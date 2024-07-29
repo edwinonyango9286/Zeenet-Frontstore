@@ -49,7 +49,7 @@ const Cart = () => {
       <Container class1="cart-wrapper home-wrapper-2">
         <div className="row">
           <div className="col-12">
-            <div className="cart-header py-4 d-flex justify-content-between align-items-center">
+            <div className="cart-header py-4 d-flex justify-content-between flex-wrap">
               <h4 className="cart-col-1">Product</h4>
               <h4 className="cart-col-2">Price</h4>
               <h4 className="cart-col-3">Quantity</h4>
@@ -61,19 +61,21 @@ const Cart = () => {
                 return (
                   <div
                     key={index}
-                    className="cart-data py-3 mb-2 d-flex justify-content-between align-items-center"
+                    className="cart-data py-1 d-flex justify-content-between flex-wrap gap-10 align-items-center"
                   >
-                    <div className="cart-col-1 gap-15 d-flex align-items-center">
+                    <div className="cart-col-1 d-flex flex-wrap justify-content-between align-items-center">
                       <div className="w-25">
                         <img
                           src={item?.images}
-                          className="img-fluid"
+                          className="img-fluid rounded"
                           alt={item?.title}
+                          width={100}
+                          height={100}
                         ></img>
                       </div>
                       <div className="w-75">
-                        <p>{item?.title}</p>
-                        <p className="d-flex gap-3">
+                        <p className="mb-0">{item?.title}</p>
+                        <p className="d-flex justify-content-between flex-wrap mb-0">
                           Screen Size: {item?.screensize}"
                         </p>
                       </div>
@@ -86,10 +88,14 @@ const Cart = () => {
                         }).format(item?.price)}{" "}
                       </h5>
                     </div>
-                    <div className="cart-col-3 d-flex align-items-center gap-30">
+                    <div className="cart-col-3 d-flex gap-20 flex-wrap">
                       <div>
                         <input
-                          className="form-control"
+                          style={{
+                            width: "46px",
+                            height:"30px"
+                          }}
+                          className="form-control form-control-sm shadow-none"
                           type="number"
                           name=""
                           id=""
@@ -103,7 +109,7 @@ const Cart = () => {
                       </div>
                       <div>
                         <button
-                          className="ms-2 fs-5 text-danger bg-transparent border-0"
+                          className=" fs-4 text-danger bg-transparent border-0 m-0"
                           onClick={() => {
                             deleteACartProduct(item?.productId);
                           }}
@@ -125,17 +131,16 @@ const Cart = () => {
               })}
           </div>
           <div className="col-12 py-2 mt-4">
-            <div className="d-flext justify-content-between align-items-baseline">
+            <div className="d-flex justify-content-between align-items-baseline">
               <Link to="/store" className="button">
                 Continue Shopping
               </Link>
-              <div className="d-flex flex-column align-items-end gap-15 mb-3">
+              <div className="d-flex flex-column align-items-end gap-10 mb-3">
                 <h6>
                   Sub Total : Ksh{" "}
                   {new Intl.NumberFormat("en-US", {
                     maximumFractionDigits: 0,
                   }).format(totalAmount)}{" "}
-                  /=
                 </h6>
                 <Link to="/checkout" className="button">
                   Proceed to checkout

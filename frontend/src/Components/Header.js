@@ -13,13 +13,26 @@ import "react-bootstrap-typeahead/css/Typeahead.css";
 import { getAproduct } from "../features/products/productSlice";
 import { logoutUser } from "../features/users/userSlice";
 
-const Header = ({ quantity }) => {
+const Header = () => {
   const authState = useSelector((state) => state?.auth);
   const productState = useSelector((state) => state?.product?.products);
   const [productOpt, setProductOpt] = useState([]);
   const [paginate, setPaginate] = useState(true);
+  const [cartData, setCartData] = useState([]);
+  const [quantity, setQuantity] = useState(0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem("userCart");
+    if (storedCart) {
+      setCartData(JSON.parse(storedCart));
+    }
+  }, []);
+
+
+  
+   
 
   useEffect(() => {
     let data = [];
@@ -36,6 +49,8 @@ const Header = ({ quantity }) => {
     navigate("/store");
     window.location.reload();
   };
+
+
   return (
     <>
       <div className="header-top container-fluid px-4 py-2">
@@ -337,7 +352,6 @@ const Header = ({ quantity }) => {
                     <span className="">SHOP CATEGORIES</span>
                   </button>
 
-                  
                   <ul
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton1"
@@ -386,7 +400,6 @@ const Header = ({ quantity }) => {
                 </div>
               </div>
 
-              
               <div className="menu-links col-6">
                 <div className="d-flex align-items-center gap-10">
                   <NavLink to="/">home</NavLink>
