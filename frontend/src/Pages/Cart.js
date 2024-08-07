@@ -18,6 +18,10 @@ const Cart = () => {
   }, []);
 
   useEffect(() => {
+    localStorage.setItem("userCart", JSON.stringify(cartData));
+  }, [cartData]);
+
+  useEffect(() => {
     let sum = 0;
     cartData.forEach((item) => {
       sum += item?.price * item?.quantity;
@@ -40,6 +44,14 @@ const Cart = () => {
     setCartData(updatedCart);
     localStorage.setItem("userCart", JSON.stringify(updatedCart));
     toast.success("Product quantity updated.");
+  };
+
+  const formatKES = (amount) => {
+    return new Intl.NumberFormat("en-KE", {
+      style: "currency",
+      currency: "KES",
+      minimumFractionDigits: 0,
+    }).format(amount);
   };
 
   return (
@@ -71,7 +83,7 @@ const Cart = () => {
                           alt={item?.title}
                           width={100}
                           height={100}
-                        ></img>
+                        />
                       </div>
                       <div className="w-75">
                         <p className="mb-0">{item?.title}</p>
@@ -81,19 +93,14 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className="cart-col-2">
-                      <h5 className="price">
-                        Ksh{" "}
-                        {new Intl.NumberFormat("en-US", {
-                          maximumFractionDigits: 0,
-                        }).format(item?.price)}{" "}
-                      </h5>
+                      <h5 className="price">{formatKES(item?.price)}</h5>
                     </div>
                     <div className="cart-col-3 d-flex gap-20 flex-wrap">
                       <div>
                         <input
                           style={{
                             width: "46px",
-                            height:"30px"
+                            height: "30px",
                           }}
                           className="form-control form-control-sm shadow-none"
                           type="number"
@@ -120,10 +127,7 @@ const Cart = () => {
                     </div>
                     <div className="cart-col-4">
                       <h5 className="price">
-                        Ksh{" "}
-                        {new Intl.NumberFormat("en-US", {
-                          maximumFractionDigits: 0,
-                        }).format(item?.price * item?.quantity)}{" "}
+                        {item?.price * item?.quantity}
                       </h5>
                     </div>
                   </div>
@@ -136,12 +140,7 @@ const Cart = () => {
                 Continue Shopping
               </Link>
               <div className="d-flex flex-column align-items-end gap-10 mb-3">
-                <h6>
-                  Sub Total : Ksh{" "}
-                  {new Intl.NumberFormat("en-US", {
-                    maximumFractionDigits: 0,
-                  }).format(totalAmount)}{" "}
-                </h6>
+                <h6>Sub Total :{formatKES(totalAmount)}</h6>
                 <Link to="/checkout" className="button">
                   Proceed to checkout
                 </Link>

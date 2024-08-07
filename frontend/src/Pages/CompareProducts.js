@@ -16,11 +16,11 @@ const CompareProducts = () => {
               <img
                 src={cross}
                 alt="cross"
-                className="position-absolute cross img-fluid"
+                className="position-absolute cross img-fluid" loading="lazy"
               />
 
               <div className="product-card-image">
-                <img src={watch1} alt="watch" className="img-fluid" />
+                <img src={watch1} alt="watch" className="img-fluid" loading="lazy" />
               </div>
 
               <div className="compare-product-details">
@@ -56,11 +56,11 @@ const CompareProducts = () => {
               <img
                 src={cross}
                 alt="cross"
-                className="position-absolute cross img-fluid"
+                className="position-absolute cross img-fluid" loading="lazy"
               />
 
               <div className="product-card-image">
-                <img src={watch1} alt="watch" className="img-fluid" />
+                <img src={watch1} alt="watch" className="img-fluid" loading="lazy" />
               </div>
 
               <div className="compare-product-details">

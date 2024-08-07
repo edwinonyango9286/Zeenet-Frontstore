@@ -70,7 +70,7 @@ const Login = () => {
         <div className="row">
           <div className="col-12 d-flex items-center">
             <div className="auth-card">
-              <h3 className="text-center mb-3">Login</h3>
+              <h3 className="text-center mb-2">Login</h3>
               <form
                 onSubmit={formik.handleSubmit}
                 className="d-flex flex-column gap-10"
@@ -83,7 +83,6 @@ const Login = () => {
                   onChange={formik.handleChange("email")}
                   onBlur={formik.handleBlur("email")}
                   value={formik.values.email}
-                 
                 />
                 <div className="error">
                   {formik.touched.email && formik.errors.email}

@@ -47,6 +47,7 @@ const Checkout = () => {
       setTotalAmount(sum);
     }
   }, [cartState]);
+  
 
   useEffect(() => {
     dispatch(getUserCart(config2));
@@ -69,9 +70,16 @@ const Checkout = () => {
       setShippingInfo(values);
     },
   });
-
   const handlePlaceOrder = (cartData) => {
     dispatch(addProductToCart(cartData));
+  };
+
+  const formatKES = (amount) => {
+    return new Intl.NumberFormat("en-KE", {
+      style: "currency",
+      currency: "KES",
+      minimumFractionDigits: 0,
+    }).format(amount);
   };
 
   return (
@@ -276,7 +284,11 @@ const Checkout = () => {
                     <Link to="/" className="button">
                       Continue to Shopping
                     </Link>
-                    <button className="button border-0" onClick={handlePlaceOrder} type="button">
+                    <button
+                      className="button border-0"
+                      onClick={handlePlaceOrder}
+                      type="button"
+                    >
                       Confirm Order
                     </button>
                   </div>
@@ -318,7 +330,7 @@ const Checkout = () => {
                       </div>
                       <div className="flex-grow-1">
                         <h5 className="total">
-                          Ksh {item?.quantity * item?.price}
+                          {item?.quantity * formatKES(item?.price)}
                         </h5>
                       </div>
                     </div>
@@ -328,7 +340,7 @@ const Checkout = () => {
             <div className="border-bottom py-4">
               <div className="d-flex justify-content-between align-items-center">
                 <p className="total">SubTotal</p>
-                <p className="total-price">Ksh {totalAmount}</p>
+                <p className="total-price">{formatKES(totalAmount)}</p>
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <p className="mb-0 total">Delivery fee</p>
@@ -337,7 +349,7 @@ const Checkout = () => {
             </div>
             <div className="d-flex justify-content-between align-items-center border-bottom py-4">
               <h4 className="total">Total</h4>
-              <h5 className="total-price">Ksh {totalAmount} </h5>
+              <h5 className="total-price">{formatKES(totalAmount)} </h5>
             </div>
             <div className="py-5 d-flex align-items-center justify-content-center">
               <button className="button border-0" type="button">

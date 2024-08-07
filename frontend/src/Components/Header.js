@@ -18,21 +18,11 @@ const Header = () => {
   const productState = useSelector((state) => state?.product?.products);
   const [productOpt, setProductOpt] = useState([]);
   const [paginate, setPaginate] = useState(true);
-  const [cartData, setCartData] = useState([]);
-  const [quantity, setQuantity] = useState(0);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  useEffect(() => {
+  const [cartData, setCartData] = useState(() => {
     const storedCart = localStorage.getItem("userCart");
-    if (storedCart) {
-      setCartData(JSON.parse(storedCart));
-    }
-  }, []);
-
-
-  
-   
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
+  const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     let data = [];
@@ -43,13 +33,23 @@ const Header = () => {
     setProductOpt(data);
   }, [productState]);
 
+  useEffect(() => {
+    let totalQuantity = 0;
+    cartData.forEach((item) => {
+      totalQuantity += +item.quantity;
+    });
+    setQuantity(totalQuantity);
+  }, [cartData]);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem("customer");
     localStorage.removeItem("token");
     navigate("/store");
     window.location.reload();
   };
-
 
   return (
     <>
@@ -110,6 +110,7 @@ const Header = () => {
                           width: "24px",
                           height: "24px",
                         }}
+                        loading="lazy"
                       />
                       <span className="d-none d-sm-block">SHOP CATEGORIES</span>
                     </button>
@@ -209,7 +210,8 @@ const Header = () => {
                       src={compareImage}
                       alt="Compare Image"
                       className="img-fluid"
-                    ></img>
+                      loading="lazy"
+                    />
                     <p className="mb-0 d-none d-lg-block" id="hidden">
                       Compare
                       <br />
@@ -226,7 +228,8 @@ const Header = () => {
                       src={wishlistImage}
                       alt="Wishlist Image"
                       className="img-fluid"
-                    ></img>
+                      loading="lazy"
+                    />
                     <p className="mb-0 d-none d-lg-block" id="hidden">
                       Favourite
                       <br /> Wishlist
@@ -242,6 +245,7 @@ const Header = () => {
                       src={accountImage}
                       alt="Account Image"
                       className="img-fluid"
+                      loading="lazy"
                     />
                     {authState?.user === null ? (
                       <p className="mb-0 d-none d-lg-block" id="hidden">
@@ -272,7 +276,8 @@ const Header = () => {
                         src={cartImage}
                         alt="Cart Image"
                         className="img-fluid "
-                      ></img>
+                        loading="lazy"
+                      />
                       <div
                         className="d-flex flex-column position-absolute  badge-container"
                         style={{
@@ -348,7 +353,12 @@ const Header = () => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <img src={menu} alt="Menu Image" className="img-fluid" />
+                    <img
+                      src={menu}
+                      alt="Menu Image"
+                      className="img-fluid"
+                      loading="lazy"
+                    />
                     <span className="">SHOP CATEGORIES</span>
                   </button>
 

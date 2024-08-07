@@ -51,7 +51,7 @@ const Signup = () => {
       <BreadCrump title="signup" />
       <Container class1="home-wrapper-2 py-4">
         <div className="row">
-          <div className="col-12">
+          <div className="col-12 d-flex items-center">
             <div className="auth-card">
               <h3 className="text-center mb-2">Sign Up</h3>
               <form

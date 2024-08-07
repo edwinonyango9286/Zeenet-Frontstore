@@ -106,22 +106,31 @@ const SingleProduct = () => {
       return false;
     }
   };
+
   const ratingValue = parseFloat(productState?.totalrating) || 0;
+
+  const formatKES = (amount) => {
+    return new Intl.NumberFormat("en-KE", {
+      style: "currency",
+      currency: "KES",
+      minimumFractionDigits: 0,
+    }).format(amount);
+  };
 
   return (
     <>
       <Meta title={productState?.title} />
       <BreadCrumb title={productState?.title} />
-      <Container class1="main-product-wrapper py-2 home-wrapper-2">
+      <Container class1="main-product-wrapper py-2 home-wrapper-2 overflow-hidden">
         <div className="row">
-          <div className="col-12 d-flex flex-wrap justify-content-between g-2">
-            <div className="col-12 col-lg-6">
+          <div className="col-12 d-flex justify-content-between flex-wrap gap-10 flex-md-nowrap">
+            <div className="col-12 col-md-6">
               <div className="main-product-image mb-2">
                 <div>
                   <ReactImageZoom {...props} />
                 </div>
               </div>
-              <div className="other-product-images d-flex flex-wrap gap-10">
+              <div className="other-product-images d-flex flex-wrap justify-content-between">
                 <div>
                   <img
                     src={productState?.images[0]?.url}
@@ -153,18 +162,13 @@ const SingleProduct = () => {
               </div>
             </div>
 
-            <div className="col-12 col-lg-6">
+            <div className="col-12 col-md-6">
               <div className="main-product-details">
                 <div className="border-bottom">
                   <h3 className="title">{productState?.title}</h3>
                 </div>
                 <div className="border-bottom py-2">
-                  <p className="price">
-                    Ksh{" "}
-                    {new Intl.NumberFormat("en-US", {
-                      maximumFractionDigits: 0,
-                    }).format(productState?.price)}
-                  </p>
+                  <p className="price">{formatKES(productState?.price)}</p>
                   <div className="d-flex align-items-center gap-10">
                     <ReactStars
                       count={5}
@@ -295,6 +299,7 @@ const SingleProduct = () => {
                           width={80}
                           height={40}
                           className=" img-fluid rounded-pill"
+                          loading="lazy"
                         />
                       </span>
 
@@ -305,6 +310,7 @@ const SingleProduct = () => {
                           className="img-fluid rounded-pill"
                           width={80}
                           height={40}
+                          loading="lazy"
                         />
                       </span>
 
@@ -315,6 +321,7 @@ const SingleProduct = () => {
                           width={80}
                           height={40}
                           className="img-fluid rounded-pill"
+                          loading="lazy"
                         />
                       </span>
                     </div>
@@ -331,13 +338,12 @@ const SingleProduct = () => {
           <div className="col-12">
             <h4>Description</h4>
 
-            <div className="bg-white p-3">
+            <div className=" description p-2 ">
               <p
                 dangerouslySetInnerHTML={{ __html: productState?.description }}
                 className="text-capitalize"
               ></p>
             </div>
-            <button className="btn btn-link"></button>
           </div>
         </div>
       </Container>
@@ -436,7 +442,7 @@ const SingleProduct = () => {
           <div className="col-12">
             <h6 className="section-heading">Popular Products.</h6>
           </div>
-          <div className="col-12 d-flex gap-10 flex-wrap align-items-center justify-content-lg-start">
+          <div className="col-12 d-flex justify-content-center flex-wrap gap-10 justify-content-md-between">
             <ProductCard data={popularProducts} />
           </div>
         </div>

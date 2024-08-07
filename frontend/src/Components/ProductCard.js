@@ -17,16 +17,19 @@ const ProductCard = (props) => {
     dispatch(addToWishlist(id));
   };
 
+  const formatKES = (amount) => {
+    return new Intl.NumberFormat("en-KE", {
+      style: "currency",
+      currency: "KES",
+      minimumFractionDigits: 0,
+    }).format(amount);
+  };
+
   return (
     <>
       {data?.map((item, index) => {
         return (
-          <div
-            key={index}
-            className={`${
-              location.pathname === "/store" ? `gr-${grid}` : "col-3"
-            }`}
-          >
+          <div key={index}>
             <div className="product-card position-relative">
               <div className="wishlist-icon position-absolute">
                 <button
@@ -41,6 +44,7 @@ const ProductCard = (props) => {
                     style={{
                       color: "#fA5",
                     }}
+                    loading="lazy"
                   />
                 </button>
               </div>
@@ -79,12 +83,7 @@ const ProductCard = (props) => {
                   }`}
                   dangerouslySetInnerHTML={{ __html: item?.description }}
                 ></p>
-                <p className="price">
-                  Ksh{" "}
-                  {new Intl.NumberFormat("en-US", {
-                    maximumFractionDigits: 0,
-                  }).format(item?.price)}
-                </p>
+                <p className="price">{formatKES(item?.price)}</p>
               </div>
 
               <div className="action-bar position-absolute">
@@ -97,11 +96,15 @@ const ProductCard = (props) => {
                     to={"/product/" + item?._id}
                     className="border-0 bg-transparent"
                   >
-                    <img src={view} alt="View Product Image" />
+                    <img src={view} alt="View Product Image" loading="lazy" />
                   </Link>
                   <Link className="" to={"/product/" + item?._id}>
                     <button className="border-0 bg-transparent">
-                      <img src={addCart} alt="Add to cart Image" />
+                      <img
+                        src={addCart}
+                        alt="Add to cart Image"
+                        loading="lazy"
+                      />
                     </button>
                   </Link>
                 </div>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BreadCrumb from "../Components/BreadCrumb";
 import Meta from "../Components/Meta";
-import watch1 from "../images/watch-1.avif";
 import ReactStars from "react-rating-stars-component";
 import gr1 from "../images/gr.svg";
 import grid2 from "../images/gr2.svg";
@@ -15,7 +14,6 @@ import applelaptop from "../images/Apple laptop.jpg";
 import avitalaptop from "../images/Avita laptop.jpg";
 
 const Store = () => {
-  const [grid, setGrid] = useState(4);
   const dispatch = useDispatch();
   const productState = useSelector((state) => state.product.products);
   const [brands, setBrands] = useState([]);
@@ -222,8 +220,6 @@ const Store = () => {
                       <p>Ksh 48,000/=</p>
                     </div>
                   </div>
-                 
-                 
                 </div>
               </div>
             </div>
@@ -262,52 +258,15 @@ const Store = () => {
                     </div>
                   </div>
 
-                  <div className="d-flex align-items-center justify-content-between gap-10">
+                  <div>
                     <span className="mb-0"> 24 Laptops</span>
-                    <div className="d-flex gap-10 ">
-                      <img
-                        onClick={() => {
-                          setGrid(3);
-                        }}
-                        src={grid4}
-                        className="img-fluid"
-                        alt="grid4"
-                      />
-                      <img
-                        onClick={() => {
-                          setGrid(4);
-                        }}
-                        src={grid3}
-                        className="img-fluid"
-                        alt="grid3"
-                      />
-                      <img
-                        onClick={() => {
-                          setGrid(6);
-                        }}
-                        src={grid2}
-                        className="img-fluid"
-                        alt="grid2"
-                      />
-                      <img
-                        onClick={() => {
-                          setGrid(12);
-                        }}
-                        src={gr1}
-                        className="img-fluid"
-                        alt="grid"
-                      />
-                    </div>
                   </div>
                 </div>
               </div>
 
               <div className="pb-2">
                 <div className="d-flex justify-content-between gap-10 flex-wrap">
-                  <ProductCard
-                    data={productState ? productState : []}
-                    grid={grid}
-                  />
+                  <ProductCard data={productState ? productState : []} />
                 </div>
               </div>
             </div>

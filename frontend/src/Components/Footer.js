@@ -19,7 +19,8 @@ const Footer = () => {
                 <img
                   src={newsletterImage}
                   className="img-fluid"
-                  alt="newsletter"
+                  alt="News letter"
+                  loading="lazy"
                 />
                 <h5 className="mb-0 text-white newsLetter">
                   Sign Up for Newsletter
@@ -37,9 +38,8 @@ const Footer = () => {
                   aria-describedby="basic-addon2"
                   style={{
                     boxShadow: "none",
-                    outline:"none"
+                    outline: "none",
                   }}
-                 
                 />
                 <span
                   className="input-group-text p-1 footer-text"
@@ -172,6 +172,7 @@ const Footer = () => {
                     width={100}
                     height={30}
                     alt="Google Playstore Badge"
+                    loading="lazy"
                   />
                 </Link>
                 <Link to={""} className="text-white py-2 mb-1 ">
@@ -181,6 +182,7 @@ const Footer = () => {
                     height={30}
                     className="img-fluid rounded-pill"
                     alt="App Store adge"
+                    loading="lazy"
                   />
                 </Link>
               </div>
@@ -212,6 +214,7 @@ const Footer = () => {
                   width={80}
                   height={40}
                   className=" img-fluid rounded-pill"
+                  loading="lazy"
                 />
               </span>
 
@@ -222,16 +225,18 @@ const Footer = () => {
                   className="img-fluid rounded-pill"
                   width={80}
                   height={40}
+                  loading="lazy"
                 />
               </span>
 
               <span className="text-white">
                 <img
                   src={airtelMoneyBadge}
-                  alt=""
+                  alt="Airtel Money Badge"
                   width={80}
                   height={40}
                   className="img-fluid rounded-pill"
+                  loading="lazy"
                 />
               </span>
             </div>

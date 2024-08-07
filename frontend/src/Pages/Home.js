@@ -62,7 +62,8 @@ const Home = () => {
                 src={mainBanner}
                 className="img-fluid rounded-2"
                 alt="Main Banner"
-              ></img>
+                loading="lazy"
+              />
               <div className="main-banner-content position-absolute">
                 <h4>SUPPERCHARGED FOR PROS</h4>
                 <h5>iPad S13+ Pro.</h5>
@@ -79,7 +80,8 @@ const Home = () => {
                   src={catBanner1}
                   className="img-fluid rounded-2"
                   alt="Small Banner"
-                ></img>
+                  loading="lazy"
+                />
                 <div className="small-banner-content position-absolute">
                   <h4>SUPPERCHARGED</h4>
                   <h5>MacBook Pro M3-</h5>
@@ -93,7 +95,8 @@ const Home = () => {
                   src={catBanner2}
                   className="img-fluid rounded-2"
                   alt="Small Banner"
-                ></img>
+                  loading="lazy"
+                />
                 <div className="small-banner-content position-absolute">
                   <h4>Best Sales</h4>
                   <h5>watchOS 10+</h5>
@@ -108,7 +111,8 @@ const Home = () => {
                   src={catBanner3}
                   className="img-fluid rounded-2"
                   alt="Small Banner"
-                ></img>
+                  loading="lazy"
+                />
                 <div className="small-banner-content position-absolute">
                   <h4>New Arrivals</h4>
                   <h5>Apple iPad</h5>
@@ -122,7 +126,8 @@ const Home = () => {
                   src={catBanner4}
                   className="img-fluid rounded-2"
                   alt="Small Banner"
-                ></img>
+                  loading="lazy"
+                />
                 <div className="small-banner-content position-absolute">
                   <h4>Bose QuietComfort </h4>
                   <h5>Sony WH-10</h5>
@@ -152,7 +157,8 @@ const Home = () => {
                       className="advertImages img-fluid"
                       width={40}
                       height={40}
-                    ></img>
+                      loading="lazy"
+                    />
                     <div>
                       <h6 className="d-none d-lg-block">{service.title}</h6>
                       <p className="mb-0 d-none d-sm-block">
@@ -231,6 +237,7 @@ const Home = () => {
                               <img
                                 src={prodcompare}
                                 alt="Compare Product Image"
+                                loading="lazy"
                               />
                             </button>
 
@@ -241,10 +248,11 @@ const Home = () => {
                                 onClick={() =>
                                   navigate("/product/" + item?._id)
                                 }
+                                loading="lazy"
                               />
                             </button>
                             <button className="border-0 bg-transparent">
-                              <img src={addCart} alt="cartImage" />
+                              <img src={addCart} alt="cartImage"  loading="lazy"/>
                             </button>
                           </div>
                         </div>
