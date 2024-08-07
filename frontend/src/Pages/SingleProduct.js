@@ -442,7 +442,7 @@ const SingleProduct = () => {
           <div className="col-12">
             <h6 className="section-heading">Popular Products.</h6>
           </div>
-          <div className="col-12 d-flex justify-content-center flex-wrap gap-10 justify-content-md-between">
+          <div className="col-12 d-flex justify-content-center flex-wrap gap-10 justify-content-md-start">
             <ProductCard data={popularProducts} />
           </div>
         </div>

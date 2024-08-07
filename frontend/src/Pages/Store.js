@@ -2,10 +2,6 @@ import React, { useEffect, useState } from "react";
 import BreadCrumb from "../Components/BreadCrumb";
 import Meta from "../Components/Meta";
 import ReactStars from "react-rating-stars-component";
-import gr1 from "../images/gr.svg";
-import grid2 from "../images/gr2.svg";
-import grid3 from "../images/gr3.svg";
-import grid4 from "../images/gr4.svg";
 import ProductCard from "../Components/ProductCard";
 import Container from "../Components/Container";
 import { useDispatch, useSelector } from "react-redux";
@@ -188,7 +184,7 @@ const Store = () => {
                       <h5>Apple MacBook Pro 14</h5>
                       <ReactStars
                         count={5}
-                        size={24}
+                        size={18}
                         value={4}
                         edit={false}
                         activeColor="#ffd700"
@@ -212,7 +208,7 @@ const Store = () => {
                       <h5>AVITA SATUS S102</h5>
                       <ReactStars
                         count={5}
-                        size={24}
+                        size={18}
                         value={3}
                         edit={false}
                         activeColor="#ffd700"
@@ -265,7 +261,7 @@ const Store = () => {
               </div>
 
               <div className="pb-2">
-                <div className="d-flex justify-content-between gap-10 flex-wrap">
+                <div className="d-flex gap-10 justify-content-center justify-content-md-between flex-wrap">
                   <ProductCard data={productState ? productState : []} />
                 </div>
               </div>

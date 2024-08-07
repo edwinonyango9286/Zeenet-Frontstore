@@ -11,7 +11,6 @@ import { addToWishlist } from "../features/products/productSlice";
 const ProductCard = (props) => {
   const navigate = useNavigate();
   const { grid, data } = props;
-  let location = useLocation();
   const dispatch = useDispatch();
   const addProductToWishlist = (id) => {
     dispatch(addToWishlist(id));
@@ -54,36 +53,30 @@ const ProductCard = (props) => {
                   src={item?.images[0]?.url}
                   className="img-fluid mx-auto border rounded object-fit "
                   alt={item?.title}
-                  width={180}
-                  height={180}
+                  width={126}
+                  height={156}
                   onClick={() => navigate("/product/" + item?._id)}
                 />
                 <img
                   src={item?.images[0]?.url}
                   className="img-fluid mx-auto  border rounded object-fit"
                   alt={item?.title}
-                  width={180}
-                  height={200}
+                  width={126}
+                  height={156}
                   onClick={() => navigate("/product/" + item?._id)}
                 />
               </div>
               <div className="product-details">
-                <h6 className="brand">{item?.brand}</h6>
-                <h5 className="product-title">{item?.title}</h5>
+                <h6 className="brand mb-0 mt-3">{item?.brand}</h6>
+                <h5 className="product-title mb-0">{item?.title}</h5>
                 <ReactStars
                   count={5}
-                  size={20}
+                  size={18}
                   value={parseFloat(item?.totalrating)}
                   edit={false}
                   activeColor="#ffd700"
                 />
-                <p
-                  className={`description ${
-                    grid === 12 ? "d-block" : "d-none"
-                  }`}
-                  dangerouslySetInnerHTML={{ __html: item?.description }}
-                ></p>
-                <p className="price">{formatKES(item?.price)}</p>
+                <p className="price mb-0">{formatKES(item?.price)}</p>
               </div>
 
               <div className="action-bar position-absolute">

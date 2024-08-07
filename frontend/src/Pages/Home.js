@@ -52,6 +52,14 @@ const Home = () => {
   const products = () => {
     dispatch(getAllProducts());
   };
+
+    const formatKES = (amount) => {
+      return new Intl.NumberFormat("en-KE", {
+        style: "currency",
+        currency: "KES",
+        minimumFractionDigits: 0,
+      }).format(amount);
+    };
   return (
     <>
       <Container class1="home-wrapper-2  pt-2 pt-sm-4">
@@ -199,35 +207,32 @@ const Home = () => {
                             src={item?.images[0]?.url}
                             className="img-fluid mx-auto border rounded object-fit "
                             alt={item?.title}
-                            width={180}
-                            height={200}
+                            width={126}
+                            height={156}
                             onClick={() => navigate("/product/" + item?._id)}
                           />
                           <img
                             src={item?.images[0]?.url}
                             className="img-fluid mx-auto border rounded object-fit "
                             alt="ProductImage"
-                            width={180}
-                            height={200}
+                            width={126}
+                            height={156}
                             onClick={() => navigate("/product/" + item?._id)}
                           />
                         </div>
 
                         <div className="product-details">
-                          <h6 className="brand">{item?.brand}</h6>
-                          <h5 className="product-title">{item?.title}</h5>
+                          <h6 className="brand mt-3 mb-0">{item?.brand}</h6>
+                          <h5 className="product-title mb-0">{item?.title}</h5>
                           <ReactStars
                             count={5}
-                            size={20}
+                            size={18}
                             value={item?.totalrating.toString()}
                             edit={false}
                             activeColor="#ffd700"
                           />
                           <p className="price">
-                            Ksh{" "}
-                            {new Intl.NumberFormat("en-US", {
-                              maximumFractionDigits: 0,
-                            }).format(item?.price)}
+                            {formatKES(item?.price)}
                           </p>
                         </div>
 
@@ -273,7 +278,7 @@ const Home = () => {
                 src={famous1}
                 className="img-fluid"
                 alt="famous1"
-                width={270}
+                width={260}
                 height={240}
               />
               <div className="famous-content position-absolute">
@@ -292,7 +297,7 @@ const Home = () => {
                 src={famous2}
                 className="img-fluid"
                 alt="famous2"
-                width={270}
+                width={260}
                 height={240}
               />
               <div className="famous-content position-absolute">
@@ -310,7 +315,7 @@ const Home = () => {
                 src={famous3}
                 className="img-fluid"
                 alt="famous1"
-                width={270}
+                width={260}
                 height={240}
               />
               <div className="famous-content position-absolute">
@@ -329,7 +334,7 @@ const Home = () => {
                 src={famous4}
                 className="img-fluid"
                 alt="famous1"
-                width={270}
+                width={260}
                 height={240}
               />
               <div className="famous-content position-absolute">
@@ -363,9 +368,7 @@ const Home = () => {
                       brand={item?.brand}
                       title={item?.title}
                       totalrating={item?.totalrating.toString()}
-                      price={new Intl.NumberFormat("en-US", {
-                        maximumFractionDigits: 0,
-                      }).format(item?.price)}
+                      price={formatKES(item?.price)}
                       sold={item?.sold}
                       quantity={item?.quantity}
                       image={item?.images[0]?.url}
@@ -404,35 +407,32 @@ const Home = () => {
                               src={item?.images[0]?.url}
                               className="img-fluid mx-auto border rounded object-fit "
                               alt="Product Image"
-                              width={180}
-                              height={200}
+                              width={126}
+                              height={156}
                               onClick={() => navigate("/product/" + item?._id)}
                             />
                             <img
                               src={item?.images[0]?.url}
                               className="img-fluid mx-auto border rounded object-fit"
                               alt="Product Image"
-                              width={180}
-                              height={200}
+                              width={126}
+                              height={156}
                               onClick={() => navigate("/product/" + item?._id)}
                             />
                           </div>
 
                           <div className="product-details">
-                            <h6 className="brand">{item?.brand}</h6>
-                            <h5 className="product-title">{item?.title}</h5>
+                            <h6 className="brandvmb-0 mt-3">{item?.brand}</h6>
+                            <h5 className="product-title mb-0">{item?.title}</h5>
                             <ReactStars
                               count={5}
-                              size={20}
+                              size={18}
                               value={item?.totalrating.toString() || 4}
                               edit={false}
                               activeColor="#ffd700"
                             />
                             <p className="price">
-                              Ksh{" "}
-                              {new Intl.NumberFormat("en-US", {
-                                maximumFractionDigits: 0,
-                              }).format(item?.price)}
+                              {formatKES(item?.price)}
                             </p>
                           </div>
 
