@@ -91,7 +91,7 @@ const Header = () => {
         <div className="row">
           <div className="d-flex align-items-center">
             <div className="col-6 col-md-2 d-flex  ">
-              <div>
+              <div className="menu-bottom header-bottom">
                 <div className="d-md-none d-lg-none d-xl-none d-xxl-none">
                   <div className="dropdown">
                     <button
@@ -113,6 +113,7 @@ const Header = () => {
                       />
                       <span className="d-none d-sm-block">SHOP CATEGORIES</span>
                     </button>
+
                     <ul
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenuButton1"
@@ -134,7 +135,7 @@ const Header = () => {
                       </li>
                       <li>
                         <Link className="dropdown-item text-white" to="/store">
-                          HP (Hewlett-Packard)
+                          HP
                         </Link>
                       </li>
                       <li>

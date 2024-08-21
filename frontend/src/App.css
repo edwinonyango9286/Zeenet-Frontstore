@@ -114,7 +114,6 @@ body a {
   text-transform: capitalize;
   color: var(--color-ffffff);
   letter-spacing: 0.3px;
-
 }
 
 .header-upper {
@@ -175,11 +174,29 @@ body a {
   transform: translate(0px, 57px, 0px) !important;
 }
 
+.dropdown-menu-Mobile {
+  background-color: #131921;
+  width: 100%;
+  transform: translate(0px, 57px, 0px) !important;
+}
+
+.dropdown-item-mobile {
+  padding: 10px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--color-3b4149);
+}
+ .dropdown-item-mobile:hover {
+  background-color: transparent;
+  color: var(--color-febd69) !important;
+}
+
 .header-bottom .dropdown-item {
   padding: 10px;
   margin-bottom: 4px;
   border-bottom: 1px solid var(--color-3b4149);
 }
+
+
 
 .header-bottom .dropdown-item:hover {
   background-color: transparent;
