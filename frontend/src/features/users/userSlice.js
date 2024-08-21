@@ -23,6 +23,7 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+
 export const logoutUser = createAsyncThunk(
   "auth/user-logout",
   async (thunkAPI) => {
@@ -123,8 +124,11 @@ const getCustomerFromLocalStorge = localStorage.getItem("customer")
   ? JSON.parse(localStorage.getItem("customer"))
   : null;
 
+const getCartFromLocalStorage = localStorage.getItem("userCart");
+
 const initialState = {
   user: getCustomerFromLocalStorge,
+  userCart: getCartFromLocalStorage,
   isError: false,
   isLoading: false,
   isSuccess: false,

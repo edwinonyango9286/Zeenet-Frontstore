@@ -21,6 +21,7 @@ const signUpschema = Yup.object().shape({
     .required("Enter your Phone Number."),
   password: Yup.string().required("Enter your password."),
 });
+
 const Signup = () => {
   const authState = useSelector((state) => state.auth);
   const dispatch = useDispatch();

@@ -11,7 +11,7 @@ import avitalaptop from "../images/Avita laptop.jpg";
 
 const Store = () => {
   const dispatch = useDispatch();
-  const productState = useSelector((state) => state.product.products);
+  const productState = useSelector((state) => state?.product?.products);
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);

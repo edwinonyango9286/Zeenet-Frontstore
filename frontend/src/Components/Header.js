@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { getAproduct } from "../features/products/productSlice";
-import { logoutUser } from "../features/users/userSlice";
 
 const Header = () => {
   const authState = useSelector((state) => state?.auth);
@@ -58,14 +57,14 @@ const Header = () => {
           <div className="col-12">
             <div className="d-flex justify-content-center justify-content-sm-between align-items-center">
               <div className="d-none d-sm-block">
-                <p className="text-white mb-0 header-info ">
+                <p className="mb-0 header-info ">
                   Free delivery & returns for all our customers.
                 </p>
               </div>
 
               <div className="d-flex gap-10">
                 <div>
-                  <p className="text-white mb-0 header-info">
+                  <p className="mb-0 header-info">
                     Hotline: {"  "}
                     <a className="text-white" href="tel:+254 719547267">
                       0719547267
@@ -200,7 +199,7 @@ const Header = () => {
             </div>
 
             <div className="col-6 col-sm-5 ">
-              <div className="header-upper-links d-flex align-items-center justify-content-center gap-10">
+              <div className="header-upper-links d-flex align-items-center justify-content-center gap-15 ">
                 <div>
                   <Link
                     to="/compare-products"
@@ -211,12 +210,16 @@ const Header = () => {
                       alt="Compare Image"
                       className="img-fluid"
                       loading="lazy"
+                      style={{
+                        width: 35,
+                        height: 35,
+                      }}
                     />
-                    <p className="mb-0 d-none d-lg-block" id="hidden">
+                    <span className="mb-0 d-none d-lg-block" id="hidden">
                       Compare
                       <br />
                       Products
-                    </p>
+                    </span>
                   </Link>
                 </div>
                 <div>
@@ -229,11 +232,15 @@ const Header = () => {
                       alt="Wishlist Image"
                       className="img-fluid"
                       loading="lazy"
+                      style={{
+                        width: 35,
+                        height: 35,
+                      }}
                     />
-                    <p className="mb-0 d-none d-lg-block" id="hidden">
+                    <span className="mb-0 d-none d-lg-block" id="hidden">
                       Favourite
                       <br /> Wishlist
-                    </p>
+                    </span>
                   </Link>
                 </div>
                 <div>
@@ -246,22 +253,26 @@ const Header = () => {
                       alt="Account Image"
                       className="img-fluid"
                       loading="lazy"
+                      style={{
+                        width: 35,
+                        height: 35,
+                      }}
                     />
                     {authState?.user === null ? (
-                      <p className="mb-0 d-none d-lg-block" id="hidden">
+                      <span className="mb-0 d-none d-lg-block" id="hidden">
                         Log in
                         <br />
                         My Account
-                      </p>
+                      </span>
                     ) : (
-                      <p
+                      <span
                         className="mb-0 d-none d-lg-block text-capitalize"
                         id="hidden"
                       >
                         Welcome
                         <br />
                         {authState?.user?.firstname}
-                      </p>
+                      </span>
                     )}
                   </Link>
                 </div>
@@ -277,12 +288,17 @@ const Header = () => {
                         alt="Cart Image"
                         className="img-fluid "
                         loading="lazy"
+                        style={{
+                          width: 35,
+                          height: 35,
+                        }}
                       />
+
                       <div
                         className="d-flex flex-column position-absolute  badge-container"
                         style={{
-                          top: "-4px",
-                          left: "15px",
+                          top: "-6px",
+                          left: "22px",
                         }}
                       >
                         <h6
@@ -292,14 +308,14 @@ const Header = () => {
                           }}
                           className="mb-0"
                         >
-                          <span
+                          <p
                             className="badge bg-white rounded-pill text-dark mb-0"
                             style={{
-                              fontSize: "9px",
+                              fontSize: "10px",
                             }}
                           >
                             {quantity}
-                          </span>
+                          </p>
                         </h6>
                       </div>
                     </Link>

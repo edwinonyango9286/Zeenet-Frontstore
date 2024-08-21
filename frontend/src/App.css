@@ -16,6 +16,7 @@
   --color-1c1c1b: #1c1c1b;
   --color-f2f2f2: #f2f2f2;
   --color-eaeaea: #eaeaea;
+  --color-ffffff: #ffffff;
 }
 .error {
   color: red;
@@ -107,7 +108,13 @@ body a {
   background-color: var(--color-131921);
 }
 .header-info {
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 22px;
+  text-transform: capitalize;
+  color: var(--color-ffffff);
+  letter-spacing: 0.3px;
+
 }
 
 .header-upper {
@@ -115,7 +122,7 @@ body a {
 }
 
 .form-control {
-  height: 34px;
+  height: 36px;
 }
 
 .form-control:focus {
@@ -132,11 +139,14 @@ body a {
   width: 24px;
   height: 24px;
 }
-.header-upper .header-upper-links p {
-  font-size: 11px;
-  font-weight: 300;
+.header-upper .header-upper-links span {
+  text-transform: capitalize;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  color: var(--color-ffffff);
 }
-
 .logo {
   font-weight: 500;
   font-size: 26px;
