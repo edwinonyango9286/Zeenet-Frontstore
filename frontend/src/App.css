@@ -147,8 +147,8 @@ body a {
   color: var(--color-ffffff);
 }
 .logo {
-  font-weight: 500;
-  font-size: 26px;
+  font-weight: 400;
+  font-size: 28px;
   line-height: 30px;
   text-transform: uppercase;
 }
@@ -174,18 +174,7 @@ body a {
   transform: translate(0px, 57px, 0px) !important;
 }
 
-.dropdown-menu-Mobile {
-  background-color: #131921;
-  width: 100%;
-  transform: translate(0px, 57px, 0px) !important;
-}
-
-.dropdown-item-mobile {
-  padding: 10px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid var(--color-3b4149);
-}
- .dropdown-item-mobile:hover {
+.dropdown-item-mobile:hover {
   background-color: transparent;
   color: var(--color-febd69) !important;
 }
@@ -195,8 +184,6 @@ body a {
   margin-bottom: 4px;
   border-bottom: 1px solid var(--color-3b4149);
 }
-
-
 
 .header-bottom .dropdown-item:hover {
   background-color: transparent;

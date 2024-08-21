@@ -90,12 +90,12 @@ const Header = () => {
       <div className="header-upper py-2 container-fluid">
         <div className="row">
           <div className="d-flex align-items-center">
-            <div className="col-6 col-md-2 d-flex  ">
+            <div className="col-6 col-md-2 d-flex align-items-center gap-10  ">
               <div className="menu-bottom header-bottom">
                 <div className="d-md-none d-lg-none d-xl-none d-xxl-none">
                   <div className="dropdown">
                     <button
-                      className="btn btn-secondary dropdown-toggle bg-transparent border-0 d-flex align-items-center shadow-none"
+                      className="btn btn-secondary dropdown-toggle bg-transparent rounded-md d-flex align-items-center shadow-none"
                       type="button"
                       id="dropdownMenuButton1"
                       data-bs-toggle="dropdown"
@@ -106,8 +106,8 @@ const Header = () => {
                         alt="Menu Image"
                         className="img-fluid"
                         style={{
-                          width: "24px",
-                          height: "24px",
+                          width: "20px",
+                          height: "20px",
                         }}
                         loading="lazy"
                       />
@@ -165,7 +165,7 @@ const Header = () => {
 
               <div>
                 <h2>
-                  <Link to="/" className="text-white logo">
+                  <Link to="/" className="text-white logo mt-2 md:mt-0">
                     Zeenet
                   </Link>
                 </h2>
