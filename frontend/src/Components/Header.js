@@ -298,8 +298,8 @@ const Header = () => {
                       <div
                         className="d-flex flex-column position-absolute  badge-container"
                         style={{
-                          top: "-6px",
-                          left: "22px",
+                          top: "-4px",
+                          left: "24px",
                         }}
                       >
                         <h6
