@@ -30,13 +30,13 @@ const ForgotPassword = () => {
   return (
     <>
       <Meta title={"forgot password"} />
-      <BreadCrump title="Forgot Passsword" />
-      <Container class1="forgot-passwrod-wrapper home-wrapper-2">
+      <BreadCrump title="forgot passsword" />
+      <Container class1="home-wrapper-2 py-4">
         <div className="row">
-          <div className="col-12">
+          <div className="col-12 d-flex items-center">
             <div className="auth-card">
-              <h3 className="text-center mb-3">Reset Your Password</h3>
-              <p className="text-center mt-2 mb-3">
+              <h3 className="text-center mb-2">Reset your password</h3>
+              <p className="text-center mt-3 mb-3">
                 We will send you an email to reset your password.
               </p>
               <form
@@ -51,7 +51,6 @@ const ForgotPassword = () => {
                     onChange={formik.handleChange("email")}
                     onBlur={formik.handleBlur("email")}
                     value={formik.values.email}
-                    className="mw-100"
                   />
                   <div className="error">
                     {formik.touched.email && formik.errors.email}

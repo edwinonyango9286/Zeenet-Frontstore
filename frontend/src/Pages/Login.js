@@ -32,8 +32,10 @@ const Login = () => {
       Accept: "application/json",
     },
   };
-  const authState = useSelector((state) => state?.auth);
-  const loading = useSelector((state) => state?.auth?.isLoading);
+
+  const { user, userCart, isError, isLoading, isSuccess, message } =
+    useSelector((state) => state.auth ?? {});
+
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -47,7 +49,7 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       dispatch(loginUser(values));
-      if (authState.isSuccess) {
+      if (isSuccess) {
         dispatch(getUserCart(config2));
         navigate(from, { replace: true });
       }
@@ -55,11 +57,10 @@ const Login = () => {
   });
 
   useEffect(() => {
-    if (authState?.user !== null && authState?.isError === false) {
+    if (user !== null && isError === false && isSuccess === true) {
       navigate(from, { replace: true });
-      window.location.reload();
     }
-  }, [authState]);
+  }, [user]);
 
   return (
     <>
@@ -101,15 +102,15 @@ const Login = () => {
                 </div>
 
                 <div>
-                  <Link to="/forgot-password">Forgot Your Password?</Link>
+                  <Link to="/forgot-password">Forgot your password?</Link>
                 </div>
                 <div className="mt-2 d-flex justify-content-center gap-15 align-items-center">
                   <button
                     className="button border-0 "
                     type="submit"
-                    disabled={authState.is}
+                    disabled={isLoading}
                   >
-                    {loading ? "Loading..." : "Login"}
+                    {isLoading ? "Loading..." : "Login"}
                   </button>
                   <Link to="/signup" className="button signup">
                     Sign Up

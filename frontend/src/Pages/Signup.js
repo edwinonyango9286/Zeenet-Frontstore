@@ -23,8 +23,9 @@ const signUpschema = Yup.object().shape({
 });
 
 const Signup = () => {
-  const authState = useSelector((state) => state?.auth);
-  const loading = useSelector((state) => state?.auth?.isLoading);
+  const { user, userCart, isError, isLoading, isSuccess, message } =
+    useSelector((state) => state?.auth);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const formik = useFormik({
@@ -42,14 +43,10 @@ const Signup = () => {
   });
 
   useEffect(() => {
-    if (
-      authState.createdUser &&
-      authState.createdUser !== null &&
-      authState.isError === false
-    ) {
+    if (user && isError === false) {
       navigate("/login");
     }
-  }, [authState]);
+  }, [user, navigate, isError]);
 
   return (
     <>
@@ -126,7 +123,7 @@ const Signup = () => {
 
                 <div className="mt-2 d-flex justify-content-center gap-15 align-items-center">
                   <button type="submit" className="button border-0">
-                    {loading ? "Loading..." : "Sign Up"}
+                    {isLoading ? "Loading..." : "Sign Up"}
                   </button>
                   <Link to="/login" className="button signup ">
                     Login
