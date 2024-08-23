@@ -20,20 +20,20 @@ const loginSchema = Yup.object().shape({
 });
 
 const Login = () => {
+  const getTokenFromLocalStorge = localStorage.getItem("customer")
+    ? JSON.parse(localStorage.getItem("customer"))
+    : null;
 
-    const getTokenFromLocalStorge = localStorage.getItem("customer")
-      ? JSON.parse(localStorage.getItem("customer"))
-      : null;
-
-    const config2 = {
-      headers: {
-        Authorization: `Bearer ${
-          getTokenFromLocalStorge !== null ? getTokenFromLocalStorge.token : ""
-        }`,
-        Accept: "application/json",
-      },
-    };
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${
+        getTokenFromLocalStorge !== null ? getTokenFromLocalStorge.token : ""
+      }`,
+      Accept: "application/json",
+    },
+  };
   const authState = useSelector((state) => state?.auth);
+  const loading = useSelector((state) => state?.auth?.isLoading);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -47,16 +47,15 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       dispatch(loginUser(values));
-
       if (authState.isSuccess) {
-        dispatch(getUserCart(config2))
+        dispatch(getUserCart(config2));
         navigate(from, { replace: true });
       }
     },
   });
 
   useEffect(() => {
-    if (authState.user !== null && authState.isError === false) {
+    if (authState?.user !== null && authState?.isError === false) {
       navigate(from, { replace: true });
       window.location.reload();
     }
@@ -105,8 +104,12 @@ const Login = () => {
                   <Link to="/forgot-password">Forgot Your Password?</Link>
                 </div>
                 <div className="mt-2 d-flex justify-content-center gap-15 align-items-center">
-                  <button className="button border-0 " type="submit">
-                    Login
+                  <button
+                    className="button border-0 "
+                    type="submit"
+                    disabled={authState.is}
+                  >
+                    {loading ? "Loading..." : "Login"}
                   </button>
                   <Link to="/signup" className="button signup">
                     Sign Up

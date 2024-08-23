@@ -360,11 +360,11 @@ const Header = () => {
           </div>
 
           <div className="col-12 d-none d-sm-block">
-            <div className="menu-bottom d-flex align-items-center gap-10">
+            <div className="menu-bottom d-flex align-items-center gap-20">
               <div className="d-none d-sm-block">
                 <div className="dropdown">
                   <button
-                    className="btn btn-secondary dropdown-toggle bg-transparent border-0 gap-10  d-flex align-items-center"
+                    className="btn btn-secondary dropdown-toggle bg-transparent border-0 gap-20 d-flex align-items-center"
                     type="button"
                     id="dropdownMenuButton1"
                     data-bs-toggle="dropdown"
@@ -428,7 +428,7 @@ const Header = () => {
               </div>
 
               <div className="menu-links col-6">
-                <div className="d-flex align-items-center gap-10">
+                <div className="d-flex align-items-center gap-20">
                   <NavLink to="/">home</NavLink>
                   <NavLink to="/store">store</NavLink>
                   <NavLink to="/myorders">orders</NavLink>
@@ -438,7 +438,13 @@ const Header = () => {
                     type="button"
                     onClick={handleLogout}
                     className=" border-0  bg-transparent text-white text-uppercase"
-                    style={{ fontSize: "12px", fontWeight: "300" }}
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "300",
+                      lineHeight: "24px",
+                      letterSpacing: "o.3px",
+                      color: "white",
+                    }}
                   >
                     Logout
                   </button>

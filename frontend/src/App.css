@@ -147,44 +147,38 @@ body a {
   color: var(--color-ffffff);
 }
 .logo {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 28px;
   line-height: 30px;
   text-transform: uppercase;
 }
-
 .header-bottom .menu-links a,
 .header-bottom .dropdown button {
   color: white;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 24px;
   font-weight: 300;
   letter-spacing: 0.3;
   text-transform: uppercase;
   text-decoration: none;
 }
-
 .header-bottom .dropdown button:focus {
   box-shadow: none;
 }
-
 .header-bottom .dropdown-menu {
   background-color: #131921;
   width: 100%;
   transform: translate(0px, 57px, 0px) !important;
 }
-
 .dropdown-item-mobile:hover {
   background-color: transparent;
   color: var(--color-febd69) !important;
 }
-
 .header-bottom .dropdown-item {
   padding: 10px;
   margin-bottom: 4px;
   border-bottom: 1px solid var(--color-3b4149);
 }
-
 .header-bottom .dropdown-item:hover {
   background-color: transparent;
   color: var(--color-febd69) !important;

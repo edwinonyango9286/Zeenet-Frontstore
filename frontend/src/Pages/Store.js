@@ -11,7 +11,9 @@ import avitalaptop from "../images/Avita laptop.jpg";
 
 const Store = () => {
   const dispatch = useDispatch();
-  const productState = useSelector((state) => state?.product?.products);
+  const productsState = useSelector((state) => state?.product?.products);
+  const loading = useSelector((state) => state?.product?.isLoading);
+
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
@@ -28,8 +30,8 @@ const Store = () => {
     let newBrands = [];
     let newCategory = [];
     let newTags = [];
-    for (let index = 0; index < productState.length; index++) {
-      const element = productState[index];
+    for (let index = 0; index < productsState?.length; index++) {
+      const element = productsState[index];
       newBrands.push(element.brand);
       newCategory.push(element.category);
       newTags.push(element.tags);
@@ -37,7 +39,7 @@ const Store = () => {
     setBrands(newBrands);
     setCategories(newCategory);
     setTags(newTags);
-  }, [productState]);
+  }, [productsState]);
 
   useEffect(() => {
     dispatch(
@@ -262,7 +264,23 @@ const Store = () => {
 
               <div className="pb-2">
                 <div className="d-flex gap-10 justify-content-center justify-content-md-between flex-wrap">
-                  <ProductCard data={productState ? productState : []} />
+                  {loading ? (
+                    <div className="d-flex justify-content-center align-items-center">
+                      <p
+                        style={{
+                          fontSize: "16px",
+                          fontWeight: "400",
+                          letterSpacing: "0.3px",
+                          lineHeight: "20px",
+                        }}
+                      >
+                        {" "}
+                        Laoding products...
+                      </p>
+                    </div>
+                  ) : (
+                    <ProductCard data={productsState ? productsState : []} />
+                  )}
                 </div>
               </div>
             </div>

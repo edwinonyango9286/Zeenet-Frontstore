@@ -23,7 +23,8 @@ const signUpschema = Yup.object().shape({
 });
 
 const Signup = () => {
-  const authState = useSelector((state) => state.auth);
+  const authState = useSelector((state) => state?.auth);
+  const loading = useSelector((state) => state?.auth?.isLoading);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const formik = useFormik({
@@ -41,7 +42,11 @@ const Signup = () => {
   });
 
   useEffect(() => {
-    if ( authState.createdUser && authState.createdUser !== null && authState.isError === false) {
+    if (
+      authState.createdUser &&
+      authState.createdUser !== null &&
+      authState.isError === false
+    ) {
       navigate("/login");
     }
   }, [authState]);
@@ -115,14 +120,13 @@ const Signup = () => {
                   onBlur={formik.handleBlur("password")}
                   value={formik.values.password}
                 />
-
                 <div className="error">
                   {formik.touched.password && formik.errors.password}
                 </div>
 
                 <div className="mt-2 d-flex justify-content-center gap-15 align-items-center">
                   <button type="submit" className="button border-0">
-                    Sign Up
+                    {loading ? "Loading..." : "Sign Up"}
                   </button>
                   <Link to="/login" className="button signup ">
                     Login

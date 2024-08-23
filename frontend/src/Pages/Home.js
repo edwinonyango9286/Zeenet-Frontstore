@@ -39,27 +39,24 @@ const Home = () => {
   const navigate = useNavigate();
   const blogState = useSelector((state) => state?.blog?.blogs);
   const productState = useSelector((state) => state?.product?.products);
+  const loadingProducts = useSelector((state) => state?.product?.isLoading);
+  const loadingBlogs = useSelector((state) => state?.blog?.isLoading);
+
   const addProductToWishlist = (id) => {
     dispatch(addToWishlist(id));
   };
   useEffect(() => {
-    blogs();
-    products();
-  }, []);
-  const blogs = () => {
     dispatch(getAllBlogs());
-  };
-  const products = () => {
     dispatch(getAllProducts());
-  };
+  }, [dispatch]);
 
-    const formatKES = (amount) => {
-      return new Intl.NumberFormat("en-KE", {
-        style: "currency",
-        currency: "KES",
-        minimumFractionDigits: 0,
-      }).format(amount);
-    };
+  const formatKES = (amount) => {
+    return new Intl.NumberFormat("en-KE", {
+      style: "currency",
+      currency: "KES",
+      minimumFractionDigits: 0,
+    }).format(amount);
+  };
   return (
     <>
       <Container class1="home-wrapper-2  pt-2 pt-sm-4">
@@ -188,7 +185,22 @@ const Home = () => {
           </div>
 
           <div className="col-12 d-flex align-items-center justify-content-center justify-content-lg-start gap-10 flex-wrap ">
-            {productState &&
+            {loadingProducts ? (
+              <div className="d-flex justify-content-center align-items-center">
+                <p
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "400",
+                    letterSpacing: "0.3px",
+                    lineHeight: "20px",
+                  }}
+                >
+                  {" "}
+                  Laoding products...
+                </p>
+              </div>
+            ) : (
+              productState &&
               productState?.map((item, index) => {
                 if (item?.tags === "featured") {
                   return (
@@ -231,9 +243,7 @@ const Home = () => {
                             edit={false}
                             activeColor="#ffd700"
                           />
-                          <p className="price">
-                            {formatKES(item?.price)}
-                          </p>
+                          <p className="price">{formatKES(item?.price)}</p>
                         </div>
 
                         <div className="action-bar position-absolute">
@@ -257,7 +267,11 @@ const Home = () => {
                               />
                             </button>
                             <button className="border-0 bg-transparent">
-                              <img src={addCart} alt="cartImage"  loading="lazy"/>
+                              <img
+                                src={addCart}
+                                alt="cartImage"
+                                loading="lazy"
+                              />
                             </button>
                           </div>
                         </div>
@@ -265,7 +279,8 @@ const Home = () => {
                     </div>
                   );
                 }
-              })}
+              })
+            )}
           </div>
         </div>
       </Container>
@@ -358,7 +373,22 @@ const Home = () => {
           </div>
 
           <div className="col-12 d-flex align-items-center justify-content-center justify-content-lg-start gap-10 flex-wrap">
-            {productState &&
+            {loadingProducts ? (
+              <div className="d-flex justify-content-center align-items-center">
+                <p
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "400",
+                    letterSpacing: "0.3px",
+                    lineHeight: "20px",
+                  }}
+                >
+                  {" "}
+                  Laoding products...
+                </p>
+              </div>
+            ) : (
+              productState &&
               productState?.map((item, index) => {
                 if (item.tags === "special") {
                   return (
@@ -375,7 +405,8 @@ const Home = () => {
                     />
                   );
                 }
-              })}
+              })
+            )}
           </div>
         </div>
       </Container>
@@ -388,7 +419,22 @@ const Home = () => {
 
           <div className="col-12">
             <div className="d-flex align-items-center flex-wrap justify-content-center justify-content-lg-start gap-10 ">
-              {productState &&
+              {loadingProducts ? (
+                <div className="d-flex justify-content-center align-items-center">
+                  <p
+                    style={{
+                      fontSize: "16px",
+                      fontWeight: "400",
+                      letterSpacing: "0.3px",
+                      lineHeight: "20px",
+                    }}
+                  >
+                    {" "}
+                    Laoding products...
+                  </p>
+                </div>
+              ) : (
+                productState &&
                 productState?.map((item, index) => {
                   if (item?.tags === "popular") {
                     return (
@@ -423,7 +469,9 @@ const Home = () => {
 
                           <div className="product-details">
                             <h6 className="brandvmb-0 mt-3">{item?.brand}</h6>
-                            <h5 className="product-title mb-0">{item?.title}</h5>
+                            <h5 className="product-title mb-0">
+                              {item?.title}
+                            </h5>
                             <ReactStars
                               count={5}
                               size={18}
@@ -431,9 +479,7 @@ const Home = () => {
                               edit={false}
                               activeColor="#ffd700"
                             />
-                            <p className="price">
-                              {formatKES(item?.price)}
-                            </p>
+                            <p className="price">{formatKES(item?.price)}</p>
                           </div>
 
                           <div className="action-bar position-absolute">
@@ -463,7 +509,8 @@ const Home = () => {
                       </div>
                     );
                   }
-                })}
+                })
+              )}
             </div>
           </div>
         </div>
@@ -561,7 +608,22 @@ const Home = () => {
           </div>
 
           <div className="d-flex align-items-center gap-10 flex-wrap pb-2">
-            <BlogCard data={blogState ? blogState : []} />
+            {loadingBlogs ? (
+              <div className="d-flex justify-content-center align-items-center">
+                <p
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "400",
+                    letterSpacing: "0.3px",
+                    lineHeight: "20px",
+                  }}
+                >
+                  Laoding blogs...
+                </p>
+              </div>
+            ) : (
+              <BlogCard data={blogState ? blogState : []} />
+            )}
           </div>
         </div>
       </Container>
