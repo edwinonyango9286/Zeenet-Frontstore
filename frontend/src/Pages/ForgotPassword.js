@@ -6,7 +6,7 @@ import Container from "../Components/Container";
 import CustomInput from "../Components/CustomInput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetPasswordToken } from "../features/users/userSlice";
 
 const forgetPasswordSchema = Yup.object().shape({
@@ -26,6 +26,10 @@ const ForgotPassword = () => {
       dispatch(resetPasswordToken(values));
     },
   });
+
+  const { isError, isLoading, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
 
   return (
     <>
@@ -57,10 +61,13 @@ const ForgotPassword = () => {
                   </div>
                 </div>
 
-
                 <div className="mt-3 d-flex justify-content-center flex-column gap-10 align-items-center">
-                  <button className="button border-0" type="submit">
-                    Submit
+                  <button
+                    className="button border-0"
+                    type="submit"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Loading..." : "Submit"}
                   </button>
                   <Link to="/login">Cancel</Link>
                 </div>
