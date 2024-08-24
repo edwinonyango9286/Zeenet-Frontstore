@@ -8,11 +8,11 @@ import { getAllBlogs } from "../features/blogs/blogSlice";
 
 const Blogs = () => {
   const dispatch = useDispatch();
-  const blogState = useSelector((state) => state?.blog?.blogs);
+  const blogState = useSelector((state) => state.blog?.blogs);
 
   useEffect(() => {
     dispatch(getAllBlogs());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -36,7 +36,7 @@ const Blogs = () => {
             </div>
 
             <div className="col-12 col-md-9 col-lg-9 col-xl-9 col-xxl-9 d-flex gap-10">
-                  <BlogCard data={blogState ? blogState : []} />
+              <BlogCard data={blogState ? blogState : []} />
             </div>
           </div>
         </div>

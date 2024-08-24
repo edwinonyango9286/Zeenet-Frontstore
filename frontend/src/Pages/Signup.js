@@ -122,8 +122,12 @@ const Signup = () => {
                 </div>
 
                 <div className="mt-2 d-flex justify-content-center gap-15 align-items-center">
-                  <button type="submit" className="button border-0">
-                    {isLoading ? "Loading..." : "Sign Up"}
+                  <button
+                    type="submit"
+                    className="button border-0"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Signing up..." : "Sign Up"}
                   </button>
                   <Link to="/login" className="button signup ">
                     Login

@@ -67,7 +67,7 @@ const ForgotPassword = () => {
                     type="submit"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Loading..." : "Submit"}
+                    {isLoading ? "Submitting..." : "Submit"}
                   </button>
                   <Link to="/login">Cancel</Link>
                 </div>

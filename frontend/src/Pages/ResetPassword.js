@@ -62,7 +62,7 @@ const ResetPassword = () => {
                 </div>
                   <div className="mt-2 d-flex justify-content-center gap-15 align-items-center">
                     <button className="button border-0" type="submit" disabled={isLoading}>
-                      {isLoading ? "Loading..." : "Reset Password"}
+                      {isLoading ? "Submitting..." : "Reset Password"}
                     </button>
                 </div>
               </form>
