@@ -12,55 +12,43 @@ import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
-const loginSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Enter a valid email.")
-    .required("Enter your email address."),
-  password: Yup.string().required("Enter your password"),
+const LOGIN_SCHEMA = Yup.object().shape({
+  email: Yup.string().email().required(),
+  password: Yup.string()
+    .min(8)
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Password must have a mix of upper and lowercase letters, atleast one number and a special character,"
+    )
+    .required(),
 });
 
 const Login = () => {
-  const getTokenFromLocalStorge = localStorage.getItem("customer")
-    ? JSON.parse(localStorage.getItem("customer"))
-    : null;
-
-  const config2 = {
-    headers: {
-      Authorization: `Bearer ${
-        getTokenFromLocalStorge !== null ? getTokenFromLocalStorge.token : ""
-      }`,
-      Accept: "application/json",
-    },
-  };
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { user, userCart, isError, isLoading, isSuccess, message } =
     useSelector((state) => state.auth ?? {});
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  const dispatch = useDispatch();
+  useEffect(() => {
+    if (user !== null && isError === false && isSuccess === true) {
+      navigate(location.state?.from?.pathname || "/store", { replace: true });
+    }
+  }, [navigate]);
 
-  const from = location.state?.from?.pathname || "/store";
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-    validationSchema: loginSchema,
+    validationSchema: LOGIN_SCHEMA,
     onSubmit: (values) => {
       dispatch(loginUser(values));
       if (isSuccess) {
-        dispatch(getUserCart(config2));
-        navigate(from, { replace: true });
+        dispatch(getUserCart());
       }
     },
   });
-
-  useEffect(() => {
-    if (user !== null && isError === false && isSuccess === true) {
-      navigate(from, { replace: true });
-    }
-  }, [user]);
 
   return (
     <>
@@ -126,3 +114,6 @@ const Login = () => {
 };
 
 export default Login;
+
+// 359 016 381 122
+// kQEKf9

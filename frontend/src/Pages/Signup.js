@@ -11,15 +11,19 @@ import { registerUser } from "../features/users/userSlice";
 import { useEffect } from "react";
 
 const signUpschema = Yup.object().shape({
-  firstname: Yup.string().required("Enter your first name."),
-  lastname: Yup.string().required("Enter your Last name is."),
-  email: Yup.string()
-    .email("Enter a valid email.")
-    .required("Enter your email address."),
+  firstname: Yup.string().required(),
+  lastname: Yup.string().required(),
+  email: Yup.string().email().required(),
   mobile: Yup.string()
-    .matches(/^(\+?254|0)?(7\d{8})$/, "Enter a valid phone number.")
-    .required("Enter your Phone Number."),
-  password: Yup.string().required("Enter your password."),
+    .matches(/^(\+?254|0)?(7\d{8})$/, "Please provide a valid phone nummber.")
+    .required(),
+  password: Yup.string()
+    .min(8)
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Password must have a mix of upper and lowercase letters, atleast one number and a special character,"
+    )
+    .required(),
 });
 
 const Signup = () => {

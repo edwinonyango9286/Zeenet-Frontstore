@@ -17,7 +17,7 @@ const BlogCard = (props) => {
                 className="img-fluid"
                 width={100}
                 height={100}
-              ></img>
+              />
             </div>
             <div className="blog-content">
               <p className="date">

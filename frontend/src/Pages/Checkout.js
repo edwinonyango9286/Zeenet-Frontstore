@@ -10,14 +10,14 @@ import Meta from "../Components/Meta";
 import { addProductToCart, getUserCart } from "../features/users/userSlice";
 
 const shippingSchema = Yup.object().shape({
-  firstName: Yup.string().required("Enter your first name."),
-  lastName: Yup.string().required("Enter your last name."),
-  address: Yup.string().required("Enter your address"),
-  city: Yup.string().required("Enter your city."),
-  other: Yup.string().required("Enter your apartment, suite, etc."),
-  state: Yup.string().required("Enter your state"),
-  country: Yup.string().required("Select your country."),
-  pincode: Yup.string().required("Enter your pincode"),
+  firstName: Yup.string().required(),
+  lastName: Yup.string().required(),
+  address: Yup.string().required(),
+  city: Yup.string().required(),
+  other: Yup.string().required(),
+  state: Yup.string().required(),
+  country: Yup.string().required(),
+  pincode: Yup.string().required(),
 });
 
 const Checkout = () => {
@@ -47,7 +47,6 @@ const Checkout = () => {
       setTotalAmount(sum);
     }
   }, [cartState]);
-  
 
   useEffect(() => {
     dispatch(getUserCart(config2));

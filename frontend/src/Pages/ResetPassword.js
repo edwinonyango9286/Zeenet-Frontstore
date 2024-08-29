@@ -11,7 +11,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetPassword } from "../features/users/userSlice";
 
 const resetPasswordSchema = Yup.object().shape({
-  password: Yup.string().required("Enter a new password."),
+  password: Yup.string()
+    .min(8)
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Password must have a mix of upper and lowercase letters, atleast one number and a special character,"
+    )
+    .required(),
 });
 
 const ResetPassword = () => {

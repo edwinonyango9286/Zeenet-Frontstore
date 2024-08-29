@@ -2,8 +2,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-family, "Roboto"), sans-serif;
 }
+
 :root {
   --color-131921: #131921;
   --color-3b4149: #3b4149;
@@ -17,88 +18,105 @@
   --color-f2f2f2: #f2f2f2;
   --color-eaeaea: #eaeaea;
   --color-ffffff: #ffffff;
+  --color-0000001a: #0000001a;
+  --font-family: "Roboto", sans-serif;
 }
 .error {
-  color: red;
-  font-size: 10px;
+  color: var(--color-error, red);
+  font-size: 1rem;
 }
+
 body a {
   text-decoration: none;
   display: inline-block;
 }
+
 .section-heading {
-  font-size: 18px;
-  line-height: 30px;
+  font-size: 1.125rem;
+  line-height: 1.5;
   font-weight: 500;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 .card-wrapper {
   border-color: white;
-  box-shadow: 0 0 10px #0000001a;
-  padding: 4px;
+  box-shadow: 0 0 10px var(--color-0000001a);
+  padding: 0.5rem;
 }
 
 .link {
   text-decoration: none;
 }
-
 .gap-10 {
-  gap: 10px;
+  gap: 0.625rem;
 }
+
 .gap-15 {
-  gap: 15px;
+  gap: 0.9375rem;
 }
+
 .gap-20 {
-  gap: 20px;
+  gap: 1.25rem;
 }
+
 .gap-25 {
-  gap: 25px;
+  gap: 1.5625rem;
 }
+
 .gap-30 {
-  gap: 30px;
+  gap: 1.875rem;
 }
+
 .gap-35 {
-  gap: 35px;
+  gap: 2.1875rem;
 }
+
 .gap-40 {
-  gap: 40px;
+  gap: 2.5rem;
 }
+
 .gap-45 {
-  gap: 45px;
+  gap: 2.8125rem;
 }
+
 .gap-50 {
-  gap: 50px;
+  gap: 3.125rem;
 }
+
 .gap-55 {
-  gap: 55px;
+  gap: 3.4375rem;
 }
+
 .gap-60 {
-  gap: 60px;
+  gap: 3.75rem;
 }
+
 .gap-65 {
-  gap: 65px;
+  gap: 4.0625rem;
 }
+
 .gap-70 {
-  gap: 75px;
+  gap: 4.375rem;
 }
+
 .gap-75 {
-  gap: 75px;
+  gap: 4.6875rem;
 }
+
 .gap-80 {
-  gap: 80px;
+  gap: 5rem;
 }
 
 .button {
   background-color: var(--color-232f3e);
   color: white;
-  font-size: 12px;
-  padding: 8px 30px;
-  border-radius: 25px;
+  font-size: 0.75rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1.25rem;
 }
 
 .button:hover {
   background-color: var(--color-febd69);
-  color: #131921;
+  color: var(--color-131921);
 }
 
 /* Header part styling starts here*/
@@ -107,10 +125,11 @@ body a {
   border-bottom: 1px solid var(--color-3b4149);
   background-color: var(--color-131921);
 }
+
 .header-info {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 400;
-  line-height: 22px;
+  line-height: 1.375rem;
   text-transform: capitalize;
   color: var(--color-ffffff);
   letter-spacing: 0.3px;
@@ -121,7 +140,7 @@ body a {
 }
 
 .form-control {
-  height: 36px;
+  height: 2.25rem;
 }
 
 .form-control:focus {
@@ -129,34 +148,34 @@ body a {
   box-shadow: none;
 }
 .header-bottom {
-  background-color: #232f3e;
+  background-color: var(--color-232f3e);
 }
 .header-upper .input-group-text {
-  background-color: #febd69;
+  background-color: var(--color-febd69);
 }
 .header-upper .header-upper-links img {
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 .header-upper .header-upper-links span {
   text-transform: capitalize;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 400;
-  line-height: 22px;
+  line-height: 1.375rem;
   letter-spacing: 0.5px;
   color: var(--color-ffffff);
 }
 .logo {
   font-weight: 500;
-  font-size: 28px;
-  line-height: 30px;
+  font-size: 1.75rem;
+  line-height: 1.5;
   text-transform: uppercase;
 }
 .header-bottom .menu-links a,
 .header-bottom .dropdown button {
   color: white;
-  font-size: 14px;
-  line-height: 24px;
+  font-size: 0.875rem;
+  line-height: 1.5;
   font-weight: 300;
   letter-spacing: 0.3;
   text-transform: uppercase;
@@ -166,18 +185,18 @@ body a {
   box-shadow: none;
 }
 .header-bottom .dropdown-menu {
-  background-color: #131921;
+  background-color: var(--color-131921);
   width: 100%;
-  transform: translate(0px, 57px, 0px) !important;
+  transform: translate(0rem, 3.57rem, 0rem) !important;
 }
 .dropdown-item-mobile:hover {
   background-color: transparent;
   color: var(--color-febd69) !important;
 }
 .header-bottom .dropdown-item {
-  padding: 10px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid var(--color-3b4149);
+  padding: 0.625rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 0.0625rem solid var(--color-3b4149);
 }
 .header-bottom .dropdown-item:hover {
   background-color: transparent;
@@ -296,7 +315,7 @@ footer .input-group-text {
 
 .categories {
   background-color: white;
-  box-shadow: 0 0 10px #0000001a;
+  box-shadow: 0 0 10px var(--color-0000001a);
   padding: 15px;
 }
 .categories > div {

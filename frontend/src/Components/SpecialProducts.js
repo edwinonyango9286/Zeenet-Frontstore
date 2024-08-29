@@ -10,7 +10,13 @@ const SpecialProducts = (props) => {
         <div className="special-product-card">
           <div className="d-flex justify-content-between  gap-10">
             <div>
-              <img src={image} className="img-fluid" alt={title} width={200} height={200} />
+              <img
+                src={image}
+                className="img-fluid"
+                alt={title}
+                width={200}
+                height={200}
+              />
             </div>
             <div className="special-product-content">
               <h5 className="brand">{brand}</h5>
@@ -24,12 +30,13 @@ const SpecialProducts = (props) => {
               />
               <p className="price">
                 <span className="text-danger">Ksh {price}</span>&nbsp;
-                <strike>{price}{ }</strike>
+                <strike>
+                  {price}
+                  {}
+                </strike>
               </p>
               <div className="discount-till d-flex align-items-center gap-10">
-                <p className="mb-0">
-                  5 days
-                </p>
+                <p className="mb-0">5 days</p>
                 <div className="d-flex align-items-center gap-10 ">
                   <span className="badge rounded-circle p-1 bg-danger">1</span>:
                   <span className="badge rounded-circle p-1 bg-danger">1</span>:

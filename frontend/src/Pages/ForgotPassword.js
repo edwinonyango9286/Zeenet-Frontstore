@@ -10,9 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetPasswordToken } from "../features/users/userSlice";
 
 const forgetPasswordSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Enter a valid email.")
-    .required("Enter your email address."),
+  email: Yup.string().email().required(),
 });
 
 const ForgotPassword = () => {

@@ -201,15 +201,15 @@ const Home = () => {
               </div>
             ) : (
               productState &&
-              productState?.map((item, index) => {
-                if (item?.tags === "featured") {
+              productState.map((item, index) => {
+                if (item.tags === "featured") {
                   return (
                     <div key={index} className="">
                       <div className="product-card position-relative">
                         <div className="wishlist-icon position-absolute">
                           <button
                             className="border-0 bg-transparent"
-                            onClick={(e) => addProductToWishlist(item?._id)}
+                            onClick={(e) => addProductToWishlist(item._id)}
                           >
                             <img src={wishlistIcon} alt="Wishlist Image" />
                           </button>
@@ -389,19 +389,19 @@ const Home = () => {
               </div>
             ) : (
               productState &&
-              productState?.map((item, index) => {
+              productState.map((item, index) => {
                 if (item.tags === "special") {
                   return (
                     <SpecialProducts
                       key={index}
-                      id={item?._id}
-                      brand={item?.brand}
-                      title={item?.title}
-                      totalrating={item?.totalrating.toString()}
-                      price={formatKES(item?.price)}
-                      sold={item?.sold}
-                      quantity={item?.quantity}
-                      image={item?.images[0]?.url}
+                      id={item._id}
+                      brand={item.brand}
+                      title={item.title}
+                      totalrating={item.totalrating.toString()}
+                      price={formatKES(item.price)}
+                      sold={item.sold}
+                      quantity={item.quantity}
+                      image={item.images[0].url}
                     />
                   );
                 }

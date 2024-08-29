@@ -10,12 +10,12 @@ import { useFormik } from "formik";
 import { createEnquiry, resetState } from "../features/contact/contactSlice";
 
 let contactSchema = Yup.object().shape({
-  name: Yup.string().required("Enter your name."),
-  email: Yup.string().email("Invalid email").required("Enter your email."),
+  name: Yup.string().required(),
+  email: Yup.string().email().required(),
   mobile: Yup.string()
-    .matches(/^(\+?254|0)?(7\d{8})$/, "Enter a valid phone number.")
-    .required("Enter your Phone Number."),
-  comment: Yup.string().required("Enter an enquiry."),
+    .matches(/^(\+?254|0)?(7\d{8})$/, "Please provide a valid phone number.")
+    .required(),
+  comment: Yup.string().required(),
 });
 
 const Contact = () => {

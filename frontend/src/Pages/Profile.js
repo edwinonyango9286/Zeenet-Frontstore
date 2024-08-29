@@ -8,14 +8,12 @@ import { updateProfile } from "../features/users/userSlice";
 import { FiEdit } from "react-icons/fi";
 
 const profileSchema = Yup.object().shape({
-  firstname: Yup.string().required("Enter your First Name."),
-  lastname: Yup.string().required("Enter your Last Name."),
-  email: Yup.string()
-    .email("Enter a valid Email Address.")
-    .required("Enter your Email Address."),
+  firstname: Yup.string().required(),
+  lastname: Yup.string().required(),
+  email: Yup.string().email().required(),
   mobile: Yup.string()
-    .matches(/^(\+?254|0)?(7\d{8})$/, "Enter a valid phone number.")
-    .required("Enter your Phone Number."),
+    .matches(/^(\+?254|0)?(7\d{8})$/, "Please provide a valid phone number.")
+    .required(),
 });
 
 const Profile = () => {
@@ -33,18 +31,20 @@ const Profile = () => {
   };
 
   const dispatch = useDispatch();
-  const userState = useSelector((state) => state?.auth?.user);
+  const { user, isError, isLoading, isSuccess, message } = useSelector(
+    (state) => state.auth ?? {}
+  );
   const [update, setUpdate] = useState(true);
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      firstname: userState?.firstname,
-      lastname: userState?.lastname,
-      email: userState?.email,
-      mobile: userState?.mobile,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      mobile: user.mobile,
     },
-    validationSchema: profileSchema,  
+    validationSchema: profileSchema,
     onSubmit: (values) => {
       dispatch(updateProfile({ data: values, config2: config2 }));
       setUpdate(true);
@@ -59,10 +59,10 @@ const Profile = () => {
           <div className="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
             <div className="d-flex justify-content-between align-items-center">
               <h4> {update === true ? "Your Profile" : "Update Profile"}</h4>
-              {/* <FiEdit
+              <FiEdit
                 className=" fs-4 text-primary"
                 onClick={() => setUpdate(false)}
-              /> */}
+              />
             </div>
 
             <div>
@@ -145,7 +145,7 @@ const Profile = () => {
                 </div>
                 {update === false && (
                   <button type="submit" className="button border-0">
-                    Update
+                    {isLoading ? "Updating..." : "Update"}
                   </button>
                 )}
               </form>

@@ -257,12 +257,12 @@ export const authSlice = createSlice({
         state.updatedUser = action.payload;
         let currentUserData = JSON.parse(localStorage.getItem("customer"));
         let newUserData = {
-          _id: currentUserData?._id,
+          _id: currentUserData._id,
           token: currentUserData?.token,
-          firstname: action?.payload?.firstname,
-          lastname: action?.payload?.lastname,
-          email: action?.payload?.email,
-          mobile: action?.payload?.mobile,
+          firstname: action.payload?.firstname,
+          lastname: action.payload?.lastname,
+          email: action.payload?.email,
+          mobile: action.payload?.mobile,
         };
 
         localStorage.setItem("customer", JSON.stringify(newUserData));
