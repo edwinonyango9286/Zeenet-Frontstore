@@ -7,7 +7,11 @@ import CustomInput from "../Components/CustomInput";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { getUserCart, loginUser } from "../features/users/userSlice";
+import {
+  getUserCart,
+  loginUser,
+  resetState,
+} from "../features/users/userSlice";
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
@@ -23,18 +27,21 @@ const LOGIN_SCHEMA = Yup.object().shape({
     .required(),
 });
 
-const Login = () => {
+const Login = React.memo(() => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const { user, userCart, isError, isLoading, isSuccess, message } =
     useSelector((state) => state.auth ?? {});
+  const from =
+    (location.state && location.state.from && location.state.from.pathname) ||
+    "/store";
 
   useEffect(() => {
-    if (user !== null && isError === false && isSuccess === true) {
-      navigate(location.state?.from?.pathname || "/store", { replace: true });
+    if (user) {
+      navigate(from, { replace: true });
     }
-  }, [navigate]);
+  }, [user, navigate]);
 
   const formik = useFormik({
     initialValues: {
@@ -46,9 +53,16 @@ const Login = () => {
       dispatch(loginUser(values));
       if (isSuccess) {
         dispatch(getUserCart());
+        navigate(from, { replace: true });
       }
     },
   });
+
+  useEffect(() => {
+    if (isError) {
+      dispatch(resetState());
+    }
+  }, [dispatch]);
 
   return (
     <>
@@ -58,7 +72,13 @@ const Login = () => {
         <div className="row">
           <div className="col-12 d-flex items-center">
             <div className="auth-card">
-              <h3 className="text-center mb-2">Login</h3>
+              <h3 className="text-center ">Login</h3>
+              <p className="text-center">Login to your account to continue.</p>
+              <div className="error text-center mb-2">
+                {isError && message
+                  ? message || "Something went wrong. Please try again later."
+                  : ""}
+              </div>
               <form
                 onSubmit={formik.handleSubmit}
                 className="d-flex flex-column gap-10"
@@ -98,7 +118,7 @@ const Login = () => {
                     type="submit"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Loading..." : "Login"}
+                    {isLoading ? "Logging in..." : "Login"}
                   </button>
                   <Link to="/signup" className="button signup">
                     Sign Up
@@ -111,7 +131,7 @@ const Login = () => {
       </Container>
     </>
   );
-};
+});
 
 export default Login;
 

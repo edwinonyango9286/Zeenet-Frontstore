@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import authService from "./userService";
 import { toast } from "react-toastify";
 
@@ -120,15 +120,15 @@ export const getOrders = createAsyncThunk(
   }
 );
 
-const getCustomerFromLocalStorge = localStorage.getItem("customer")
+export const resetState = createAction("Reset_all");
+
+const user = localStorage.getItem("customer")
   ? JSON.parse(localStorage.getItem("customer"))
   : null;
 
-const getCartFromLocalStorage = localStorage.getItem("userCart");
-
 const initialState = {
-  user: getCustomerFromLocalStorge,
-  userCart: getCartFromLocalStorage,
+  user: user,
+  userCart: null,
   isError: false,
   isLoading: false,
   isSuccess: false,
@@ -137,7 +137,7 @@ const initialState = {
 
 export const authSlice = createSlice({
   name: "auth",
-  initialState: initialState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -149,18 +149,13 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.createdUser = action.payload;
-        if (state.isSuccess === true) {
-          toast.success("Account creation successful.");
-        }
+        toast.success("Account creation successful.");
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
         state.isLoading = false;
-        state.message = action.error;
-        if (state.isError === true) {
-          toast.error(action.payload.response.data.message);
-        }
+        state.message = action.payload.response.data.message;
       })
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
@@ -170,19 +165,14 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.user = action.payload;
-        if (state.isSuccess === true) {
-          localStorage.setItem("token", action.payload.token);
-          toast.success("User login successful.");
-        }
+        localStorage.setItem("token", action.payload.token);
+        toast.success("User login successfull.");
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
         state.isLoading = false;
-        state.message = action.error;
-        if (state.isError === true) {
-          toast.error(action.payload.response.data.message);
-        }
+        state.message = action.payload.response.data.message;
       })
 
       .addCase(logoutUser.pending, (state) => {
@@ -255,18 +245,17 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.updatedUser = action.payload;
-        let currentUserData = JSON.parse(localStorage.getItem("customer"));
-        let newUserData = {
-          _id: currentUserData._id,
-          token: currentUserData?.token,
+        let currentUser = JSON.parse(localStorage.getItem("customer"));
+        let newUser = {
+          _id: currentUser?._id,
+          token: currentUser?.token,
           firstname: action.payload?.firstname,
           lastname: action.payload?.lastname,
           email: action.payload?.email,
           mobile: action.payload?.mobile,
         };
-
-        localStorage.setItem("customer", JSON.stringify(newUserData));
-        state.user = newUserData;
+        localStorage.setItem("customer", JSON.stringify(newUser));
+        state.user = newUser;
         toast.success("Profile updated.");
       })
       .addCase(updateProfile.rejected, (state, action) => {
@@ -274,9 +263,7 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.isLoading = false;
         state.message = action.error;
-        if (state.isSuccess === false) {
-          toast.error("Something went wrong. Please try again later.");
-        }
+        toast.error("Something went wrong. Please try again later.");
       })
       .addCase(resetPasswordToken.pending, (state) => {
         state.isLoading = true;
@@ -286,18 +273,14 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.token = action.payload;
-        if (state.isSuccess) {
-          toast.success("A password reset token has been sent to your email.");
-        }
+        toast.success("A password reset token has been sent to your email.");
       })
       .addCase(resetPasswordToken.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
         state.isLoading = false;
         state.message = action.error;
-        if (state.isSuccess === false) {
-          toast.error(action.payload.response.data.message);
-        }
+        toast.error(action.payload.response.data.message);
       })
       .addCase(resetPassword.pending, (state) => {
         state.isLoading = true;
@@ -307,18 +290,13 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.newPassword = action.payload;
-        if (state.isSuccess) {
-          toast.success("Your password has been updated.");
-        }
+        toast.success("Your password has been updated. Proceed to login.");
       })
       .addCase(resetPassword.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
         state.isLoading = false;
         state.message = action.error;
-        if (state.isSuccess === false) {
-          toast.error(action.payload.response.data.message);
-        }
       })
       .addCase(getOrders.pending, (state) => {
         state.isLoading = true;
@@ -334,9 +312,8 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.isLoading = false;
         state.message = action.error;
-        if (state.isError === true)
-          toast.error(action.payload.response.data.message);
-      });
+      })
+      .addCase(resetState, () => initialState);
   },
 });
 

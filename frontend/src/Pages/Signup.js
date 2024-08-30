@@ -7,10 +7,10 @@ import CustomInput from "../Components/CustomInput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../features/users/userSlice";
+import { registerUser, resetState } from "../features/users/userSlice";
 import { useEffect } from "react";
 
-const signUpschema = Yup.object().shape({
+const SIGN_UP_SCHEMA = Yup.object().shape({
   firstname: Yup.string().required(),
   lastname: Yup.string().required(),
   email: Yup.string().email().required(),
@@ -26,9 +26,10 @@ const signUpschema = Yup.object().shape({
     .required(),
 });
 
-const Signup = () => {
-  const { user, userCart, isError, isLoading, isSuccess, message } =
-    useSelector((state) => state?.auth);
+const Signup = React.memo(() => {
+  const { isError, isLoading, isSuccess, message, createdUser } = useSelector(
+    (state) => state.auth ?? {}
+  );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,17 +41,23 @@ const Signup = () => {
       mobile: "",
       password: "",
     },
-    validationSchema: signUpschema,
+    validationSchema: SIGN_UP_SCHEMA,
     onSubmit: (values) => {
       dispatch(registerUser(values));
     },
   });
 
   useEffect(() => {
-    if (user && isError === false) {
+    if (createdUser) {
       navigate("/login");
     }
-  }, [user, navigate, isError]);
+  }, [createdUser, navigate]);
+
+  useEffect(() => {
+    if (isError) {
+      dispatch(resetState());
+    }
+  }, [dispatch]);
 
   return (
     <>
@@ -60,7 +67,13 @@ const Signup = () => {
         <div className="row">
           <div className="col-12 d-flex items-center">
             <div className="auth-card">
-              <h3 className="text-center mb-2">Sign Up</h3>
+              <h3 className="text-center">Sign Up</h3>
+              <p className="text-center">Sign up to continue.</p>
+              <div className="error text-center mb-2">
+                {isError && message
+                  ? message || "Something went wrong. Please try again later."
+                  : ""}
+              </div>
               <form
                 onSubmit={formik.handleSubmit}
                 className="d-flex flex-column gap-10"
@@ -144,6 +157,6 @@ const Signup = () => {
       </Container>
     </>
   );
-};
+});
 
 export default Signup;

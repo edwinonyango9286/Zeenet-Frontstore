@@ -25,7 +25,6 @@ const logoutAUser = async () => {
   return response.data;
 };
 
-
 const getUserWishlist = async () => {
   const response = await axios.get(`${base_url}user/wishlist`, config);
   if (response.data) {
@@ -56,7 +55,7 @@ const updateUserProfile = async (data) => {
   const response = await axios.put(
     `${base_url}user/update-user`,
     data?.data,
-    data?.config2
+    config
   );
   if (response.data) {
     return response.data;

@@ -23,7 +23,7 @@
 }
 .error {
   color: var(--color-error, red);
-  font-size: 1rem;
+  font-size: 0.625rem;
 }
 
 body a {
@@ -217,14 +217,14 @@ footer:not(:first-child) {
 footer .input-group-text {
   background-color: var(--color-232f3e);
   color: white;
-  padding: 8px 16px;
+  padding: 6px 14px;
 }
 .footer-text {
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .newsLetter {
-  font-size: 12px;
+  font-size: 11px;
 }
 
 /* Footer Styling Ends Here */

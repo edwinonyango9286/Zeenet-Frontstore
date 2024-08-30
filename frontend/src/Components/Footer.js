@@ -42,7 +42,7 @@ const Footer = () => {
                   }}
                 />
                 <span
-                  className="input-group-text p-1 footer-text"
+                  className="input-group-text p-1 footer-text rounded-md"
                   id="basic-addon2"
                 >
                   Subscribe
@@ -195,9 +195,9 @@ const Footer = () => {
         <div className="row">
           <div className="col-12">
             <p className="text-center mb-0 text-white">
-              &copy;{new Date().getFullYear()}:{" "}
+              <span className="fs-6"> &copy;{new Date().getFullYear()}: </span>
               <Link to="/zeenet" className="text-white footer-text">
-                Developed By Zeenet App Developers
+                Zeenet Tech Group.
               </Link>
             </p>
           </div>

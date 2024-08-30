@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "../features/users/userSlice";
 import { FiEdit } from "react-icons/fi";
 
-const profileSchema = Yup.object().shape({
+const PROFILE_SCHEMA = Yup.object().shape({
   firstname: Yup.string().required(),
   lastname: Yup.string().required(),
   email: Yup.string().email().required(),
@@ -17,36 +17,23 @@ const profileSchema = Yup.object().shape({
 });
 
 const Profile = () => {
-  const getTokenFromLocalStorge = localStorage.getItem("customer")
-    ? JSON.parse(localStorage.getItem("customer"))
-    : null;
-
-  const config2 = {
-    headers: {
-      Authorization: `Bearer ${
-        getTokenFromLocalStorge !== null ? getTokenFromLocalStorge.token : ""
-      }`,
-      Accept: "application/json",
-    },
-  };
-
   const dispatch = useDispatch();
+  const [update, setUpdate] = useState(true);
   const { user, isError, isLoading, isSuccess, message } = useSelector(
     (state) => state.auth ?? {}
   );
-  const [update, setUpdate] = useState(true);
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      firstname: user.firstname,
-      lastname: user.lastname,
-      email: user.email,
-      mobile: user.mobile,
+      firstname: user?.firstname,
+      lastname: user?.lastname,
+      email: user?.email,
+      mobile: user?.mobile,
     },
-    validationSchema: profileSchema,
+    validationSchema: PROFILE_SCHEMA,
     onSubmit: (values) => {
-      dispatch(updateProfile({ data: values, config2: config2 }));
+      dispatch(updateProfile({ data: values }));
       setUpdate(true);
     },
   });
@@ -58,7 +45,7 @@ const Profile = () => {
         <div className="row">
           <div className="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
             <div className="d-flex justify-content-between align-items-center">
-              <h4> {update === true ? "Your Profile" : "Update Profile"}</h4>
+              <h4> {update === true ? "Account details" : "Update profile"}</h4>
               <FiEdit
                 className=" fs-4 text-primary"
                 onClick={() => setUpdate(false)}

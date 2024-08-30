@@ -33,7 +33,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            {/* Private Routes */}
             <Route path="about" element={<About />} />
             <Route path="store" element={<Store />} />
             <Route path="product/:id" element={<SingleProduct />} />
