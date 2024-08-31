@@ -48,7 +48,7 @@ export const addProductRating = createAsyncThunk(
 
 export const resetState = createAction("Reset_all");
 
-const productState = {
+const initialState = {
   products: [],
   isError: false,
   isLoading: false,
@@ -58,7 +58,7 @@ const productState = {
 
 export const productSlice = createSlice({
   name: "products",
-  initialState: productState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -127,7 +127,7 @@ export const productSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
       })
-      .addCase(resetState, () => productState);
+      .addCase(resetState, () => initialState);
   },
 });
 

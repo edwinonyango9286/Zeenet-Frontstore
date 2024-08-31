@@ -11,10 +11,14 @@ import { useNavigate } from "react-router-dom";
 import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { getAproduct } from "../features/products/productSlice";
+import { TfiMenu } from "react-icons/tfi";
 
 const Header = () => {
-  const authState = useSelector((state) => state?.auth);
-  const productState = useSelector((state) => state?.product?.products);
+  //Getting user from redux
+  const { user, userCart, isError, isLoading, isSuccess, message } =
+    useSelector((state) => state?.auth ?? {});
+
+  const { products } = useSelector((state) => state?.product);
   const [productOpt, setProductOpt] = useState([]);
   const [paginate, setPaginate] = useState(true);
   const [cartData, setCartData] = useState(() => {
@@ -25,12 +29,12 @@ const Header = () => {
 
   useEffect(() => {
     let data = [];
-    for (let index = 0; index < productState.length; index++) {
-      const element = productState[index];
+    for (let index = 0; index < products.length; index++) {
+      const element = products[index];
       data.push({ id: index, prod: element?._id, name: element?.title });
     }
     setProductOpt(data);
-  }, [productState]);
+  }, [products]);
 
   useEffect(() => {
     let totalQuantity = 0;
@@ -89,28 +93,25 @@ const Header = () => {
 
       <div className="header-upper py-2 container-fluid">
         <div className="row">
-          <div className="d-flex align-items-center">
-            <div className="col-6 col-md-2 d-flex align-items-center gap-10  ">
+          <div className=" col-12 d-flex align-items-center ">
+            <div className="col-6 col-md-2 d-flex align-items-center">
               <div className="menu-bottom header-bottom">
                 <div className="d-md-none d-lg-none d-xl-none d-xxl-none">
                   <div className="dropdown">
                     <button
-                      className="btn btn-secondary dropdown-toggle bg-transparent rounded-md d-flex align-items-center shadow-none"
+                      className="btn btn-secondary dropdown-toggle rounded d-flex align-items-center"
                       type="button"
                       id="dropdownMenuButton1"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
+                      style={{
+                        border: "none",
+                        outline: "none",
+                        boxShadow: "none",
+                        backgroundColor: "#131921",
+                      }}
                     >
-                      <img
-                        src={menu}
-                        alt="Menu Image"
-                        className="img-fluid"
-                        style={{
-                          width: "20px",
-                          height: "20px",
-                        }}
-                        loading="lazy"
-                      />
+                      <TfiMenu className="fs-1" />
                       <span className="d-none d-sm-block">SHOP CATEGORIES</span>
                     </button>
 
@@ -163,13 +164,11 @@ const Header = () => {
                 </div>
               </div>
 
-              <div>
-                <h2>
-                  <Link to="/" className="text-white logo mt-2 md:mt-0">
-                    Zeenet
-                  </Link>
-                </h2>
-              </div>
+              <h2>
+                <Link to="/" className="text-white logo mt-2 md:mt-0">
+                  Zeenet
+                </Link>
+              </h2>
             </div>
 
             <div className="d-none d-sm-block col-sm-5">
@@ -244,9 +243,10 @@ const Header = () => {
                     </span>
                   </Link>
                 </div>
-                <div>
+
+                <div className="dropdown">
                   <Link
-                    to={authState?.user === null ? "/login" : "/my-profile"}
+                    to={user === null ? "/login" : "/my-profile"}
                     className="d-flex align-items-center gap-10 text-white"
                   >
                     <img
@@ -259,7 +259,7 @@ const Header = () => {
                         height: 35,
                       }}
                     />
-                    {authState?.user === null ? (
+                    {user === null ? (
                       <span className="mb-0 d-none d-lg-block" id="hidden">
                         Log in
                         <br />
@@ -272,7 +272,7 @@ const Header = () => {
                       >
                         Welcome
                         <br />
-                        {authState?.user?.firstname}
+                        {user.firstname}
                       </span>
                     )}
                   </Link>
