@@ -265,6 +265,7 @@ export const authSlice = createSlice({
         state.message = action.error;
         toast.error("Something went wrong. Please try again later.");
       })
+      
       .addCase(resetPasswordToken.pending, (state) => {
         state.isLoading = true;
       })

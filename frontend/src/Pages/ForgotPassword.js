@@ -7,26 +7,28 @@ import CustomInput from "../Components/CustomInput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { resetPasswordToken } from "../features/users/userSlice";
+import { resetPasswordToken, resetState } from "../features/users/userSlice";
 
-const forgetPasswordSchema = Yup.object().shape({
+const FORGOT_PASSWORD_SCHEMA = Yup.object().shape({
   email: Yup.string().email().required(),
 });
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       email: "",
     },
-    validationSchema: forgetPasswordSchema,
+    validationSchema: FORGOT_PASSWORD_SCHEMA,
     onSubmit: (values) => {
+      dispatch(resetState());
       dispatch(resetPasswordToken(values));
     },
   });
 
   const { isError, isLoading, isSuccess, message } = useSelector(
-    (state) => state.auth
+    (state) => state.auth ?? {}
   );
 
   return (
@@ -41,6 +43,12 @@ const ForgotPassword = () => {
               <p className="text-center mt-3 mb-3">
                 We will send you an email to reset your password.
               </p>
+
+              <div className="error text-center">
+                {isError && message
+                  ? message || "Something went wrong. Please try again later."
+                  : ""}
+              </div>
               <form
                 onSubmit={formik.handleSubmit}
                 className="d-flex flex-column gap-10"
