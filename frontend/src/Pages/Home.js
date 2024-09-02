@@ -202,7 +202,7 @@ const Home = () => {
             ) : (
               productState &&
               productState.map((item, index) => {
-                if (item.tags === "featured") {
+                if (item.tags === "Featured") {
                   return (
                     <div key={index} className="">
                       <div className="product-card position-relative">
@@ -390,7 +390,7 @@ const Home = () => {
             ) : (
               productState &&
               productState.map((item, index) => {
-                if (item.tags === "special") {
+                if (item.tags === "Special") {
                   return (
                     <SpecialProducts
                       key={index}
@@ -436,7 +436,7 @@ const Home = () => {
               ) : (
                 productState &&
                 productState?.map((item, index) => {
-                  if (item?.tags === "popular") {
+                  if (item?.tags === "Popular") {
                     return (
                       <div key={index}>
                         <div className="product-card position-relative">

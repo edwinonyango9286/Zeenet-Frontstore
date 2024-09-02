@@ -52,7 +52,7 @@ function App() {
             />
 
             <Route path="cart" element={<Cart />} />
-            
+
             <Route
               path="/myorders"
               element={

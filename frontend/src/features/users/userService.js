@@ -1,9 +1,8 @@
-import axios from "axios";
-import { base_url } from "../../utils/baseUrl";
 import { config } from "../../utils/axiosConfig";
+import { newRequest } from "../../utils/newRequest";
 
 const register = async (userData) => {
-  const response = await axios.post(`${base_url}user/register`, userData);
+  const response = await newRequest.post(`user/register`, userData);
   if (response.data) {
     localStorage.setItem("customer", JSON.stringify(response.data));
   }
@@ -11,7 +10,7 @@ const register = async (userData) => {
 };
 
 const login = async (userData) => {
-  const response = await axios.post(`${base_url}user/login`, userData);
+  const response = await newRequest.post(`user/login`, userData);
   if (response.data) {
     localStorage.setItem("user", JSON.stringify(response.data));
   }
@@ -19,14 +18,14 @@ const login = async (userData) => {
 };
 
 const logoutAUser = async () => {
-  const response = await axios.get(`${base_url}user/logout`);
+  const response = await newRequest.get(`user/logout`);
   localStorage.removeItem("customer");
   localStorage.removeItem("token");
   return response.data;
 };
 
 const getUserWishlist = async () => {
-  const response = await axios.get(`${base_url}user/wishlist`, config);
+  const response = await newRequest.get(`user/wishlist`, config);
   if (response.data) {
     return response.data;
   }
@@ -34,7 +33,7 @@ const getUserWishlist = async () => {
 
 const addToCart = async (cartData) => {
   if (localStorage.getItem("customer")) {
-    const response = await axios.post(`${base_url}user/cart`, cartData, config);
+    const response = await newRequest.post(`user/cart`, cartData, config);
     if (response.data) {
       localStorage.removeItem("userCart");
       return response.data;
@@ -45,45 +44,37 @@ const addToCart = async (cartData) => {
 };
 
 const getCart = async (data) => {
-  const response = await axios.get(`${base_url}user/getusercart`, data);
+  const response = await newRequest.get(`user/getusercart`, data);
   if (response.data) {
     return response.data;
   }
 };
 
 const updateUserProfile = async (data) => {
-  const response = await axios.put(
-    `${base_url}user/update-user`,
-    data?.data,
-    config
-  );
+  const response = await newRequest.put(`user/update-user`, data?.data, config);
   if (response.data) {
     return response.data;
   }
 };
 
 const forgotPasswordToken = async (data) => {
-  const response = await axios.post(
-    `${base_url}user/forgot-password-token`,
-    data
-  );
+  const response = await newRequest.post(`user/forgot-password-token`, data);
   if (response.data) {
     return response.data;
   }
 };
 
 const resetUserPassword = async (data) => {
-  const response = await axios.put(
-    `${base_url}user/reset-password/${data?.token}`,
-    { password: data.password }
-  );
+  const response = await newRequest.put(`user/reset-password/${data?.token}`, {
+    password: data.password,
+  });
   if (response.data) {
     return response.data;
   }
 };
 
 const getUserOrders = async (data) => {
-  const response = await axios.get(`${base_url}user/getmyorders/`, data);
+  const response = await newRequest.get(`user/getmyorders/`, data);
   if (response.data) {
     return response.data;
   }

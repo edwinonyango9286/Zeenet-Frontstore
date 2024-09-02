@@ -1,8 +1,8 @@
 import axios from "axios";
-import { base_url } from "../../utils/baseUrl";
+import { newRequest } from "../../utils/newRequest";
 
 const postEnquiry = async (contactData) => {
-  const response = await axios.post(`${base_url}enquiry/create`, contactData);
+  const response = await newRequest.post(`enquiry/create`, contactData);
   return response.data;
 };
 

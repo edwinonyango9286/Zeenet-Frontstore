@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
 export const OpenRoutes = ({ children }) => {
-  const customer = JSON.parse(localStorage.getItem("customer"));
+  const customer = JSON.parse(localStorage.getItem("user"));
   return customer?.token === undefined ? (
     children
   ) : (

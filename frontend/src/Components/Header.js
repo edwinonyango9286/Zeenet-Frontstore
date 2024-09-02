@@ -48,7 +48,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("customer");
+    localStorage.removeItem("user");
     localStorage.removeItem("token");
     navigate("/store");
     window.location.reload();

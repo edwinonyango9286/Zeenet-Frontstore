@@ -1,29 +1,27 @@
-import axios from "axios";
-import { base_url } from "../../utils/baseUrl";
 import { config } from "../../utils/axiosConfig";
+import { newRequest } from "../../utils/newRequest";
 
 const getProducts = async (data) => {
-  const response = await axios.get(
-    `${base_url}products/allproducts?${
-      data?.brand ? `brand=${data?.brand}&&` : ""
-    }${data?.tag ? `tags=${data?.tag}&&` : ""}${
-      data?.category ? `category=${data?.category}&&` : ""
-    }${data?.minPrice ? `price[gte]=${data?.minPrice}&&` : ""}${
-      data?.maxPrice ? `price[lte]=${data?.maxPrice}&&` : ""
-    }${data?.sort? `sort=${data?.sort}&&` : ""}`
+  const response = await newRequest.get(
+    `products/allproducts?${data?.brand ? `brand=${data?.brand}&&` : ""}${
+      data?.tag ? `tags=${data?.tag}&&` : ""
+    }${data?.category ? `category=${data?.category}&&` : ""}${
+      data?.minPrice ? `price[gte]=${data?.minPrice}&&` : ""
+    }${data?.maxPrice ? `price[lte]=${data?.maxPrice}&&` : ""}${
+      data?.sort ? `sort=${data?.sort}&&` : ""
+    }`
   );
   return response.data;
 };
 
-
 const getASingleProduct = async (id) => {
-  const response = await axios.get(`${base_url}products/getaproduct/${id}`);
+  const response = await newRequest.get(`products/getaproduct/${id}`);
   return response.data;
 };
 
 const addToWishlist = async (prodId) => {
-  const response = await axios.put(
-    `${base_url}products/addtowishlist`,
+  const response = await newRequest.put(
+    `products/addtowishlist`,
     {
       prodId,
     },
@@ -34,7 +32,7 @@ const addToWishlist = async (prodId) => {
   }
 };
 const addRating = async (data) => {
-  const response = await axios.put(`${base_url}products/rating`, data, config);
+  const response = await newRequest.put(`products/rating`, data, config);
   if (response.data) {
     return response.data;
   }
