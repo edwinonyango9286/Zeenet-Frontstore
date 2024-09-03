@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk,createAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import contactService from "./contactService";
 import { toast } from "react-toastify";
 
@@ -13,8 +13,8 @@ export const createEnquiry = createAsyncThunk(
   }
 );
 
-export const resetState = createAction("Reset_all")
-   
+export const resetState = createAction("Reset_all");
+
 const enquiryState = {
   enquiries: [],
   isError: false,
@@ -37,18 +37,13 @@ export const contactSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.createdEnquiry = action.payload;
-        if (state.isSuccess === true) {
-          toast.success("Enquiry Submitted.");
-        }
+        toast.success("Enquiry Submitted.");
       })
       .addCase(createEnquiry.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
-        state.message = action.error;
-        if (state.isError === true) {
-          toast.error("Something went wrong, Please try again.");
-        }
+        state.message = action.payload.response?.data?.message;
       })
       .addCase(resetState, () => enquiryState);
   },

@@ -155,7 +155,7 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.isLoading = false;
-        state.message = action.payload.response.data.message;
+        state.message = action.payload.response?.data?.message;
       })
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
@@ -172,7 +172,7 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.isLoading = false;
-        state.message = action.payload.response.data.message;
+        state.message = action.payload.response?.data?.message;
       })
 
       .addCase(logoutUser.pending, (state) => {
@@ -204,7 +204,7 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.isLoading = false;
-        state.message = action.error;
+        state.message = action.payload.response?.data?.message;
       })
 
       .addCase(getUserProductWishlist.pending, (state) => {
@@ -235,7 +235,7 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.isLoading = false;
-        state.message = action.error;
+        state.message = action.payload.response?.data?.message;
       })
       .addCase(updateProfile.pending, (state) => {
         state.isLoading = true;
@@ -262,8 +262,7 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.isLoading = false;
-        state.message = action.error;
-        toast.error("Something went wrong. Please try again later.");
+        state.message = action.payload.response?.data?.message;
       })
 
       .addCase(resetPasswordToken.pending, (state) => {
@@ -280,8 +279,7 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.isLoading = false;
-        state.message = action.error;
-        toast.error(action.payload.response.data.message);
+        state.message = action.payload.response?.data?.message;
       })
       .addCase(resetPassword.pending, (state) => {
         state.isLoading = true;
@@ -297,7 +295,7 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.isLoading = false;
-        state.message = action.error;
+        state.message = action.payload.response?.data?.message;
       })
       .addCase(getOrders.pending, (state) => {
         state.isLoading = true;
@@ -312,7 +310,7 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.isLoading = false;
-        state.message = action.error;
+        state.message = action.payload.response?.data?.message;
       })
       .addCase(resetState, () => initialState);
   },

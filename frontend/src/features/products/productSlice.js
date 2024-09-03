@@ -75,7 +75,7 @@ export const productSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
-        state.message = action.error;
+        state.message = action.payload.response?.data?.message;
       })
       .addCase(addToWishlist.pending, (state) => {
         state.isLoading = true;
@@ -91,7 +91,7 @@ export const productSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
-        state.message = action.error;
+        state.message = action.payload.response?.data?.message;
       })
       .addCase(getAproduct.pending, (state) => {
         state.isLoading = true;
@@ -117,15 +117,13 @@ export const productSlice = createSlice({
         state.isSuccess = true;
         state.rating = action.payload;
         state.message = "Thank you for rating this product.";
-        if (state.isSuccess) {
-          toast.success("Product rating submitted.");
-        }
+        toast.success("Product rating submitted.");
       })
       .addCase(addProductRating.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
-        state.message = action.error;
+        state.message = action.payload.response?.data?.message;
       })
       .addCase(resetState, () => initialState);
   },
