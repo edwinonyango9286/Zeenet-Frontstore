@@ -7,7 +7,7 @@ const BlogCard = (props) => {
 
   return (
     <>
-      {data &&
+      {(data &&
         data?.map((item, index) => {
           return (
             <div key={index} className="blog-card">
@@ -37,7 +37,8 @@ const BlogCard = (props) => {
               </div>
             </div>
           );
-        })}
+        })) ||
+        []}
     </>
   );
 };
