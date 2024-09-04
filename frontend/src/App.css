@@ -136,7 +136,7 @@ body a {
   letter-spacing: 0.3px;
 }
 
-.header-upper {
+.header-middle {
   background-color: var(--color-131921);
 }
 
@@ -151,14 +151,14 @@ body a {
 .header-bottom {
   background-color: var(--color-232f3e);
 }
-.header-upper .input-group-text {
+.header-middle .input-group-text {
   background-color: var(--color-febd69);
 }
-.header-upper .header-upper-links img {
-  width: 1.5rem;
-  height: 1.5rem;
+.header-middle.header-middle-links img {
+  width: 24px;
+  height: 24px;
 }
-.header-upper .header-upper-links span {
+.header-middle .header-middle-links span {
   text-transform: capitalize;
   font-size: 0.8125rem;
   font-weight: 400;
@@ -400,9 +400,9 @@ footer .input-group-text {
 
 /* Product card styling  starts here*/
 .product-card {
-  padding: 10px;
+  padding: 0.625rem;
   background-color: white;
-  border-radius: 6px;
+  border-radius: 0.25rem;
   overflow: hidden;
   width: 200px;
   height: 240px;
@@ -509,96 +509,104 @@ footer .input-group-text {
 }
 /* famous card styling ends here */
 
-/* store styling starts here */
+/* Store styling starts here */
+
 .filter-card {
   background-color: white;
-  border-radius: 10px;
-  padding: 5px 18px 24px;
-  margin-top: 5px;
+  border-radius: 0.25rem;
+  padding: 1.25rem;
+  margin-top: 0.25rem;
 }
 
 .sort-text {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
 }
 
 .sort-text::selection {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
 }
 
 .filter-title {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-weight: 500;
   color: var(--color-1c1c1b);
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
 }
 
 .filter-card ul,
 .filter-card .form-check-label {
   list-style-type: none;
-  font-size: 12px;
-  line-height: 30px;
+  font-size: 0.75rem;
+  line-height: 1.875rem;
   color: var(--color-777777);
   cursor: pointer;
 }
-.filter-card .form-check-input:focus {
-  box-shadow: none;
-  border-color: rgba(0, 0, 0, 0.25);
-}
-.filter-card .form-check-input:checked {
-  background-color: var(--color-febd69);
-  border-color: var(--color-febd69);
+
+.filter-card .form-check-input {
+  &:focus {
+    box-shadow: none;
+    border-color: rgba(0, 0, 0, 0.25);
+  }
+  &:checked {
+    background-color: var(--color-febd69);
+    border-color: var(--color-febd69);
+  }
 }
 
 .sub-title {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   color: var(--color-1c1c1b);
-  margin-bottom: 14px;
-  margin-top: 14px;
+  margin-bottom: 0.875rem;
+  margin-top: 0.875rem;
 }
 
 .colors {
   list-style-type: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
 .colors li {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   background-color: red;
   border-radius: 50%;
 }
 
-.random-product h5 {
-  font-size: 14px;
-  margin-bottom: 8px;
-  font-weight: 500;
-  line-height: 14px;
+.random-product {
+  h5 {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 0.875rem;
+    margin:0px;
+  }
+  &:first-child {
+    border-bottom: 1px solid var(--color-ededed);
+  }
 }
 
-.random-product:first-child {
-  border-bottom: 1px solid var(--color-ededed);
-}
 .filter-sort-grid {
-  padding: 10px;
+  padding: 0.625rem;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 0.25rem;
 }
+
 .grid img {
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
   background-color: var(--color-f2f2f2);
-  padding: 8px;
-  border-radius: 2px;
+  padding: 0.5rem;
+  border-radius: 0.125rem;
   cursor: pointer;
 }
 
-/* store styling ends here */
+/* Store styling ends here */
 
 /*contact page styling starts here */
 
@@ -637,7 +645,7 @@ footer .input-group-text {
 .compare-product-card {
   padding: 10px 10px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 0.25rem;
 }
 .compare-product-card .cross,
 .wishlist-card .cross {

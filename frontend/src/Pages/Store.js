@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import BreadCrumb from "../Components/BreadCrumb";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Flex, Spin } from "antd";
 import Meta from "../Components/Meta";
 import ReactStars from "react-rating-stars-component";
 import ProductCard from "../Components/ProductCard";
 import Container from "../Components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../features/products/productSlice";
-import applelaptop from "../images/Apple laptop.jpg";
-import avitalaptop from "../images/Avita laptop.jpg";
 
 const Store = () => {
   const dispatch = useDispatch();
   const productsState = useSelector((state) => state?.product?.products);
-  const loading = useSelector((state) => state?.product?.isLoading);
+  const isLoading = useSelector((state) => state?.product?.isLoading);
 
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -47,16 +47,24 @@ const Store = () => {
     );
   }, [sort, tag, brand, category, minPrice, maxPrice]);
 
+  const formatKES = (amount) => {
+    return new Intl.NumberFormat("en-KE", {
+      style: "currency",
+      currency: "KES",
+      minimumFractionDigits: 0,
+    }).format(amount);
+  };
+
   return (
     <>
       <Meta title={"Store"} />
       <BreadCrumb title="Store" />
       <Container class1="store-wrapper home-wrapper-2 ">
         <div className="row">
-          <div className="col-12 d-flex gap-10">
+          <div className="col-12 d-flex flex-row justify-content-between gap-10">
             <div className="col-3 d-none d-sm-block">
               <div className="filter-card mb-2">
-                <h3 className="filter-title">Shop By Categories</h3>
+                <h3 className="filter-title">Shop by categories</h3>
                 <div>
                   <ul className="ps-0">
                     {categories &&
@@ -72,7 +80,7 @@ const Store = () => {
               </div>
 
               <div className="filter-card mb-2">
-                <h3 className="filter-title"> Filter By</h3>
+                <h3 className="filter-title"> Filter by</h3>
                 <div>
                   <h5 className="sub-title">Availability</h5>
                   <div>
@@ -106,8 +114,8 @@ const Store = () => {
                     <div className="form-floating">
                       <input
                         type="number"
-                        className="form-control"
-                        id=""
+                        className="form-control border shadow-none"
+                        id="minPrice"
                         placeholder="From"
                         onChange={(e) => setMinPrice(e.target.value)}
                       />
@@ -116,7 +124,8 @@ const Store = () => {
                     <div className="form-floating">
                       <input
                         type="number"
-                        className="form-control"
+                        id="maxPrice"
+                        className="form-control border shadow-none"
                         placeholder="To"
                         onChange={(e) => setMaxPrice(e.target.value)}
                       />
@@ -128,7 +137,7 @@ const Store = () => {
 
               <div>
                 <div className="filter-card mb-2">
-                  <h3 className="filter-title">Product Tags</h3>
+                  <h3 className="filter-title">Product tags</h3>
                   <div>
                     <div className="product-tags d-flex flex-wrap align-items-center gap-10">
                       {tags &&
@@ -147,7 +156,7 @@ const Store = () => {
                   </div>
 
                   <div className="py-2">
-                    <h3 className="filter-title ">Product Brands</h3>
+                    <h3 className="filter-title ">Product brands</h3>
                     <div>
                       <div className="product-tags d-flex flex-wrap align-items-center gap-10">
                         {brands &&
@@ -168,121 +177,115 @@ const Store = () => {
                 </div>
               </div>
 
-              <div className="filter-card mb-2">
-                <h3 className="filter-title">Random Products</h3>
-                <div>
-                  <div className="random-product mb-4 d-flex">
-                    <div className="w-50">
-                      <img
-                        src={applelaptop}
-                        className="img-fluid"
-                        alt="watch"
-                        width={100}
-                        height={100}
-                      ></img>
-                    </div>
+              {productsState &&
+                productsState.map((randomProduct, index) => {
+                  if (randomProduct.tags === "Featured") {
+                    return (
+                      <div key={index} className="filter-card mb-0">
+                        <h3 className="filter-title">Random products</h3>
+                        <div>
+                          <div className="random-product mb-4 d-flex justify-content-between">
+                            <div className="w-50 ">
+                              <img
+                                src={randomProduct?.images[0]?.url}
+                                className="img-fluid border mx-auto rounded"
+                                alt="watch"
+                                width={100}
+                                height={100}
+                              />
+                            </div>
 
-                    <div className="w-50">
-                      <h5>Apple MacBook Pro 14</h5>
-                      <ReactStars
-                        count={5}
-                        size={18}
-                        value={4}
-                        edit={false}
-                        activeColor="#ffd700"
-                      />
-                      <p>Ksh 40,000/=</p>
-                    </div>
-                  </div>
-
-                  <div className="random-product d-flex">
-                    <div className="w-50">
-                      <img
-                        src={avitalaptop}
-                        className="img-fluid"
-                        alt="watch"
-                        width={100}
-                        height={100}
-                      ></img>
-                    </div>
-
-                    <div className="w-50">
-                      <h5>AVITA SATUS S102</h5>
-                      <ReactStars
-                        count={5}
-                        size={18}
-                        value={3}
-                        edit={false}
-                        activeColor="#ffd700"
-                      />
-                      <p>Ksh 48,000/=</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                            <div className="w-50">
+                              <h5>{randomProduct?.title}</h5>
+                              <ReactStars
+                                count={5}
+                                size={18}
+                                value={4}
+                                edit={false}
+                                activeColor="#ffd700"
+                              />
+                              <p>{formatKES(randomProduct?.price)}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
             </div>
 
-            <div className=" col-12 col-md-9">
-              <div className="filter-sort-grid mb-2 mt-2">
-                <div className="d-flex justify-content-between align-items-center gap-10 grid">
-                  <div className="d-flex d-none d-md-block d-lg-block d-xl-block d-xxl-block">
-                    <div className="d-flex justify-content-between gap-10 align-items-center">
-                      <span className="d-block" style={{ width: "100px" }}>
-                        Sort by :
-                      </span>
-                      <select
-                        className="form-control form-select  sort-text border shadow-none"
-                        onChange={(e) => setSort(e.target.value)}
-                      >
-                        <option value="title" className="sort-text">
-                          Alphabetically, a-z
-                        </option>
-                        <option value="-title" className="sort-text">
-                          Alphabetically, z-a
-                        </option>
-                        <option value="price" className="sort-text">
-                          Price, Low to High
-                        </option>
-                        <option value="-price" className="sort-text">
-                          Price, High to Low
-                        </option>
-                        <option value="createdAt" className="sort-text">
-                          Date, Old to New
-                        </option>
-                        <option value="-createdAt" className="sort-text">
-                          Date, New to Old
-                        </option>
-                      </select>
+            <div className="col-12 col-md-9">
+              {isLoading ? (
+                <div
+                  className="d-flex flex-row justify-content-center align-items-center"
+                  style={{ marginTop: "80px" }}
+                >
+                  <Flex align="center" gap="middle">
+                    <Spin
+                      indicator={
+                        <LoadingOutlined
+                          style={{
+                            fontSize: 36,
+                            color: "#000",
+                          }}
+                          spin
+                        />
+                      }
+                    />
+                  </Flex>
+                </div>
+              ) : (
+                <div>
+                  <div className="filter-sort-grid mb-2 mt-2">
+                    <div className="d-flex justify-content-between align-items-center gap-10 grid">
+                      <div className="d-flex d-none d-md-block">
+                        <div className="d-flex justify-content-between gap-10 align-items-center">
+                          <span className="d-block" style={{ width: "100px" }}>
+                            Sort by :
+                          </span>
+                          <select
+                            className="form-control form-select  sort-text border shadow-none"
+                            onChange={(e) => setSort(e.target.value)}
+                          >
+                            <option value="title" className="sort-text">
+                              Alphabetically, a-z
+                            </option>
+                            <option value="-title" className="sort-text">
+                              Alphabetically, z-a
+                            </option>
+                            <option value="price" className="sort-text">
+                              Price, Low to High
+                            </option>
+                            <option value="-price" className="sort-text">
+                              Price, High to Low
+                            </option>
+                            <option value="createdAt" className="sort-text">
+                              Date, Old to New
+                            </option>
+                            <option value="-createdAt" className="sort-text">
+                              Date, New to Old
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div>
+                        <span className="mb-0">
+                          {" "}
+                          {productsState.length ? productsState.length : 0}{" "}
+                          Items
+                        </span>
+                      </div>
                     </div>
                   </div>
 
-                  <div>
-                    <span className="mb-0"> 24 Laptops</span>
+                  <div className="pb-2">
+                    <div className="d-flex gap-10 justify-content-center justify-content-md-between flex-wrap">
+                      <ProductCard data={productsState ? productsState : []} />
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="pb-2">
-                <div className="d-flex gap-10 justify-content-center justify-content-md-between flex-wrap">
-                  {loading ? (
-                    <div className="d-flex justify-content-center align-items-center">
-                      <p
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: "400",
-                          letterSpacing: "0.3px",
-                          lineHeight: "20px",
-                        }}
-                      >
-                        {" "}
-                        Laoding products...
-                      </p>
-                    </div>
-                  ) : (
-                    <ProductCard data={productsState ? productsState : []} />
-                  )}
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

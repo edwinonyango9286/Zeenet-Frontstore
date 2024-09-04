@@ -14,12 +14,11 @@ const persistConfig = {
 };
 
 const persistedAuthReducer = persistReducer(persistConfig, authReducer);
-const persistedProductReducer = persistReducer(persistConfig, productReducer);
 
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
-    product: persistedProductReducer,
+    product: productReducer,
     blog: blogReducer,
     contact: contactReducer,
   },
