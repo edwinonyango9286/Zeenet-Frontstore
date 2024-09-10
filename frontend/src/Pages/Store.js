@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import BreadCrumb from "../Components/BreadCrumb";
-import { LoadingOutlined } from "@ant-design/icons";
-import { Flex, Spin } from "antd";
+import { Loading3QuartersOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 import Meta from "../Components/Meta";
 import ReactStars from "react-rating-stars-component";
 import ProductCard from "../Components/ProductCard";
 import Container from "../Components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../features/products/productSlice";
+import { useNavigate } from "react-router-dom";
 
 const Store = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const productsState = useSelector((state) => state?.product?.products);
   const isLoading = useSelector((state) => state?.product?.isLoading);
 
@@ -156,7 +158,7 @@ const Store = () => {
                   </div>
 
                   <div className="py-2">
-                    <h3 className="filter-title ">Product brands</h3>
+                    <h3 className="filter-title">Product brands</h3>
                     <div>
                       <div className="product-tags d-flex flex-wrap align-items-center gap-10">
                         {brands &&
@@ -185,7 +187,12 @@ const Store = () => {
                         <h3 className="filter-title">Random products</h3>
                         <div>
                           <div className="random-product mb-4 d-flex justify-content-between">
-                            <div className="w-50 ">
+                            <div
+                              className="w-50"
+                              onClick={() =>
+                                navigate("/product/" + randomProduct?._id)
+                              }
+                            >
                               <img
                                 src={randomProduct?.images[0]?.url}
                                 className="img-fluid border mx-auto rounded"
@@ -218,21 +225,20 @@ const Store = () => {
               {isLoading ? (
                 <div
                   className="d-flex flex-row justify-content-center align-items-center"
-                  style={{ marginTop: "80px" }}
+                  style={{ marginTop: "80px", marginBottom: "80px" }}
                 >
-                  <Flex align="center" gap="middle">
-                    <Spin
-                      indicator={
-                        <LoadingOutlined
-                          style={{
-                            fontSize: 36,
-                            color: "#000",
-                          }}
-                          spin
-                        />
-                      }
-                    />
-                  </Flex>
+                  <Spin
+                    indicator={
+                      <Loading3QuartersOutlined
+                        style={{
+                          fontSize: 40,
+                          fontWeight : "bold",
+                          color: "#000",
+                        }}
+                        spin
+                      />
+                    }
+                  />
                 </div>
               ) : (
                 <div>
@@ -271,8 +277,7 @@ const Store = () => {
 
                       <div>
                         <span className="mb-0">
-                          {" "}
-                          {productsState.length ? productsState.length : 0}{" "}
+                          {productsState.length ? productsState.length : 0}
                           Items
                         </span>
                       </div>
@@ -280,7 +285,7 @@ const Store = () => {
                   </div>
 
                   <div className="pb-2">
-                    <div className="d-flex gap-10 justify-content-center justify-content-md-between flex-wrap">
+                    <div className="d-inline-flex gap-10 justify-content-center justify-content-md-between flex-wrap">
                       <ProductCard data={productsState ? productsState : []} />
                     </div>
                   </div>

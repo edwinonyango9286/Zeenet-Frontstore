@@ -15,7 +15,7 @@ const Wishlist = () => {
 
   useEffect(() => {
     dispatch(getUserProductWishlist());
-  }, [dispatch]);
+  }, []);
 
   const removeFromWishlist = debounce((id) => {
     dispatch(removeFromWishlist(id));

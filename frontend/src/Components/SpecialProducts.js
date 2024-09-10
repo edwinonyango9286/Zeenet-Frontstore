@@ -2,7 +2,7 @@ import React from "react";
 import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 
-const SpecialProducts = (props) => {
+const SpecialProducts = React.memo((props) => {
   const { brand, title, totalrating, price, sold, quantity, image, id } = props;
   return (
     <>
@@ -65,6 +65,6 @@ const SpecialProducts = (props) => {
       </div>
     </>
   );
-};
+});
 
 export default SpecialProducts;

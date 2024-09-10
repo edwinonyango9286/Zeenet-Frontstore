@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import BreadCrumb from "../Components/BreadCrumb";
 import Meta from "../Components/Meta";
 import { AiTwotoneHome, AiTwotoneMail } from "react-icons/ai";
@@ -30,7 +30,7 @@ const Contact = () => {
     },
     validationSchema: contactSchema,
     onSubmit: (values) => {
-      dispatch(resetState())
+      dispatch(resetState());
       dispatch(createEnquiry(values));
     },
   });
@@ -133,7 +133,7 @@ const Contact = () => {
             <div className=" col-12 col-sm-6 ">
               <h3 className="contact-title"> Get In Touch With Us</h3>
 
-              <div> 
+              <div>
                 <ul className="ps-0 d-flex flex-column gap-10 ">
                   <li className="mb-2 d-flex align-items-center  gap-10">
                     <AiTwotoneHome className="fs-5" />

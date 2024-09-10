@@ -73,8 +73,8 @@ const resetUserPassword = async (data) => {
   }
 };
 
-const getUserOrders = async (data) => {
-  const response = await newRequest.get(`user/getmyorders/`, data);
+const getUserOrders = async () => {
+  const response = await newRequest.get(`user/getmyorders`, config);
   if (response.data) {
     return response.data;
   }

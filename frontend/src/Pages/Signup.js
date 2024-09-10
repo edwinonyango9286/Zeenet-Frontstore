@@ -57,7 +57,7 @@ const Signup = React.memo(() => {
     if (isError) {
       dispatch(resetState());
     }
-  }, [dispatch]);
+  }, []);
 
   return (
     <>

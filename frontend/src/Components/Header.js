@@ -48,6 +48,7 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+      localStorage.removeItem("persist:root");
     navigate("/store");
     window.location.reload();
   };

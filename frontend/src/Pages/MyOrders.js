@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { Table } from "antd";
+import { Table, Spin } from "antd";
 import BreadCrumb from "../Components/BreadCrumb";
 import Container from "../Components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../features/users/userSlice";
+import { Loading3QuartersOutlined } from "@ant-design/icons";
 
 const columns = [
   {
@@ -34,28 +35,15 @@ const columns = [
 ];
 
 const MyOrders = () => {
-  const getTokenFromLocalStorge = localStorage.getItem("customer")
-    ? JSON.parse(localStorage.getItem("customer"))
-    : null;
-
-  const config2 = {
-    headers: {
-      Authorization: `Bearer ${
-        getTokenFromLocalStorge !== null ? getTokenFromLocalStorge.token : ""
-      }`,
-      Accept: "application/json",
-    },
-  };
-
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getOrders(config2));
+    dispatch(getOrders());
   }, []);
 
   const ordersState = useSelector(
     (state) => state?.auth?.orderedProducts?.orders
   );
-  const loading = useSelector((state) => state?.auth?.isLoading);
+  const loadingOrders = useSelector((state) => state?.auth?.isLoading);
 
   const data1 = [];
   for (let i = 0; i < ordersState?.length; i++) {
@@ -82,26 +70,31 @@ const MyOrders = () => {
     <>
       <BreadCrumb title="My Orders" />
       <Container class1="py-4">
-        <div>
-          <h5 className="my-4">Recent Orders</h5>
-          {loading ? (
-            <div className="d-flex justify-content-center align-items-center">
-              <p
-                style={{
-                  fontSize: "16px",
-                  fontWeight: "400",
-                  letterSpacing: "0.3px",
-                  lineHeight: "20px",
-                }}
-              >
-                {" "}
-                Laoding...
-              </p>
-            </div>
-          ) : (
+        {loadingOrders ? (
+          <div
+            className="d-flex flex-row justify-content-center align-items-center"
+            style={{ marginTop: "80px", marginBottom: "80px" }}
+          >
+            <Spin
+              indicator={
+                <Loading3QuartersOutlined
+                  style={{
+                    fontSize: 40,
+                    fontWeight: "bold",
+                    color: "#000",
+                  }}
+                  spin
+                />
+              }
+            />
+          </div>
+        ) : (
+          <div>
+            <h5 className="my-4">Recent Orders</h5>
+
             <div>{<Table columns={columns} dataSource={data1} />}</div>
-          )}
-        </div>
+          </div>
+        )}
       </Container>
     </>
   );

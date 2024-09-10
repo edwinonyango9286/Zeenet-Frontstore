@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
+
 const LOGIN_SCHEMA = Yup.object().shape({
   email: Yup.string().email().required(),
   password: Yup.string()
@@ -62,7 +63,7 @@ const Login = React.memo(() => {
     if (isError) {
       dispatch(resetState());
     }
-  }, [dispatch]);
+  }, []);
 
   return (
     <>
@@ -135,5 +136,3 @@ const Login = React.memo(() => {
 
 export default Login;
 
-// 359 016 381 122
-// kQEKf9
