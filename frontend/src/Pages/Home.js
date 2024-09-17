@@ -267,7 +267,7 @@ const Home = () => {
                                 <ReactStars
                                   count={5}
                                   size={18}
-                                  value={item?.totalrating.toString()}
+                                  value={parseInt(item.totalrating) ?? 0}
                                   edit={false}
                                   activeColor="#ffd700"
                                 />
@@ -489,7 +489,7 @@ const Home = () => {
                                 <ReactStars
                                   count={5}
                                   size={18}
-                                  value={item?.totalrating.toString() || 4}
+                                  value={parseInt(item?.totalrating) ?? 0}
                                   edit={false}
                                   activeColor="#ffd700"
                                 />
