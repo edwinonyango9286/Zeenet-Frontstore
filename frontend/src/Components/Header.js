@@ -48,7 +48,7 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-      localStorage.removeItem("persist:root");
+    localStorage.removeItem("persist:root");
     navigate("/store");
     window.location.reload();
   };
@@ -100,24 +100,24 @@ const Header = () => {
                 <div className="menu-bottom header-bottom">
                   <div className="d-md-none d-lg-none d-xl-none d-xxl-none">
                     <div className="dropdown">
-                      <button
-                        className="btn btn-secondary dropdown-toggle rounded d-flex align-items-center"
-                        type="button"
+                      <TfiMenu
+                        className="fs-1 dropdown-toggle"
                         id="dropdownMenuButton1"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                         style={{
+                          cursor: "pointer",
                           border: "none",
                           outline: "none",
                           boxShadow: "none",
+                          color: "white",
+                          width: "48px",
+                          height: "48px",
                           backgroundColor: "#131921",
+                          padding: "10px", 
                         }}
-                      >
-                        <TfiMenu className="fs-1" />
-                        <span className="d-none d-sm-block">
-                          SHOP CATEGORIES
-                        </span>
-                      </button>
+                      />
+                      <span className="d-none d-sm-block">SHOP CATEGORIES</span>
 
                       <ul
                         className="dropdown-menu"

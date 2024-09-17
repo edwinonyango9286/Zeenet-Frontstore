@@ -64,8 +64,6 @@ const SingleProduct = () => {
     return existingCart;
   };
 
-
-
   const props = {
     width: 600,
     height: 600,
@@ -158,7 +156,7 @@ const SingleProduct = () => {
                       <ReactImageZoom {...props} />
                     </div>
                   </div>
-                  <div className="other-product-images d-flex flex-wrap justify-content-between">
+                  <div className="other-product-images d-flex flex-wrap justify-content-between gap-10">
                     <div>
                       <img
                         src={productState?.images[0]?.url}
@@ -242,7 +240,7 @@ const SingleProduct = () => {
                       <div className="d-flex gap-10 flex-wrap mt-2 mb-4">
                         <h3 className="product-heading"> Screen Size:</h3>
                         <div className="d-flex flex-wrap gap-2 gap-md-15">
-                          <span className="bg-white text-dark border px-2"> 
+                          <span className="bg-white text-dark border px-2">
                             {productState?.screensize}"
                           </span>
                         </div>
@@ -400,7 +398,7 @@ const SingleProduct = () => {
                       </div>
                     </div>
                     <div>
-                      <button className="text-dark text-decoration-underline btn btn-link">
+                      <button className="text-dark text-decoration-underline btn btn-link shadow-none ">
                         Write a review
                       </button>
                     </div>
@@ -425,7 +423,7 @@ const SingleProduct = () => {
                         <textarea
                           name="review"
                           id="review"
-                          className="w-100 form-control"
+                          className="w-100 form-control border shadow-none"
                           cols={20}
                           rows={4}
                           placeholder="Comment..."
