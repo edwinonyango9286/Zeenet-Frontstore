@@ -18,7 +18,7 @@ const CustomInput = (props) => {
         type={type}
         name={name}
         placeholder={placeholder}
-        className={`form-control border shadow-none ${classname}`}
+        className={`form-control border rounded-md shadow-none ${classname}`}
         value={value}
         onChange={onChange}
         onBlur={onBlur}

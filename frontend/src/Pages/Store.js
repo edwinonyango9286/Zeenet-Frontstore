@@ -274,10 +274,9 @@ const Store = () => {
                           </select>
                         </div>
                       </div>
-
                       <div>
                         <span className="mb-0">
-                          {productsState.length ? productsState.length : 0}
+                          {productsState.length ? productsState.length : 0 } {""}
                           Items
                         </span>
                       </div>

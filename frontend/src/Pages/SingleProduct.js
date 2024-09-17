@@ -64,6 +64,8 @@ const SingleProduct = () => {
     return existingCart;
   };
 
+
+
   const props = {
     width: 600,
     height: 600,
@@ -240,7 +242,7 @@ const SingleProduct = () => {
                       <div className="d-flex gap-10 flex-wrap mt-2 mb-4">
                         <h3 className="product-heading"> Screen Size:</h3>
                         <div className="d-flex flex-wrap gap-2 gap-md-15">
-                          <span className="bg-white text-dark border px-2">
+                          <span className="bg-white text-dark border px-2"> 
                             {productState?.screensize}"
                           </span>
                         </div>

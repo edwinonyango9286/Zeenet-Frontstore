@@ -204,7 +204,7 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.isLoading = false;
-        state.message = action.payload.response?.data?.message;
+        state.message = action.error;
       })
 
       .addCase(getUserProductWishlist.pending, (state) => {

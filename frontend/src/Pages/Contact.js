@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { createEnquiry, resetState } from "../features/contact/contactSlice";
+import CustomInput from "../Components/CustomInput";
 
 let contactSchema = Yup.object().shape({
   name: Yup.string().required(),
@@ -56,14 +57,12 @@ const Contact = () => {
             <div className="col-12 col-sm-6">
               <h3 className="contact-title mb-4">Contact</h3>
               <form
-                action=""
                 onSubmit={formik.handleSubmit}
                 className="d-flex align flex-column gap-10"
               >
                 <div className="mb-2">
-                  <input
+                  <CustomInput
                     type="text"
-                    className="form-control shadow-none"
                     placeholder="Name"
                     name="name"
                     id="name"
@@ -76,9 +75,8 @@ const Contact = () => {
                   </div>
                 </div>
                 <div className="mb-2">
-                  <input
+                  <CustomInput
                     type="email"
-                    className="form-control shadow-none"
                     placeholder="Email"
                     id="email"
                     name="email"
@@ -91,9 +89,8 @@ const Contact = () => {
                   </div>
                 </div>
                 <div className="mb-2">
-                  <input
+                  <CustomInput
                     type="tel"
-                    className="form-control shadow-none"
                     placeholder="Mobile Number"
                     id="mobile"
                     name="mobile"
@@ -108,7 +105,7 @@ const Contact = () => {
 
                 <div className="mb-2">
                   <textarea
-                    className=" form-control shadow-none"
+                    className=" form-control border rounded-md shadow-none"
                     name="comment"
                     id="comment"
                     cols={30}
