@@ -43,7 +43,7 @@ export const contactSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
-        state.message = action.payload.response?.data?.message;
+        state.message = action?.payload?.response?.data?.message;
       })
       .addCase(resetState, () => enquiryState);
   },
