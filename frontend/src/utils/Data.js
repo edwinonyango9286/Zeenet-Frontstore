@@ -1,8 +1,8 @@
-import service1 from "../images/free delivery.jpg";
-import service2 from "../images/daily offers.jpg";
-import service3 from "../images/24h support.jpg";
+import service1 from "../images/free delivery.png";
+import service2 from "../images/daily offers.png";
+import service3 from "../images/24h support.png";
 import service4 from "../images/affordable prices.png";
-import service5 from "../images/secure payment.jpg";
+import service5 from "../images/secure payment.png";
 
 const services = [
   {
