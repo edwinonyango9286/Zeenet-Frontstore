@@ -21,6 +21,7 @@ import { toast } from "react-toastify";
 import mpesaBadge from "../images/Mpesa logo best.png";
 import kcbBadge from "../images/kcb logo.png";
 import airtelMoneyBadge from "../images/airtel-logo  best.jpg";
+import CustomInput from "../Components/CustomInput";
 
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
@@ -245,8 +246,27 @@ const SingleProduct = () => {
                           </span>
                         </div>
                       </div>
-                      <div className="d-flex align-items-center  gap-15  flex-row mt-2 mb-4">
-                        <div className="d-flex  align-items-center gap-30 ">
+                      <div className="d-flex flex-column  gap-20  flex-row mt-2 mb-4">
+                        <div className="d-flex flex-row  align-items-center gap-20">
+                          <div>
+                            <p className="">Quantity</p>
+                          </div>
+                          <div>
+                            <input
+                              type="number"
+                              name="quanity"
+                              className="form-control border rounded shadow-none"
+                              min={1}
+                              max={10}
+                              style={{ width: "60px" }}
+                              id="quantity"
+                              onChange={(e) => setQuantity(e.target.value)}
+                              value={quantity}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="d-flex flex-row  align-items-center gap-30 ">
                           <div>
                             <button
                               className="button border-0"

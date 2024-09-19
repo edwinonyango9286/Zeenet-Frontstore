@@ -22,10 +22,8 @@ const Layout = () => {
         pauseOnHover
         draggable
         transition={Bounce}
-        theme="colored"
+        theme="dark"
         toastStyle={{
-          width: "300px",
-          height: "40px",
           fontSize: "12px",
           fontWeight: "400",
         }}

@@ -34,17 +34,17 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="store" element={<Store />} />
-            <Route path="product/:id" element={<SingleProduct />} />
-            <Route path="blogs" element={<Blogs />} />
-            <Route path="blogs/singleblog/:id" element={<SingleBlog />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="compare-products" element={<CompareProducts />} />
-            <Route path="wishlist" element={<Wishlist />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/store" element={<Store />} />
+            <Route path="/product/:id" element={<SingleProduct />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blogs/singleblog/:id" element={<SingleBlog />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/compare-products" element={<CompareProducts />} />
+            <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/my-profile" element={<Profile />} />
             <Route
-              path="login"
+              path="/login"
               element={
                 <OpenRoutes>
                   <Login />
@@ -63,7 +63,7 @@ function App() {
               }
             />
             <Route
-              path="checkout"
+              path="/checkout"
               element={
                 <PrivateRoutes>
                   <Checkout />
@@ -73,7 +73,7 @@ function App() {
             <Route path="forgot-password" element={<ForgotPassword />} />
 
             <Route
-              path="signup"
+              path="/signup"
               element={
                 <OpenRoutes>
                   <Signup />

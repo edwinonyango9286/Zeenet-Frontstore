@@ -14,22 +14,24 @@ const Footer = () => {
       <footer className="py-4 overflow-hidden">
         <div className="container">
           <div className="row">
-            <div className="col-12 d-flex justify-content-between flex-wrap">
-              <div className="col-6">
-                <div className="footer-top-data d-flex gap-30 align-items-center">
+            <div className="col-12 d-flex justify-content-between flex-wrap gap-20">
+              <div className="col-12 col-md-6">
+                <div className="footer-top-data d-flex gap-10 align-items-center justify-content-center">
                   <img
                     src={newsletterImage}
                     className="img-fluid"
                     alt="News letter"
                     loading="lazy"
+                    width={20}
+                    height={20}
                   />
                   <h5 className="mb-0 text-white newsLetter">
-                    Sign Up for Newsletter
+                    sign up for our discounts
                   </h5>
                 </div>
               </div>
 
-              <div className="col-6">
+              <div className="col-12 col-md-6">
                 <div className="input-group">
                   <input
                     type="text"
@@ -38,12 +40,13 @@ const Footer = () => {
                     aria-label="Your Email Address"
                     aria-describedby="basic-addon2"
                     style={{
+                      width: "80px",
                       boxShadow: "none",
                       outline: "none",
                     }}
                   />
                   <span
-                    className="input-group-text p-1 footer-text rounded-md"
+                    className="input-group-text p-1 text-sm  rounded-md"
                     id="basic-addon2"
                   >
                     Subscribe

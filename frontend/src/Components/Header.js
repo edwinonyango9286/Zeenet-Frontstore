@@ -114,10 +114,9 @@ const Header = () => {
                           width: "48px",
                           height: "48px",
                           backgroundColor: "#131921",
-                          padding: "10px", 
+                          padding: "10px",
                         }}
                       />
-                      <span className="d-none d-sm-block">SHOP CATEGORIES</span>
 
                       <ul
                         className="dropdown-menu"
@@ -125,7 +124,7 @@ const Header = () => {
                       >
                         <li>
                           <Link className="dropdown-item text-white" to="/">
-                            Home
+                            HOME
                           </Link>
                         </li>
                         <li>
@@ -133,7 +132,31 @@ const Header = () => {
                             className="dropdown-item text-white"
                             to="/store"
                           >
-                            Apple
+                            STORE
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            className="dropdown-item text-white"
+                            to="/myorders"
+                          >
+                            ORDERS
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            className="dropdown-item text-white"
+                            to="/blogs"
+                          >
+                            BLOGS
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            className="dropdown-item text-white"
+                            to="/contact"
+                          >
+                            CONTACT
                           </Link>
                         </li>
                         <li>
@@ -141,47 +164,15 @@ const Header = () => {
                             className="dropdown-item text-white"
                             to="/store"
                           >
-                            Dell
+                            LOGOUT
                           </Link>
                         </li>
                         <li>
                           <Link
                             className="dropdown-item text-white"
-                            to="/store"
+                            to="/about"
                           >
-                            HP
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="dropdown-item text-white"
-                            to="/store"
-                          >
-                            Samsung
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="dropdown-item text-white"
-                            to="/store"
-                          >
-                            ASUS
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="dropdown-item text-white"
-                            to="/store"
-                          >
-                            Lenovo
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="dropdown-item text-white"
-                            to="/store"
-                          >
-                            Toshiba
+                            About
                           </Link>
                         </li>
                       </ul>
