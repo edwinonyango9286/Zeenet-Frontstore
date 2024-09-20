@@ -53,9 +53,9 @@ const Contact = () => {
             ></iframe>
           </div>
 
-          <div className=" col-12 my-4 contact-inner-wrapper d-flex gap-20 flex-wrap flex-sm-nowrap">
+          <div className=" col-12 my-4 contact-inner-wrapper d-flex gap-4 flex-wrap flex-sm-nowrap">
             <div className="col-12 col-sm-6">
-              <h3 className="contact-title mb-4">Contact</h3>
+              <h3 className="contact-title mb-2">Contact</h3>
               <form
                 onSubmit={formik.handleSubmit}
                 className="d-flex align flex-column gap-10"
@@ -128,31 +128,31 @@ const Contact = () => {
             </div>
 
             <div className=" col-12 col-sm-6 ">
-              <h3 className="contact-title"> Get In Touch With Us</h3>
+              <h3 className="contact-title"> Get in touch with us.</h3>
 
               <div>
                 <ul className="ps-0 d-flex flex-column gap-10 ">
                   <li className="mb-2 d-flex align-items-center  gap-10">
-                    <AiTwotoneHome className="fs-5" />
+                    <AiTwotoneHome className="fs-6" />
                     <address className="mb-0">
                       Address : Moi Avenue Bazaar Plaza 7th Floor, Crystal
                       Suites,
                     </address>
                   </li>
                   <li className="mb-2 d-flex align-items-center gap-10">
-                    <BsTelephoneFill className="fs-5" />
+                    <BsTelephoneFill className="fs-6" />
                     <a href="tel:+254 0719547267">Phone : +254 0719547267</a>
                   </li>
 
                   <li className="mb-2 d-flex align-items-center gap-10">
-                    <AiTwotoneMail className="fs-5" />
+                    <AiTwotoneMail className="fs-6" />
                     <a href="mailto:technologieszeenet@gmail.com">
                       Email : technologieszeenet@gmail.com
                     </a>
                   </li>
 
                   <li className="mb-2 d-flex align-items-center gap-10">
-                    <BsFillInfoCircleFill className="fs-5" />
+                    <BsFillInfoCircleFill className="fs-6" />
                     <p className="mb-0">Monday To Sunday 6am to 8pm </p>
                   </li>
                 </ul>

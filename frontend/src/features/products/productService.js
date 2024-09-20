@@ -23,11 +23,23 @@ const getASingleProduct = async (id) => {
   }
 };
 
-const addToWishlist = async (prodId) => {
+const addToWishlist = async (productId) => {
   const response = await newRequest.put(
     `products/addtowishlist`,
     {
-      prodId,
+      productId,
+    },
+    config
+  );
+  if (response.data) {
+    return response.data;
+  }
+};
+const removeFromWishlist = async (productId) => {
+  const response = await newRequest.put(
+    `products/addtowishlist`,
+    {
+      productId,
     },
     config
   );
@@ -47,6 +59,7 @@ const productService = {
   addToWishlist,
   getASingleProduct,
   addRating,
+  removeFromWishlist,
 };
 
 export default productService;

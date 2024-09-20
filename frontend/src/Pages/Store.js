@@ -260,16 +260,16 @@ const Store = () => {
                               Alphabetically, z-a
                             </option>
                             <option value="price" className="sort-text">
-                              Price, Low to High
+                              Price, low to high
                             </option>
                             <option value="-price" className="sort-text">
-                              Price, High to Low
+                              Price, high to low
                             </option>
                             <option value="createdAt" className="sort-text">
-                              Date, Old to New
+                              Date, old to new
                             </option>
                             <option value="-createdAt" className="sort-text">
-                              Date, New to Old
+                              Date, new to old
                             </option>
                           </select>
                         </div>
@@ -284,7 +284,7 @@ const Store = () => {
                   </div>
 
                   <div className="pb-2">
-                    <div className="d-inline-flex  justify-content-center  justify-content-md-between justify-content-lg-start flex-wrap gap-10">
+                    <div className="d-inline-flex  justify-content-center justify-content-md-start flex-wrap gap-md-4 gap-lg-2">
                       <ProductCard data={productsState ? productsState : []} />
                     </div>
                   </div>

@@ -46,6 +46,7 @@ export const getUserProductWishlist = createAsyncThunk(
   }
 );
 
+
 export const addProductToCart = createAsyncThunk(
   "user/add-product-to-cart",
   async (cartData, thunkAPI) => {
@@ -133,6 +134,7 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   message: "",
+  isGettingWishlist: false, 
 };
 
 export const authSlice = createSlice({
@@ -209,6 +211,7 @@ export const authSlice = createSlice({
 
       .addCase(getUserProductWishlist.pending, (state) => {
         state.isLoading = true;
+        state.isGettingWishlist = true; 
       })
       .addCase(getUserProductWishlist.fulfilled, (state, action) => {
         state.isError = false;

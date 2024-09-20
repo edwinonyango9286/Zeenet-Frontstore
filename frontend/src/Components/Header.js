@@ -81,7 +81,7 @@ const Header = () => {
                       English
                     </p>
                   </div>
-                  <div class="vertical-rule d-none d-md-block"></div>
+                  <div className="vertical-rule d-none d-md-block"></div>
                   <div>
                     <p className="header-info text-white mb-0 d-none d-md-block">
                       Kenya Shillings

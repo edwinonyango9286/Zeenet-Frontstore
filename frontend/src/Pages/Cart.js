@@ -34,6 +34,7 @@ const Cart = () => {
     setCartData(updatedCart);
     localStorage.setItem("userCart", JSON.stringify(updatedCart));
   };
+  
   const updateQuantity = (id, quantity) => {
     const updatedCart = cartData.map((item) => {
       if (item.productId === id) {

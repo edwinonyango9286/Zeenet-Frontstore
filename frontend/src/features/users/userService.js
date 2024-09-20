@@ -43,7 +43,7 @@ const addToCart = async (cartData) => {
 };
 
 const getCart = async (data) => {
-  const response = await newRequest.get(`user/getusercart`, data);
+  const response = await newRequest.get(`user/getusercart`, data, config);
   if (response.data) {
     return response.data;
   }

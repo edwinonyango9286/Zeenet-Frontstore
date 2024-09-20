@@ -6,15 +6,15 @@ import view from "../images/view.svg";
 import addCart from "../images/add-cart.svg";
 import wishlistIcon from "../images/wish.svg";
 import { useDispatch } from "react-redux";
-import { addToWishlist } from "../features/products/productSlice";
+import { addProductToWishlist } from "../features/products/productSlice";
 
 const ProductCard = React.memo((props) => {
   const navigate = useNavigate();
   const { data } = props;
   const dispatch = useDispatch();
 
-  const addProductToWishlist = (id) => {
-    dispatch(addToWishlist(id));
+  const addProductToUserWishlist = (productId) => {
+    dispatch(addProductToWishlist(productId));
   };
 
   const formatKES = (amount) => {
@@ -36,7 +36,7 @@ const ProductCard = React.memo((props) => {
                   <button
                     className="border-0 bg-transparent"
                     onClick={(e) => {
-                      addProductToWishlist(item._id);
+                      addProductToUserWishlist(item?._id);
                     }}
                   >
                     <img
@@ -49,33 +49,33 @@ const ProductCard = React.memo((props) => {
 
                 <div className="product-image">
                   <img
-                    src={item.images[0].url}
+                    src={item.images[0]?.url}
                     className="img-fluid mx-auto border rounded object-fit "
-                    alt={item.title}
+                    alt={item?.title}
                     width={124}
                     height={154}
-                    onClick={() => navigate("/product/" + item._id)}
+                    onClick={() => navigate("/product/" + item?._id)}
                   />
                   <img
-                    src={item.images[0].url}
+                    src={item.images[0]?.url}
                     className="img-fluid mx-auto  border rounded object-fit"
                     alt={item.title}
                     width={124}
                     height={154}
-                    onClick={() => navigate("/product/" + item._id)}
+                    onClick={() => navigate("/product/" + item?._id)}
                   />
                 </div>
                 <div className="product-details">
-                  <h6 className="brand mb-0 mt-3">{item.brand}</h6>
-                  <h5 className="product-title mb-0">{item.title}</h5>
+                  <h6 className="brand mb-0 mt-3">{item?.brand}</h6>
+                  <h5 className="product-title mb-0">{item?.title}</h5>
                   <ReactStars
                     count={5}
                     size={18}
-                    value={parseInt(item.totalrating) ?? 0}
+                    value={parseInt(item?.totalrating) ?? 0}
                     edit={false}
                     activeColor="#ffd700"
                   />
-                  <p className="price mb-0">{formatKES(item.price)}</p>
+                  <p className="price mb-0">{formatKES(item?.price)}</p>
                 </div>
 
                 <div className="action-bar position-absolute">
@@ -85,12 +85,12 @@ const ProductCard = React.memo((props) => {
                     </button>
 
                     <Link
-                      to={"/product/" + item._id}
+                      to={"/product/" + item?._id}
                       className="border-0 bg-transparent"
                     >
                       <img src={view} alt="View Product Image" loading="lazy" />
                     </Link>
-                    <Link className="" to={"/product/" + item._id}>
+                    <Link className="" to={"/product/" + item?._id}>
                       <button className="border-0 bg-transparent">
                         <img
                           src={addCart}

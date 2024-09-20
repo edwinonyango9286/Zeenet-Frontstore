@@ -27,7 +27,7 @@ import { getAllBlogs } from "../features/blogs/blogSlice";
 import { Spin } from "antd";
 import { Loading3QuartersOutlined } from "@ant-design/icons";
 import {
-  addToWishlist,
+  addProductToWishlist,
   getAllProducts,
 } from "../features/products/productSlice";
 import ReactStars from "react-rating-stars-component";
@@ -49,8 +49,8 @@ const Home = () => {
   const specialProducts =
     productState?.filter((item) => item?.tags === "Special") || [];
 
-  const addProductToWishlist = (id) => {
-    dispatch(addToWishlist(id));
+  const addProductUserToWishlist = (productId) => {
+    dispatch(addProductToWishlist(productId));
   };
   useEffect(() => {
     dispatch(getAllBlogs());
@@ -225,7 +225,7 @@ const Home = () => {
                       {productState.length === 0 ? " " : "Featured collection"}
                     </h3>
                   </div>
-                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-center justify-content-md-start gap-25 flex-wrap">
+                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-center justify-content-md-start  gap-md-2 flex-wrap">
                     {productState &&
                       productState.map((item, index) => {
                         if (item.tags === "Featured") {
@@ -236,7 +236,7 @@ const Home = () => {
                                   <button
                                     className="border-0 bg-transparent"
                                     onClick={(e) =>
-                                      addProductToWishlist(item._id)
+                                      addProductUserToWishlist(item?._id)
                                     }
                                   >
                                     <img
@@ -278,7 +278,7 @@ const Home = () => {
                                   <ReactStars
                                     count={5}
                                     size={18}
-                                    value={parseInt(item.totalrating) ?? 0}
+                                    value={parseInt(item?.totalrating) ?? 0}
                                     edit={false}
                                     activeColor="#ffd700"
                                   />
@@ -419,14 +419,14 @@ const Home = () => {
                         return (
                           <SpecialProducts
                             key={index}
-                            id={item._id}
-                            brand={item.brand}
-                            title={item.title}
-                            totalrating={item.totalrating.toString()}
-                            price={formatKES(item.price)}
-                            sold={item.sold}
-                            quantity={item.quantity}
-                            image={item.images[0].url}
+                            id={item?._id}
+                            brand={item?.brand}
+                            title={item?.title}
+                            totalrating={item?.totalrating.toString()}
+                            price={formatKES(item?.price)}
+                            sold={item?.sold}
+                            quantity={item?.quantity}
+                            image={item?.images[0].url}
                           />
                         );
                       })}
@@ -455,7 +455,7 @@ const Home = () => {
                                   <button
                                     className="border-0 bg-transparent"
                                     onClick={(e) =>
-                                      addProductToWishlist(item?._id)
+                                      addProductUserToWishlist(item?._id)
                                     }
                                   >
                                     <img
@@ -632,7 +632,7 @@ const Home = () => {
                 <div>
                   <div className="col-12">
                     <h3 className="section-heading">
-                      {blogState && blogState.length === 0
+                      {blogState && blogState?.length === 0
                         ? " "
                         : "Our Latest News"}
                     </h3>

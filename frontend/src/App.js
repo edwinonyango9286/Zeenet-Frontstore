@@ -26,7 +26,6 @@ import { OpenRoutes } from "./routing/OpenRoutes";
 import Profile from "./Pages/Profile";
 import MyOrders from "./Pages/MyOrders";
 
-
 function App() {
   return (
     <>
@@ -41,7 +40,6 @@ function App() {
             <Route path="/blogs/singleblog/:id" element={<SingleBlog />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/compare-products" element={<CompareProducts />} />
-            <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/my-profile" element={<Profile />} />
             <Route
               path="/login"
@@ -49,6 +47,15 @@ function App() {
                 <OpenRoutes>
                   <Login />
                 </OpenRoutes>
+              }
+            />
+
+            <Route
+              path="/wishlist"
+              element={
+                <PrivateRoutes>
+                  <Wishlist />
+                </PrivateRoutes>
               }
             />
 
