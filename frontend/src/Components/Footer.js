@@ -14,7 +14,7 @@ const Footer = () => {
       <footer className="py-4 overflow-hidden">
         <div className="container">
           <div className="row">
-            <div className="col-12 d-flex flex-row justify-content-center  justify-content-md-between align-items-center flex-wrap gap-20">
+            <div className="col-12 d-flex flex-row justify-content-center  justify-content-md-between justify-content-lg-center align-items-center flex-wrap gap-4 gap-md-5">
               <div>
                 <div className="d-flex gap-10 align-items-center justify-content-center">
                   <img
@@ -40,7 +40,7 @@ const Footer = () => {
                     aria-label="Your Email Address"
                     aria-describedby="basic-addon2"
                     style={{
-                      width:"250px",
+                      width: "250px",
                       boxShadow: "none",
                       outline: "none",
                     }}

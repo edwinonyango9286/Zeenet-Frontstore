@@ -49,6 +49,7 @@ const SingleProduct = () => {
       title: productState?.title,
       images: productState?.images[0]?.url,
       screensize: productState?.screensize,
+      brand: productState?.brand,
     };
     const existingCart = JSON.parse(localStorage.getItem("userCart")) || [];
     const index = existingCart.findIndex(

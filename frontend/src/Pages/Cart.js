@@ -34,7 +34,7 @@ const Cart = () => {
     setCartData(updatedCart);
     localStorage.setItem("userCart", JSON.stringify(updatedCart));
   };
-  
+
   const updateQuantity = (id, quantity) => {
     const updatedCart = cartData.map((item) => {
       if (item.productId === id) {
@@ -62,9 +62,8 @@ const Cart = () => {
       <Container class1="cart-wrapper home-wrapper-2">
         <div className="row">
           <div className="col-12">
-            <div className="cart-header py-4 d-flex justify-content-between flex-wrap">
+            <div className="cart-header py-4 d-flex  flex-row justify-content-between flex-wrap">
               <h4 className="cart-col-1">Product</h4>
-              <h4 className="cart-col-2">Price</h4>
               <h4 className="cart-col-3">Quantity</h4>
               <h4 className="crat-col-4">Total</h4>
             </div>
@@ -74,29 +73,28 @@ const Cart = () => {
                 return (
                   <div
                     key={index}
-                    className="cart-data py-1 d-flex justify-content-between flex-wrap gap-10 align-items-center"
+                    className="cart-data py-1 d-flex justify-content-between flex-wrap gap-4 align-items-center"
                   >
-                    <div className="cart-col-1 d-flex flex-wrap justify-content-between align-items-center">
-                      <div className="w-25">
+                    <div className="cart-col-1 d-flex flex-wrap flex-lg-nowrap justify-content-between align-items-center py-4 gap-md-4 gap-2">
+                      <div>
                         <img
                           src={item?.images}
                           className="img-fluid rounded"
                           alt={item?.title}
-                          width={100}
-                          height={100}
+                          width={200}
+                          height={200}
                         />
                       </div>
-                      <div className="w-75">
+                      <div>
+                        <p className="">{item?.brand}</p>
                         <p className="mb-0">{item?.title}</p>
+                        <p className="mb-0">{formatKES(item?.price)}</p>
                         <p className="d-flex justify-content-between flex-wrap mb-0">
-                          Screen Size: {item?.screensize}"
+                          Screen Size {item?.screensize}"
                         </p>
                       </div>
                     </div>
-                    <div className="cart-col-2">
-                      <h5 className="price">{formatKES(item?.price)}</h5>
-                    </div>
-                    <div className="cart-col-3 d-flex gap-20 flex-wrap">
+                    <div className="cart-col-3 d-flex gap-3  align-items-center flex-wrap">
                       <div>
                         <input
                           style={{
@@ -127,7 +125,9 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className="cart-col-4">
-                      <h5 className="price">{item?.price * item?.quantity}</h5>
+                      <h5 className="price">
+                        {formatKES(item?.price * item?.quantity)}
+                      </h5>
                     </div>
                   </div>
                 );
@@ -135,13 +135,13 @@ const Cart = () => {
           </div>
           <div className="col-12 py-2 mt-4">
             <div className="d-flex justify-content-between align-items-baseline">
-              <Link to="/store" className="button">
-                Continue Shopping
+              <Link to="/store" className="button signup">
+                Continue shopping
               </Link>
               <div className="d-flex flex-column align-items-end gap-10 mb-3">
-                <h6>Sub Total :{formatKES(totalAmount)}</h6>
-                <Link to="/checkout" className="button">
-                  Proceed to checkout
+                <h6>Sub total {formatKES(totalAmount)}</h6>
+                <Link to="/checkout" className="button signup">
+                  Checkout
                 </Link>
               </div>
             </div>
