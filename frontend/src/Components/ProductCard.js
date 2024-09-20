@@ -52,16 +52,16 @@ const ProductCard = React.memo((props) => {
                     src={item.images[0].url}
                     className="img-fluid mx-auto border rounded object-fit "
                     alt={item.title}
-                    width={126}
-                    height={156}
+                    width={124}
+                    height={154}
                     onClick={() => navigate("/product/" + item._id)}
                   />
                   <img
                     src={item.images[0].url}
                     className="img-fluid mx-auto  border rounded object-fit"
                     alt={item.title}
-                    width={126}
-                    height={156}
+                    width={124}
+                    height={154}
                     onClick={() => navigate("/product/" + item._id)}
                   />
                 </div>

@@ -181,7 +181,7 @@ const Store = () => {
 
               {productsState &&
                 productsState.map((randomProduct, index) => {
-                  if (randomProduct.tags === "Featured") {
+                  if (randomProduct.tags === "Popular") {
                     return (
                       <div key={index} className="filter-card mb-0">
                         <h3 className="filter-title">Random products</h3>
@@ -232,7 +232,7 @@ const Store = () => {
                       <Loading3QuartersOutlined
                         style={{
                           fontSize: 40,
-                          fontWeight : "bold",
+                          fontWeight: "bold",
                           color: "#000",
                         }}
                         spin
@@ -276,7 +276,7 @@ const Store = () => {
                       </div>
                       <div>
                         <span className="mb-0">
-                          {productsState.length ? productsState.length : 0 } {""}
+                          {productsState.length ? productsState.length : 0} {""}
                           Items
                         </span>
                       </div>
@@ -284,7 +284,7 @@ const Store = () => {
                   </div>
 
                   <div className="pb-2">
-                    <div className="d-inline-flex gap-10 justify-content-center justify-content-md-between flex-wrap">
+                    <div className="d-inline-flex  justify-content-center  justify-content-md-between justify-content-lg-start flex-wrap gap-10">
                       <ProductCard data={productsState ? productsState : []} />
                     </div>
                   </div>

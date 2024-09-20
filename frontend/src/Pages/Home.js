@@ -222,10 +222,10 @@ const Home = () => {
                 <div>
                   <div className="col-12">
                     <h3 className="section-heading">
-                      {productState.length === 0 ? " " : "Featured collection"}{" "}
+                      {productState.length === 0 ? " " : "Featured collection"}
                     </h3>
                   </div>
-                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-center justify-content-md-start gap-10 flex-wrap ">
+                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-center justify-content-md-start gap-25 flex-wrap">
                     {productState &&
                       productState.map((item, index) => {
                         if (item.tags === "Featured") {
@@ -328,13 +328,13 @@ const Home = () => {
 
             <Container class1="famous-wrapper py-2  home-wrapper-2">
               <div className="row">
-                <div className="col-12 d-flex flex-wrap align-items-center justify-content-center justify-content-md-between gap-20">
+                <div className="col-12 d-inline-flex align-items-center justify-content-center justify-content-md-between justify-content-lg-start gap-10 flex-wrap flex-lg-nowrap">
                   <div className="famous-card position-relative">
                     <img
                       src={famous1}
                       className="img-fluid"
                       alt="famous1"
-                      width={300}
+                      width={340}
                       height={300}
                     />
                     <div className="famous-content position-absolute">
@@ -353,7 +353,7 @@ const Home = () => {
                       src={famous2}
                       className="img-fluid"
                       alt="famous2"
-                      width={300}
+                      width={340}
                       height={300}
                     />
                     <div className="famous-content position-absolute">
@@ -371,7 +371,7 @@ const Home = () => {
                       src={famous3}
                       className="img-fluid"
                       alt="famous1"
-                      width={300}
+                      width={340}
                       height={300}
                     />
                     <div className="famous-content position-absolute">
@@ -389,7 +389,7 @@ const Home = () => {
                       src={famous4}
                       className="img-fluid"
                       alt="famous1"
-                      width={300}
+                      width={340}
                       height={300}
                     />
                     <div className="famous-content position-absolute">
@@ -445,7 +445,7 @@ const Home = () => {
                   </div>
 
                   <div className="col-12">
-                    <div className="d-flex align-items-center flex-wrap justify-content-center justify-content-lg-start gap-10 ">
+                    <div className="d-flex align-items-center flex-wrap justify-content-center justify-content-md-start gap-25">
                       {popularProducts.length > 0 &&
                         popularProducts.map((item, index) => {
                           return (
@@ -547,7 +547,7 @@ const Home = () => {
                 <div className="col-12">
                   <div className="marquee-inner-wrapper card-wrapper">
                     <Marquee>
-                      <div className="d-flex align-items-center justify-content-between gap-50">
+                      <div className="d-flex align-items-center justify-content-between gap-50 ">
                         <div className="">
                           <img
                             src={brand1}
@@ -634,7 +634,7 @@ const Home = () => {
                     <h3 className="section-heading">
                       {blogState && blogState.length === 0
                         ? " "
-                        : "Our Latest Blogs "}
+                        : "Our Latest News"}
                     </h3>
                   </div>
 

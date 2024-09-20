@@ -11,12 +11,16 @@ const getProducts = async (data) => {
       data?.sort ? `sort=${data?.sort}&&` : ""
     }`
   );
-  return response.data;
+  if (response.data) {
+    return response.data;
+  }
 };
 
 const getASingleProduct = async (id) => {
   const response = await newRequest.get(`products/getaproduct/${id}`);
-  return response.data;
+  if (response.data) {
+    return response.data;
+  }
 };
 
 const addToWishlist = async (prodId) => {

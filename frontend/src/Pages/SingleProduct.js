@@ -269,7 +269,7 @@ const SingleProduct = () => {
                         <div className="d-flex flex-row  align-items-center gap-30 ">
                           <div>
                             <button
-                              className="button border-0"
+                              className="button signup border-0"
                               type="button"
                               onClick={() => {
                                 addToCart();
@@ -280,7 +280,7 @@ const SingleProduct = () => {
                           </div>
                           <div>
                             <button
-                              className="button signup border-0"
+                              className="button  border-0"
                               type="button"
                               onClick={() => {
                                 addToCart();
@@ -384,9 +384,10 @@ const SingleProduct = () => {
           <Container class1="description-wrapper py-2 home-wrapper-2">
             <div className="row">
               <div className="col-12">
-                <h4>Description</h4>
-
-                <div className=" description p-2 ">
+                <button className="button signup border-0 mb-2">
+                  Description{" "}
+                </button>
+                <div className=" description p-2 border ">
                   <p
                     dangerouslySetInnerHTML={{
                       __html: productState?.description,
@@ -416,11 +417,6 @@ const SingleProduct = () => {
                         />
                         <p className="mb-0 t-review">Based on 2 Reviews</p>
                       </div>
-                    </div>
-                    <div>
-                      <button className="text-dark text-decoration-underline btn btn-link shadow-none ">
-                        Write a review
-                      </button>
                     </div>
                   </div>
                   <div className="review-form py-4">

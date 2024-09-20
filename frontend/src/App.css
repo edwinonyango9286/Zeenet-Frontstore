@@ -83,6 +83,9 @@ body a {
   gap: 3.125rem;
 }
 
+.column-gap-48 {
+  column-gap: 3rem;
+}
 .gap-55 {
   gap: 3.4375rem;
 }
@@ -207,6 +210,13 @@ body a {
   color: var(--color-febd69) !important;
 }
 
+.vertical-rule {
+  border-left: 1px solid #ccc;
+  height: 12px;
+  margin: 0 10px;
+  background-color: var(--color-3b4149);
+}
+
 /* Header part styling ends here */
 
 /* Footer Styling Starts Here */
@@ -224,14 +234,9 @@ footer .input-group-text {
   padding: 6px 14px;
 }
 .footer-text {
-  font-size: 11px;
-}
-
-.newsLetter {
   font-size: 12px;
-  text-transform: capitalize;
+  line-height: 16px;
 }
-
 /* Footer Styling Ends Here */
 
 /*Home page Styling*/
@@ -253,7 +258,7 @@ footer .input-group-text {
 .main-banner-content h5 {
   font-size: 42px;
   line-height: 54px;
-  letter-spacing: -2px;
+  letter-spacing: 0.3px;
   font-weight: 500;
   text-transform: none;
 }
@@ -261,7 +266,7 @@ footer .input-group-text {
 .main-banner-content p {
   font-size: 18px;
   line-height: 28px;
-  letter-spacing: 0.4;
+  letter-spacing: 0.4px;
   color: var(--color-131921);
 }
 
@@ -408,7 +413,7 @@ footer .input-group-text {
   background-color: white;
   border-radius: 0.25rem;
   overflow: hidden;
-  width: 200px;
+  width: 201px;
   height: 240px;
 }
 .product-card .product-image {

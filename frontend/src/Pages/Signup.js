@@ -48,10 +48,10 @@ const Signup = React.memo(() => {
   });
 
   useEffect(() => {
-    if (createdUser) {
+    if (isSuccess && createdUser) {
       navigate("/login");
     }
-  }, [createdUser, navigate]);
+  }, [createdUser]);
 
   useEffect(() => {
     if (isError) {

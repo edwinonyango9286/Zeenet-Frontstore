@@ -4,17 +4,16 @@ import { newRequest } from "../../utils/newRequest";
 const register = async (userData) => {
   const response = await newRequest.post(`user/register`, userData);
   if (response.data) {
-    localStorage.setItem("customer", JSON.stringify(response.data));
+    return response.data;
   }
-  return response.data;
 };
 
 const login = async (userData) => {
   const response = await newRequest.post(`user/login`, userData);
   if (response.data) {
     localStorage.setItem("user", JSON.stringify(response.data));
+    return response.data;
   }
-  return response.data;
 };
 
 const logoutAUser = async () => {
@@ -42,8 +41,6 @@ const addToCart = async (cartData) => {
     return cartData;
   }
 };
-
-
 
 const getCart = async (data) => {
   const response = await newRequest.get(`user/getusercart`, data);

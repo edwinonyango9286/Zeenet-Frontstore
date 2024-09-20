@@ -66,22 +66,24 @@ const Header = () => {
                   </p>
                 </div>
 
-                <div className="d-flex gap-10">
+                <div className="d-flex gap-20 justify-content-center align-items-center">
                   <div>
                     <p className="mb-0 header-info">
                       Hotline: {"  "}
                       <a className="text-white" href="tel:+254 719547267">
-                        0719547267
+                        (+254)719547267
                       </a>
                     </p>
                   </div>
+
                   <div>
-                    <p className="header-info text-white mb-0 d-none d-md-block d-lg-block d-xxl-block">
+                    <p className="header-info text-white mb-0 d-none d-md-block">
                       English
                     </p>
                   </div>
+                  <div class="vertical-rule d-none d-md-block"></div>
                   <div>
-                    <p className="header-info text-white mb-0 d-none d-md-block d-lg-block d-xxl-block ">
+                    <p className="header-info text-white mb-0 d-none d-md-block">
                       Kenya Shillings
                     </p>
                   </div>
@@ -172,7 +174,7 @@ const Header = () => {
                             className="dropdown-item text-white"
                             to="/about"
                           >
-                            About
+                            ABOUT
                           </Link>
                         </li>
                       </ul>
