@@ -370,7 +370,7 @@ const Header = () => {
                     inputProps={{
                       className: "custom-typeahead-input",
                       style: {
-                        height: "32px",
+                        height: "34px",
                         boxShadow: "none",
                         outline: "none",
                       },
