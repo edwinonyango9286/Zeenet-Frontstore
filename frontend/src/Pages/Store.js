@@ -288,7 +288,7 @@ const Store = () => {
                   </div>
 
                   <div className="pb-2">
-                    <div className="d-inline-flex  justify-content-center justify-content-md-start flex-wrap gap-2 gap-md-4 gap-lg-2">
+                    <div className="d-inline-flex  justify-content-center justify-content-md-start flex-wrap gap-4  gap-lg-2">
                       <ProductCard data={productsState ? productsState : []} />
                     </div>
                   </div>
