@@ -101,7 +101,7 @@ const Login = React.memo(() => {
                   type="password"
                   name="password"
                   id="password"
-                  placeholder="password"
+                  placeholder="Password"
                   onChange={formik.handleChange("password")}
                   onBlur={formik.handleBlur("password")}
                   value={formik.values.password}

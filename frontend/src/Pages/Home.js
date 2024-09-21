@@ -227,7 +227,7 @@ const Home = () => {
                       {productState.length === 0 ? " " : "Featured collection"}
                     </h3>
                   </div>
-                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-center justify-content-md-start gap-4 gap-lg-3  flex-wrap">
+                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-start gap-4  gap-lg-2 flex-wrap">
                     {productState &&
                       productState.map((item, index) => {
                         if (item.tags === "Featured") {
@@ -447,7 +447,7 @@ const Home = () => {
                   </div>
 
                   <div className="col-12">
-                    <div className="d-flex align-items-center flex-wrap justify-content-center justify-content-md-start gap-4">
+                    <div className="d-inline-flex align-items-center flex-wrap justify-content-start  gap-5 gap-md-2">
                       {popularProducts.length > 0 &&
                         popularProducts.map((item, index) => {
                           return (
@@ -549,7 +549,7 @@ const Home = () => {
                 <div className="col-12">
                   <div className="marquee-inner-wrapper card-wrapper">
                     <Marquee>
-                      <div className="d-flex align-items-center justify-content-between gap-50 ">
+                      <div className="d-inline-flex align-items-center justify-content-between gap-4 ">
                         <div className="">
                           <img
                             src={brand1}
