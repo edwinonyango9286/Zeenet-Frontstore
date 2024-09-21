@@ -13,7 +13,7 @@ const BlogCard = (props) => {
             <div key={index} className="blog-card">
               <div className="card-image">
                 <img
-                  src={item.images[0]?.url}
+                  src={item?.images[0]?.url}
                   alt="Blog Image"
                   className="img-fluid"
                   width={100}
