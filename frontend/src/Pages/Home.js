@@ -104,10 +104,12 @@ const Home = () => {
                       </h4>
                       <h5 className="fs-4 fs-md-3">iPad S13+ Pro.</h5>
                       <p className="d-none d-lg-block ">
-                        From ksh: 56,000 to 98,000 <br />
+                        From Ksh 56,000 to Ksh 98,000 <br />
                         or ksh 4000/mo. for 24 months.
                       </p>
-                      <Link className="button">BUY NOW</Link>
+                      <Link className="button" to={"/store"}>
+                        BUY NOW
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -225,7 +227,7 @@ const Home = () => {
                       {productState.length === 0 ? " " : "Featured collection"}
                     </h3>
                   </div>
-                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-center justify-content-md-start  gap-md-2 flex-wrap">
+                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-center justify-content-md-start gap-md-2  gap-lg-3  flex-wrap">
                     {productState &&
                       productState.map((item, index) => {
                         if (item.tags === "Featured") {

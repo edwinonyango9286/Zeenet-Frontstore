@@ -12,6 +12,7 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { getAproduct } from "../features/products/productSlice";
 import { TfiMenu } from "react-icons/tfi";
+import { RiArrowDownSLine } from "react-icons/ri";
 
 const Header = () => {
   const { user, userCart, isError, isLoading, isSuccess, message } =
@@ -99,11 +100,11 @@ const Header = () => {
           <div className="row">
             <div className=" col-12 d-flex align-items-center ">
               <div className="col-6 col-md-2 d-flex align-items-center">
-                <div className="menu-bottom header-bottom">
-                  <div className="d-md-none d-lg-none d-xl-none d-xxl-none">
+                <div className="header-bottom">
+                  <div className="d-md-none">
                     <div className="dropdown">
                       <TfiMenu
-                        className="fs-1 dropdown-toggle"
+                        className="fs-2"
                         id="dropdownMenuButton1"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
@@ -113,71 +114,46 @@ const Header = () => {
                           outline: "none",
                           boxShadow: "none",
                           color: "white",
-                          width: "48px",
-                          height: "48px",
+                          width: "44px",
+                          height: "44px",
                           backgroundColor: "#131921",
                           padding: "10px",
                         }}
                       />
 
-                      <ul
+                      <div
                         className="dropdown-menu"
                         aria-labelledby="dropdownMenuButton1"
                       >
-                        <li>
-                          <Link className="dropdown-item text-white" to="/">
-                            HOME
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="dropdown-item text-white"
-                            to="/store"
-                          >
-                            STORE
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="dropdown-item text-white"
-                            to="/myorders"
-                          >
-                            ORDERS
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="dropdown-item text-white"
-                            to="/blogs"
-                          >
-                            BLOGS
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="dropdown-item text-white"
-                            to="/contact"
-                          >
-                            CONTACT
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="dropdown-item text-white"
-                            to="/store"
-                          >
-                            LOGOUT
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="dropdown-item text-white"
-                            to="/about"
-                          >
-                            ABOUT
-                          </Link>
-                        </li>
-                      </ul>
+                        <Link className="dropdown-item text-white" to="/">
+                          Home
+                        </Link>
+                        <Link className="dropdown-item text-white" to="/store">
+                          Store
+                        </Link>
+                        <Link
+                          className="dropdown-item text-white"
+                          to="/myorders"
+                        >
+                          Orders
+                        </Link>
+                        <Link className="dropdown-item text-white" to="/blogs">
+                          Blogs
+                        </Link>
+                        <Link
+                          className="dropdown-item text-white"
+                          to="/contact"
+                        >
+                          Contact
+                        </Link>
+
+                        <Link className="dropdown-item text-white" to="/store">
+                          Logout
+                        </Link>
+                        <Link className="dropdown-item text-white" to="/about">
+                          About
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -204,6 +180,7 @@ const Header = () => {
                     labelKey={"name"}
                     placeholder="Search product here...?"
                     inputProps={{
+                      className: "custom-typeahead-input",
                       style: {
                         boxShadow: "none",
                         outline: "none",
@@ -211,17 +188,17 @@ const Header = () => {
                     }}
                   />
                   <span className="input-group-text p-2" id="basic-addon2">
-                    <BsSearch className="fs-6"></BsSearch>
+                    <BsSearch className="fs-6" />
                   </span>
                 </div>
               </div>
 
               <div className="col-6 col-sm-5 ">
-                <div className="header-middle-links d-flex align-items-center justify-content-center gap-15 ">
+                <div className="header-middle-links d-flex align-items-center justify-content-center  gap-2 gap-md-3 ">
                   <div>
                     <Link
                       to="/compare-products"
-                      className="d-flex align-items-center gap-10 text-white"
+                      className="d-flex align-items-center gap-2 text-white"
                     >
                       <img
                         src={compareImage}
@@ -229,11 +206,11 @@ const Header = () => {
                         className="img-fluid"
                         loading="lazy"
                         style={{
-                          width: 35,
-                          height: 35,
+                          width: 30,
+                          height: 30,
                         }}
                       />
-                      <span className="mb-0 d-none d-lg-block" id="hidden">
+                      <span className="mb-0 d-none d-lg-block">
                         Compare
                         <br />
                         Products
@@ -251,49 +228,73 @@ const Header = () => {
                         className="img-fluid"
                         loading="lazy"
                         style={{
-                          width: 35,
-                          height: 35,
+                          width: 30,
+                          height: 30,
                         }}
                       />
-                      <span className="mb-0 d-none d-lg-block" id="hidden">
+                      <span className="mb-0 d-none d-lg-block">
                         Favourite
                         <br /> Wishlist
                       </span>
                     </Link>
                   </div>
 
-                  <div className="dropdown">
-                    <Link
-                      to={user === null ? "/login" : "/my-profile"}
-                      className="d-flex align-items-center gap-10 text-white"
-                    >
-                      <img
-                        src={accountImage}
-                        alt="Account Image"
-                        className="img-fluid"
-                        loading="lazy"
+                  <div className="">
+                    <div className="dropdown">
+                      <button
+                        className="d-flex align-items-center gap-10 text-white btn bg-transparent"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-expanded="false"
                         style={{
-                          width: 35,
-                          height: 35,
+                          border: "none",
+                          outline: "none",
+                          boxShadow: "none",
                         }}
-                      />
-                      {user === null ? (
-                        <span className="mb-0 d-none d-lg-block" id="hidden">
-                          Log in
-                          <br />
-                          My Account
-                        </span>
-                      ) : (
-                        <span
-                          className="mb-0 d-none d-lg-block text-capitalize"
-                          id="hidden"
+                      >
+                        <img
+                          src={accountImage}
+                          alt="Account Image"
+                          className="img-fluid"
+                          loading="lazy"
+                          style={{
+                            width: 30,
+                            height: 30,
+                          }}
+                        />
+
+                        {user === null ? (
+                          <span className="mb-0 d-none d-lg-block">
+                            Log in
+                            <br />
+                            My Account
+                          </span>
+                        ) : (
+                          <span className="mb-0 d-none d-lg-block text-capitalize">
+                            Welcome
+                            <br />
+                            {user?.firstname}
+                          </span>
+                        )}
+                      </button>
+
+                      <div
+                        className="dropdown-menu "
+                        aria-labelledby="dropdownMenuButton"
+                      >
+                        <Link
+                          className="dropdown-item"
+                          to={user === null ? "/login" : ""}
                         >
-                          Welcome
-                          <br />
-                          {user.firstname}
-                        </span>
-                      )}
-                    </Link>
+                          Login
+                        </Link>
+
+                        <Link className="dropdown-item" to={"/signup"}>
+                          Register
+                        </Link>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="d-flex flex-column justify-content-between align-items-center">
@@ -308,8 +309,8 @@ const Header = () => {
                           className="img-fluid "
                           loading="lazy"
                           style={{
-                            width: 35,
-                            height: 35,
+                            width: 30,
+                            height: 30,
                           }}
                         />
 
@@ -322,7 +323,7 @@ const Header = () => {
                         >
                           <h6
                             style={{
-                              fontSize: "11px",
+                              fontSize: "10px",
                               fontWeight: "500",
                             }}
                             className="mb-0"
@@ -380,13 +381,14 @@ const Header = () => {
             </div>
 
             <div className="col-12 d-none d-sm-block">
-              <div className="menu-bottom d-flex align-items-center gap-20">
+              <div className="d-flex align-items-center gap-20">
                 <div className="d-none d-sm-block">
                   <div className="dropdown">
                     <button
-                      className="btn btn-secondary dropdown-toggle bg-transparent border-0 gap-20 d-flex align-items-center"
+                      className="btn btn-secondary bg-transparent border-0 gap-20 d-flex align-items-center"
                       type="button"
                       id="dropdownMenuButton1"
+                      aria-haspopup="true"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
@@ -396,7 +398,10 @@ const Header = () => {
                         className="img-fluid"
                         loading="lazy"
                       />
-                      <span className="">SHOP CATEGORIES</span>
+                      <div className="d-flex gap-4 align-items-center ">
+                        <span className="">SHOP CATEGORIES</span>
+                        <RiArrowDownSLine className="fs-6" />
+                      </div>
                     </button>
 
                     <ul
@@ -430,7 +435,7 @@ const Header = () => {
                       </li>
                       <li>
                         <Link className="dropdown-item text-white" to="/store">
-                          ASUS
+                          Asus
                         </Link>
                       </li>
                       <li>
@@ -446,6 +451,7 @@ const Header = () => {
                     </ul>
                   </div>
                 </div>
+                <div className="vertical-rule d-none d-md-block"></div>
 
                 <div className="menu-links col-6">
                   <div className="d-flex align-items-center gap-20">

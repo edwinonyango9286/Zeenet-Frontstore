@@ -36,6 +36,7 @@ const ProductCard = React.memo((props) => {
                   <button
                     className="border-0 bg-transparent"
                     onClick={(e) => {
+                      e.preventDefault()
                       addProductToUserWishlist(item?._id);
                     }}
                   >

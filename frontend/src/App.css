@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: var(--font-family, "Roboto"), sans-serif;
+  font-family: "Gowun Batang", serif;
 }
 
 :root {
@@ -140,6 +140,7 @@ body a {
   text-transform: capitalize;
   color: var(--color-ffffff);
   letter-spacing: 0.3px;
+  font-family: "Gowun Batang", serif;
 }
 
 .header-middle {
@@ -171,9 +172,11 @@ body a {
   line-height: 1.375rem;
   letter-spacing: 0.5px;
   color: var(--color-ffffff);
+  font-family: "Gowun Batang", serif;
 }
 .logo {
   font-weight: 500;
+  font-family: "Gowun Batang", serif;
   font-size: 1.75rem;
   line-height: 1.5;
   text-transform: uppercase;
@@ -215,6 +218,13 @@ body a {
   height: 12px;
   margin: 0 10px;
   background-color: var(--color-3b4149);
+}
+
+.custom-typeahead-input::placeholder {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Gowun Batang", serif;
+  color: #777;
 }
 
 /* Header part styling ends here */
@@ -588,10 +598,17 @@ footer .input-group-text {
 }
 
 .random-product {
-  h5 {
-    font-size: 0.875rem;
+  h6 {
+    font-size: 14px;
     margin-bottom: 0.5rem;
-    font-weight: 500;
+    font-weight: 400;
+    line-height: 0.875rem;
+    margin: 0px;
+  }
+  p {
+    font-size: 14px;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
     line-height: 0.875rem;
     margin: 0px;
   }
@@ -827,15 +844,16 @@ footer .input-group-text {
   background-color: white;
   border-radius: 10px 10px 10px 10px;
 }
-.main-product-details h3.title {
-  font-size: 16px;
-  font-weight: 600;
+.main-product-details h4.title {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 500;
   color: var(--color-1c1c1b);
 }
 .main-product-details p.price {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 20px;
-  font-weight: 600;
+  font-weight: 500;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -846,17 +864,23 @@ footer .input-group-text {
 }
 .product-heading {
   font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
   color: var(--color-1c1c1b);
   margin-bottom: 0px;
 }
 
 .product-data {
-  font-size: 13px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
   columns: var(--color-777777);
   margin-bottom: 0px;
 }
 .main-product-details a {
   font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
   color: var(--color-777777);
 }
 .description {

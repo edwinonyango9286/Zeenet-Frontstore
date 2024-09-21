@@ -22,6 +22,9 @@ import mpesaBadge from "../images/Mpesa logo best.png";
 import kcbBadge from "../images/kcb logo.png";
 import airtelMoneyBadge from "../images/airtel-logo  best.jpg";
 import CustomInput from "../Components/CustomInput";
+import { addProductToWishlist } from "../features/products/productSlice";
+import { ImShare2 } from "react-icons/im";
+
 
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
@@ -125,6 +128,9 @@ const SingleProduct = () => {
     (state) => state.product
   );
 
+  const addProductToUserWishlist = (productId) => {
+    dispatch(addProductToWishlist(productId));
+  };
   return (
     <>
       <Meta title={productState?.title} />
@@ -193,64 +199,68 @@ const SingleProduct = () => {
                 <div className="col-12 col-md-6">
                   <div className="main-product-details">
                     <div className="border-bottom">
-                      <h3 className="title">{productState?.title}</h3>
+                      <h4 className="title">{productState?.title}</h4>
                     </div>
                     <div className="border-bottom py-2">
                       <p className="price">
                         {formatKES(productState ? productState?.price : 0)}
                       </p>
-                      <div className="d-flex align-items-center gap-10">
+                      <div className="d-flex align-items-center gap-2">
                         <ReactStars
                           count={5}
                           size={20}
-                          value={parseFloat(productState?.totalrating)}
+                          value={parseInt(productState?.totalrating)}
                           edit={false}
                           activeColor="#ffd700"
                         />
-                        <p className="mb-0 t-review">(2 Reviews )</p>
+                        <p className="mb-0 mt-0 t-review">
+                          ({parseInt(productState?.totalrating)})
+                        </p>
                       </div>
                       <a className="review-btn" href="#review">
                         Write a review
                       </a>
                     </div>
-                    <div className=" py-3">
-                      <div className="d-flex gap-10 align-items-center">
-                        <h3 className="product-heading">Type:</h3>
+                    <div className=" border-bottom py-2">
+                      <div className="d-flex gap-2 align-items-center">
+                        <h3 className="product-heading">Type</h3>
                         <p className="product-data">{productState?.category}</p>
                       </div>
 
-                      <div className="d-flex gap-10 align-items-center my-2">
-                        <h3 className="product-heading">Brand:</h3>
+                      <div className="d-flex gap-2 align-items-center my-2">
+                        <h3 className="product-heading">Brand</h3>
                         <p className="product-data">{productState?.brand}</p>
                       </div>
 
-                      <div className="d-flex gap-10 align-items-center my-2">
-                        <h3 className="product-heading">Category:</h3>
-                        <p className="product-data">{productState?.category}</p>
+                      <div className="d-flex gap-2 align-items-center my-2">
+                        <h3 className="product-heading">Category</h3>
+                        <p className="product-data mb-0 mt-0">
+                          {productState?.category}
+                        </p>
                       </div>
 
-                      <div className="d-flex gap-10 align-items-center my-2">
-                        <h3 className="product-heading">Tags:</h3>
-                        <p className="product-data">{productState?.tags}</p>
+                      <div className="d-flex gap-2 align-items-center my-2">
+                        <h3 className="product-heading">Tags</h3>
+                        <p className="product-data mb-0 mt-0">
+                          {productState?.tags}
+                        </p>
                       </div>
 
-                      <div className="d-flex gap-10 align-items-center my-2">
-                        <h3 className="product-heading">Availability:</h3>
-                        <p className="product-data">In Stock</p>
+                      <div className="d-flex gap-2 align-items-center my-2">
+                        <h3 className="product-heading">Availability</h3>
+                        <p className="product-data mb-0 mt-0">In Stock</p>
                       </div>
 
-                      <div className="d-flex gap-10 flex-wrap mt-2 mb-4">
-                        <h3 className="product-heading"> Screen Size:</h3>
-                        <div className="d-flex flex-wrap gap-2 gap-md-15">
-                          <span className="bg-white text-dark border px-2">
-                            {productState?.screensize}"
-                          </span>
-                        </div>
+                      <div className="d-flex gap-2 align-items-center mt-2 border-bottom">
+                        <h3 className="product-heading mb-2"> Screen Size</h3>
+                        <p className="product-data  mb-2 mt-0 ">
+                          {parseFloat(productState?.screensize)}"
+                        </p>
                       </div>
-                      <div className="d-flex flex-column  gap-20  flex-row mt-2 mb-4">
-                        <div className="d-flex flex-row  align-items-center gap-20">
+                      <div className="d-flex flex-column  gap-20 flex-row mt-2 mb-2">
+                        <div className="d-flex flex-row  align-items-center gap-4">
                           <div>
-                            <p className="">Quantity</p>
+                            <p className="mb-0 mt-0">Quantity</p>
                           </div>
                           <div>
                             <input
@@ -259,7 +269,7 @@ const SingleProduct = () => {
                               className="form-control border rounded shadow-none"
                               min={1}
                               max={10}
-                              style={{ width: "60px" }}
+                              style={{ width: "50px", height: "28px" }}
                               id="quantity"
                               onChange={(e) => setQuantity(e.target.value)}
                               value={quantity}
@@ -295,16 +305,29 @@ const SingleProduct = () => {
                       </div>
                       <div className="d-flex align-items-center gap-15">
                         <div>
-                          <a href="">
+                          <button
+                            type="button"
+                            className="border-0 bg-transparent"
+                            onClick={(e) => {
+                              e.preventDefault();
+                            }}
+                          >
                             <VscGitCompare className="fs-5 me-2" />
-                            Add To Compare
-                          </a>
+                            Add to compare
+                          </button>
                         </div>
                         <div>
-                          <a href="">
+                          <button
+                            type="button"
+                            className="border-0 bg-transparent"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              addProductToUserWishlist(productState?._id);
+                            }}
+                          >
                             <AiOutlineHeart className="fs-5 me-2" />
-                            Add To Wishlist
-                          </a>
+                            Add to wishlist
+                          </button>
                         </div>
                       </div>
                       <div className="d-flex gap-10 flex-column my-3">
@@ -316,31 +339,35 @@ const SingleProduct = () => {
                           <b> 1-2 business days.</b>
                         </p>
                       </div>
-                      <div className="d-flex gap-10 align-items-center mt-2 mb-4">
-                        <h3 className="product-heading"> Product Link :</h3>
+                      <div className="d-flex gap-2 align-items-center mt-2 mb-2">
                         <a
                           href="javasrcript:void(0);"
-                          onClick={() => {
+                          title="copy product link"
+                          onClick={(e) => {
+                            e.preventDefault();
                             copyToClipboard(window.location.href);
                           }}
                         >
-                          Copy Product Link
+                          <div className="d-flex align-items-center gap-2">
+                            <ImShare2 />
+                            <span> Copy product link</span>
+                          </div>
                         </a>
                       </div>
 
-                      <div className="d-flex flex-column justify-content-center align-items-center my-2 ">
+                      <div className="d-flex flex-column justify-content-center align-items-center my-2">
                         <div className="mb-4">
                           <h6
                             style={{
                               fontSize: "14px",
                               fontWeight: "500",
-                              lineHeight: "22px",
+                              lineHeight: "20px",
                             }}
                           >
                             Payment Methods
                           </h6>
                         </div>
-                        <div className="d-flex  justify-content-between gap-10">
+                        <div className="d-flex  justify-content-between gap-2">
                           <span className="text-white">
                             <img
                               src={kcbBadge}
@@ -407,16 +434,18 @@ const SingleProduct = () => {
                 <div className="review-inner-wrapper">
                   <div className="review-head d-flex  justify-content-between align-items-end">
                     <div>
-                      <h4 className="mb-2">Customer Reviews</h4>
+                      <h4 className="mb-2">Customer reviews</h4>
                       <div className="d-flex align-items-center gap-10">
                         <ReactStars
                           count={5}
                           size={20}
-                          value={4}
+                          value={parseInt(productState?.totalrating)}
                           edit={false}
                           activeColor="#ffd700"
                         />
-                        <p className="mb-0 t-review">Based on 2 Reviews</p>
+                        <p className="mb-0 t-review">
+                          ({parseInt(productState?.totalrating)})
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -428,7 +457,7 @@ const SingleProduct = () => {
                         <ReactStars
                           count={5}
                           size={20}
-                          value={4}
+                          value={parseInt(productsState?.totalrating)}
                           edit={true}
                           activeColor="#ffd700"
                           onChange={(e) => {
@@ -455,7 +484,7 @@ const SingleProduct = () => {
                           onClick={addRatingToProduct}
                           className="button border-0"
                         >
-                          Submit Review
+                          Submit review
                         </button>
                       </div>
                     </div>
@@ -470,7 +499,7 @@ const SingleProduct = () => {
                               <ReactStars
                                 count={5}
                                 size={20}
-                                value={item?.star}
+                                value={parseInt(item?.star)}
                                 edit={false}
                                 activeColor="#ffd700"
                               />

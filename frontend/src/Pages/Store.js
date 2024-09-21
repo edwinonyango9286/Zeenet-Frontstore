@@ -147,6 +147,9 @@ const Store = () => {
                           return (
                             <span
                               onClick={() => setTag(item)}
+                              style={{
+                                cursor: "pointer",
+                              }}
                               key={index}
                               className="badge text-capitalize bg-light text-secondary p-2"
                             >
@@ -166,6 +169,7 @@ const Store = () => {
                             return (
                               <span
                                 onClick={() => setBrand(item)}
+                                style={{ cursor: "pointer" }}
                                 key={index}
                                 className="badge text-capitalize bg-light text-secondary p-2"
                               >
@@ -203,7 +207,7 @@ const Store = () => {
                             </div>
 
                             <div className="w-50">
-                              <h5>{randomProduct?.title}</h5>
+                              <h6>{randomProduct?.title}</h6>
                               <ReactStars
                                 count={5}
                                 size={18}
@@ -277,14 +281,14 @@ const Store = () => {
                       <div>
                         <span className="mb-0">
                           {productsState.length ? productsState.length : 0} {""}
-                          Items
+                          products
                         </span>
                       </div>
                     </div>
                   </div>
 
                   <div className="pb-2">
-                    <div className="d-inline-flex  justify-content-center justify-content-md-start flex-wrap gap-md-4 gap-lg-2">
+                    <div className="d-inline-flex  justify-content-center justify-content-md-start flex-wrap gap-2 gap-md-4 gap-lg-2">
                       <ProductCard data={productsState ? productsState : []} />
                     </div>
                   </div>
