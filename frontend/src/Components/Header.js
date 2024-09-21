@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { BsSearch } from "react-icons/bs";
+import { IoSearchSharp } from "react-icons/io5";
 import compareImage from "../images/compare.svg";
 import wishlistImage from "../images/wishlist.svg";
 import accountImage from "../images/user.svg";
@@ -95,7 +95,7 @@ const Header = () => {
         </div>
       </header>
 
-      <header className="header-middle  py-2">
+      <header className="header-middle py-1">
         <div className="container">
           <div className="row">
             <div className=" col-12 d-flex align-items-center ">
@@ -182,13 +182,14 @@ const Header = () => {
                     inputProps={{
                       className: "custom-typeahead-input",
                       style: {
+                        height: "32px",
                         boxShadow: "none",
                         outline: "none",
                       },
                     }}
                   />
-                  <span className="input-group-text p-2" id="basic-addon2">
-                    <BsSearch className="fs-6" />
+                  <span className="input-group-text px-3" id="basic-addon2">
+                    <IoSearchSharp />
                   </span>
                 </div>
               </div>
@@ -367,14 +368,16 @@ const Header = () => {
                     labelKey={"name"}
                     placeholder="Search product here...?"
                     inputProps={{
+                      className: "custom-typeahead-input",
                       style: {
+                        height: "32px",
                         boxShadow: "none",
                         outline: "none",
                       },
                     }}
                   />
-                  <span className="input-group-text p-2" id="basic-addon2">
-                    <BsSearch className="fs-6"></BsSearch>
+                  <span className="input-group-text px-3" id="basic-addon2">
+                    <IoSearchSharp className="fs-6" />
                   </span>
                 </div>
               </div>

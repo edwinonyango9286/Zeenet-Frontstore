@@ -207,6 +207,8 @@ body a {
   padding: 0.625rem;
   margin-bottom: 0.25rem;
   border-bottom: 0.0625rem solid var(--color-3b4149);
+  color: #fff;
+
 }
 .header-bottom .dropdown-item:hover {
   background-color: transparent;
