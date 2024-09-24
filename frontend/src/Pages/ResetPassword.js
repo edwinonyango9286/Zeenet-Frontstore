@@ -9,6 +9,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword, resetState } from "../features/users/userSlice";
+import { toast } from "react-toastify";
 
 const RESET_PASSWORD_SCHEMA = Yup.object().shape({
   password: Yup.string()
@@ -43,13 +44,13 @@ const ResetPassword = React.memo(() => {
     onSubmit: (values) => {
       dispatch(resetState());
       dispatch(resetPassword({ token: getToken, password: values.password }));
+      toast.success("Your password has been updated. Proceed to login.");
+
       navigate("/login");
     },
   });
 
-  const { isError, isLoading, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
+  const { isError, isLoading, message } = useSelector((state) => state?.user);
 
   return (
     <>

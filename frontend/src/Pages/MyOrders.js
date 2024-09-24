@@ -41,9 +41,9 @@ const MyOrders = () => {
   }, []);
 
   const ordersState = useSelector(
-    (state) => state?.auth?.orderedProducts?.orders
+    (state) => state?.user?.orderedProducts?.orders
   );
-  const loadingOrders = useSelector((state) => state?.auth?.isLoading);
+  const loadingOrders = useSelector((state) => state?.user?.isLoading);
 
   const data1 = [];
   for (let i = 0; i < ordersState?.length; i++) {

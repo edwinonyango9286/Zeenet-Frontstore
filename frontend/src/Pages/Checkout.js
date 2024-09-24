@@ -35,8 +35,8 @@ const Checkout = () => {
   };
 
   const dispatch = useDispatch();
-  const cartState = useSelector((state) => state?.auth?.cartProducts);
-  const currentUser = useSelector((state) => state?.auth?.user);
+  const cartState = useSelector((state) => state?.user?.cartProducts);
+  const currentUser = useSelector((state) => state?.user?.user);
   const [totalAmount, setTotalAmount] = useState(null);
   const [ShippingInfo, setShippingInfo] = useState(null);
 

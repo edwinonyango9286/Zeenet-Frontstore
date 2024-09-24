@@ -21,19 +21,21 @@ import { toast } from "react-toastify";
 import mpesaBadge from "../images/Mpesa logo best.png";
 import kcbBadge from "../images/kcb logo.png";
 import airtelMoneyBadge from "../images/airtel-logo  best.jpg";
-import CustomInput from "../Components/CustomInput";
 import { addProductToWishlist } from "../features/products/productSlice";
 import { ImShare2 } from "react-icons/im";
-
+import { addProductToCart } from "../features/users/userSlice";
 
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
+  const [alreadyAddedToCart, setAlreadyAddedToCart] = useState(false);
+
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const getProductId = location.pathname.split("/")[2];
-  const productState = useSelector((state) => state?.product?.singleProduct);
-  const productsState = useSelector((state) => state?.product?.products);
+  const product = useSelector((state) => state?.product?.singleProduct);
+  const products = useSelector((state) => state?.product?.products);
+  const userCart = useSelector((state) => state?.user?.userCart);
   const [popularProducts, setPopularProducts] = useState([]);
   const [star, setStar] = useState(null);
   const [comment, setComment] = useState(null);
@@ -44,37 +46,33 @@ const SingleProduct = () => {
     dispatch(getAllProducts());
   }, []);
 
-  const addToCart = () => {
-    const cartData = {
-      productId: productState?._id,
-      quantity: quantity,
-      price: productState?.price,
-      title: productState?.title,
-      images: productState?.images[0]?.url,
-      screensize: productState?.screensize,
-      brand: productState?.brand,
-    };
-    const existingCart = JSON.parse(localStorage.getItem("userCart")) || [];
-    const index = existingCart.findIndex(
-      (item) => item.productId === cartData.productId
-    );
-    if (index === -1) {
-      existingCart.push({ ...cartData, quantity: 1 });
-    } else {
-      existingCart[index].quantity += 1;
-      cartData.quantity = existingCart[index].quantity;
+  useEffect(() => {
+    for (let index = 0; index < userCart.length; index++) {
+      if (getProductId === userCart[index]?.productId)
+        setAlreadyAddedToCart(true);
     }
-    localStorage.setItem("userCart", JSON.stringify(existingCart));
-    toast.success("Product added to cart.");
-    return existingCart;
+  });
+  const addItemToCart = () => {
+    const cartData = {
+      productId: product?._id,
+      quantity: quantity,
+      price: product?.price,
+      category: product?.category,
+      title: product?.title,
+      images: product?.images[0]?.url,
+      screensize: product?.screensize,
+      brand: product?.brand,
+    };
+    dispatch(addProductToCart(cartData));
+    toast.success(`${product?.title} added to cart.`);
   };
 
   const props = {
     width: 600,
     height: 600,
     zoomWidth: 600,
-    img: productState?.images[0]?.url
-      ? productState?.images[0]?.url
+    img: product?.images[0]?.url
+      ? product?.images[0]?.url
       : "https://media.istockphoto.com/id/1139493113/vector/black-laptop-with-white-monitor-vector.jpg?s=612x612&w=0&k=20&c=-dMyJaIBvqhtLcemuC4O-D2x-HE7xZGqeDM6J67oGwo=",
   };
 
@@ -89,14 +87,14 @@ const SingleProduct = () => {
 
   useEffect(() => {
     let data = [];
-    for (let index = 0; index < productsState.length; index++) {
-      const element = productsState[index];
+    for (let index = 0; index < products.length; index++) {
+      const element = products[index];
       if (element.tags === "popular") {
         data.push(element);
       }
       setPopularProducts(data);
     }
-  }, [productsState]);
+  }, [products]);
 
   const addRatingToProduct = () => {
     if (star === null) {
@@ -114,7 +112,7 @@ const SingleProduct = () => {
     }
   };
 
-  const ratingValue = parseFloat(productState?.totalrating) || 0;
+  const ratingValue = parseFloat(product?.totalrating) || 0;
 
   const formatKES = (amount) => {
     return new Intl.NumberFormat("en-KE", {
@@ -124,16 +122,14 @@ const SingleProduct = () => {
     }).format(amount);
   };
 
-  const { products, isError, isLoading, isSuccess, message } = useSelector(
-    (state) => state.product
-  );
+  const { isLoading } = useSelector((state) => state.product);
 
   const addProductToUserWishlist = (productId) => {
     dispatch(addProductToWishlist(productId));
   };
   return (
     <>
-      <Meta title={productState?.title} />
+      <Meta title={product?.title} />
 
       {isLoading ? (
         <div
@@ -154,7 +150,7 @@ const SingleProduct = () => {
         </div>
       ) : (
         <div>
-          <BreadCrumb title={productState?.title} />
+          <BreadCrumb title={product?.title} />
           <Container class1="main-product-wrapper py-2 home-wrapper-2 overflow-hidden">
             <div className="row">
               <div className="col-12 d-flex justify-content-between flex-wrap gap-10 flex-md-nowrap">
@@ -167,30 +163,30 @@ const SingleProduct = () => {
                   <div className="other-product-images d-flex flex-wrap justify-content-between gap-10">
                     <div>
                       <img
-                        src={productState?.images[0]?.url}
+                        src={product?.images[0]?.url}
                         className="img-fluid square-image object-fit rounded"
-                        alt={productState?.title}
+                        alt={product?.title}
                       />
                     </div>
                     <div>
                       <img
-                        src={productState?.images[0]?.url}
+                        src={product?.images[0]?.url}
                         className="img-fluid square-image object-fit rounded"
-                        alt={productState?.title}
+                        alt={product?.title}
                       />
                     </div>
                     <div>
                       <img
-                        src={productState?.images[0]?.url}
+                        src={product?.images[0]?.url}
                         className="img-fluid square-image object-fit rounded"
-                        alt={productState?.title}
+                        alt={product?.title}
                       />
                     </div>
                     <div>
                       <img
-                        src={productState?.images[0]?.url}
+                        src={product?.images[0]?.url}
                         className="img-fluid square-image object-fit rounded"
-                        alt={productState?.title}
+                        alt={product?.title}
                       />
                     </div>
                   </div>
@@ -199,22 +195,20 @@ const SingleProduct = () => {
                 <div className="col-12 col-md-6">
                   <div className="main-product-details">
                     <div className="border-bottom">
-                      <h4 className="title">{productState?.title}</h4>
+                      <h4 className="title">{product?.title}</h4>
                     </div>
                     <div className="border-bottom py-2">
-                      <p className="price">
-                        {formatKES(productState ? productState?.price : 0)}
-                      </p>
+                      <p className="price">{formatKES(product?.price ?? 0)}</p>
                       <div className="d-flex align-items-center gap-2">
                         <ReactStars
                           count={5}
                           size={20}
-                          value={parseInt(productState?.totalrating)}
+                          value={parseInt(product?.totalrating)}
                           edit={false}
                           activeColor="#ffd700"
                         />
                         <p className="mb-0 mt-0 t-review">
-                          ({parseInt(productState?.totalrating)})
+                          ({parseInt(product?.totalrating)})
                         </p>
                       </div>
                       <a className="review-btn" href="#review">
@@ -224,25 +218,25 @@ const SingleProduct = () => {
                     <div className=" border-bottom py-2">
                       <div className="d-flex gap-2 align-items-center">
                         <h3 className="product-heading">Type</h3>
-                        <p className="product-data">{productState?.category}</p>
+                        <p className="product-data">{product?.category}</p>
                       </div>
 
                       <div className="d-flex gap-2 align-items-center my-2">
                         <h3 className="product-heading">Brand</h3>
-                        <p className="product-data">{productState?.brand}</p>
+                        <p className="product-data">{product?.brand}</p>
                       </div>
 
                       <div className="d-flex gap-2 align-items-center my-2">
                         <h3 className="product-heading">Category</h3>
                         <p className="product-data mb-0 mt-0">
-                          {productState?.category}
+                          {product?.category}
                         </p>
                       </div>
 
                       <div className="d-flex gap-2 align-items-center my-2">
                         <h3 className="product-heading">Tags</h3>
                         <p className="product-data mb-0 mt-0">
-                          {productState?.tags}
+                          {product?.tags}
                         </p>
                       </div>
 
@@ -251,56 +245,44 @@ const SingleProduct = () => {
                         <p className="product-data mb-0 mt-0">In Stock</p>
                       </div>
 
-                      <div className="d-flex gap-2 align-items-center mt-2 border-bottom">
+                      <div className="d-flex gap-2 align-items-center mt-2">
                         <h3 className="product-heading mb-2"> Screen Size</h3>
                         <p className="product-data  mb-2 mt-0 ">
-                          {parseFloat(productState?.screensize)}"
+                          {parseFloat(product?.screensize)}"
                         </p>
                       </div>
-                      <div className="d-flex flex-column  gap-20 flex-row mt-2 mb-2">
-                        <div className="d-flex flex-row  align-items-center gap-4">
-                          <div>
-                            <p className="mb-0 mt-0">Quantity</p>
-                          </div>
-                          <div>
-                            <input
-                              type="number"
-                              name="quanity"
-                              className="form-control border rounded shadow-none"
-                              min={1}
-                              max={10}
-                              style={{ width: "50px", height: "28px" }}
-                              id="quantity"
-                              onChange={(e) => setQuantity(e.target.value)}
-                              value={quantity}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="d-flex flex-row  align-items-center gap-30 ">
+                      <div className="d-flex flex-column  gap-4 flex-row mt-3 mb-3">
+                        <div className="d-flex flex-row  align-items-center gap-4 ">
                           <div>
                             <button
                               className="button signup border-0"
                               type="button"
-                              onClick={() => {
-                                addToCart();
+                              onClick={(e) => {
+                                e.preventDefault();
+                                addItemToCart();
                               }}
                             >
-                              Add To Cart
+                              {alreadyAddedToCart
+                                ? "View my cart"
+                                : "Add to cart"}
                             </button>
                           </div>
-                          <div>
-                            <button
-                              className="button  border-0"
-                              type="button"
-                              onClick={() => {
-                                addToCart();
-                                navigate("/cart");
-                              }}
-                            >
-                              Buy It Now{" "}
-                            </button>
-                          </div>
+
+                          {alreadyAddedToCart === false && (
+                            <div>
+                              <button
+                                className="button  border-0"
+                                type="button"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  addItemToCart();
+                                  navigate("/cart");
+                                }}
+                              >
+                                Buy it now{" "}
+                              </button>
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="d-flex align-items-center gap-15">
@@ -322,7 +304,7 @@ const SingleProduct = () => {
                             className="border-0 bg-transparent"
                             onClick={(e) => {
                               e.preventDefault();
-                              addProductToUserWishlist(productState?._id);
+                              addProductToUserWishlist(product?._id);
                             }}
                           >
                             <AiOutlineHeart className="fs-5 me-2" />
@@ -346,6 +328,7 @@ const SingleProduct = () => {
                           onClick={(e) => {
                             e.preventDefault();
                             copyToClipboard(window.location.href);
+                            toast.success(` ${product?.title} link copied.`);
                           }}
                         >
                           <div className="d-flex align-items-center gap-2">
@@ -418,7 +401,7 @@ const SingleProduct = () => {
                 <div className=" description p-2 border ">
                   <p
                     dangerouslySetInnerHTML={{
-                      __html: productState?.description,
+                      __html: product?.description,
                     }}
                     className="text-capitalize"
                   ></p>
@@ -439,12 +422,18 @@ const SingleProduct = () => {
                         <ReactStars
                           count={5}
                           size={20}
-                          value={parseInt(productState?.totalrating)}
+                          value={parseInt(product?.totalrating || 0)}
                           edit={false}
                           activeColor="#ffd700"
+                          {...{
+                            count: 5,
+                            size: 20,
+                            edit: false,
+                            activeColor: "#ffd700",
+                          }}
                         />
                         <p className="mb-0 t-review">
-                          ({parseInt(productState?.totalrating)})
+                          ({parseInt(product?.totalrating)})
                         </p>
                       </div>
                     </div>
@@ -457,7 +446,7 @@ const SingleProduct = () => {
                         <ReactStars
                           count={5}
                           size={20}
-                          value={parseInt(productsState?.totalrating)}
+                          value={parseInt(products?.totalrating)}
                           edit={true}
                           activeColor="#ffd700"
                           onChange={(e) => {
@@ -491,8 +480,8 @@ const SingleProduct = () => {
                   </div>
 
                   <div className="reviews mt-4">
-                    {productState &&
-                      productState.ratings?.map((item, index) => {
+                    {product &&
+                      product.ratings?.map((item, index) => {
                         return (
                           <div key={index} className="review">
                             <div className="d-flex align-items-center gap-10">

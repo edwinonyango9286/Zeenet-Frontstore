@@ -6,18 +6,16 @@ import Container from "../Components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProductWishlist } from "../features/users/userSlice";
 import { removeProductFromWishlist } from "../features/products/productSlice";
-import { Loading3QuartersOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
 import { Link } from "react-router-dom";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
   const wishlistState = useSelector(
-    (state) => state?.auth?.wishlistProducts?.wishlist
+    (state) => state?.user?.wishlistProducts?.wishlist
   );
 
   const isGettingWishlist = useSelector(
-    (state) => state?.auth?.isGettingWishlist
+    (state) => state?.user?.isGettingWishlist
   );
 
   useEffect(() => {

@@ -15,17 +15,15 @@ import { TfiMenu } from "react-icons/tfi";
 import { RiArrowDownSLine } from "react-icons/ri";
 
 const Header = () => {
-  const { user, userCart, isError, isLoading, isSuccess, message } =
-    useSelector((state) => state?.auth ?? {});
+  const { user } = useSelector((state) => state?.user ?? {});
+  const userCart = useSelector((state) => state?.user?.userCart);
+  console.log(userCart);
 
   const { products } = useSelector((state) => state?.product);
+
   const [productOpt, setProductOpt] = useState([]);
   const [paginate, setPaginate] = useState(true);
-  const [cartData, setCartData] = useState(() => {
-    const storedCart = localStorage.getItem("userCart");
-    return storedCart ? JSON.parse(storedCart) : [];
-  });
-  const [quantity, setQuantity] = useState(0);
+
   useEffect(() => {
     let data = [];
     for (let index = 0; index < products.length; index++) {
@@ -34,14 +32,6 @@ const Header = () => {
     }
     setProductOpt(data);
   }, [products]);
-
-  useEffect(() => {
-    let totalQuantity = 0;
-    cartData.forEach((item) => {
-      totalQuantity += +item.quantity;
-    });
-    setQuantity(totalQuantity);
-  }, [cartData]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -335,7 +325,7 @@ const Header = () => {
                                 fontSize: "10px",
                               }}
                             >
-                              {quantity}
+                              {userCart ? userCart?.length : 0}
                             </p>
                           </h6>
                         </div>

@@ -4,22 +4,16 @@ import BreadCrumb from "../Components/BreadCrumb";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Container from "../Components/Container";
-import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  removeProductFromCart,
+  updateProductQuantity,
+} from "../features/users/userSlice";
 
 const Cart = () => {
-  const [cartData, setCartData] = useState([]);
+  const dispatch = useDispatch();
+  const cartData = useSelector((state) => state?.user?.userCart);
   const [totalAmount, setTotalAmount] = useState(0);
-
-  useEffect(() => {
-    const storedCart = localStorage.getItem("userCart");
-    if (storedCart) {
-      setCartData(JSON.parse(storedCart));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("userCart", JSON.stringify(cartData));
-  }, [cartData]);
 
   useEffect(() => {
     let sum = 0;
@@ -29,22 +23,8 @@ const Cart = () => {
     setTotalAmount(sum);
   }, [cartData]);
 
-  const deleteACartProduct = (id) => {
-    const updatedCart = cartData.filter((item) => item?.productId !== id);
-    setCartData(updatedCart);
-    localStorage.setItem("userCart", JSON.stringify(updatedCart));
-  };
-
-  const updateQuantity = (id, quantity) => {
-    const updatedCart = cartData.map((item) => {
-      if (item.productId === id) {
-        item.quantity = quantity;
-      }
-      return item;
-    });
-    setCartData(updatedCart);
-    localStorage.setItem("userCart", JSON.stringify(updatedCart));
-    toast.success("Product quantity updated.");
+  const updateQuantity = (productId, newQuantity) => {
+    dispatch(updateProductQuantity({ productId, newQuantity }));
   };
 
   const formatKES = (amount) => {
@@ -75,18 +55,18 @@ const Cart = () => {
                     key={index}
                     className="cart-data py-1 d-flex justify-content-between flex-wrap gap-4 align-items-center"
                   >
-                    <div className="cart-col-1 d-flex flex-wrap flex-lg-nowrap justify-content-between align-items-center py-4 gap-md-4 gap-2">
+                    <div className="cart-col-1 d-flex flex-wrap flex-lg-nowrap justify-content-between align-items-center py-2 gap-md-4 gap-2">
                       <div>
                         <img
                           src={item?.images}
                           className="img-fluid rounded"
                           alt={item?.title}
-                          width={200}
-                          height={200}
+                          width={136}
+                          height={136}
                         />
                       </div>
                       <div>
-                        <p className="">{item?.brand}</p>
+                        <p className="mt-0">{item?.category}</p>
                         <p className="mb-0">{item?.title}</p>
                         <p className="mb-0">{formatKES(item?.price)}</p>
                         <p className="d-flex justify-content-between flex-wrap mb-0">
@@ -98,7 +78,7 @@ const Cart = () => {
                       <div>
                         <input
                           style={{
-                            width: "46px",
+                            width: "50px",
                             height: "30px",
                           }}
                           className="form-control form-control-sm shadow-none"
@@ -117,7 +97,7 @@ const Cart = () => {
                         <button
                           className=" fs-4 text-danger bg-transparent border-0 m-0"
                           onClick={() => {
-                            deleteACartProduct(item?.productId);
+                            dispatch(removeProductFromCart(item?.productId));
                           }}
                         >
                           <AiFillDelete />

@@ -183,46 +183,47 @@ const Store = () => {
                 </div>
               </div>
 
-              {productsState &&
-                productsState.map((randomProduct, index) => {
-                  if (randomProduct.tags === "Popular") {
-                    return (
-                      <div key={index} className="filter-card mb-0">
-                        <h3 className="filter-title">Random products</h3>
-                        <div>
-                          <div className="random-product mb-4 d-flex justify-content-between">
-                            <div
-                              className="w-50"
-                              onClick={() =>
-                                navigate("/product/" + randomProduct?._id)
-                              }
-                            >
-                              <img
-                                src={randomProduct?.images[0]?.url}
-                                className="img-fluid border mx-auto rounded"
-                                alt="watch"
-                                width={100}
-                                height={100}
-                              />
-                            </div>
+              <div>
+                {productsState &&
+                  productsState.map((randomProduct, index) => {
+                    if (randomProduct.tags === "Popular") {
+                      return (
+                        <div key={index} className="filter-card mb-0">
+                          <div>
+                            <div className="random-product mb-2 d-flex justify-content-between">
+                              <div
+                                className="w-50"
+                                onClick={() =>
+                                  navigate("/product/" + randomProduct?._id)
+                                }
+                              >
+                                <img
+                                  src={randomProduct?.images[0]?.url}
+                                  className="img-fluid border mx-auto rounded mb-3"
+                                  alt="watch"
+                                  width={100}
+                                  height={100}
+                                />
+                              </div>
 
-                            <div className="w-50">
-                              <h6>{randomProduct?.title}</h6>
-                              <ReactStars
-                                count={5}
-                                size={18}
-                                value={4}
-                                edit={false}
-                                activeColor="#ffd700"
-                              />
-                              <p>{formatKES(randomProduct?.price)}</p>
+                              <div className="w-50">
+                                <h6>{randomProduct?.title}</h6>
+                                <ReactStars
+                                  count={5}
+                                  size={18}
+                                  value={4}
+                                  edit={false}
+                                  activeColor="#ffd700"
+                                />
+                                <p>{formatKES(randomProduct?.price)}</p>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  }
-                })}
+                      );
+                    }
+                  })}
+              </div>
             </div>
 
             <div className="col-12 col-md-9">

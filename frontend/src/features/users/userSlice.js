@@ -1,12 +1,11 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
-import authService from "./userService";
-import { toast } from "react-toastify";
+import userService from "./userService";
 
 export const registerUser = createAsyncThunk(
   "auth/user-register",
   async (userData, thunkAPI) => {
     try {
-      return await authService.register(userData);
+      return await userService.register(userData);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -17,7 +16,7 @@ export const loginUser = createAsyncThunk(
   "auth/user-login",
   async (userData, thunkAPI) => {
     try {
-      return await authService.login(userData);
+      return await userService.login(userData);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -28,7 +27,7 @@ export const logoutUser = createAsyncThunk(
   "auth/user-logout",
   async (thunkAPI) => {
     try {
-      return await authService.logoutAUser();
+      return await userService.logoutAUser();
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -39,26 +38,59 @@ export const getUserProductWishlist = createAsyncThunk(
   "user/get-user-wishlist",
   async (thunkAPI) => {
     try {
-      return await authService.getUserWishlist();
+      return await userService.getUserWishlist();
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
-
 export const addProductToCart = createAsyncThunk(
   "user/add-product-to-cart",
   async (cartData, thunkAPI) => {
     try {
-      const existingCart = JSON.parse(localStorage.getItem("userCart"));
-      if (existingCart) {
-        const response = await authService.addToCart(existingCart);
-        if (response) {
-          return response;
-        }
+      const userCart = JSON.parse(localStorage.getItem("userCart")) || [];
+      const index = userCart.findIndex(
+        (item) => item.productId === cartData.productId
+      );
+      if (index === -1) {
+        userCart.push({ ...cartData, quantity: 1 });
       } else {
-        return thunkAPI.rejectWithValue("No cart data found in local storage.");
+        userCart[index].quantity += 1;
+        cartData.quantity = userCart[index].quantity;
+      }
+      localStorage.setItem("userCart", JSON.stringify(userCart));
+      return userCart;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const removeProductFromCart = createAsyncThunk(
+  "user/remove-product-from-cart",
+  async (productId, thunkAPI) => {
+    try {
+      let userCart = JSON.parse(localStorage.getItem("userCart")) || [];
+      userCart = userCart.filter((item) => item.productId !== productId);
+      localStorage.setItem("userCart", JSON.stringify(userCart));
+      return userCart;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const updateProductQuantity = createAsyncThunk(
+  "user/update-product-quantity",
+  async ({ productId, newQuantity }, thunkAPI) => {
+    try {
+      const userCart = JSON.parse(localStorage.getItem("userCart")) || [];
+      const index = userCart.findIndex((item) => item.productId === productId);
+      if (index !== -1) {
+        userCart[index].quantity = newQuantity;
+        localStorage.setItem("userCart", JSON.stringify(userCart));
+        return userCart;
       }
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -67,10 +99,10 @@ export const addProductToCart = createAsyncThunk(
 );
 
 export const getUserCart = createAsyncThunk(
-  "user/get-cart",
+  "user/get-user-cart",
   async (data, thunkAPI) => {
     try {
-      return await authService.getCart(data);
+      return await userService.getCart(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -78,10 +110,10 @@ export const getUserCart = createAsyncThunk(
 );
 
 export const updateProfile = createAsyncThunk(
-  "user/update-user-profile",
+  "user/update-profile",
   async (data, thunkAPI) => {
     try {
-      return await authService.updateUserProfile(data);
+      return await userService.updateUserProfile(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -92,7 +124,7 @@ export const resetPasswordToken = createAsyncThunk(
   "user/reset-password-token",
   async (data, thunkAPI) => {
     try {
-      return await authService.forgotPasswordToken(data);
+      return await userService.forgotPasswordToken(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -103,7 +135,7 @@ export const resetPassword = createAsyncThunk(
   "user/reset-password",
   async (data, thunkAPI) => {
     try {
-      return await authService.resetUserPassword(data);
+      return await userService.resetUserPassword(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -111,10 +143,10 @@ export const resetPassword = createAsyncThunk(
 );
 
 export const getOrders = createAsyncThunk(
-  "user/get-user-orders",
+  "user/get-orders",
   async (data, thunkAPI) => {
     try {
-      return await authService.getUserOrders(data);
+      return await userService.getUserOrders(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -129,16 +161,18 @@ const user = localStorage.getItem("user")
 
 const initialState = {
   user: user,
-  userCart: null,
+  userCart: localStorage.getItem("userCart")
+    ? JSON.parse(localStorage.getItem("userCart"))
+    : [],
   isError: false,
   isLoading: false,
   isSuccess: false,
   message: "",
-  isGettingWishlist: false, 
+  isGettingWishlist: false,
 };
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: "user",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -151,7 +185,6 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.createdUser = action.payload;
-        toast.success("Account creation successful.");
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isError = true;
@@ -168,7 +201,6 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         state.user = action.payload;
         localStorage.setItem("token", action.payload.token);
-        toast.success("User login successfull.");
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isError = true;
@@ -201,6 +233,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.userCart = action.payload;
+        localStorage.setItem("userCart", JSON.stringify(action.payload));
       })
       .addCase(addProductToCart.rejected, (state, action) => {
         state.isError = true;
@@ -208,10 +241,41 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.message = action.error;
       })
+      .addCase(removeProductFromCart.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(removeProductFromCart.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.userCart = action.payload;
+        localStorage.setItem("userCart", JSON.stringify(action.payload));
+      })
+      .addCase(removeProductFromCart.rejected, (state, action) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.isLoading = false;
+        state.message = action.error;
+      })
 
+      .addCase(updateProductQuantity.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateProductQuantity.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.userCart = action.payload;
+      })
+      .addCase(updateProductQuantity.rejected, (state, action) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.isLoading = false;
+        state.message = action.payload;
+      })
       .addCase(getUserProductWishlist.pending, (state) => {
         state.isLoading = true;
-        state.isGettingWishlist = true; 
+        state.isGettingWishlist = true;
       })
       .addCase(getUserProductWishlist.fulfilled, (state, action) => {
         state.isError = false;
@@ -259,7 +323,6 @@ export const authSlice = createSlice({
         };
         localStorage.setItem("customer", JSON.stringify(newUser));
         state.user = newUser;
-        toast.success("Profile updated.");
       })
       .addCase(updateProfile.rejected, (state, action) => {
         state.isError = true;
@@ -276,7 +339,6 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.token = action.payload;
-        toast.success("A password reset token has been sent to your email.");
       })
       .addCase(resetPasswordToken.rejected, (state, action) => {
         state.isError = true;
@@ -292,7 +354,6 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.newPassword = action.payload;
-        toast.success("Your password has been updated. Proceed to login.");
       })
       .addCase(resetPassword.rejected, (state, action) => {
         state.isError = true;

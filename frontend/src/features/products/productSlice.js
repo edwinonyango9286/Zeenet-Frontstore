@@ -3,7 +3,7 @@ import productService from "./productService";
 import { toast } from "react-toastify";
 
 export const getAllProducts = createAsyncThunk(
-  "product/get-products",
+  "products/get-all-products",
   async (data, thunkAPI) => {
     try {
       return await productService.getProducts(data);
@@ -14,7 +14,7 @@ export const getAllProducts = createAsyncThunk(
 );
 
 export const getAproduct = createAsyncThunk(
-  "product/get-product",
+  "products/get-a-product",
   async (id, thunkAPI) => {
     try {
       return await productService.getASingleProduct(id);
@@ -25,7 +25,7 @@ export const getAproduct = createAsyncThunk(
 );
 
 export const addProductToWishlist = createAsyncThunk(
-  "product/add-to-wishlist",
+  "products/add-to-wishlist",
   async (productId, thunkAPI) => {
     try {
       return await productService.addToWishlist(productId);
@@ -36,7 +36,7 @@ export const addProductToWishlist = createAsyncThunk(
 );
 
 export const removeProductFromWishlist = createAsyncThunk(
-  "product/remove-from-wishlist",
+  "products/remove-product-from-wishlist",
   async (productId, thunkAPI) => {
     try {
       return await productService.removeFromWishlist(productId);
@@ -47,7 +47,7 @@ export const removeProductFromWishlist = createAsyncThunk(
 );
 
 export const addProductRating = createAsyncThunk(
-  "product/add-product-rating",
+  "products/add-product-rating",
   async (data, thunkAPI) => {
     try {
       return await productService.addRating(data);

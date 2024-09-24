@@ -3,7 +3,7 @@ import contactService from "./contactService";
 import { toast } from "react-toastify";
 
 export const createEnquiry = createAsyncThunk(
-  "contact/post-enquiry",
+  "enquiries/post-enquiry",
   async (contactData, thunkAPI) => {
     try {
       return await contactService.postEnquiry(contactData);

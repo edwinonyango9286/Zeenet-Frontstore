@@ -33,7 +33,7 @@ const Login = React.memo(() => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, userCart, isError, isLoading, isSuccess, message } =
-    useSelector((state) => state?.auth ?? {});
+    useSelector((state) => state?.user ?? {});
   const from =
     (location?.state && location?.state.from && location?.state?.from?.pathname) ||
     "/store";

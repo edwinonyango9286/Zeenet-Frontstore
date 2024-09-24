@@ -11,14 +11,14 @@ const getProducts = async (data) => {
       data?.sort ? `sort=${data?.sort}&&` : ""
     }`
   );
-  if (response.data) {
+  if (response?.data) {
     return response.data;
   }
 };
 
 const getASingleProduct = async (id) => {
   const response = await newRequest.get(`products/getaproduct/${id}`);
-  if (response.data) {
+  if (response?.data) {
     return response.data;
   }
 };
@@ -31,7 +31,7 @@ const addToWishlist = async (productId) => {
     },
     config
   );
-  if (response.data) {
+  if (response?.data) {
     return response.data;
   }
 };
@@ -43,13 +43,13 @@ const removeFromWishlist = async (productId) => {
     },
     config
   );
-  if (response.data) {
+  if (response?.data) {
     return response.data;
   }
 };
 const addRating = async (data) => {
   const response = await newRequest.put(`products/rating`, data, config);
-  if (response.data) {
+  if (response?.data) {
     return response.data;
   }
 };

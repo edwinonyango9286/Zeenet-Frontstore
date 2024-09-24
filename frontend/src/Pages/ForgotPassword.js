@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPasswordToken, resetState } from "../features/users/userSlice";
+import { toast } from "react-toastify";
 
 const FORGOT_PASSWORD_SCHEMA = Yup.object().shape({
   email: Yup.string().email().required(),
@@ -24,11 +25,12 @@ const ForgotPassword = () => {
     onSubmit: (values) => {
       dispatch(resetState());
       dispatch(resetPasswordToken(values));
+      toast.success("A password reset token has been sent to your email.");
     },
   });
 
   const { isError, isLoading, isSuccess, message } = useSelector(
-    (state) => state.auth ?? {}
+    (state) => state?.user ?? {}
   );
 
   return (

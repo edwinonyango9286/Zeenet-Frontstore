@@ -20,7 +20,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [update, setUpdate] = useState(true);
   const { user, isError, isLoading, isSuccess, message } = useSelector(
-    (state) => state.auth ?? {}
+    (state) => state.user ?? {}
   );
 
   const formik = useFormik({
