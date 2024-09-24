@@ -253,20 +253,36 @@ const SingleProduct = () => {
                       </div>
                       <div className="d-flex flex-column  gap-4 flex-row mt-3 mb-3">
                         <div className="d-flex flex-row  align-items-center gap-4 ">
-                          <div>
-                            <button
-                              className="button signup border-0"
-                              type="button"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                addItemToCart();
-                              }}
-                            >
-                              {alreadyAddedToCart
-                                ? "View my cart"
-                                : "Add to cart"}
-                            </button>
-                          </div>
+                          {alreadyAddedToCart === false && (
+                            <div>
+                              <button
+                                className="button signup border-0"
+                                type="button"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  addItemToCart();
+                                }}
+                              >
+                                Add to cart
+                              </button>
+                            </div>
+                          )}
+
+                          {alreadyAddedToCart && (
+                            <div>
+                              <button
+                                className="button signup border-0"
+                                type="button"
+                                onClick={(e) => {
+                                  navigate("/cart");
+                                }}
+                              >
+                                {alreadyAddedToCart
+                                  ? "View my cart"
+                                  : "Add to cart"}
+                              </button>
+                            </div>
+                          )}
 
                           {alreadyAddedToCart === false && (
                             <div>
