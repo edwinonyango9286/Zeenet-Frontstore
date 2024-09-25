@@ -477,7 +477,7 @@ const SingleProduct = () => {
                           rows={4}
                           placeholder="Comment..."
                           onChange={(e) => {
-                            setComment(e.target.value);
+                            setComment(e);
                           }}
                         />
                       </div>
