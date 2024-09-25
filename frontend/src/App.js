@@ -40,7 +40,16 @@ function App() {
             <Route path="/blogs/singleblog/:id" element={<SingleBlog />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/compare-products" element={<CompareProducts />} />
-            <Route path="/profile" element={<Profile />} />
+
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoutes>
+                  <Profile />
+                </PrivateRoutes>
+              }
+            />
+
             <Route
               path="/login"
               element={
