@@ -107,7 +107,11 @@ const SingleProduct = () => {
       dispatch(
         addProductRating({ star: star, comment: comment, prodId: getProductId })
       );
-      dispatch(getAproduct(getProductId));
+      setTimeout(() => {
+        dispatch(getAproduct(getProductId));
+      }, 200);
+      setStar(null);
+      setComment(null);
       return false;
     }
   };
@@ -460,7 +464,7 @@ const SingleProduct = () => {
                         <ReactStars
                           count={5}
                           size={20}
-                          value={parseInt(products?.totalRating ?? 0)}
+                          value={parseInt(star ?? 0)}
                           edit={true}
                           activeColor="#ffd700"
                           onChange={(e) => {
@@ -483,7 +487,7 @@ const SingleProduct = () => {
                       </div>
                       <div className="d-flex justify-content-end mt-2">
                         <button
-                          type="button"
+                          type="submit"
                           onClick={addRatingToProduct}
                           className="button border-0"
                         >
