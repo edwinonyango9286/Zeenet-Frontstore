@@ -70,7 +70,7 @@ const Cart = () => {
                         <p className="mb-0">{item?.title}</p>
                         <p className="mb-0">{formatKES(item?.price)}</p>
                         <p className="d-flex justify-content-between flex-wrap mb-0">
-                          Screen Size {item?.screensize}"
+                          Screen Size {parseFloat(item?.screenSize)}"
                         </p>
                       </div>
                     </div>

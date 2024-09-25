@@ -72,7 +72,7 @@ const ProductCard = React.memo((props) => {
                   <ReactStars
                     count={5}
                     size={18}
-                    value={parseInt(item?.totalrating) ?? 0}
+                    value={parseInt(item?.totalRating) ?? 0}
                     edit={false}
                     activeColor="#ffd700"
                   />

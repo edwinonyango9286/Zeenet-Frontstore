@@ -3,7 +3,7 @@ import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 
 const SpecialProducts = React.memo((props) => {
-  const { brand, title, totalrating, price, sold, quantity, image, id } = props;
+  const { brand, title, totalRating, price, sold, quantity, image, id } = props;
   return (
     <>
       <div className="col-12 col-md-6 col-lg-3 mb-2">
@@ -24,7 +24,7 @@ const SpecialProducts = React.memo((props) => {
               <ReactStars
                 count={5}
                 size={24}
-                value={parseFloat(totalrating)}
+                value={parseInt(totalRating ?? 0)}
                 edit={false}
                 activeColor="#ffd700"
               />

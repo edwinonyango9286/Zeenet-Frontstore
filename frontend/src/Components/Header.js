@@ -17,7 +17,6 @@ import { RiArrowDownSLine } from "react-icons/ri";
 const Header = () => {
   const { user } = useSelector((state) => state?.user ?? {});
   const userCart = useSelector((state) => state?.user?.userCart);
-  console.log(userCart);
 
   const { products } = useSelector((state) => state?.product);
 

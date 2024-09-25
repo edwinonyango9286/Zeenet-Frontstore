@@ -280,7 +280,7 @@ const Home = () => {
                                   <ReactStars
                                     count={5}
                                     size={18}
-                                    value={parseInt(item?.totalrating) ?? 0}
+                                    value={parseInt(item?.totalRating) ?? 0}
                                     edit={false}
                                     activeColor="#ffd700"
                                   />
@@ -424,7 +424,7 @@ const Home = () => {
                             id={item?._id}
                             brand={item?.brand}
                             title={item?.title}
-                            totalrating={item?.totalrating.toString()}
+                            totalRating={parseInt(item?.totalRating ?? 0)}
                             price={formatKES(item?.price)}
                             sold={item?.sold}
                             quantity={item?.quantity}
@@ -499,7 +499,7 @@ const Home = () => {
                                   <ReactStars
                                     count={5}
                                     size={18}
-                                    value={parseInt(item?.totalrating) ?? 0}
+                                    value={parseInt(item?.totalRating) ?? 0}
                                     edit={false}
                                     activeColor="#ffd700"
                                   />

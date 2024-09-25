@@ -47,7 +47,7 @@ const SingleProduct = () => {
   }, []);
 
   useEffect(() => {
-    for (let index = 0; index < userCart.length; index++) {
+    for (let index = 0; index < userCart?.length; index++) {
       if (getProductId === userCart[index]?.productId)
         setAlreadyAddedToCart(true);
     }
@@ -60,7 +60,7 @@ const SingleProduct = () => {
       category: product?.category,
       title: product?.title,
       images: product?.images[0]?.url,
-      screensize: product?.screensize,
+      screenSize: product?.screenSize,
       brand: product?.brand,
     };
     dispatch(addProductToCart(cartData));
@@ -111,8 +111,6 @@ const SingleProduct = () => {
       return false;
     }
   };
-
-  const ratingValue = parseFloat(product?.totalrating) || 0;
 
   const formatKES = (amount) => {
     return new Intl.NumberFormat("en-KE", {
@@ -203,12 +201,12 @@ const SingleProduct = () => {
                         <ReactStars
                           count={5}
                           size={20}
-                          value={parseInt(product?.totalrating)}
+                          value={parseInt(product?.totalRating ?? 0)}
                           edit={false}
                           activeColor="#ffd700"
                         />
                         <p className="mb-0 mt-0 t-review">
-                          ({parseInt(product?.totalrating)})
+                          ({parseInt(product?.totalRating ?? 0)})
                         </p>
                       </div>
                       <a className="review-btn" href="#review">
@@ -248,7 +246,7 @@ const SingleProduct = () => {
                       <div className="d-flex gap-2 align-items-center mt-2">
                         <h3 className="product-heading mb-2"> Screen Size</h3>
                         <p className="product-data  mb-2 mt-0 ">
-                          {parseFloat(product?.screensize)}"
+                          {parseFloat(product?.screenSize)}"
                         </p>
                       </div>
                       <div className="d-flex flex-column  gap-4 flex-row mt-3 mb-3">
@@ -438,7 +436,7 @@ const SingleProduct = () => {
                         <ReactStars
                           count={5}
                           size={20}
-                          value={parseInt(product?.totalrating || 0)}
+                          value={parseInt(product?.totalRating ?? 0)}
                           edit={false}
                           activeColor="#ffd700"
                           {...{
@@ -449,7 +447,7 @@ const SingleProduct = () => {
                           }}
                         />
                         <p className="mb-0 t-review">
-                          ({parseInt(product?.totalrating)})
+                          ({parseInt(product?.totalRating ?? 0)})
                         </p>
                       </div>
                     </div>
@@ -462,11 +460,11 @@ const SingleProduct = () => {
                         <ReactStars
                           count={5}
                           size={20}
-                          value={parseInt(products?.totalrating)}
+                          value={parseInt(products?.totalRating ?? 0)}
                           edit={true}
                           activeColor="#ffd700"
                           onChange={(e) => {
-                            setStar(e);
+                            setStar(e.target.value);
                           }}
                         />
                       </div>

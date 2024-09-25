@@ -47,6 +47,13 @@ body a {
   text-decoration: none;
 }
 
+.form-control::placeholder {
+  font-size: 13px;
+  font-weight: 400;
+  font-family: "Gowun Batang", serif;
+  color: #777;
+}
+
 .gap-10 {
   gap: 0.625rem;
 }
@@ -208,7 +215,6 @@ body a {
   margin-bottom: 0.25rem;
   border-bottom: 0.0625rem solid var(--color-3b4149);
   color: #fff;
-
 }
 .header-bottom .dropdown-item:hover {
   background-color: transparent;
@@ -220,13 +226,6 @@ body a {
   height: 12px;
   margin: 0 10px;
   background-color: var(--color-3b4149);
-}
-
-.custom-typeahead-input::placeholder {
-  font-size: 14px;
-  font-weight: 500;
-  font-family: "Gowun Batang", serif;
-  color: #777;
 }
 
 /* Header part styling ends here */
