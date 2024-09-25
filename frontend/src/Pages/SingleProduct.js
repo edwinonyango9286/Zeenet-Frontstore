@@ -464,7 +464,7 @@ const SingleProduct = () => {
                           edit={true}
                           activeColor="#ffd700"
                           onChange={(e) => {
-                            setStar(e.target.value);
+                            setStar(e);
                           }}
                         />
                       </div>
@@ -477,7 +477,7 @@ const SingleProduct = () => {
                           rows={4}
                           placeholder="Comment..."
                           onChange={(e) => {
-                            setComment(e);
+                            setComment(e.target.value);
                           }}
                         />
                       </div>
