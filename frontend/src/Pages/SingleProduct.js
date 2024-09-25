@@ -107,6 +107,8 @@ const SingleProduct = () => {
       dispatch(
         addProductRating({ star: star, comment: comment, prodId: getProductId })
       );
+      toast.success("Your review has been submitted.");
+
       setTimeout(() => {
         dispatch(getAproduct(getProductId));
       }, 200);
