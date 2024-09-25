@@ -9,7 +9,6 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, resetState } from "../features/users/userSlice";
 import { useEffect } from "react";
-import { toast } from "react-toastify";
 
 const SIGN_UP_SCHEMA = Yup.object().shape({
   firstname: Yup.string().required(),
@@ -45,7 +44,6 @@ const Signup = React.memo(() => {
     validationSchema: SIGN_UP_SCHEMA,
     onSubmit: (values) => {
       dispatch(registerUser(values));
-      toast.success("Account creation successful.");
     },
   });
 

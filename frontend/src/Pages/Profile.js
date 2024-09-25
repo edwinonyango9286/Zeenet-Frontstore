@@ -1,141 +1,52 @@
-import React, { useState } from "react";
+import React from "react";
 import BreadCrumb from "../Components/BreadCrumb";
 import Container from "../Components/Container";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProfile } from "../features/users/userSlice";
-import { FiEdit } from "react-icons/fi";
-
-const PROFILE_SCHEMA = Yup.object().shape({
-  firstname: Yup.string().required(),
-  lastname: Yup.string().required(),
-  email: Yup.string().email().required(),
-  mobile: Yup.string()
-    .matches(/^(\+?254|0)?(7\d{8})$/, "Please provide a valid phone number.")
-    .required(),
-});
+import { RiLogoutBoxRLine } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
+import { logoutUser, resetState } from "../features/users/userSlice";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [update, setUpdate] = useState(true);
-  const { user, isError, isLoading, isSuccess, message } = useSelector(
-    (state) => state.user ?? {}
-  );
+  const { user } = useSelector((state) => state?.user ?? {});
 
-  const formik = useFormik({
-    enableReinitialize: true,
-    initialValues: {
-      firstname: user?.firstname,
-      lastname: user?.lastname,
-      email: user?.email,
-      mobile: user?.mobile,
-    },
-    validationSchema: PROFILE_SCHEMA,
-    onSubmit: (values) => {
-      dispatch(updateProfile({ data: values }));
-      setUpdate(true);
-    },
-  });
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    dispatch(logoutUser());
+    dispatch(resetState());
+    navigate("/store");
+    window.location.reload();
+  };
 
   return (
     <>
       <BreadCrumb title="My Profile" />
-      <Container class1="home-wrapper-2 py-4 ">
+      <Container class1="home-wrapper-2 py-4">
         <div className="row">
-          <div className="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-            <div className="d-flex justify-content-between align-items-center">
-              <h4> {update === true ? "Account details" : "Update profile"}</h4>
-              <FiEdit
-                className=" fs-4 text-primary"
-                onClick={() => setUpdate(false)}
-              />
-            </div>
+          <div className="col-12 col-md-6">
+            <div className="d-flex flex-column  justify-content-start  gap-2">
+              <div>
+                <h4>Account</h4>
+              </div>
 
-            <div>
-              <form onSubmit={formik.handleSubmit}>
-                <div className="mb-2">
-                  <label htmlFor="exampleInputEmail1" className="form-label">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="firstname"
-                    name="firstname"
-                    aria-describedby="emailHelp"
-                    value={formik.values.firstname}
-                    onChange={formik.handleChange("firstname")}
-                    onBlur={formik.handleBlur("firstname")}
-                    disabled={update}
-                  />
-                  <div className="error">
-                    {formik.touched.firstname && formik.errors.firstname}
+              <div>
+                <button
+                  className="border-0 "
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLogout();
+                  }}
+                  style={{ backgroundColor: "transparent" }}
+                >
+                  <div className="d-flex flex-row justify-content-start align-items-center gap-2">
+                    <RiLogoutBoxRLine />
+                    <p className="mb-0 mt-0">Logout</p>
                   </div>
-                </div>
-                <div className="mb-2">
-                  <label htmlFor="exampleInputEmail1" className="form-label">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="lastname"
-                    name="lastname"
-                    aria-describedby="emailHelp"
-                    value={formik.values.lastname}
-                    onChange={formik.handleChange("lastname")}
-                    onBlur={formik.handleBlur("lastname")}
-                    disabled={update}
-                  />
-                  <div className="error">
-                    {formik.touched.lastname && formik.errors.lastname}
-                  </div>
-                </div>
-                <div className="mb-2">
-                  <label htmlFor="exampleInputEmail1" className="form-label">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    aria-describedby="emailHelp"
-                    value={formik.values.email}
-                    onChange={formik.handleChange("email")}
-                    onBlur={formik.handleBlur("email")}
-                    disabled={update}
-                  />
-                  <div className="error">
-                    {formik.touched.email && formik.errors.email}
-                  </div>
-                </div>
-                <div className="mb-2">
-                  <label htmlFor="exampleInputEmail1" className="form-label">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    className="form-control"
-                    id="mobile"
-                    name="mobile"
-                    aria-describedby="emailHelp"
-                    value={formik.values.mobile}
-                    onChange={formik.handleChange("mobile")}
-                    onBlur={formik.handleBlur("mobile")}
-                    disabled={update}
-                  />
-                  <div className="error">
-                    {formik.touched.mobile && formik.errors.mobile}
-                  </div>
-                </div>
-                {update === false && (
-                  <button type="submit" className="button border-0">
-                    {isLoading ? "Updating..." : "Update"}
-                  </button>
-                )}
-              </form>
+                </button>
+              </div>
             </div>
           </div>
         </div>

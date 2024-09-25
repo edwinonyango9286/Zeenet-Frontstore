@@ -23,7 +23,7 @@
 }
 .error {
   color: var(--color-error, red);
-  font-size: 0.625rem;
+  font-size: 10px;
 }
 
 body a {

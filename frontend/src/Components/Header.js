@@ -15,6 +15,8 @@ import { TfiMenu } from "react-icons/tfi";
 import { RiArrowDownSLine } from "react-icons/ri";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state?.user ?? {});
   const userCart = useSelector((state) => state?.user?.userCart);
 
@@ -31,17 +33,6 @@ const Header = () => {
     }
     setProductOpt(data);
   }, [products]);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    localStorage.removeItem("persist:root");
-    navigate("/store");
-    window.location.reload();
-  };
 
   return (
     <>
@@ -134,10 +125,6 @@ const Header = () => {
                           to="/contact"
                         >
                           Contact
-                        </Link>
-
-                        <Link className="dropdown-item text-white" to="/store">
-                          Logout
                         </Link>
                         <Link className="dropdown-item text-white" to="/about">
                           About
@@ -452,20 +439,6 @@ const Header = () => {
                     <NavLink to="/myorders">orders</NavLink>
                     <NavLink to="/blogs">blogs</NavLink>
                     <NavLink to="/contact">contact</NavLink>
-                    <button
-                      type="button"
-                      onClick={handleLogout}
-                      className=" border-0  bg-transparent text-white text-uppercase"
-                      style={{
-                        fontSize: "14px",
-                        fontWeight: "300",
-                        lineHeight: "24px",
-                        letterSpacing: "o.3px",
-                        color: "white",
-                      }}
-                    >
-                      Logout
-                    </button>
                   </div>
                 </div>
               </div>

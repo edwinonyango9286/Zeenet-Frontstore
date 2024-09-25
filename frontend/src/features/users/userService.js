@@ -18,11 +18,8 @@ const login = async (userData) => {
 
 const logoutAUser = async () => {
   const response = await newRequest.get(`user/logout`);
-  localStorage.removeItem("customer");
-  localStorage.removeItem("token");
   if (response?.data) {
-      return response.data;
-
+    return response.data;
   }
 };
 
