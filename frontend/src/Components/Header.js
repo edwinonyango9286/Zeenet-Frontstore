@@ -281,7 +281,7 @@ const Header = () => {
                       >
                         <img
                           src={cartImage}
-                          alt="Cart Image"
+                          alt="cart"
                           className="img-fluid "
                           loading="lazy"
                           style={{

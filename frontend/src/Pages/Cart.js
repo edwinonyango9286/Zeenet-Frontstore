@@ -12,16 +12,16 @@ import {
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cartData = useSelector((state) => state?.user?.userCart);
+  const userCart = useSelector((state) => state?.user?.userCart);
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
     let sum = 0;
-    cartData.forEach((item) => {
+    userCart.forEach((item) => {
       sum += item?.price * item?.quantity;
     });
     setTotalAmount(sum);
-  }, [cartData]);
+  }, [userCart]);
 
   const updateQuantity = (productId, newQuantity) => {
     dispatch(updateProductQuantity({ productId, newQuantity }));
@@ -48,8 +48,8 @@ const Cart = () => {
               <h4 className="crat-col-4">Total</h4>
             </div>
 
-            {cartData &&
-              cartData.map((item, index) => {
+            {userCart &&
+              userCart?.map((item, index) => {
                 return (
                   <div
                     key={index}
