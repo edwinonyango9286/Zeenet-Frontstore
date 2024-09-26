@@ -335,9 +335,9 @@ const Home = () => {
                     <img
                       src={famous1}
                       className="img-fluid"
-                      alt="famous1"
-                      width={340}
-                      height={300}
+                        alt="famous1"
+                        width={340}
+                        height={300}
                     />
                     <div className="famous-content position-absolute">
                       <h5 className="text-white text-sm">BIG SCREEN</h5>

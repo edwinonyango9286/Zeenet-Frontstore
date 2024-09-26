@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Container from "../Components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  clearUserCart,
   removeProductFromCart,
   updateProductQuantity,
 } from "../features/users/userSlice";
@@ -25,6 +26,10 @@ const Cart = () => {
 
   const updateQuantity = (productId, newQuantity) => {
     dispatch(updateProductQuantity({ productId, newQuantity }));
+  };
+
+  const handleClearCart = () => {
+    dispatch(clearUserCart());
   };
 
   const formatKES = (amount) => {
@@ -79,7 +84,7 @@ const Cart = () => {
                         <input
                           style={{
                             width: "50px",
-                            height: "30px",
+                            height: "40px",
                           }}
                           className="form-control form-control-sm shadow-none"
                           type="number"
@@ -114,11 +119,23 @@ const Cart = () => {
               })}
           </div>
           <div className="col-12 py-2 mt-4">
-            <div className="d-flex justify-content-between align-items-baseline">
-              <Link to="/store" className="button signup">
-                Continue shopping
-              </Link>
-              <div className="d-flex flex-column align-items-end gap-10 mb-3">
+            <div className="d-flex justify-content-between  align-items-baseline">
+              <div className="d-flex   flex-column  flex-md-row gap-3">
+                {userCart.length > 0 && (
+                  <button
+                    type="button"
+                    className="button border-0"
+                    onClick={handleClearCart}
+                  >
+                    Clear cart
+                  </button>
+                )}
+                <Link to="/store" className="button signup">
+                  Continue shopping
+                </Link>
+              </div>
+
+              <div className="d-flex flex-column align-items-end gap-3 mb-3">
                 <h6>Sub total {formatKES(totalAmount)}</h6>
                 <Link to="/checkout" className="button signup">
                   Checkout
