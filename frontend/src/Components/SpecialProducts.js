@@ -6,16 +6,16 @@ const SpecialProducts = React.memo((props) => {
   const { brand, title, totalRating, price, sold, quantity, image, id } = props;
   return (
     <>
-      <div className="col-12 col-md-6 col-lg-3 mb-2">
+      <div className="col-12 col-md-6 col-lg-4 mb-2">
         <div className="special-product-card">
-          <div className="d-flex justify-content-between  gap-10">
+          <div className="d-flex flex-row justify-content-between justify-content-md-start gap-2">
             <div>
               <img
                 src={image}
                 className="img-fluid"
                 alt={title}
-                width={200}
-                height={200}
+                width={180}
+                height={180}
               />
             </div>
             <div className="special-product-content">
@@ -29,18 +29,38 @@ const SpecialProducts = React.memo((props) => {
                 activeColor="#ffd700"
               />
               <p className="price">
-                <span className="text-danger">Ksh {price}</span>&nbsp;
-                <strike>
-                  {price}
-                  {}
-                </strike>
+                <span className="text-danger">{price}</span>&nbsp;
+                <strike>{price}</strike>
               </p>
               <div className="discount-till d-flex align-items-center gap-10">
                 <p className="mb-0">5 days</p>
-                <div className="d-flex align-items-center gap-10 ">
-                  <span className="badge rounded-circle p-1 bg-danger">1</span>:
-                  <span className="badge rounded-circle p-1 bg-danger">1</span>:
-                  <span className="badge rounded-circle p-1 bg-danger">1</span>
+                <div className="d-flex align-items-center gap-1">
+                  <span
+                    className="badge rounded-pill  bg-danger"
+                    style={{
+                      fontSize: "12px",
+                    }}
+                  >
+                    1
+                  </span>
+                  :
+                  <span
+                    className="badge rounded-pill  bg-danger"
+                    style={{
+                      fontSize: "12px",
+                    }}
+                  >
+                    1
+                  </span>
+                  :
+                  <span
+                    className="badge rounded-pill  bg-danger"
+                    style={{
+                      fontSize: "12px",
+                    }}
+                  >
+                    1
+                  </span>
                 </div>
               </div>
               <div className="prod-count my-3">

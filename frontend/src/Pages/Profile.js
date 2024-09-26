@@ -25,27 +25,51 @@ const Profile = () => {
       <BreadCrumb title="My Profile" />
       <Container class1="home-wrapper-2 py-4">
         <div className="row">
-          <div className="col-12 col-md-6">
-            <div className="d-flex flex-column  justify-content-start  gap-2">
-              <div>
-                <h4>Account</h4>
+          <div className="col-12 d-flex flex-row flex-wrap flex-md-nowrap gap-4">
+            <div className=" col-md-6 d-flex flex-column gap-4">
+              <div className="d-flex flex-column  justify-content-start  gap-2">
+                <div>
+                  <h4>Account</h4>
+                </div>
+
+                <div>
+                  <button
+                    className="border-0 "
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleLogout();
+                    }}
+                    style={{ backgroundColor: "transparent" }}
+                  >
+                    <div className="d-flex flex-row justify-content-start align-items-center gap-2">
+                      <RiLogoutBoxRLine />
+                      <p className="mb-0 mt-0">Logout</p>
+                    </div>
+                  </button>
+                </div>
               </div>
 
-              <div>
-                <button
-                  className="border-0 "
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleLogout();
-                  }}
-                  style={{ backgroundColor: "transparent" }}
-                >
-                  <div className="d-flex flex-row justify-content-start align-items-center gap-2">
-                    <RiLogoutBoxRLine />
-                    <p className="mb-0 mt-0">Logout</p>
-                  </div>
-                </button>
+              <div className="d-flex flex-column gap-2">
+                <h4>Order history</h4>
+                <h6>You haven't placed any order yet.</h6>
+              </div>
+            </div>
+
+            <div className="col-md-6 d-flex flex-column justify-content-start justify-content-md-end align-items-md-center">
+              <div className="d-flex gap-2 justify-content-start flex-column">
+                <h4 className="mt-0 md-0">Account details</h4>
+                <h6 className="text-capitalize mb-0 mt-0">
+                  Name:{"  "} {user?.firstname + " " + user?.lastname}
+                </h6>
+                <h6 className="mb-0 mt-0">
+                  {" "}
+                  Email: {"  "} {user?.email}
+                </h6>
+                <h6 className="mb-0 mt-0">
+                  {" "}
+                  Phone: {"  "} {user?.mobile}
+                </h6>
               </div>
             </div>
           </div>

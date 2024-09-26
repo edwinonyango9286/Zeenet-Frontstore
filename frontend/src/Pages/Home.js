@@ -229,8 +229,8 @@ const Home = () => {
                   </div>
                   <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-start gap-4  gap-lg-2 flex-wrap">
                     {productState &&
-                      productState.map((item, index) => {
-                        if (item.tags === "Featured") {
+                      productState?.map((item, index) => {
+                        if (item?.tags === "Featured") {
                           return (
                             <div key={index} className="">
                               <div className="product-card position-relative">
@@ -411,13 +411,15 @@ const Home = () => {
                 <div>
                   <div className="col-12">
                     <h3 className="section-heading">
-                      {specialProducts.length === 0 ? " " : " Special products"}
+                      {specialProducts?.length === 0
+                        ? " "
+                        : " Special products"}
                     </h3>
                   </div>
 
-                  <div className="col-12 d-flex align-items-center justify-content-center justify-content-lg-start gap-10 flex-wrap">
-                    {specialProducts > 0 &&
-                      specialProducts.map((item, index) => {
+                  <div className="col-12 d-flex align-items-center justify-content-center justify-content-lg-start gap-2 flex-wrap flex-lg-nowrap">
+                    {specialProducts?.length > 0 &&
+                      specialProducts?.map((item, index) => {
                         return (
                           <SpecialProducts
                             key={index}

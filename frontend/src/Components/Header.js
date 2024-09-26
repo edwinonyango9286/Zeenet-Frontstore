@@ -40,7 +40,7 @@ const Header = () => {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <div className="d-flex justify-content-center justify-content-sm-between align-items-center">
+              <div className="d-flex  flex-row justify-content-center justify-content-sm-between align-items-center">
                 <div className="d-none d-sm-block">
                   <p className="mb-0 header-info ">
                     Free delivery & returns for all our customers.
@@ -109,7 +109,7 @@ const Header = () => {
                           Home
                         </Link>
                         <Link className="dropdown-item text-white" to="/store">
-                          Store
+                          Our Store
                         </Link>
                         <Link
                           className="dropdown-item text-white"
@@ -187,10 +187,9 @@ const Header = () => {
                           height: 30,
                         }}
                       />
-                      <span className="mb-0 d-none d-lg-block">
+                      <span className="mb-0 mt-0 d-none d-lg-block">
                         Compare
-                        <br />
-                        Products
+                        <br /> Products
                       </span>
                     </Link>
                   </div>
@@ -209,7 +208,7 @@ const Header = () => {
                           height: 30,
                         }}
                       />
-                      <span className="mb-0 d-none d-lg-block">
+                      <span className="mb-0 mt-0 d-none d-lg-block">
                         Favourite
                         <br /> Wishlist
                       </span>
@@ -242,7 +241,7 @@ const Header = () => {
                         />
 
                         {user === null ? (
-                          <span className="mb-0 d-none d-lg-block">
+                          <span className="mb-0 mt-0 d-none d-lg-block">
                             Log in
                             <br />
                             My Account
@@ -435,7 +434,7 @@ const Header = () => {
                 <div className="menu-links col-6">
                   <div className="d-flex align-items-center gap-20">
                     <NavLink to="/">home</NavLink>
-                    <NavLink to="/store">store</NavLink>
+                    <NavLink to="/store">our store</NavLink>
                     <NavLink to="/myorders">orders</NavLink>
                     <NavLink to="/blogs">blogs</NavLink>
                     <NavLink to="/contact">contact</NavLink>
