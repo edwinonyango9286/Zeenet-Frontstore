@@ -280,7 +280,7 @@ const Checkout = () => {
               </div>
               <div className="border-bottom py-2">
                 <div className="d-flex justify-content-between align-items-center">
-                  <p className="total mb-0 mt-0">SubTotal</p>
+                  <p className="total mb-0 mt-0">Sub total</p>
                   <p className="total-price mb-0 mt-0">
                     {formatKES(totalAmount)}
                   </p>
