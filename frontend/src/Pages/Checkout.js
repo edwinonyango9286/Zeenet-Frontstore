@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Meta from "../Components/Meta";
+import { toast } from "react-toastify";
+import { placeUserOrder } from "../features/users/userSlice";
 
 const shippingSchema = Yup.object().shape({
   firstName: Yup.string().required(),
@@ -25,6 +27,7 @@ const Checkout = () => {
   const user = useSelector((state) => state?.user?.user);
   const [totalAmount, setTotalAmount] = useState(null);
   const [ShippingInfo, setShippingInfo] = useState(null);
+  const [paymentStatus, setPaymentStatus] = useState(null);
 
   useEffect(() => {
     let sum = 0;
@@ -59,6 +62,21 @@ const Checkout = () => {
       minimumFractionDigits: 0,
     }).format(amount);
   };
+
+  const handlePlaceOrder = async () => {
+    const totalAmountToPay = totalAmount;
+    const userPhone = formik.values.phone;
+    dispatch(placeUserOrder(userPhone, totalAmountToPay));
+    setPaymentStatus("pending");
+  };
+
+  useEffect(() => {
+    if (paymentStatus === "success") {
+      toast.success("Payment successful");
+    } else if (paymentStatus === "failure") {
+      toast.error("We can not complete payment your at this time.");
+    }
+  }, [paymentStatus]);
 
   return (
     <>
@@ -114,7 +132,7 @@ const Checkout = () => {
                   <div className="flex-grow-1">
                     <CustomInput
                       type="type"
-                      placeholder="First Name."
+                      placeholder="First name."
                       name="firstName"
                       id="firstName"
                       defaultValue={user?.firstname}
@@ -130,7 +148,7 @@ const Checkout = () => {
                   <div className="flex-grow-1">
                     <CustomInput
                       type="text"
-                      placeholder="Last Name."
+                      placeholder="Last name."
                       name="lastname"
                       id="lastname"
                       defaultValue={user?.lastname}
@@ -295,8 +313,12 @@ const Checkout = () => {
                 <h5 className="total-price">{formatKES(totalAmount)} </h5>
               </div>
               <div className="py-4 d-flex align-items-center justify-content-end">
-                <button className="button border-0" type="button">
-                  Place Order
+                <button
+                  className="button signup border-0"
+                  type="button"
+                  onClick={handlePlaceOrder}
+                >
+                  Place order
                 </button>
               </div>
             </div>

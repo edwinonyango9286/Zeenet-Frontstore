@@ -68,7 +68,7 @@ const Profile = () => {
                 </h6>
                 <h6 className="mb-0 mt-0">
                   {" "}
-                  Phone: {"  "} {user?.mobile}
+                  Phone: {"  "} {user?.phone}
                 </h6>
               </div>
             </div>

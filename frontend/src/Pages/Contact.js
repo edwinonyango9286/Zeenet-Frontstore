@@ -13,7 +13,7 @@ import CustomInput from "../Components/CustomInput";
 let contactSchema = Yup.object().shape({
   name: Yup.string().required(),
   email: Yup.string().email().required(),
-  mobile: Yup.string()
+  phone: Yup.string()
     .matches(/^(\+?254|0)?(7\d{8})$/, "Please provide a valid phone number.")
     .required(),
   comment: Yup.string().required(),
@@ -26,7 +26,7 @@ const Contact = () => {
     initialValues: {
       name: "",
       email: "",
-      mobile: "",
+      phone: "",
       comment: "",
     },
     validationSchema: contactSchema,
@@ -91,15 +91,15 @@ const Contact = () => {
                 <div className="mb-2">
                   <CustomInput
                     type="tel"
-                    placeholder="Mobile Number"
-                    id="mobile"
-                    name="mobile"
-                    onChange={formik.handleChange("mobile")}
-                    onBlur={formik.handleBlur("mobile")}
-                    value={formik.values.mobile}
+                    placeholder="Phone number"
+                    id="phone"
+                    name="phone"
+                    onChange={formik.handleChange("phone")}
+                    onBlur={formik.handleBlur("phone")}
+                    value={formik.values.phone}
                   />
                   <div className="error">
-                    {formik.touched.mobile && formik.errors.mobile}
+                    {formik.touched.phone && formik.errors.phone}
                   </div>
                 </div>
 

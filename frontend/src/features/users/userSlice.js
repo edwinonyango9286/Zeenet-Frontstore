@@ -121,6 +121,17 @@ export const clearUserCart = createAsyncThunk(
   }
 );
 
+export const placeUserOrder = createAsyncThunk(
+  "user/place-order",
+  async ({ phone, amount }, thunkAPI) => {
+    try {
+      return await userService.placeOrder(phone, amount);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const updateProfile = createAsyncThunk(
   "user/update-profile",
   async (data, thunkAPI) => {
@@ -332,6 +343,22 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.message = action?.payload?.response?.data?.message;
       })
+      .addCase(placeUserOrder.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(placeUserOrder.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.paymentStatus = action.payload;
+      })
+      .addCase(placeUserOrder.rejected, (state, action) => {
+        state.isError = true;
+        state.isSuccess = false;
+        state.isLoading = false;
+        state.message = action.error;
+      })
+
       .addCase(updateProfile.pending, (state) => {
         state.isLoading = true;
       })
@@ -340,17 +367,6 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.updatedUser = action.payload;
-        let currentUser = JSON.parse(localStorage.getItem("customer"));
-        let newUser = {
-          _id: currentUser?._id,
-          token: currentUser?.token,
-          firstname: action.payload?.firstname,
-          lastname: action.payload?.lastname,
-          email: action.payload?.email,
-          mobile: action.payload?.mobile,
-        };
-        localStorage.setItem("customer", JSON.stringify(newUser));
-        state.user = newUser;
       })
       .addCase(updateProfile.rejected, (state, action) => {
         state.isError = true;

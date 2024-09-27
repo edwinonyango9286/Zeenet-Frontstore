@@ -49,6 +49,13 @@ const getCart = async (data) => {
   }
 };
 
+
+const placeOrder = async (phone, amount) => {
+  const response = await newRequest.post("/payment", { phone, amount });
+  if (response?.data) {
+    return response.data;
+  }
+};
 const updateUserProfile = async (data) => {
   const response = await newRequest.put(`user/update-user`, data?.data, config);
   if (response?.data) {
@@ -90,6 +97,7 @@ const userService = {
   forgotPasswordToken,
   resetUserPassword,
   getUserOrders,
+  placeOrder,
 };
 
 export default userService;

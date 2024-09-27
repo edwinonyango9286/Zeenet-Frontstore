@@ -14,7 +14,7 @@ const SIGN_UP_SCHEMA = Yup.object().shape({
   firstname: Yup.string().required(),
   lastname: Yup.string().required(),
   email: Yup.string().email().required(),
-  mobile: Yup.string()
+  phone: Yup.string()
     .matches(/^(\+?254|0)?(7\d{8})$/, "Please provide a valid phone nummber.")
     .required(),
   password: Yup.string()
@@ -38,7 +38,7 @@ const Signup = React.memo(() => {
       firstname: "",
       lastname: "",
       email: "",
-      mobile: "",
+      phone: "",
       password: "",
     },
     validationSchema: SIGN_UP_SCHEMA,
@@ -81,7 +81,7 @@ const Signup = React.memo(() => {
                 <CustomInput
                   type="text"
                   name="firstname"
-                  placeholder="First Name"
+                  placeholder="First name"
                   onChange={formik.handleChange("firstname")}
                   onBlur={formik.handleBlur("firstname")}
                   value={formik.values.firstname}
@@ -93,7 +93,7 @@ const Signup = React.memo(() => {
                 <CustomInput
                   type="text"
                   name="lastname"
-                  placeholder="Last Name"
+                  placeholder="Last name"
                   onChange={formik.handleChange("lastname")}
                   onBlur={formik.handleBlur("lastname")}
                   value={formik.values.lastname}
@@ -115,16 +115,16 @@ const Signup = React.memo(() => {
 
                 <CustomInput
                   type="tel"
-                  name="mobile"
+                  name="phone"
                   max={0}
                   min={14}
-                  placeholder="Mobile Number"
-                  onChange={formik.handleChange("mobile")}
-                  onBlur={formik.handleBlur("mobile")}
-                  value={formik.values.mobile}
+                  placeholder="Phone number"
+                  onChange={formik.handleChange("phone")}
+                  onBlur={formik.handleBlur("phone")}
+                  value={formik.values.phone}
                 />
                 <div className="error">
-                  {formik.touched.mobile && formik.errors.mobile}
+                  {formik.touched.phone && formik.errors.phone}
                 </div>
                 <CustomInput
                   type="password"
