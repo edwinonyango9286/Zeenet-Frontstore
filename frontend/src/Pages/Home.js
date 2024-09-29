@@ -227,7 +227,7 @@ const Home = () => {
                       {productState.length === 0 ? " " : "Featured collection"}
                     </h3>
                   </div>
-                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-start gap-4  gap-lg-2 flex-wrap">
+                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-start gap-3 flex-wrap">
                     {productState &&
                       productState?.map((item, index) => {
                         if (item?.tags === "Featured") {
@@ -244,6 +244,8 @@ const Home = () => {
                                     <img
                                       src={wishlistIcon}
                                       alt="Wishlist Image"
+                                      width={15}
+                                      height={15}
                                     />
                                   </button>
                                 </div>
@@ -252,8 +254,8 @@ const Home = () => {
                                     src={item?.images[0]?.url}
                                     className="img-fluid mx-auto border rounded object-fit "
                                     alt={item?.title}
-                                    width={126}
-                                    height={156}
+                                    width={90}
+                                    height={130}
                                     onClick={() =>
                                       navigate("/product/" + item?._id)
                                     }
@@ -262,8 +264,8 @@ const Home = () => {
                                     src={item?.images[0]?.url}
                                     className="img-fluid mx-auto border rounded object-fit "
                                     alt="ProductImage"
-                                    width={126}
-                                    height={156}
+                                    width={90}
+                                    height={130}
                                     onClick={() =>
                                       navigate("/product/" + item?._id)
                                     }
@@ -296,6 +298,8 @@ const Home = () => {
                                         src={prodcompare}
                                         alt="Compare Product Image"
                                         loading="lazy"
+                                        width={15}
+                                        height={15}
                                       />
                                     </button>
 
@@ -307,6 +311,8 @@ const Home = () => {
                                           navigate("/product/" + item?._id)
                                         }
                                         loading="lazy"
+                                        width={15}
+                                        height={15}
                                       />
                                     </button>
                                     <button className="border-0 bg-transparent">
@@ -314,6 +320,8 @@ const Home = () => {
                                         src={addCart}
                                         alt="cartImage"
                                         loading="lazy"
+                                        width={15}
+                                        height={15}
                                       />
                                     </button>
                                   </div>
@@ -335,9 +343,9 @@ const Home = () => {
                     <img
                       src={famous1}
                       className="img-fluid"
-                        alt="famous1"
-                        width={340}
-                        height={300}
+                      alt="famous1"
+                      width={340}
+                      height={300}
                     />
                     <div className="famous-content position-absolute">
                       <h5 className="text-white text-sm">BIG SCREEN</h5>
@@ -448,99 +456,99 @@ const Home = () => {
                     </h3>
                   </div>
 
-                  <div className="col-12">
-                    <div className="d-inline-flex align-items-center flex-wrap justify-content-start  gap-5 gap-md-2">
-                      {popularProducts.length > 0 &&
-                        popularProducts.map((item, index) => {
-                          return (
-                            <div key={index}>
-                              <div className="product-card position-relative">
-                                <div className="wishlist-icon position-absolute">
-                                  <button
-                                    className="border-0 bg-transparent"
-                                    onClick={(e) =>
-                                      addProductUserToWishlist(item?._id)
-                                    }
-                                  >
+                  <div className=" col-12 d-inline-flex flex-row align-items-center flex-wrap justify-content-start  gap-3">
+                    {popularProducts.length > 0 &&
+                      popularProducts.map((item, index) => {
+                        return (
+                          <div key={index}>
+                            <div className="product-card position-relative">
+                              <div className="wishlist-icon position-absolute">
+                                <button
+                                  className="border-0 bg-transparent"
+                                  onClick={(e) =>
+                                    addProductUserToWishlist(item?._id)
+                                  }
+                                >
+                                  <img
+                                    src={wishlistIcon}
+                                    alt="Wishlist Image"
+                                    width={15}
+                                    height={15}
+                                  />
+                                </button>
+                              </div>
+                              <div className="product-image">
+                                <img
+                                  src={item?.images[0]?.url}
+                                  className="img-fluid mx-auto border rounded object-fit "
+                                  alt="Product Image"
+                                  width={90}
+                                  height={130}
+                                  onClick={() =>
+                                    navigate("/product/" + item?._id)
+                                  }
+                                />
+                                <img
+                                  src={item?.images[0]?.url}
+                                  className="img-fluid mx-auto border rounded object-fit"
+                                  alt="Product Image"
+                                  width={90}
+                                  height={130}
+                                  onClick={() =>
+                                    navigate("/product/" + item?._id)
+                                  }
+                                />
+                              </div>
+
+                              <div className="product-details">
+                                <h6 className="brandvmb-0 mt-3">
+                                  {item?.brand}
+                                </h6>
+                                <h5 className="product-title mb-0">
+                                  {item?.title}
+                                </h5>
+                                <ReactStars
+                                  count={5}
+                                  size={18}
+                                  value={parseInt(item?.totalRating) ?? 0}
+                                  edit={false}
+                                  activeColor="#ffd700"
+                                />
+                                <p className="price">
+                                  {formatKES(item?.price)}
+                                </p>
+                              </div>
+
+                              <div className="action-bar position-absolute">
+                                <div className="d-flex flex-column gap-1">
+                                  <button className="border-0 bg-transparent">
                                     <img
-                                      src={wishlistIcon}
-                                      alt="Wishlist Image"
+                                      src={prodcompare}
+                                      alt="Compare Product Image"
+                                    />
+                                  </button>
+
+                                  <button className="border-0 bg-transparent">
+                                    <img
+                                      src={view}
+                                      alt="View Product Image"
+                                      onClick={() =>
+                                        navigate("/product/" + item?._id)
+                                      }
+                                    />
+                                  </button>
+                                  <button className="border-0 bg-transparent">
+                                    <img
+                                      src={addCart}
+                                      alt="Add to cart Image"
                                     />
                                   </button>
                                 </div>
-                                <div className="product-image">
-                                  <img
-                                    src={item?.images[0]?.url}
-                                    className="img-fluid mx-auto border rounded object-fit "
-                                    alt="Product Image"
-                                    width={126}
-                                    height={156}
-                                    onClick={() =>
-                                      navigate("/product/" + item?._id)
-                                    }
-                                  />
-                                  <img
-                                    src={item?.images[0]?.url}
-                                    className="img-fluid mx-auto border rounded object-fit"
-                                    alt="Product Image"
-                                    width={126}
-                                    height={156}
-                                    onClick={() =>
-                                      navigate("/product/" + item?._id)
-                                    }
-                                  />
-                                </div>
-
-                                <div className="product-details">
-                                  <h6 className="brandvmb-0 mt-3">
-                                    {item?.brand}
-                                  </h6>
-                                  <h5 className="product-title mb-0">
-                                    {item?.title}
-                                  </h5>
-                                  <ReactStars
-                                    count={5}
-                                    size={18}
-                                    value={parseInt(item?.totalRating) ?? 0}
-                                    edit={false}
-                                    activeColor="#ffd700"
-                                  />
-                                  <p className="price">
-                                    {formatKES(item?.price)}
-                                  </p>
-                                </div>
-
-                                <div className="action-bar position-absolute">
-                                  <div className="d-flex flex-column gap-15">
-                                    <button className="border-0 bg-transparent">
-                                      <img
-                                        src={prodcompare}
-                                        alt="Compare Product Image"
-                                      />
-                                    </button>
-
-                                    <button className="border-0 bg-transparent">
-                                      <img
-                                        src={view}
-                                        alt="View Product Image"
-                                        onClick={() =>
-                                          navigate("/product/" + item?._id)
-                                        }
-                                      />
-                                    </button>
-                                    <button className="border-0 bg-transparent">
-                                      <img
-                                        src={addCart}
-                                        alt="Add to cart Image"
-                                      />
-                                    </button>
-                                  </div>
-                                </div>
                               </div>
                             </div>
-                          );
-                        })}
-                    </div>
+                          </div>
+                        );
+                      })}
                   </div>
                 </div>
               </div>

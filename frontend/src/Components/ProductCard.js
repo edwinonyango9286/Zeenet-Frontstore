@@ -36,7 +36,7 @@ const ProductCard = React.memo((props) => {
                   <button
                     className="border-0 bg-transparent"
                     onClick={(e) => {
-                      e.preventDefault()
+                      e.preventDefault();
                       addProductToUserWishlist(item?._id);
                     }}
                   >
@@ -44,6 +44,8 @@ const ProductCard = React.memo((props) => {
                       src={wishlistIcon}
                       alt="Wishlist Image"
                       loading="lazy"
+                      width={15}
+                      height={15}
                     />
                   </button>
                 </div>
@@ -53,16 +55,16 @@ const ProductCard = React.memo((props) => {
                     src={item.images[0]?.url}
                     className="img-fluid mx-auto border rounded object-fit "
                     alt={item?.title}
-                    width={124}
-                    height={154}
+                    width={90}
+                    height={130}
                     onClick={() => navigate("/product/" + item?._id)}
                   />
                   <img
                     src={item.images[0]?.url}
                     className="img-fluid mx-auto  border rounded object-fit"
-                    alt={item.title}
-                    width={124}
-                    height={154}
+                    alt={item?.title}
+                    width={90}
+                    height={130}
                     onClick={() => navigate("/product/" + item?._id)}
                   />
                 </div>
@@ -80,16 +82,27 @@ const ProductCard = React.memo((props) => {
                 </div>
 
                 <div className="action-bar position-absolute">
-                  <div className="d-flex flex-column gap-15">
+                  <div className="d-flex flex-column gap-1">
                     <button className="border-0 bg-transparent">
-                      <img src={prodcompare} alt="Compare Product Image" />
+                      <img
+                        src={prodcompare}
+                        alt="Compare Product Image"
+                        width={15}
+                        height={15}
+                      />
                     </button>
 
                     <Link
                       to={"/product/" + item?._id}
                       className="border-0 bg-transparent"
                     >
-                      <img src={view} alt="View Product Image" loading="lazy" />
+                      <img
+                        src={view}
+                        alt="View Product Image"
+                        loading="lazy"
+                        width={15}
+                        height={15}
+                      />
                     </Link>
                     <Link className="" to={"/product/" + item?._id}>
                       <button className="border-0 bg-transparent">
@@ -97,6 +110,8 @@ const ProductCard = React.memo((props) => {
                           src={addCart}
                           alt="Add to cart Image"
                           loading="lazy"
+                          width={15}
+                          height={15}
                         />
                       </button>
                     </Link>
