@@ -25,7 +25,7 @@ import { addProductToWishlist } from "../features/products/productSlice";
 import { ImShare2 } from "react-icons/im";
 import { addProductToCart } from "../features/users/userSlice";
 
-const SingleProduct = () => {
+const Product = () => {
   const [quantity, setQuantity] = useState(1);
   const [alreadyAddedToCart, setAlreadyAddedToCart] = useState(false);
 
@@ -33,7 +33,7 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const getProductId = location.pathname.split("/")[2];
-  const product = useSelector((state) => state?.product?.singleProduct);
+  const product = useSelector((state) => state?.product?.product);
   const products = useSelector((state) => state?.product?.products);
   const userCart = useSelector((state) => state?.user?.userCart);
   const [popularProducts, setPopularProducts] = useState([]);
@@ -89,7 +89,7 @@ const SingleProduct = () => {
     let data = [];
     for (let index = 0; index < products.length; index++) {
       const element = products[index];
-      if (element.tags === "popular") {
+      if (element.tags === "Popular") {
         data.push(element);
       }
       setPopularProducts(data);
@@ -131,6 +131,7 @@ const SingleProduct = () => {
   const addProductToUserWishlist = (productId) => {
     dispatch(addProductToWishlist(productId));
   };
+
   return (
     <>
       <Meta title={product?.title} />
@@ -527,11 +528,11 @@ const SingleProduct = () => {
             <div className="row">
               <div className="col-12">
                 <h6 className="section-heading">
-                  {popularProducts ? "" : "Popular products"}
+                  {popularProducts ? "Popular products" : ""}
                 </h6>
               </div>
               <div className="col-12">
-                <div className="col-12 d-flex justify-content-center flex-wrap gap-10 justify-content-md-start">
+                <div className="col-12 d-inline-flex flex-row justify-content-start flex-wrap gap-2 justify-content-start">
                   <ProductCard data={popularProducts} />
                 </div>
               </div>
@@ -543,4 +544,4 @@ const SingleProduct = () => {
   );
 };
 
-export default SingleProduct;
+export default Product;

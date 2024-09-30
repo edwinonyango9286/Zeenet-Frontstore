@@ -16,7 +16,7 @@ const getProducts = async (data) => {
   }
 };
 
-const getASingleProduct = async (id) => {
+const getProduct = async (id) => {
   const response = await newRequest.get(`products/getaproduct/${id}`);
   if (response?.data) {
     return response.data;
@@ -57,7 +57,7 @@ const addRating = async (data) => {
 const productService = {
   getProducts,
   addToWishlist,
-  getASingleProduct,
+  getProduct,
   addRating,
   removeFromWishlist,
 };

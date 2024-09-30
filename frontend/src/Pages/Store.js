@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 const Store = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const productsState = useSelector((state) => state?.product?.products);
+  const products = useSelector((state) => state?.product?.products);
   const isLoading = useSelector((state) => state?.product?.isLoading);
 
   const [brands, setBrands] = useState([]);
@@ -32,8 +32,8 @@ const Store = () => {
     let newBrands = [];
     let newCategory = [];
     let newTags = [];
-    for (let index = 0; index < productsState?.length; index++) {
-      const element = productsState[index];
+    for (let index = 0; index < products?.length; index++) {
+      const element = products[index];
       newBrands.push(element.brand);
       newCategory.push(element.category);
       newTags.push(element.tags);
@@ -41,7 +41,7 @@ const Store = () => {
     setBrands(newBrands);
     setCategories(newCategory);
     setTags(newTags);
-  }, [productsState]);
+  }, [products]);
 
   useEffect(() => {
     dispatch(
@@ -184,8 +184,8 @@ const Store = () => {
               </div>
 
               <div>
-                {productsState &&
-                  productsState.map((randomProduct, index) => {
+                {products &&
+                  products.map((randomProduct, index) => {
                     if (randomProduct.tags === "Popular") {
                       return (
                         <div key={index} className="filter-card mb-0">
@@ -281,7 +281,7 @@ const Store = () => {
                       </div>
                       <div>
                         <span className="mb-0">
-                          {productsState.length ? productsState.length : 0} {""}
+                          {products.length ? products.length : 0} {""}
                           products
                         </span>
                       </div>
@@ -290,7 +290,7 @@ const Store = () => {
 
                   <div className="pb-2">
                     <div className="d-inline-flex   justify-content-start flex-wrap   gap-4 gap-lg-2">
-                      <ProductCard data={productsState ? productsState : []} />
+                      <ProductCard data={products ? products : []} />
                     </div>
                   </div>
                 </div>

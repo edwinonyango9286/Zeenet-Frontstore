@@ -1,6 +1,6 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import prodcompare from "../images/prodcompare.svg";
 import view from "../images/view.svg";
 import addCart from "../images/add-cart.svg";
@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { addProductToWishlist } from "../features/products/productSlice";
 
 const ProductCard = React.memo((props) => {
+  const param = useParams();
   const navigate = useNavigate();
   const { data } = props;
   const dispatch = useDispatch();
@@ -92,29 +93,22 @@ const ProductCard = React.memo((props) => {
                       />
                     </button>
 
-                    <Link
-                      to={"/product/" + item?._id}
-                      className="border-0 bg-transparent"
-                    >
-                      <img
-                        src={view}
-                        alt="View Product Image"
-                        loading="lazy"
-                        width={15}
-                        height={15}
-                      />
-                    </Link>
-                    <Link className="" to={"/product/" + item?._id}>
-                      <button className="border-0 bg-transparent">
-                        <img
-                          src={addCart}
-                          alt="Add to cart Image"
-                          loading="lazy"
-                          width={15}
-                          height={15}
-                        />
-                      </button>
-                    </Link>
+                    <img
+                      src={view}
+                      alt="View Product Image"
+                      loading="lazy"
+                      width={15}
+                      height={15}
+                      onClick={() => navigate("/product" + item?._id)}
+                    />
+                    <img
+                      src={addCart}
+                      alt="Add to cart Image"
+                      loading="lazy"
+                      width={15}
+                      height={15}
+                      onClick={() => navigate("/product" + item?._id)}
+                    />
                   </div>
                 </div>
               </div>
