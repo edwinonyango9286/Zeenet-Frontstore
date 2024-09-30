@@ -123,9 +123,9 @@ export const clearUserCart = createAsyncThunk(
 
 export const placeUserOrder = createAsyncThunk(
   "user/place-order",
-  async ({ phone, amount }, thunkAPI) => {
+  async (paymentInfo, thunkAPI) => {
     try {
-      return await userService.placeOrder(phone, amount);
+      return await userService.placeOrder(paymentInfo);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

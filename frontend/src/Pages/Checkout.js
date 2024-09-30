@@ -25,6 +25,7 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const userCart = useSelector((state) => state?.user?.userCart);
   const user = useSelector((state) => state?.user?.user);
+  console.log(user);
   const [totalAmount, setTotalAmount] = useState(null);
   const [ShippingInfo, setShippingInfo] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState(null);
@@ -64,9 +65,12 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = async () => {
-    const totalAmountToPay = totalAmount;
-    const userPhone = formik.values.phone;
-    dispatch(placeUserOrder(userPhone, totalAmountToPay));
+    const paymentInfo = {
+      amount: totalAmount,
+      phone: user?.phone,
+    };
+    console.log(paymentInfo);
+    dispatch(placeUserOrder(paymentInfo));
     setPaymentStatus("pending");
   };
 
@@ -315,7 +319,7 @@ const Checkout = () => {
               <div className="py-4 d-flex align-items-center justify-content-end">
                 <button
                   className="button signup border-0"
-                  type="button"
+                  type="submit"
                   onClick={handlePlaceOrder}
                 >
                   Place order

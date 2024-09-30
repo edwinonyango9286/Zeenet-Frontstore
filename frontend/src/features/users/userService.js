@@ -49,9 +49,12 @@ const getCart = async (data) => {
   }
 };
 
-
-const placeOrder = async (phone, amount) => {
-  const response = await newRequest.post("/payment", { phone, amount });
+const placeOrder = async (paymentInfo) => {
+  const response = await newRequest.post(
+    "/payment/stk-push",
+    paymentInfo,
+    config
+  );
   if (response?.data) {
     return response.data;
   }

@@ -227,7 +227,7 @@ const Home = () => {
                       {productState.length === 0 ? " " : "Featured collection"}
                     </h3>
                   </div>
-                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-start gap-3 flex-wrap">
+                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-start gap-2 flex-wrap">
                     {productState &&
                       productState?.map((item, index) => {
                         if (item?.tags === "Featured") {
@@ -456,7 +456,7 @@ const Home = () => {
                     </h3>
                   </div>
 
-                  <div className=" col-12 d-inline-flex flex-row align-items-center flex-wrap justify-content-start  gap-3">
+                  <div className="col-12 d-inline-flex flex-row align-items-center flex-wrap justify-content-start  gap-2">
                     {popularProducts.length > 0 &&
                       popularProducts.map((item, index) => {
                         return (
