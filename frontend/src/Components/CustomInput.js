@@ -10,7 +10,6 @@ const CustomInput = (props) => {
     onChange,
     onBlur,
     disabled,
-    defaultValue,
   } = props;
   return (
     <div>
@@ -23,7 +22,6 @@ const CustomInput = (props) => {
         onChange={onChange}
         onBlur={onBlur}
         disabled={disabled}
-        defaultValue={defaultValue}
       />
     </div>
   );
