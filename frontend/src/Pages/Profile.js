@@ -36,10 +36,7 @@ const Profile = () => {
                   <button
                     className="border-0 "
                     type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleLogout();
-                    }}
+                    onClick={handleLogout}
                     style={{ backgroundColor: "transparent" }}
                   >
                     <div className="d-flex flex-row justify-content-start align-items-center gap-2">

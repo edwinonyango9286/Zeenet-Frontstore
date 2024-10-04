@@ -18,7 +18,6 @@ const shippingSchema = Yup.object().shape({
   other: Yup.string().required(),
   state: Yup.string().required(),
   country: Yup.string().required(),
-  pincode: Yup.string().required(),
 });
 
 const Checkout = () => {
@@ -227,20 +226,6 @@ const Checkout = () => {
                     </select>
                     <div className="error ms-2">
                       {formik.touched.state && formik.errors.state}
-                    </div>
-                  </div>
-                  <div className="flex-grow-1">
-                    <CustomInput
-                      type="text"
-                      placeholder="Pincode."
-                      id="pincode"
-                      name="pincode"
-                      value={formik.values.pincode}
-                      onChange={formik.handleChange("pincode")}
-                      onBlur={formik.handleBlur("pincode")}
-                    />
-                    <div className="error ms-2">
-                      {formik.touched.pincode && formik.errors.pincode}
                     </div>
                   </div>
                   <div className="w-100 my-3">

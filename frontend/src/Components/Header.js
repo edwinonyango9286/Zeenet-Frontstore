@@ -13,6 +13,7 @@ import "react-bootstrap-typeahead/css/Typeahead.css";
 import { getAproduct } from "../features/products/productSlice";
 import { TfiMenu } from "react-icons/tfi";
 import { RiArrowDownSLine } from "react-icons/ri";
+import { logoutUser, resetState } from "../features/users/userSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,15 @@ const Header = () => {
     }
     setProductOpt(data);
   }, [products]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    dispatch(logoutUser());
+    dispatch(resetState());
+    navigate("/store");
+    window.location.reload();
+  };
 
   return (
     <>
@@ -215,61 +225,66 @@ const Header = () => {
                     </Link>
                   </div>
 
-                  <div className="">
-                    <div className="dropdown">
-                      <button
-                        className="d-flex align-items-center gap-10 text-white btn bg-transparent"
-                        type="button"
-                        id="dropdownMenuButton"
-                        data-toggle="dropdown"
-                        aria-expanded="false"
+                  <div className="dropdown">
+                    <button
+                      className="d-flex align-items-center gap-10 text-white btn bg-transparent"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      style={{
+                        border: "none",
+                        outline: "none",
+                        boxShadow: "none",
+                      }}
+                    >
+                      <img
+                        src={accountImage}
+                        alt="Account Image"
+                        className="img-fluid"
+                        loading="lazy"
                         style={{
-                          border: "none",
-                          outline: "none",
-                          boxShadow: "none",
+                          width: 30,
+                          height: 30,
                         }}
-                      >
-                        <img
-                          src={accountImage}
-                          alt="Account Image"
-                          className="img-fluid"
-                          loading="lazy"
-                          style={{
-                            width: 30,
-                            height: 30,
-                          }}
-                        />
+                      />
 
-                        {user === null ? (
-                          <span className="mb-0 mt-0 d-none d-lg-block">
-                            Log in
-                            <br />
-                            My Account
-                          </span>
-                        ) : (
-                          <span className="mb-0 d-none d-lg-block text-capitalize">
-                            Welcome
-                            <br />
-                            {user?.firstname}
-                          </span>
-                        )}
-                      </button>
+                      {user === null ? (
+                        <span className="mb-0 mt-0 d-none d-lg-block">
+                          Log in
+                          <br />
+                          My Account
+                        </span>
+                      ) : (
+                        <span className="mb-0 d-none d-lg-block text-capitalize">
+                          Hi, {user?.firstname}
+                        </span>
+                      )}
+                    </button>
 
-                      <div
-                        className="dropdown-menu "
-                        aria-labelledby="dropdownMenuButton"
-                      >
-                        <Link
-                          className="dropdown-item"
-                          to={user === null ? "/login" : ""}
-                        >
+                    <div
+                      className="dropdown-menu "
+                      aria-labelledby="dropdownMenuButton"
+                    >
+                      {user === null ? (
+                        <Link className="dropdown-item" to={"/login"}>
                           Login
                         </Link>
+                      ) : (
+                        <Link className="dropdown-item" to={"/profile"}>
+                          Account
+                        </Link>
+                      )}
 
+                      {user === null ? (
                         <Link className="dropdown-item" to={"/signup"}>
                           Register
                         </Link>
-                      </div>
+                      ) : (
+                        <Link className="dropdown-item" onClick={handleLogout}>
+                          Log Out
+                        </Link>
+                      )}
                     </div>
                   </div>
 

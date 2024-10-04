@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Meta from "../Components/Meta";
 import BreadCrump from "../Components/BreadCrumb";
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ import {
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-
+import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 
 const LOGIN_SCHEMA = Yup.object().shape({
   email: Yup.string().email().required(),
@@ -35,7 +35,9 @@ const Login = React.memo(() => {
   const { user, userCart, isError, isLoading, isSuccess, message } =
     useSelector((state) => state?.user ?? {});
   const from =
-    (location?.state && location?.state.from && location?.state?.from?.pathname) ||
+    (location?.state &&
+      location?.state.from &&
+      location?.state?.from?.pathname) ||
     "/store";
 
   useEffect(() => {
@@ -64,6 +66,11 @@ const Login = React.memo(() => {
       dispatch(resetState());
     }
   }, []);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <>
@@ -97,17 +104,35 @@ const Login = React.memo(() => {
                   {formik.touched.email && formik.errors.email}
                 </div>
 
-                <CustomInput
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
-                  onChange={formik.handleChange("password")}
-                  onBlur={formik.handleBlur("password")}
-                  value={formik.values.password}
-                />
-                <div className="error">
-                  {formik.touched.password && formik.errors.password}
+                <div className="position-relative z-index-4 d-flex flex-column mb-2 gap-2 md-mb-4 ">
+                  <CustomInput
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    onChange={formik.handleChange("password")}
+                    onBlur={formik.handleBlur("password")}
+                    value={formik.values.password}
+                  />
+
+                  <button
+                    type="button"
+                    onClick={handleShowPassword}
+                    className="position-absolute d-flex flex-row  border-0  bg-transparent"
+                    style={{
+                      top: "10px",
+                      right: "10px",
+                    }}
+                  >
+                    {showPassword ? (
+                      <MdVisibility className="flex-shrink-0" />
+                    ) : (
+                      <MdVisibilityOff className="flex-shrink-0" />
+                    )}
+                  </button>
+                  <div className="error">
+                    {formik.touched.password && formik.errors.password}
+                  </div>
                 </div>
 
                 <div>
@@ -135,4 +160,3 @@ const Login = React.memo(() => {
 });
 
 export default Login;
-

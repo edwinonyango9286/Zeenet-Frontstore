@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Meta from "../Components/Meta";
 import BreadCrump from "../Components/BreadCrumb";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, resetState } from "../features/users/userSlice";
 import { useEffect } from "react";
+import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 
 const SIGN_UP_SCHEMA = Yup.object().shape({
   firstname: Yup.string().required(),
@@ -58,6 +59,11 @@ const Signup = React.memo(() => {
       dispatch(resetState());
     }
   }, []);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <>
@@ -126,16 +132,36 @@ const Signup = React.memo(() => {
                 <div className="error">
                   {formik.touched.phone && formik.errors.phone}
                 </div>
-                <CustomInput
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  onChange={formik.handleChange("password")}
-                  onBlur={formik.handleBlur("password")}
-                  value={formik.values.password}
-                />
-                <div className="error">
-                  {formik.touched.password && formik.errors.password}
+
+                <div className="position-relative z-index-4 d-flex flex-column mb-2 gap-2 md-mb-4 ">
+                  <CustomInput
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    onChange={formik.handleChange("password")}
+                    onBlur={formik.handleBlur("password")}
+                    value={formik.values.password}
+                  />
+
+                  <button
+                    type="button"
+                    onClick={handleShowPassword}
+                    className="position-absolute d-flex flex-row  border-0  bg-transparent"
+                    style={{
+                      top: "10px",
+                      right: "10px",
+                    }}
+                  >
+                    {showPassword ? (
+                      <MdVisibility className="flex-shrink-0" />
+                    ) : (
+                      <MdVisibilityOff className="flex-shrink-0" />
+                    )}
+                  </button>
+                  <div className="error">
+                    {formik.touched.password && formik.errors.password}
+                  </div>
                 </div>
 
                 <div className="mt-2 d-flex justify-content-center gap-15 align-items-center">
