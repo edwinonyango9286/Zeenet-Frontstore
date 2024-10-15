@@ -35,6 +35,8 @@ const Contact = () => {
       dispatch(createEnquiry(values));
     },
   });
+
+
   return (
     <>
       <Meta title={"Contact Us"} />
@@ -43,7 +45,7 @@ const Contact = () => {
         <div className="row">
           <div className="col-12">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31918.546452429066!2d34.562022686004646!3d-0.004763603204947037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182aa97bdc7a35f1%3A0x20276056a9ac87c9!2sMaseno%20University!5e0!3m2!1sen!2ske!4v1714723305991!5m2!1sen!2ske"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d54952.62173316973!2d36.79491909941817!3d-1.3028984515834783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d671900001%3A0x90f5e610e51dce23!2sKimathi%20House!5e0!3m2!1sen!2ske!4v1728286391627!5m2!1sen!2ske"
               width="600"
               height="450"
               className="border-0 w-100 "

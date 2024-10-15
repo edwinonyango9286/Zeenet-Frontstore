@@ -23,11 +23,9 @@ const Wishlist = () => {
     dispatch(getUserProductWishlist());
   }, []);
 
-  const removeFromWishlist = (productId) => {
-    dispatch(removeProductFromWishlist(productId));
-    setTimeout(() => {
-      dispatch(getUserProductWishlist());
-    }, 200);
+  const removeFromWishlist = async (productId) => {
+    await  dispatch(removeProductFromWishlist(productId));
+    await dispatch(getUserProductWishlist());
   };
 
   const addItemToCart = (product) => {
