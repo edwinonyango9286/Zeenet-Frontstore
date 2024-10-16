@@ -97,7 +97,7 @@ const Header = () => {
         <div className="container">
           <div className="row">
             <div className=" col-12 d-flex align-items-center ">
-              <div className="col-6 col-md-2 d-flex flex-row align-items-center gap-2">
+              <div className="col-6 col-md-2 d-flex flex-row align-items-center gap-3 my-1">
                 <div className="header-bottom">
                   <div className="d-sm-none">
                     <div className="dropdown">
@@ -113,7 +113,6 @@ const Header = () => {
                           boxShadow: "none",
                           color: "white",
                           backgroundColor: "#131921",
-
                         }}
                       />
 
@@ -151,8 +150,8 @@ const Header = () => {
                 </div>
 
                 <div>
-                  <h2>
-                    <Link to="/" className="text-white logo">
+                  <h2 className="m-0">
+                    <Link to="/" className="text-white logo m-0">
                       Zeenet
                     </Link>
                   </h2>
@@ -188,7 +187,7 @@ const Header = () => {
                 </div>
               </div>
 
-              <div className="col-6 col-sm-5 ">
+              <div className="col-6 col-sm-5">
                 <div className="header-middle-links d-flex align-items-center justify-content-center  gap-2 gap-md-3 ">
                   <div>
                     <Link
