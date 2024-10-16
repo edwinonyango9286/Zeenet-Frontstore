@@ -27,7 +27,6 @@ import { addProductToCart } from "../features/users/userSlice";
 
 const Product = () => {
   const [quantity, setQuantity] = useState(1);
-  const [alreadyAddedToCart, setAlreadyAddedToCart] = useState(false);
 
   const location = useLocation();
   const dispatch = useDispatch();
@@ -36,22 +35,18 @@ const Product = () => {
   const product = useSelector((state) => state?.product?.product);
   const products = useSelector((state) => state?.product?.products);
   const userCart = useSelector((state) => state?.user?.userCart);
+  const alreadyAddedToCart = userCart.some(
+    (item) => item.productId === getProductId
+  );
+
   const [popularProducts, setPopularProducts] = useState([]);
   const [star, setStar] = useState(null);
   const [comment, setComment] = useState(null);
 
   useEffect(() => {
-    dispatch(resetState());
     dispatch(getAproduct(getProductId));
     dispatch(getAllProducts());
   }, [getProductId]);
-
-  useEffect(() => {
-    for (let index = 0; index < userCart?.length; index++) {
-      if (getProductId === userCart[index]?.productId)
-        setAlreadyAddedToCart(true);
-    }
-  }, []);
 
   const addItemToCart = () => {
     const cartData = {
