@@ -11,13 +11,21 @@ const Profile = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state?.user ?? {});
 
-  const handleLogout = () => {
+  const clearLocalStorage = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    dispatch(logoutUser());
-    dispatch(resetState());
-    navigate("/store");
-    window.location.reload();
+  };
+
+  const handleLogout = async () => {
+    try {
+      clearLocalStorage();
+      dispatch(logoutUser());
+      dispatch(resetState());
+      navigate("/store");
+      window.location.reload();
+    } catch (error) {
+      console.log("Something is not right.");
+    }
   };
 
   return (

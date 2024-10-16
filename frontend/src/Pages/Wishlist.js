@@ -10,7 +10,8 @@ import {
 } from "../features/users/userSlice";
 import { removeProductFromWishlist } from "../features/products/productSlice";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Loading3QuartersOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 const Wishlist = () => {
   const [quantity, setQuantity] = useState(1);
@@ -19,9 +20,16 @@ const Wishlist = () => {
     (state) => state?.user?.wishlistProducts?.wishlist
   );
 
+  const isLoading = useSelector(
+    (state) => state?.user?.isLoading?.getUserProductWishlist
+  );
+
+  const loadingRemoveProductFromWishlist = useSelector(
+    (state) => state?.product?.isLoading?.removeProductFromWishlist
+  );
   useEffect(() => {
     dispatch(getUserProductWishlist());
-  }, []);
+  }, [dispatch]);
 
   const removeFromWishlist = async (productId) => {
     await dispatch(removeProductFromWishlist(productId));
@@ -40,7 +48,6 @@ const Wishlist = () => {
       brand: product?.brand,
     };
     dispatch(addProductToCart(cartData));
-    toast.success(`${product?.title} added to cart.`);
   };
 
   const formatKES = (amount) => {
@@ -57,65 +64,85 @@ const Wishlist = () => {
       <BreadCrumb title="Wishlist" />
       <Container class1="home-wrapper-2 py-5">
         <div className="row">
-          <div className="col-12 d-flex  gap-4 flex-wrap justify-content-md-start gap-md-5 gap-lg-4">
-            {wishlist?.length === 0 ? (
-              <div className=" col-12 d-flex flex-column align-items-center justify-content-center fs-6 gap-4">
-                No products were added to your wishlist.
-                <Link to="/store" className="button signup">
-                  Continue shopping
-                </Link>
-              </div>
-            ) : (
-              wishlist?.map((item, index) => {
-                return (
-                  <div className="col-12 col-md-4 col-lg-2" key={index}>
-                    <div className="wishlist-card  position-relative">
-                      <img
-                        onClick={() => {
-                          removeFromWishlist(item?._id);
-                        }}
-                        title="Remove product from wishlist."
-                        src={cross}
-                        className=" position-absolute img-fluid cross"
-                        alt="cross"
-                        width={50}
-                        height={50}
-                      />
-                      <div className="bg-white pt-4  pt-2 rounded">
-                        <div>
-                          <img
-                            src={item?.images[0]?.url || "Product image."}
-                            className="img-fluid d-block mx-auto"
-                            alt={
-                              item?.images[0]?.url
-                                ? item?.images[0]?.url
-                                : "Product image"
-                            }
-                            width={140}
-                            height={140}
-                          />
-                        </div>
-                        <div className="py-3 px-3 ">
-                          <h5 className="title">{item?.title}</h5>
-                          <h6 className="price">{formatKES(item?.price)}</h6>
-
+          {isLoading || loadingRemoveProductFromWishlist ? (
+            <div
+              className="d-flex flex-row justify-content-center align-items-center"
+              style={{ marginTop: "80px", marginBottom: "80px" }}
+            >
+              <Spin
+                indicator={
+                  <Loading3QuartersOutlined
+                    style={{
+                      fontSize: 40,
+                      fontWeight: "bold",
+                      color: "#000",
+                    }}
+                    spin
+                  />
+                }
+              />
+            </div>
+          ) : (
+            <div className="col-12 d-flex  gap-4 flex-wrap justify-content-md-start gap-md-5 gap-lg-4">
+              {wishlist?.length === 0 ? (
+                <div className=" col-12 d-flex flex-column align-items-center justify-content-center fs-6 gap-4">
+                  No products were added to your wishlist.
+                  <Link to="/store" className="button signup">
+                    Continue shopping
+                  </Link>
+                </div>
+              ) : (
+                wishlist?.map((item, index) => {
+                  return (
+                    <div className="col-12 col-md-4 col-lg-2" key={index}>
+                      <div className="wishlist-card  position-relative">
+                        <img
+                          onClick={() => {
+                            removeFromWishlist(item?._id);
+                          }}
+                          title="Remove product from wishlist."
+                          src={cross}
+                          className=" position-absolute img-fluid cross"
+                          alt="cross"
+                          width={50}
+                          height={50}
+                        />
+                        <div className="bg-white pt-4  pt-2 rounded">
                           <div>
-                            <button
-                              className="button signup border-0"
-                              type="button"
-                              onClick={() => addItemToCart(item)}
-                            >
-                              Add to cart
-                            </button>
+                            <img
+                              src={item?.images[0]?.url || "Product image."}
+                              className="img-fluid d-block mx-auto"
+                              alt={
+                                item?.images[0]?.url
+                                  ? item?.images[0]?.url
+                                  : "Product image"
+                              }
+                              width={140}
+                              height={140}
+                            />
+                          </div>
+                          <div className="py-3 px-3 ">
+                            <h5 className="title">{item?.title}</h5>
+                            <h6 className="price">{formatKES(item?.price)}</h6>
+
+                            <div>
+                              <button
+                                className="button signup border-0"
+                                type="button"
+                                onClick={() => addItemToCart(item)}
+                              >
+                                Add to cart
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })
-            )}
-          </div>
+                  );
+                })
+              )}
+            </div>
+          )}
         </div>
       </Container>
     </>

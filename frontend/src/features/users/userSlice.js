@@ -193,7 +193,13 @@ const initialState = {
     registerUser: false,
     loginUser: false,
     logoutUser: false,
+    addProductToCart: false,
+    removeProductFromCart: false,
+    updateProductQuantity: false,
+    clearUserCart: false,
+    getUserCart: false,
     getOrders: false,
+    updateProfile:false,
     resetPasswordToken: false,
     resetPassword: false,
     getUserProductWishlist: false,
@@ -257,27 +263,28 @@ export const authSlice = createSlice({
       })
 
       .addCase(addProductToCart.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading.addProductToCart = true;
       })
       .addCase(addProductToCart.fulfilled, (state, action) => {
         state.isError = false;
-        state.isLoading = false;
+        state.isLoading.addProductToCart = false;
         state.isSuccess = true;
         state.userCart = action.payload;
         localStorage.setItem("userCart", JSON.stringify(action.payload));
+        toast.success("Product added to cart.");
       })
       .addCase(addProductToCart.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
-        state.isLoading = false;
+        state.isLoading.addProductToCart = false;
         state.message = action.error;
       })
       .addCase(removeProductFromCart.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading.removeProductFromCart = true;
       })
       .addCase(removeProductFromCart.fulfilled, (state, action) => {
         state.isError = false;
-        state.isLoading = false;
+        state.isLoading.removeProductFromCart = false;
         state.isSuccess = true;
         state.userCart = action.payload;
         localStorage.setItem("userCart", JSON.stringify(action.payload));
@@ -285,16 +292,16 @@ export const authSlice = createSlice({
       .addCase(removeProductFromCart.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
-        state.isLoading = false;
+        state.isLoading.removeProductFromCart = false;
         state.message = action.error;
       })
 
       .addCase(updateProductQuantity.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading.updateProductQuantity = true;
       })
       .addCase(updateProductQuantity.fulfilled, (state, action) => {
         state.isError = false;
-        state.isLoading = false;
+        state.isLoading.updateProductQuantity = false;
         state.isSuccess = true;
         state.userCart = action.payload;
         localStorage.setItem("userCart", JSON.stringify(action.payload));
@@ -302,23 +309,23 @@ export const authSlice = createSlice({
       .addCase(updateProductQuantity.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
-        state.isLoading = false;
+        state.isLoading.updateProductQuantity = false;
         state.message = action.payload;
       })
 
       .addCase(clearUserCart.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading.clearUserCart = true;
       })
       .addCase(clearUserCart.fulfilled, (state, action) => {
         state.isError = false;
-        state.isLoading = false;
+        state.isLoading.clearUserCart = false;
         state.isSuccess = true;
         state.userCart = [];
       })
       .addCase(clearUserCart.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
-        state.isLoading = false;
+        state.isLoading.clearUserCart = false;
         state.message = action.payload;
       })
       .addCase(getUserProductWishlist.pending, (state) => {
@@ -337,49 +344,48 @@ export const authSlice = createSlice({
         state.message = action.error;
       })
       .addCase(getUserCart.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading.getUserCart = true;
       })
       .addCase(getUserCart.fulfilled, (state, action) => {
         state.isError = false;
-        state.isLoading = false;
+        state.isLoading.getUserCart = false;
         state.isSuccess = true;
         state.cartProducts = action.payload;
       })
       .addCase(getUserCart.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
-        state.isLoading = false;
+        state.isLoading.getUserCart = false;
         state.message = action?.payload?.response?.data?.message;
       })
       .addCase(placeUserOrder.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading.placeUserOrder = true;
       })
       .addCase(placeUserOrder.fulfilled, (state, action) => {
         state.isError = false;
-        state.isLoading = false;
+        state.isLoading.placeUserOrder = false;
         state.isSuccess = true;
         state.paymentStatus = action.payload;
       })
       .addCase(placeUserOrder.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
-        state.isLoading = false;
+        state.isLoading.placeUserOrder = false;
         state.message = action.error;
       })
-
       .addCase(updateProfile.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading.updateProfile = true;
       })
       .addCase(updateProfile.fulfilled, (state, action) => {
         state.isError = false;
-        state.isLoading = false;
+        state.isLoading.updateProfile = false;
         state.isSuccess = true;
         state.updatedUser = action.payload;
       })
       .addCase(updateProfile.rejected, (state, action) => {
         state.isError = true;
         state.isSuccess = false;
-        state.isLoading = false;
+        state.isLoading.updateProfile = false;
         state.message = action?.payload?.response?.data?.message;
       })
 

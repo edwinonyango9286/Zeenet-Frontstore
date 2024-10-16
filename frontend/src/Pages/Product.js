@@ -60,7 +60,6 @@ const Product = () => {
       brand: product?.brand,
     };
     dispatch(addProductToCart(cartData));
-    toast.success(`${product?.title} added to cart.`);
   };
 
   const props = {
