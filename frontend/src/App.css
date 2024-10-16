@@ -19,7 +19,6 @@
   --color-eaeaea: #eaeaea;
   --color-ffffff: #ffffff;
   --color-0000001a: #0000001a;
-  --font-family: "Roboto", sans-serif;
 }
 .error {
   color: var(--color-error, red);
@@ -32,15 +31,14 @@ body a {
 }
 
 .section-heading {
-  font-size: 1.125rem;
-  line-height: 1.5;
-  font-weight: 500;
-  margin-top: 1.25rem;
+  font-size: 18px;
+  line-height: 24px;
+  margin-top: 20px;
 }
 .card-wrapper {
   border-color: white;
   box-shadow: 0 0 10px var(--color-0000001a);
-  padding: 0.5rem;
+  padding: 8px;
 }
 
 .link {
@@ -50,82 +48,81 @@ body a {
 .form-control::placeholder {
   font-size: 13px;
   font-weight: 400;
-  font-family: "Gowun Batang", serif;
   color: #777;
 }
 
 .gap-10 {
-  gap: 0.625rem;
+  gap: 10px;
 }
 
 .gap-15 {
-  gap: 0.9375rem;
+  gap: 15px;
 }
 
 .gap-20 {
-  gap: 1.25rem;
+  gap: 20px;
 }
 
 .gap-25 {
-  gap: 1.5625rem;
+  gap: 25px;
 }
 
 .gap-30 {
-  gap: 1.875rem;
+  gap: 30px;
 }
 
 .gap-35 {
-  gap: 2.1875rem;
+  gap: 35px;
 }
 
 .gap-40 {
-  gap: 2.5rem;
+  gap: 40px;
 }
 
 .gap-45 {
-  gap: 2.8125rem;
+  gap: 45px;
 }
 
 .gap-50 {
-  gap: 3.125rem;
+  gap: 50px;
 }
 
 .column-gap-48 {
-  column-gap: 3rem;
+  column-gap: 48px;
 }
 .gap-55 {
-  gap: 3.4375rem;
+  gap: 55px;
 }
 
 .gap-60 {
-  gap: 3.75rem;
+  gap: 60px;
 }
 
 .gap-65 {
-  gap: 4.0625rem;
+  gap: 65px;
 }
 
 .gap-70 {
-  gap: 4.375rem;
+  gap: 70px;
 }
 
 .gap-75 {
-  gap: 4.6875rem;
+  gap: 75px;
 }
 
 .gap-80 {
-  gap: 5rem;
+  gap: 80px;
 }
 .gap-90 {
-  gap: 6rem;
+  gap: 90px;
 }
 
 .button {
   background-color: var(--color-232f3e);
   color: white;
-  font-size: 0.75rem;
-  padding: 0.5rem 1.5rem;
-  border-radius: 1.25rem;
+  font-size: 12px;
+  padding: 8px 24px;
+  border-radius: 20px;
 }
 
 .button:hover {
@@ -141,13 +138,12 @@ body a {
 }
 
 .header-info {
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 400;
-  line-height: 1.375rem;
+  line-height: 22px;
   text-transform: capitalize;
   color: var(--color-ffffff);
   letter-spacing: 0.3px;
-  font-family: "Gowun Batang", serif;
 }
 
 .header-middle {
@@ -155,7 +151,7 @@ body a {
 }
 
 .form-control {
-  height: 2.25rem;
+  height: 36px;
 }
 
 .form-control:focus {
@@ -174,25 +170,23 @@ body a {
 }
 .header-middle .header-middle-links span {
   text-transform: capitalize;
-  font-size: 0.8125rem;
+  font-size: 13px;
   font-weight: 400;
-  line-height: 1.375rem;
+  line-height: 22px;
   letter-spacing: 0.5px;
   color: var(--color-ffffff);
-  font-family: "Gowun Batang", serif;
 }
 .logo {
   font-weight: 500;
-  font-family: "Gowun Batang", serif;
-  font-size: 1.75rem;
-  line-height: 1.5;
+  font-size: 28px;
+  line-height: 24px;
   text-transform: uppercase;
 }
 .header-bottom .menu-links a,
 .header-bottom .dropdown button {
   color: white;
-  font-size: 0.875rem;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 24px;
   font-weight: 300;
   letter-spacing: 0.3;
   text-transform: uppercase;
@@ -204,16 +198,16 @@ body a {
 .header-bottom .dropdown-menu {
   background-color: var(--color-131921);
   width: 100%;
-  transform: translate(0rem, 3.57rem, 0rem) !important;
+  transform: translate(0px, 56px, 0px) !important;
 }
 .dropdown-item-mobile:hover {
   background-color: transparent;
   color: var(--color-febd69) !important;
 }
 .header-bottom .dropdown-item {
-  padding: 0.625rem;
-  margin-bottom: 0.25rem;
-  border-bottom: 0.0625rem solid var(--color-3b4149);
+  padding: 10px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--color-3b4149);
   color: #fff;
 }
 .header-bottom .dropdown-item:hover {
@@ -420,9 +414,9 @@ footer .input-group-text {
 
 /* Product card styling  starts here*/
 .product-card {
-  padding: 0.625rem;
+  padding: 10px;
   background-color: white;
-  border-radius: 0.25rem;
+  border-radius: 4px;
   overflow: hidden;
   width: 161px;
   height: 200px;
@@ -535,34 +529,34 @@ footer .input-group-text {
 
 .filter-card {
   background-color: white;
-  border-radius: 0.25rem;
-  padding: 1.25rem;
-  margin-top: 0.25rem;
+  border-radius: 4px;
+  padding: 20px;
+  margin-top: 4px;
 }
 
 .sort-text {
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 400;
 }
 
 .sort-text::selection {
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 400;
 }
 
 .filter-title {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 500;
   color: var(--color-1c1c1b);
-  margin-bottom: 0.25rem;
+  margin-bottom: 4px;
 }
 
 .filter-card ul,
 .filter-card .form-check-label {
   list-style-type: none;
-  font-size: 0.75rem;
-  line-height: 1.875rem;
+  font-size: 12px;
+  line-height: 30px;
   color: var(--color-777777);
   cursor: pointer;
 }
@@ -579,40 +573,26 @@ footer .input-group-text {
 }
 
 .sub-title {
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 500;
   color: var(--color-1c1c1b);
-  margin-bottom: 0.875rem;
-  margin-top: 0.875rem;
-}
-
-.colors {
-  list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.625rem;
-}
-
-.colors li {
-  width: 1.25rem;
-  height: 1.25rem;
-  background-color: red;
-  border-radius: 50%;
+  margin-bottom: 14px;
+  margin-top: 14px;
 }
 
 .random-product {
   h6 {
     font-size: 14px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 8px;
     font-weight: 400;
-    line-height: 0.875rem;
+    line-height: 14px;
     margin: 0px;
   }
   p {
     font-size: 14px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 8px;
     font-weight: 400;
-    line-height: 0.875rem;
+    line-height: 14px;
     margin: 0px;
   }
   &:first-child {
@@ -621,17 +601,17 @@ footer .input-group-text {
 }
 
 .filter-sort-grid {
-  padding: 0.625rem;
+  padding: 10px;
   background-color: white;
-  border-radius: 0.25rem;
+  border-radius: 4px;
 }
 
 .grid img {
-  width: 2rem;
-  height: 2rem;
+  width: 32px;
+  height: 32px;
   background-color: var(--color-f2f2f2);
-  padding: 0.5rem;
-  border-radius: 0.125rem;
+  padding: 8px;
+  border-radius: 2px;
   cursor: pointer;
 }
 
@@ -674,7 +654,7 @@ footer .input-group-text {
 .compare-product-card {
   padding: 10px 10px;
   background-color: white;
-  border-radius: 0.25rem;
+  border-radius: 4px;
 }
 .compare-product-card .cross,
 .wishlist-card .cross {

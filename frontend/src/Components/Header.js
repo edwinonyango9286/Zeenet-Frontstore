@@ -97,9 +97,9 @@ const Header = () => {
         <div className="container">
           <div className="row">
             <div className=" col-12 d-flex align-items-center ">
-              <div className="col-6 col-md-2 d-flex align-items-center">
+              <div className="col-6 col-md-2 d-flex flex-row align-items-center gap-2">
                 <div className="header-bottom">
-                  <div className="d-md-none">
+                  <div className="d-sm-none">
                     <div className="dropdown">
                       <TfiMenu
                         className="fs-2"
@@ -112,10 +112,8 @@ const Header = () => {
                           outline: "none",
                           boxShadow: "none",
                           color: "white",
-                          width: "44px",
-                          height: "44px",
                           backgroundColor: "#131921",
-                          padding: "10px",
+
                         }}
                       />
 
@@ -152,11 +150,13 @@ const Header = () => {
                   </div>
                 </div>
 
-                <h2>
-                  <Link to="/" className="text-white logo mt-2 md:mt-0">
-                    Zeenet
-                  </Link>
-                </h2>
+                <div>
+                  <h2>
+                    <Link to="/" className="text-white logo">
+                      Zeenet
+                    </Link>
+                  </h2>
+                </div>
               </div>
 
               <div className="d-none d-sm-block col-sm-5">
@@ -201,8 +201,8 @@ const Header = () => {
                         className="img-fluid"
                         loading="lazy"
                         style={{
-                          width: 30,
-                          height: 30,
+                          width: 28,
+                          height: 28,
                         }}
                       />
                       <span className="mb-0 mt-0 d-none d-lg-block">
@@ -214,7 +214,7 @@ const Header = () => {
                   <div>
                     <Link
                       to="/wishlist"
-                      className="d-flex align-items-center gap-10 text-white"
+                      className="d-flex align-items-center gap-2 text-white"
                     >
                       <img
                         src={wishlistImage}
@@ -222,8 +222,8 @@ const Header = () => {
                         className="img-fluid"
                         loading="lazy"
                         style={{
-                          width: 30,
-                          height: 30,
+                          width: 28,
+                          height: 28,
                         }}
                       />
                       <span className="mb-0 mt-0 d-none d-lg-block">
@@ -235,7 +235,7 @@ const Header = () => {
 
                   <div className="dropdown">
                     <button
-                      className="d-flex align-items-center gap-10 text-white btn bg-transparent"
+                      className="d-flex align-items-center gap-2 text-white btn bg-transparent p-0"
                       type="button"
                       id="dropdownMenuButton"
                       data-bs-toggle="dropdown"
@@ -252,8 +252,8 @@ const Header = () => {
                         className="img-fluid"
                         loading="lazy"
                         style={{
-                          width: 30,
-                          height: 30,
+                          width: 28,
+                          height: 28,
                         }}
                       />
 
@@ -308,8 +308,8 @@ const Header = () => {
                           className="img-fluid "
                           loading="lazy"
                           style={{
-                            width: 30,
-                            height: 30,
+                            width: 28,
+                            height: 28,
                           }}
                         />
 

@@ -306,3 +306,10 @@ const Store = () => {
 };
 
 export default Store;
+
+// Breakpoint	Screen Width
+// xs	< 576px
+// sm	≥ 576px and < 768px
+// md	≥ 768px and < 992px
+// lg	≥ 992px and < 1200px
+// xl	≥ 1200px
