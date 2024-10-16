@@ -66,13 +66,12 @@ const Checkout = () => {
     }).format(amount);
   };
 
-  const handlePlaceOrder = async () => {
+  const handlePlaceOrder = () => {
     const paymentInfo = {
       amount: totalAmount,
       phone: user?.phone,
     };
-    console.log(paymentInfo);
-    dispatch(placeUserOrder(paymentInfo));
+   dispatch(placeUserOrder(paymentInfo));
     setPaymentStatus("pending");
   };
 
@@ -441,7 +440,7 @@ const Checkout = () => {
                         <IoArrowBackSharp className="me-2" />
                         Return to cart
                       </Link>
-                      <Link to="/" className="button">
+                      <Link to="/store" className="button">
                         Continue to shopping
                       </Link>
                     </div>

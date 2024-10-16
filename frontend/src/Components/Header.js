@@ -119,7 +119,7 @@ const Header = () => {
                           Home
                         </Link>
                         <Link className="dropdown-item text-white" to="/store">
-                          Our Store
+                          Store
                         </Link>
                         <Link
                           className="dropdown-item text-white"
@@ -449,7 +449,7 @@ const Header = () => {
                 <div className="menu-links col-6">
                   <div className="d-flex align-items-center gap-20">
                     <NavLink to="/">home</NavLink>
-                    <NavLink to="/store">our store</NavLink>
+                    <NavLink to="/store">store</NavLink>
                     <NavLink to="/myorders">orders</NavLink>
                     <NavLink to="/blogs">blogs</NavLink>
                     <NavLink to="/contact">contact</NavLink>

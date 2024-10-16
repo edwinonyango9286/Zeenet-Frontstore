@@ -29,7 +29,7 @@ const RESET_PASSWORD_SCHEMA = Yup.object().shape({
     .required(),
 });
 
-const ResetPassword = React.memo(() => {
+const ResetPassword = () => {
   const location = useLocation();
   const getToken = location.pathname.split("/")[2];
   const dispatch = useDispatch();
@@ -50,7 +50,9 @@ const ResetPassword = React.memo(() => {
     },
   });
 
-  const { isError, isLoading, message } = useSelector((state) => state?.user);
+  const { isError, message } = useSelector((state) => state?.user);
+
+  const isLoading = useSelector((state) => state?.user?.resetPassword);
 
   return (
     <>
@@ -112,6 +114,6 @@ const ResetPassword = React.memo(() => {
       </Container>
     </>
   );
-});
+};
 
 export default ResetPassword;

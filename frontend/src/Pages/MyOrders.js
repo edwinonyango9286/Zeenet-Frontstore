@@ -43,7 +43,7 @@ const MyOrders = () => {
   const ordersState = useSelector(
     (state) => state?.user?.orderedProducts?.orders
   );
-  const loadingOrders = useSelector((state) => state?.user?.isLoading);
+  const loadingOrders = useSelector((state) => state?.user?.isLoading?.getOrders);
 
   const data1 = [];
   for (let i = 0; i < ordersState?.length; i++) {

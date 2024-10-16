@@ -28,12 +28,14 @@ const LOGIN_SCHEMA = Yup.object().shape({
     .required(),
 });
 
-const Login = React.memo(() => {
+const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, userCart, isError, isLoading, isSuccess, message } =
-    useSelector((state) => state?.user ?? {});
+  const { user, isError, isSuccess, message } = useSelector(
+    (state) => state?.user ?? {}
+  );
+  const isLoading = useSelector((state) => state?.user?.isLoading?.loginUser);
   const from =
     (location?.state &&
       location?.state.from &&
@@ -123,7 +125,7 @@ const Login = React.memo(() => {
                       top: "10px",
                       right: "10px",
                     }}
-                  > 
+                  >
                     {showPassword ? (
                       <MdVisibility className="flex-shrink-0" />
                     ) : (
@@ -157,6 +159,6 @@ const Login = React.memo(() => {
       </Container>
     </>
   );
-});
+};
 
 export default Login;

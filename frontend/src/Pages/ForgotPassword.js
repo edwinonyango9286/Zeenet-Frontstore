@@ -25,12 +25,13 @@ const ForgotPassword = () => {
     onSubmit: (values) => {
       dispatch(resetState());
       dispatch(resetPasswordToken(values));
-      toast.success("A password reset token has been sent to your email.");
     },
   });
 
-  const { isError, isLoading, isSuccess, message } = useSelector(
-    (state) => state?.user ?? {}
+  const { isError, message } = useSelector((state) => state?.user ?? {});
+
+  const isLoading = useSelector(
+    (state) => state?.user?.isLoading?.resetPasswordToken
   );
 
   return (

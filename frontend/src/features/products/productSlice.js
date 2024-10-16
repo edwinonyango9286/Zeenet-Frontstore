@@ -61,8 +61,16 @@ export const resetState = createAction("Reset_all");
 
 const initialState = {
   products: [],
+  product: null,
+  wishlist: [],
   isError: false,
-  isLoading: false,
+  isLoading: {
+    getAllProducts: false,
+    getAproduct: false,
+    addProductToWishlist: false,
+    removeProductFromWishlist: false,
+    addProductRating: false,
+  },
   isSuccess: false,
   message: "",
 };
@@ -74,80 +82,81 @@ export const productSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllProducts.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading.getAllProducts = true;
       })
       .addCase(getAllProducts.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoading.getAllProducts = false;
         state.isError = false;
         state.isSuccess = true;
         state.products = action.payload;
       })
       .addCase(getAllProducts.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoading.getAllProducts = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action?.payload?.response?.data?.message;
       })
       .addCase(addProductToWishlist.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading.addProductToWishlist = true;
       })
       .addCase(addProductToWishlist.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoading.addProductToWishlist = false;
         state.isError = false;
         state.isSuccess = true;
         state.wishlist = action.payload;
         toast.success("Product added to your wishlist.");
       })
       .addCase(addProductToWishlist.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoading.addProductToWishlist = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action?.payload?.response?.data?.message;
         toast.error(state.message);
       })
       .addCase(removeProductFromWishlist.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading.removeProductFromWishlist = true;
       })
       .addCase(removeProductFromWishlist.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoading.removeProductFromWishlist = false;
         state.isError = false;
         state.isSuccess = true;
         state.wishlist = action.payload;
         toast.success("Product removed from your wishlist.");
       })
       .addCase(removeProductFromWishlist.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoading.removeProductFromWishlist = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action?.payload?.response?.data?.message;
         toast.error(state.message);
       })
       .addCase(getAproduct.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading.getAproduct = true;
       })
       .addCase(getAproduct.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoading.getAproduct = false;
         state.isError = false;
         state.isSuccess = true;
         state.product = action.payload;
       })
       .addCase(getAproduct.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoading.getAproduct = false;
         state.isError = true;
         state.isSuccess = false;
-        state.message = action.error;
+        state.message = action?.payload?.response?.data?.message;
       })
       .addCase(addProductRating.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading.addProductRating = true;
       })
       .addCase(addProductRating.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoading.addProductRating = false;
         state.isError = false;
         state.isSuccess = true;
         state.rating = action.payload;
+        toast.success("Product rating has been submitted.");
       })
       .addCase(addProductRating.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoading.addProductRating = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action?.payload?.response?.data?.message;

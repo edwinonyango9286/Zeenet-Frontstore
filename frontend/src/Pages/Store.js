@@ -14,7 +14,9 @@ const Store = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector((state) => state?.product?.products);
-  const isLoading = useSelector((state) => state?.product?.isLoading);
+  const isLoading = useSelector(
+    (state) => state?.product?.isLoading?.getAllProducts
+  );
 
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);

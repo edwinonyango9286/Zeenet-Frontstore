@@ -27,9 +27,13 @@ const SIGN_UP_SCHEMA = Yup.object().shape({
     .required(),
 });
 
-const Signup = React.memo(() => {
-  const { isError, isLoading, isSuccess, message, createdUser } = useSelector(
+const Signup = () => {
+  const { isError, isSuccess, message, createdUser } = useSelector(
     (state) => state.user ?? {}
+  );
+
+  const isLoading = useSelector(
+    (state) => state?.user?.isLoading?.registerUser
   );
 
   const dispatch = useDispatch();
@@ -183,6 +187,6 @@ const Signup = React.memo(() => {
       </Container>
     </>
   );
-});
+};
 
 export default Signup;

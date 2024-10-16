@@ -44,14 +44,15 @@ const Product = () => {
     dispatch(resetState());
     dispatch(getAproduct(getProductId));
     dispatch(getAllProducts());
-  }, []);
+  }, [getProductId]);
 
   useEffect(() => {
     for (let index = 0; index < userCart?.length; index++) {
       if (getProductId === userCart[index]?.productId)
         setAlreadyAddedToCart(true);
     }
-  });
+  }, []);
+
   const addItemToCart = () => {
     const cartData = {
       productId: product?._id,
@@ -96,7 +97,7 @@ const Product = () => {
     }
   }, [products]);
 
-  const addRatingToProduct = () => {
+  const addRatingToProduct = async () => {
     if (star === null) {
       toast.error("Add star rating?");
       return false;
@@ -104,14 +105,9 @@ const Product = () => {
       toast.error("Please write a review about the product?");
       return false;
     } else {
-      dispatch(
-        addProductRating({ star: star, comment: comment, prodId: getProductId })
-      );
-      toast.success("Your review has been submitted.");
-
-      setTimeout(() => {
-        dispatch(getAproduct(getProductId));
-      }, 200);
+      const data = { star: star, comment: comment, prodId: getProductId };
+      await dispatch(addProductRating(data));
+      await dispatch(getAproduct(getProductId));
       setStar(null);
       setComment(null);
       return false;
@@ -126,7 +122,9 @@ const Product = () => {
     }).format(amount);
   };
 
-  const { isLoading } = useSelector((state) => state.product);
+  const isLoading = useSelector(
+    (state) => state?.product?.isLoading?.getAproduct
+  );
 
   const addProductToUserWishlist = (productId) => {
     dispatch(addProductToWishlist(productId));
@@ -203,9 +201,10 @@ const Product = () => {
                       <h4 className="title">{product?.title}</h4>
                     </div>
                     <div className="border-bottom py-2">
-                      <p className="price">{formatKES(product?.price ?? 0)}</p>
+                      <p className="price">{formatKES(product?.price)}</p>
                       <div className="d-flex align-items-center gap-2">
                         <ReactStars
+                          key={product?._id}
                           count={5}
                           size={20}
                           value={parseInt(product?.totalRating ?? 0)}
@@ -247,7 +246,9 @@ const Product = () => {
 
                       <div className="d-flex gap-2 align-items-center my-2">
                         <h3 className="product-heading">Availability</h3>
-                        <p className="product-data mb-0 mt-0">In Stock</p>
+                        <p className="product-data mb-0 mt-0">
+                          {product?.quantity} units
+                        </p>
                       </div>
 
                       <div className="d-flex gap-2 align-items-center mt-2">
@@ -441,9 +442,10 @@ const Product = () => {
                       <h4 className="mb-2">Customer reviews</h4>
                       <div className="d-flex align-items-center gap-10">
                         <ReactStars
+                          key={product?._id}
                           count={5}
                           size={20}
-                          value={parseInt(product?.totalRating ?? 0)}
+                          value={parseInt(product?.totalRating)}
                           edit={false}
                           activeColor="#ffd700"
                           {...{
@@ -454,7 +456,7 @@ const Product = () => {
                           }}
                         />
                         <p className="mb-0 t-review">
-                          ({parseInt(product?.totalRating ?? 0)})
+                          ({parseInt(product?.totalRating)})
                         </p>
                       </div>
                     </div>
@@ -465,9 +467,10 @@ const Product = () => {
                     <div action="" className="d-flex flex-column gap-15">
                       <div>
                         <ReactStars
+                          key={product?._id}
                           count={5}
                           size={20}
-                          value={parseInt(star ?? 0)}
+                          value={parseInt(star)}
                           edit={true}
                           activeColor="#ffd700"
                           onChange={(e) => {

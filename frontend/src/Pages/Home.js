@@ -41,8 +41,12 @@ const Home = () => {
   const navigate = useNavigate();
   const blogState = useSelector((state) => state?.blog?.blogs);
   const productState = useSelector((state) => state?.product?.products);
-  const loadingProducts = useSelector((state) => state?.product?.isLoading);
-  const loadingBlogs = useSelector((state) => state?.blog?.isLoading);
+  const loadingProducts = useSelector(
+    (state) => state?.product?.isLoading?.getAllProducts
+  );
+  const loadingBlogs = useSelector(
+    (state) => state?.blog?.isLoading.getAllBlogs
+  );
 
   const popularProducts =
     productState?.filter((item) => item?.tags === "Popular") || [];

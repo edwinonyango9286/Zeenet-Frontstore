@@ -1,6 +1,6 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 import prodcompare from "../images/prodcompare.svg";
 import view from "../images/view.svg";
 import addCart from "../images/add-cart.svg";
@@ -8,7 +8,7 @@ import wishlistIcon from "../images/wish.svg";
 import { useDispatch } from "react-redux";
 import { addProductToWishlist } from "../features/products/productSlice";
 
-const ProductCard = React.memo((props) => {
+const ProductCard = (props) => {
   const param = useParams();
   const navigate = useNavigate();
   const { data } = props;
@@ -99,7 +99,7 @@ const ProductCard = React.memo((props) => {
                       loading="lazy"
                       width={15}
                       height={15}
-                      onClick={() => navigate("/product" + item?._id)}
+                      onClick={() => navigate("/product/" + item?._id)}
                     />
                     <img
                       src={addCart}
@@ -107,7 +107,7 @@ const ProductCard = React.memo((props) => {
                       loading="lazy"
                       width={15}
                       height={15}
-                      onClick={() => navigate("/product" + item?._id)}
+                      onClick={() => navigate("/product/" + item?._id)}
                     />
                   </div>
                 </div>
@@ -117,6 +117,6 @@ const ProductCard = React.memo((props) => {
         })}
     </>
   );
-});
+};
 
 export default ProductCard;

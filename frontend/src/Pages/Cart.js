@@ -121,7 +121,7 @@ const Cart = () => {
           <div className="col-12 py-2 mt-4">
             <div className="d-flex justify-content-between  align-items-baseline">
               <div className="d-flex   flex-column  flex-md-row gap-3">
-                {userCart.length > 0 && (
+                {userCart?.length > 0 && (
                   <button
                     type="button"
                     className="button border-0"
