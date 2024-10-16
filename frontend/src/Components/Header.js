@@ -102,7 +102,7 @@ const Header = () => {
                   <div className="d-sm-none">
                     <div className="dropdown">
                       <TfiMenu
-                        className="fs-1"
+                        className="fs-2"
                         id="dropdownMenuButton1"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
