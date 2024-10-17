@@ -174,7 +174,18 @@ const Signup = () => {
                     className="button border-0"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Signing up..." : "Sign Up"}
+                    {isLoading ? (
+                      <div className="d-flex flex-row gap-1 align-items-center">
+                        <span
+                          class="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>{" "}
+                        <span> Signing up...</span>
+                      </div>
+                    ) : (
+                      "Sign Up"
+                    )}
                   </button>
                   <Link to="/login" className="button signup ">
                     Login

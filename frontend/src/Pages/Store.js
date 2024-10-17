@@ -65,7 +65,7 @@ const Store = () => {
       <BreadCrumb title="Store" />
       <Container class1="store-wrapper home-wrapper-2 ">
         <div className="row">
-          <div className="col-12 d-flex flex-row justify-content-between gap-10">
+          <div className="col-12 d-flex flex-row justify-content-between gap-2">
             <div className="col-3 d-none d-sm-block">
               <div className="filter-card mb-2">
                 <h3 className="filter-title">Shop by categories</h3>
@@ -114,7 +114,7 @@ const Store = () => {
                   </div>
 
                   <h5 className="sub-title">Price</h5>
-                  <div className="d-flex align-items-center gap-10">
+                  <div className="d-flex align-items-center gap-2">
                     <div className="form-floating">
                       <input
                         type="number"
@@ -143,7 +143,7 @@ const Store = () => {
                 <div className="filter-card mb-2">
                   <h3 className="filter-title">Product tags</h3>
                   <div>
-                    <div className="product-tags d-flex flex-wrap align-items-center gap-10">
+                    <div className="product-tags d-flex flex-wrap align-items-center gap-2">
                       {tags &&
                         [...new Set(tags)].map((item, index) => {
                           return (
@@ -165,7 +165,7 @@ const Store = () => {
                   <div className="py-2">
                     <h3 className="filter-title">Product brands</h3>
                     <div>
-                      <div className="product-tags d-flex flex-wrap align-items-center gap-10">
+                      <div className="product-tags d-flex flex-wrap align-items-center gap-2">
                         {brands &&
                           [...new Set(brands)].map((item, index) => {
                             return (
@@ -250,9 +250,9 @@ const Store = () => {
               ) : (
                 <div>
                   <div className="filter-sort-grid mb-2 mt-2">
-                    <div className="d-flex justify-content-between align-items-center gap-10 grid">
+                    <div className="d-flex justify-content-between align-items-center gap-2 grid">
                       <div className="d-flex d-none d-md-block">
-                        <div className="d-flex justify-content-between gap-10 align-items-center">
+                        <div className="d-flex justify-content-between gap-2 align-items-center">
                           <span className="d-block" style={{ width: "100px" }}>
                             Sort by :
                           </span>
@@ -291,7 +291,7 @@ const Store = () => {
                   </div>
 
                   <div className="pb-2">
-                    <div className="d-inline-flex   justify-content-start flex-wrap   gap-4 gap-lg-2">
+                    <div className="d-inline-flex   justify-content-start flex-wrap   gap-2 gap-lg-2">
                       <ProductCard data={products ? products : []} />
                     </div>
                   </div>

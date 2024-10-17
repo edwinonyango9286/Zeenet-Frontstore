@@ -96,13 +96,13 @@ const Header = () => {
       <header className="header-middle py-1">
         <div className="container">
           <div className="row">
-            <div className=" col-12 d-flex align-items-center ">
+            <div className=" col-12 d-flex flex-row gap-md-4 align-items-center ">
               <div className="col-6 col-md-2 d-flex flex-row align-items-center gap-3 my-1">
                 <div className="header-bottom">
                   <div className="d-sm-none">
                     <div className="dropdown">
                       <TfiMenu
-                        className="fs-2"
+                        className="fs-3"
                         id="dropdownMenuButton1"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
@@ -113,6 +113,7 @@ const Header = () => {
                           boxShadow: "none",
                           color: "white",
                           backgroundColor: "#131921",
+                          marginTop: "-8px",
                         }}
                       />
 
@@ -150,7 +151,7 @@ const Header = () => {
                 </div>
 
                 <div>
-                  <h2 className="m-0">
+                  <h2 className="m-0 p-0">
                     <Link to="/" className="text-white logo m-0">
                       Zeenet
                     </Link>
@@ -200,8 +201,8 @@ const Header = () => {
                         className="img-fluid"
                         loading="lazy"
                         style={{
-                          width: 28,
-                          height: 28,
+                          width: "28px",
+                          height: "28px",
                         }}
                       />
                       <span className="mb-0 mt-0 d-none d-lg-block">
@@ -221,8 +222,8 @@ const Header = () => {
                         className="img-fluid"
                         loading="lazy"
                         style={{
-                          width: 28,
-                          height: 28,
+                          width: "28px",
+                          height: "28px",
                         }}
                       />
                       <span className="mb-0 mt-0 d-none d-lg-block">
@@ -251,8 +252,8 @@ const Header = () => {
                         className="img-fluid"
                         loading="lazy"
                         style={{
-                          width: 28,
-                          height: 28,
+                          width: "28px",
+                          height: "28px",
                         }}
                       />
 
@@ -307,16 +308,16 @@ const Header = () => {
                           className="img-fluid "
                           loading="lazy"
                           style={{
-                            width: 28,
-                            height: 28,
+                            width: "28px",
+                            height: "28px",
                           }}
                         />
 
                         <div
                           className="d-flex flex-column position-absolute  badge-container"
                           style={{
-                            top: "-4px",
-                            left: "24px",
+                            top: "-6px",
+                            left: "20px",
                           }}
                         >
                           <h6

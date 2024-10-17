@@ -146,7 +146,18 @@ const Login = () => {
                     type="submit"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Logging in..." : "Login"}
+                    {isLoading ? (
+                      <div className="d-flex flex-row gap-1 align-items-center justify-content-center">
+                        <span
+                          class="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>{" "}
+                        <span>Logging in...</span>
+                      </div>
+                    ) : (
+                      "Login"
+                    )}
                   </button>
                   <Link to="/signup" className="button signup">
                     Sign Up

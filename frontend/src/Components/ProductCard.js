@@ -56,7 +56,7 @@ const ProductCard = (props) => {
                     src={item.images[0]?.url}
                     className="img-fluid mx-auto border rounded object-fit "
                     alt={item?.title}
-                    width={90}
+                    width={100}
                     height={130}
                     onClick={() => navigate("/product/" + item?._id)}
                   />
@@ -64,7 +64,7 @@ const ProductCard = (props) => {
                     src={item.images[0]?.url}
                     className="img-fluid mx-auto  border rounded object-fit"
                     alt={item?.title}
-                    width={90}
+                    width={100}
                     height={130}
                     onClick={() => navigate("/product/" + item?._id)}
                   />
@@ -81,17 +81,13 @@ const ProductCard = (props) => {
                   />
                   <p className="price mb-0">{formatKES(item?.price)}</p>
                 </div>
-
                 <div className="action-bar position-absolute">
-                  <div className="d-flex flex-column gap-1">
-                    <button className="border-0 bg-transparent">
                       <img
                         src={prodcompare}
                         alt="Compare Product Image"
                         width={15}
                         height={15}
                       />
-                    </button>
 
                     <img
                       src={view}
@@ -109,7 +105,6 @@ const ProductCard = (props) => {
                       height={15}
                       onClick={() => navigate("/product/" + item?._id)}
                     />
-                  </div>
                 </div>
               </div>
             </div>

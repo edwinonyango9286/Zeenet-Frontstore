@@ -189,13 +189,14 @@ const Home = () => {
               </div>
             </Container>
 
+              
             <Container class1="home-wrapper-2 p-2">
               <div className="row">
                 <div className="col-12">
-                  <div className="services d-flex align-items-center justify-content-between">
+                  <div className="services d-flex align-items-center justify-content-between ">
                     {services?.map((service, index) => (
                       <div
-                        className="d-flex align-items-center justify-content-center gap-20"
+                        className="d-flex align-items-center justify-content-center gap-4"
                         key={index}
                       >
                         <div>
@@ -211,7 +212,7 @@ const Home = () => {
                             <h6 className="d-none d-lg-block">
                               {service.title}
                             </h6>
-                            <p className="mb-0 d-none d-sm-block">
+                            <p className="mb-0 d-none d-lg-block">
                               {service.tagline}
                             </p>
                           </div>
@@ -231,7 +232,7 @@ const Home = () => {
                       {productState.length === 0 ? " " : "Featured collection"}
                     </h3>
                   </div>
-                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-start gap-2 flex-wrap">
+                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-start  gap-2 flex-wrap">
                     {productState &&
                       productState?.map((item, index) => {
                         if (item?.tags === "Featured") {
@@ -296,7 +297,7 @@ const Home = () => {
                                 </div>
 
                                 <div className="action-bar position-absolute">
-                                  <div className="d-flex flex-column gap-10">
+                                  <div className="d-flex flex-column gap-2">
                                     <button className="border-0 bg-transparent">
                                       <img
                                         src={prodcompare}
@@ -342,15 +343,9 @@ const Home = () => {
 
             <Container class1="famous-wrapper py-2  home-wrapper-2">
               <div className="row">
-                <div className="col-12 d-inline-flex align-items-center justify-content-center justify-content-md-between justify-content-lg-start gap-10 flex-wrap flex-lg-nowrap">
+                <div className="col-12 d-inline-flex align-items-center justify-content-center justify-content-md-between justify-content-lg-start gap-3 gap-md-2 flex-wrap flex-lg-nowrap">
                   <div className="famous-card position-relative">
-                    <img
-                      src={famous1}
-                      className="img-fluid"
-                      alt="famous1"
-                      width={340}
-                      height={300}
-                    />
+                    <img src={famous1} className="img-fluid" alt="famous1" />
                     <div className="famous-content position-absolute">
                       <h5 className="text-white text-sm">BIG SCREEN</h5>
                       <h6 className="text-white text-sm">
@@ -363,13 +358,7 @@ const Home = () => {
                   </div>
 
                   <div className="famous-card position-relative">
-                    <img
-                      src={famous2}
-                      className="img-fluid"
-                      alt="famous2"
-                      width={340}
-                      height={300}
-                    />
+                    <img src={famous2} className="img-fluid" alt="famous2" />
                     <div className="famous-content position-absolute">
                       <h5 className="text-dark text-sm">STUDIO DISPLAY</h5>
                       <h6 className="text-dark text-sm ">
@@ -381,13 +370,7 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="famous-card position-relative">
-                    <img
-                      src={famous3}
-                      className="img-fluid"
-                      alt="famous1"
-                      width={340}
-                      height={300}
-                    />
+                    <img src={famous3} className="img-fluid" alt="famous1" />
                     <div className="famous-content position-absolute">
                       <h5 className="text-dark text-sm">SMARTPHONES</h5>
                       <h6 className="text-dark text-sm">SMARTPHONE 13 PRO.</h6>
@@ -399,13 +382,7 @@ const Home = () => {
                   </div>
 
                   <div className="famous-card position-relative">
-                    <img
-                      src={famous4}
-                      className="img-fluid"
-                      alt="famous1"
-                      width={340}
-                      height={300}
-                    />
+                    <img src={famous4} className="img-fluid" alt="famous1" />
                     <div className="famous-content position-absolute">
                       <h5 className="text-dark text-sm">Home Speaker</h5>
                       <h6 className="text-dark text-sm">Room-filling sound.</h6>
@@ -429,7 +406,7 @@ const Home = () => {
                     </h3>
                   </div>
 
-                  <div className="col-12 d-flex align-items-center justify-content-center justify-content-lg-start gap-2 flex-wrap flex-lg-nowrap">
+                  <div className="col-12 d-flex  flex-row align-items-center justify-content-center justify-content-md-start gap-2 gap-lg-3 flex-wrap flex-lg-nowrap">
                     {specialProducts?.length > 0 &&
                       specialProducts?.map((item, index) => {
                         return (
@@ -654,7 +631,7 @@ const Home = () => {
                     </h3>
                   </div>
 
-                  <div className="d-flex align-items-center gap-10 flex-wrap pb-2">
+                  <div className="d-flex align-items-center gap-2 flex-wrap pb-2">
                     <BlogCard data={blogState} />
                   </div>
                 </div>

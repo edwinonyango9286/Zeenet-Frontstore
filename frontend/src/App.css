@@ -418,8 +418,41 @@ footer .input-group-text {
   background-color: white;
   border-radius: 4px;
   overflow: hidden;
-  width: 161px;
-  height: 200px;
+}
+
+@media (min-width: 0px) {
+  .product-card {
+    width: 164px;
+    height: 200px;
+  }
+}
+
+@media (min-width: 391px) {
+  .product-card {
+    width: 180px;
+    height: 200px;
+  }
+}
+
+@media (min-width: 412px) {
+  .product-card {
+    width: 190px;
+    height: 200px;
+  }
+}
+
+@media (min-width: 768px) {
+  .product-card {
+    width: 168px;
+    height: 200px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .product-card {
+    width: 178px;
+    height: 200px;
+  }
 }
 .product-card .product-image {
   cursor: pointer;
@@ -480,7 +513,21 @@ footer .input-group-text {
   padding: 10px;
   border-radius: 4px;
   background-color: white;
+  width: 340px;
+  height: 300px;
 }
+
+.special-product-card img {
+  width: 140px;
+  height: 140px;
+}
+@media (min-width: 1280px) {
+  .special-product-card {
+    width: 364px;
+    height: 300px;
+  }
+}
+
 .special-product-content .brand {
   font-size: 14px;
   font-weight: 500;
@@ -500,6 +547,8 @@ footer .input-group-text {
 
 .famous-card img {
   border-radius: 10px;
+  width: 340px;
+  height: 420;
 }
 
 .famous-content h5 {
