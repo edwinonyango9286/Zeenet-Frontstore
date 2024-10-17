@@ -1,6 +1,6 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
-import {useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import prodcompare from "../images/prodcompare.svg";
 import view from "../images/view.svg";
 import addCart from "../images/add-cart.svg";
@@ -61,7 +61,7 @@ const ProductCard = (props) => {
                     onClick={() => navigate("/product/" + item?._id)}
                   />
                   <img
-                    src={item.images[0]?.url}
+                    src={item?.images[0]?.url}
                     className="img-fluid mx-auto  border rounded object-fit"
                     alt={item?.title}
                     width={100}
@@ -82,12 +82,13 @@ const ProductCard = (props) => {
                   <p className="price mb-0">{formatKES(item?.price)}</p>
                 </div>
                 <div className="action-bar position-absolute">
-                      <img
-                        src={prodcompare}
-                        alt="Compare Product Image"
-                        width={15}
-                        height={15}
-                      />
+                  <div className="d-flex flex-column gap-2">
+                    <img
+                      src={prodcompare}
+                      alt="Compare Product Image"
+                      width={15}
+                      height={15}
+                    />
 
                     <img
                       src={view}
@@ -105,6 +106,7 @@ const ProductCard = (props) => {
                       height={15}
                       onClick={() => navigate("/product/" + item?._id)}
                     />
+                  </div>
                 </div>
               </div>
             </div>
