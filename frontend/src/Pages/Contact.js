@@ -4,7 +4,7 @@ import Meta from "../Components/Meta";
 import { AiTwotoneHome, AiTwotoneMail } from "react-icons/ai";
 import { BsTelephoneFill, BsFillInfoCircleFill } from "react-icons/bs";
 import Container from "../Components/Container";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { createEnquiry, resetState } from "../features/contact/contactSlice";
@@ -16,7 +16,7 @@ let contactSchema = Yup.object().shape({
   phone: Yup.string()
     .matches(/^(\+?254|0)?(7\d{8})$/, "Please provide a valid phone number.")
     .required(),
-  comment: Yup.string().required(),
+  enquiry: Yup.string().required(),
 });
 
 const Contact = () => {
@@ -27,15 +27,19 @@ const Contact = () => {
       name: "",
       email: "",
       phone: "",
-      comment: "",
+      enquiry: "",
     },
     validationSchema: contactSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       dispatch(resetState());
       dispatch(createEnquiry(values));
+      resetForm();
     },
   });
 
+  const isLoading = useSelector(
+    (state) => state?.contact?.isLoading?.createEnquiry
+  );
 
   return (
     <>
@@ -108,22 +112,37 @@ const Contact = () => {
                 <div className="mb-2">
                   <textarea
                     className=" form-control border rounded-md shadow-none"
-                    name="comment"
-                    id="comment"
+                    name="enquiry"
+                    id="enquiry"
                     cols={30}
                     rows={4}
-                    placeholder="Comment"
-                    onChange={formik.handleChange("comment")}
-                    onBlur={formik.handleBlur("comment")}
-                    value={formik.values.comment}
+                    placeholder="Enquiry"
+                    onChange={formik.handleChange("enquiry")}
+                    onBlur={formik.handleBlur("enquiry")}
+                    value={formik.values.enquiry}
                   />
                   <div className="error">
-                    {formik.touched.comment && formik.errors.comment}
+                    {formik.touched.enquiry && formik.errors.enquiry}
                   </div>
                 </div>
                 <div>
-                  <button type="submit" className="button border-0">
-                    Submit
+                  <button
+                    type="submit"
+                    className="button border-0"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <div className="d-flex flex-row gap-1 align-items-center justify-content-center">
+                        <span
+                          class="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>{" "}
+                        <span>Submitting...</span>
+                      </div>
+                    ) : (
+                      "Submit"
+                    )}
                   </button>
                 </div>
               </form>

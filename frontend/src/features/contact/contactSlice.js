@@ -18,7 +18,9 @@ export const resetState = createAction("Reset_all");
 const enquiryState = {
   enquiries: [],
   isError: false,
-  isLoading: false,
+  isLoading: {
+    createEnquiry: false,
+  },
   isSuccess: false,
   message: "",
 };
@@ -30,17 +32,19 @@ export const contactSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createEnquiry.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading.createEnquiry = true;
       })
       .addCase(createEnquiry.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoading.createEnquiry = false;
         state.isError = false;
         state.isSuccess = true;
         state.createdEnquiry = action.payload;
-        toast.success("Enquiry Submitted.");
+        toast.success(
+          "Enquiry Submitted. We will review and provide response in a few."
+        );
       })
       .addCase(createEnquiry.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoading.createEnquiry = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action?.payload?.response?.data?.message;

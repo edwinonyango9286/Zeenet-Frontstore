@@ -291,7 +291,7 @@ const Store = () => {
                   </div>
 
                   <div className="pb-2">
-                    <div className="d-inline-flex   justify-content-start flex-wrap   gap-2 gap-lg-2">
+                    <div className="d-inline-flex   justify-content-start flex-wrap  gap-2 gap-lg-4">
                       <ProductCard data={products ? products : []} />
                     </div>
                   </div>

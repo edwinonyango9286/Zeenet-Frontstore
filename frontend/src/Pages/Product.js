@@ -41,7 +41,7 @@ const Product = () => {
 
   const [popularProducts, setPopularProducts] = useState([]);
   const [star, setStar] = useState(null);
-  const [comment, setComment] = useState(null);
+  const [enquiry, setEnquiry] = useState(null);
 
   useEffect(() => {
     dispatch(getAproduct(getProductId));
@@ -95,15 +95,15 @@ const Product = () => {
     if (star === null) {
       toast.error("Add star rating?");
       return false;
-    } else if (comment === null) {
+    } else if (enquiry === null) {
       toast.error("Please write a review about the product?");
       return false;
     } else {
-      const data = { star: star, comment: comment, prodId: getProductId };
+      const data = { star: star, enquiry: enquiry, prodId: getProductId };
       await dispatch(addProductRating(data));
       await dispatch(getAproduct(getProductId));
       setStar(null);
-      setComment(null);
+      setEnquiry(null);
       return false;
     }
   };
@@ -479,9 +479,9 @@ const Product = () => {
                           className="w-100 form-control border shadow-none"
                           cols={20}
                           rows={4}
-                          placeholder="Comment..."
+                          placeholder="Enquiry..."
                           onChange={(e) => {
-                            setComment(e.target.value);
+                            setEnquiry(e.target.value);
                           }}
                         />
                       </div>
@@ -511,7 +511,7 @@ const Product = () => {
                                 activeColor="#ffd700"
                               />
                             </div>
-                            <p>{item?.comment}</p>
+                            <p>{item?.enquiry}</p>
                           </div>
                         );
                       })}

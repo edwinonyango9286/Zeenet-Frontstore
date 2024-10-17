@@ -45,8 +45,8 @@ const ProductCard = (props) => {
                       src={wishlistIcon}
                       alt="Wishlist Image"
                       loading="lazy"
-                      width={15}
-                      height={15}
+                      width={20}
+                      height={20}
                     />
                   </button>
                 </div>
@@ -86,24 +86,24 @@ const ProductCard = (props) => {
                     <img
                       src={prodcompare}
                       alt="Compare Product Image"
-                      width={15}
-                      height={15}
+                      width={20}
+                      height={20}
                     />
 
                     <img
                       src={view}
                       alt="View Product Image"
                       loading="lazy"
-                      width={15}
-                      height={15}
+                      width={20}
+                      height={20}
                       onClick={() => navigate("/product/" + item?._id)}
                     />
                     <img
                       src={addCart}
                       alt="Add to cart Image"
                       loading="lazy"
-                      width={15}
-                      height={15}
+                      width={20}
+                      height={20}
                       onClick={() => navigate("/product/" + item?._id)}
                     />
                   </div>

@@ -53,8 +53,9 @@ const Checkout = () => {
     },
 
     validationSchema: SHIPPINGSCHEMA,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       setShippingInfo(values);
+      resetForm();
     },
   });
 
@@ -71,7 +72,7 @@ const Checkout = () => {
       amount: totalAmount,
       phone: user?.phone,
     };
-   dispatch(placeUserOrder(paymentInfo));
+    dispatch(placeUserOrder(paymentInfo));
     setPaymentStatus("pending");
   };
 

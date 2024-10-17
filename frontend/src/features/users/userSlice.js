@@ -199,7 +199,7 @@ const initialState = {
     clearUserCart: false,
     getUserCart: false,
     getOrders: false,
-    updateProfile:false,
+    updateProfile: false,
     resetPasswordToken: false,
     resetPassword: false,
     getUserProductWishlist: false,
@@ -415,6 +415,7 @@ export const authSlice = createSlice({
         state.isLoading.resetPassword = false;
         state.isSuccess = true;
         state.newPassword = action.payload;
+        toast.success("Your password has been updated. Proceed to login.");
       })
       .addCase(resetPassword.rejected, (state, action) => {
         state.isError = true;

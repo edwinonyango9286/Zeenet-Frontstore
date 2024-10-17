@@ -41,11 +41,10 @@ const ResetPassword = () => {
       confirmPassword: "",
     },
     validationSchema: RESET_PASSWORD_SCHEMA,
-    onSubmit: (values) => {
+    onSubmit: (values ,{resetForm}) => {
       dispatch(resetState());
       dispatch(resetPassword({ token: getToken, password: values.password }));
-      toast.success("Your password has been updated. Proceed to login.");
-
+      resetForm();
       navigate("/login");
     },
   });

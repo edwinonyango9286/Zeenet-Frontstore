@@ -54,10 +54,11 @@ const Login = () => {
       password: "",
     },
     validationSchema: LOGIN_SCHEMA,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       dispatch(loginUser(values));
       if (isSuccess) {
         dispatch(getUserCart());
+        resetForm();
         navigate(from, { replace: true });
       }
     },

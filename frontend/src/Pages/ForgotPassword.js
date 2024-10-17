@@ -22,9 +22,10 @@ const ForgotPassword = () => {
       email: "",
     },
     validationSchema: FORGOT_PASSWORD_SCHEMA,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       dispatch(resetState());
       dispatch(resetPasswordToken(values));
+      resetForm();
     },
   });
 

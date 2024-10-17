@@ -189,7 +189,6 @@ const Home = () => {
               </div>
             </Container>
 
-              
             <Container class1="home-wrapper-2 p-2">
               <div className="row">
                 <div className="col-12">
@@ -249,8 +248,8 @@ const Home = () => {
                                     <img
                                       src={wishlistIcon}
                                       alt="Wishlist Image"
-                                      width={15}
-                                      height={15}
+                                      width={20}
+                                      height={20}
                                     />
                                   </button>
                                 </div>
@@ -297,14 +296,14 @@ const Home = () => {
                                 </div>
 
                                 <div className="action-bar position-absolute">
-                                  <div className="d-flex flex-column gap-2">
+                                  <div className="d-flex flex-column gap-1">
                                     <button className="border-0 bg-transparent">
                                       <img
                                         src={prodcompare}
                                         alt="Compare Product Image"
                                         loading="lazy"
-                                        width={15}
-                                        height={15}
+                                        width={20}
+                                        height={20}
                                       />
                                     </button>
 
@@ -316,8 +315,8 @@ const Home = () => {
                                           navigate("/product/" + item?._id)
                                         }
                                         loading="lazy"
-                                        width={15}
-                                        height={15}
+                                        width={20}
+                                        height={20}
                                       />
                                     </button>
                                     <button className="border-0 bg-transparent">
@@ -325,8 +324,8 @@ const Home = () => {
                                         src={addCart}
                                         alt="cartImage"
                                         loading="lazy"
-                                        width={15}
-                                        height={15}
+                                        width={20}
+                                        height={20}
                                       />
                                     </button>
                                   </div>
@@ -453,8 +452,8 @@ const Home = () => {
                                   <img
                                     src={wishlistIcon}
                                     alt="Wishlist Image"
-                                    width={15}
-                                    height={15}
+                                    width={20}
+                                    height={20}
                                   />
                                 </button>
                               </div>
@@ -506,6 +505,8 @@ const Home = () => {
                                     <img
                                       src={prodcompare}
                                       alt="Compare Product Image"
+                                      width={20}
+                                      height={20}
                                     />
                                   </button>
 
@@ -516,12 +517,16 @@ const Home = () => {
                                       onClick={() =>
                                         navigate("/product/" + item?._id)
                                       }
+                                      width={20}
+                                      height={20}
                                     />
                                   </button>
                                   <button className="border-0 bg-transparent">
                                     <img
                                       src={addCart}
                                       alt="Add to cart Image"
+                                      width={20}
+                                      height={20}
                                     />
                                   </button>
                                 </div>
