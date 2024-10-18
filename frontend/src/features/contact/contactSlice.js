@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import contactService from "./contactService";
 import { toast } from "react-toastify";
+import { message } from "antd";
 
 export const createEnquiry = createAsyncThunk(
   "enquiries/post-enquiry",
@@ -48,6 +49,7 @@ export const contactSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action?.payload?.response?.data?.message;
+        toast.error(message || "Something went wrong please try again later.");
       })
       .addCase(resetState, () => enquiryState);
   },
