@@ -44,6 +44,7 @@ export const contactSlice = createSlice({
           "Enquiry Submitted. We will review and provide response in a few."
         );
       })
+      
       .addCase(createEnquiry.rejected, (state, action) => {
         state.isLoading.createEnquiry = false;
         state.isError = true;
