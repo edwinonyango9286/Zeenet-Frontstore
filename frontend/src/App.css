@@ -427,9 +427,9 @@ footer .input-group-text {
   }
 }
 
-@media (min-width: 391px) {
+@media (min-width: 390px) {
   .product-card {
-    width: 180px;
+    width: 178px;
     height: 200px;
   }
 }
@@ -449,8 +449,16 @@ footer .input-group-text {
 }
 
 @media (min-width: 1280px) {
+  .product-card  .product-image img {
+width:70px ;
+height: 80px;
+
+  }
+}
+
+@media (min-width: 1280px) {
   .product-card {
-    width: 178px;
+    width: 161px;
     height: 200px;
   }
 }
