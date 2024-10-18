@@ -49,7 +49,7 @@ export const contactSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action?.payload?.response?.data?.message;
-        toast.error(message || "Something went wrong please try again later.");
+        toast.error(message || "Something went wrong. Please try again later.");
       })
       .addCase(resetState, () => enquiryState);
   },
