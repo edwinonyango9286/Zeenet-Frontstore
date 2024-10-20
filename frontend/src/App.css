@@ -413,6 +413,7 @@ footer .input-group-text {
 /* single blog card styling ends here */
 
 /* Product card styling  starts here*/
+
 .product-card {
   padding: 10px;
   background-color: white;
@@ -449,10 +450,9 @@ footer .input-group-text {
 }
 
 @media (min-width: 1280px) {
-  .product-card  .product-image img {
-width:70px ;
-height: 80px;
-
+  .product-card .product-image img {
+    width: 70px;
+    height: 80px;
   }
 }
 
