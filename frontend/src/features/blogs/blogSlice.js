@@ -25,12 +25,18 @@ export const getABlog = createAsyncThunk(
 
 const blogState = {
   blogs: [],
-  isError: false,
+  isError: {
+    getAllBlogs: false,
+    getABlog: false,
+  },
   isLoading: {
     getAllBlogs: false,
     getABlog: false,
   },
-  isSuccess: false,
+  isSuccess: {
+    getAllBlogs: false,
+    getAllBlogs: false,
+  },
   message: "",
 };
 
@@ -45,14 +51,14 @@ export const blogSlice = createSlice({
       })
       .addCase(getAllBlogs.fulfilled, (state, action) => {
         state.isLoading.getAllBlogs = false;
-        state.isError = false;
-        state.isSuccess = true;
+        state.isError.getAllBlogs = false;
+        state.isSuccess.getAllBlogs = true;
         state.blogs = action.payload;
       })
       .addCase(getAllBlogs.rejected, (state, action) => {
         state.isLoading.getAllBlogs = false;
-        state.isError = true;
-        state.isSuccess = false;
+        state.isError.getAllBlogs = true;
+        state.isSuccess.getAllBlogs = false;
         state.message = action?.payload?.response?.data?.message;
       })
       .addCase(getABlog.pending, (state) => {
@@ -60,14 +66,14 @@ export const blogSlice = createSlice({
       })
       .addCase(getABlog.fulfilled, (state, action) => {
         state.isLoading.getABlog = false;
-        state.isError = false;
-        state.isSuccess = true;
+        state.isError.getABlog = false;
+        state.isSuccess.getABlog = true;
         state.singleBlog = action.payload;
       })
       .addCase(getABlog.rejected, (state, action) => {
         state.isLoading.getABlog = false;
-        state.isError = true;
-        state.isSuccess = false;
+        state.isError.getABlog = true;
+        state.isSuccess.getABlog = false;
         state.message = action?.payload?.response?.data?.message;
       });
   },

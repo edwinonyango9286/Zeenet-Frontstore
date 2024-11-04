@@ -28,13 +28,11 @@ const SIGN_UP_SCHEMA = Yup.object().shape({
 });
 
 const Signup = () => {
-  const { isError, isSuccess, message, createdUser } = useSelector(
-    (state) => state.user ?? {}
-  );
-
-  const isLoading = useSelector(
-    (state) => state?.user?.isLoading?.registerUser
-  );
+  const createdUser = useSelector((state) => state?.user?.createdUser);
+  const isSuccess = useSelector((state) => state.user?.isSuccess?.registerUser);
+  const isLoading = useSelector((state) => state.user?.isLoading?.registerUser);
+  const isError = useSelector((state) => state.user?.isError?.registerUser);
+  const message = useSelector((state) => state?.user?.message);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -48,6 +46,7 @@ const Signup = () => {
     },
     validationSchema: SIGN_UP_SCHEMA,
     onSubmit: (values, { resetForm }) => {
+      dispatch(resetState());
       dispatch(registerUser(values));
       resetForm();
     },
@@ -57,13 +56,12 @@ const Signup = () => {
     if (isSuccess && createdUser) {
       navigate("/login");
     }
-  }, [createdUser]);
-
-  useEffect(() => {
-    if (isError) {
-      dispatch(resetState());
+    if (isError && message) {
+      setTimeout(() => {
+        dispatch(resetState());
+      }, 5000);
     }
-  }, []);
+  }, [isSuccess, createdUser, navigate, isError, message, dispatch]);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {

@@ -41,7 +41,7 @@ const ResetPassword = () => {
       confirmPassword: "",
     },
     validationSchema: RESET_PASSWORD_SCHEMA,
-    onSubmit: (values ,{resetForm}) => {
+    onSubmit: (values, { resetForm }) => {
       dispatch(resetState());
       dispatch(resetPassword({ token: getToken, password: values.password }));
       resetForm();
@@ -49,7 +49,8 @@ const ResetPassword = () => {
     },
   });
 
-  const { isError, message } = useSelector((state) => state?.user);
+  const message = useSelector((state) => state?.user?.message);
+  const isError = useSelector((state) => state?.user?.isError?.resetPassword);
 
   const isLoading = useSelector((state) => state?.user?.resetPassword);
 

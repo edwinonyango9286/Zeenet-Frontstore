@@ -18,11 +18,15 @@ export const resetState = createAction("Reset_all");
 
 const enquiryState = {
   enquiries: [],
-  isError: false,
+  isError: {
+    createEnquiry: false,
+  },
   isLoading: {
     createEnquiry: false,
   },
-  isSuccess: false,
+  isSuccess: {
+    createEnquiry: false,
+  },
   message: "",
 };
 
@@ -37,18 +41,18 @@ export const contactSlice = createSlice({
       })
       .addCase(createEnquiry.fulfilled, (state, action) => {
         state.isLoading.createEnquiry = false;
-        state.isError = false;
-        state.isSuccess = true;
+        state.isError.createEnquiry = false;
+        state.isSuccess.createEnquiry = true;
         state.createdEnquiry = action.payload;
         toast.success(
           "Enquiry Submitted. We will review and provide response in a few."
         );
       })
-      
+
       .addCase(createEnquiry.rejected, (state, action) => {
         state.isLoading.createEnquiry = false;
-        state.isError = true;
-        state.isSuccess = false;
+        state.isError.createEnquiry = true;
+        state.isSuccess.createEnquiry = false;
         state.message = action?.payload?.response?.data?.message;
         toast.error(message || "Something went wrong. Please try again later.");
       })

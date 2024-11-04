@@ -32,9 +32,10 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, isError, isSuccess, message } = useSelector(
-    (state) => state?.user ?? {}
-  );
+  const user = useSelector((state) => state?.user?.user);
+  const message = useSelector((state) => state?.user?.message);
+  const isSuccess = useSelector((state) => state?.user?.isSuccess?.loginUser);
+  const isError = useSelector((state) => state?.user?.isError?.loginUser);
   const isLoading = useSelector((state) => state?.user?.isLoading?.loginUser);
   const from =
     (location?.state &&
@@ -65,7 +66,7 @@ const Login = () => {
   });
 
   useEffect(() => {
-    if (isError) {
+    if (isError && message) {
       dispatch(resetState());
     }
   }, []);

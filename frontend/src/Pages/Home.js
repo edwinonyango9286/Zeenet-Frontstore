@@ -45,7 +45,7 @@ const Home = () => {
     (state) => state?.product?.isLoading?.getAllProducts
   );
   const loadingBlogs = useSelector(
-    (state) => state?.blog?.isLoading.getAllBlogs
+    (state) => state?.blog?.isLoading?.getAllBlogs
   );
 
   const popularProducts =
