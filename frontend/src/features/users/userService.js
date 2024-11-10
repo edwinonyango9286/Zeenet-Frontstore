@@ -8,8 +8,8 @@ const register = async (userData) => {
   }
 };
 
-const login = async (userData) => {
-  const response = await newRequest.post(`user/login`, userData);
+const signin = async (userData) => {
+  const response = await newRequest.post(`user/signin`, userData);
   if (response?.data) {
     localStorage.setItem("user", JSON.stringify(response.data));
     return response.data;
@@ -91,7 +91,7 @@ const getUserOrders = async () => {
 
 const userService = {
   register,
-  login,
+  signin,
   logoutAUser,
   getUserWishlist,
   addToCart,

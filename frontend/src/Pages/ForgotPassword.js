@@ -81,7 +81,7 @@ const ForgotPassword = () => {
                   >
                     {isLoading ? "Submitting..." : "Submit"}
                   </button>
-                  <Link to="/login">Cancel</Link>
+                  <Link to="/signin">Cancel</Link>
                 </div>
               </form>
             </div>

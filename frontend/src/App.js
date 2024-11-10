@@ -9,7 +9,6 @@ import Store from "./Pages/Store";
 import Blogs from "./Pages/Blogs";
 import CompareProducts from "./Pages/CompareProducts";
 import Wishlist from "./Pages/Wishlist";
-import Login from "./Pages/Login";
 import ForgotPassword from "./Pages/ForgotPassword";
 import Signup from "./Pages/Signup";
 import ResetPassword from "./Pages/ResetPassword";
@@ -25,6 +24,7 @@ import { PrivateRoutes } from "./routing/PrivateRoutes";
 import { OpenRoutes } from "./routing/OpenRoutes";
 import Profile from "./Pages/Profile";
 import MyOrders from "./Pages/MyOrders";
+import Signin from "./Pages/Signin";
 
 function App() {
   return (
@@ -40,7 +40,6 @@ function App() {
             <Route path="/blogs/singleblog/:id" element={<SingleBlog />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/compare-products" element={<CompareProducts />} />
-
             <Route
               path="/profile"
               element={
@@ -51,10 +50,10 @@ function App() {
             />
 
             <Route
-              path="/login"
+              path="/signin"
               element={
                 <OpenRoutes>
-                  <Login />
+                  <Signin />
                 </OpenRoutes>
               }
             />

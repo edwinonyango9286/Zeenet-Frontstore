@@ -51,18 +51,16 @@ const Signup = () => {
       resetForm();
     },
   });
-
   useEffect(() => {
     if (isSuccess && createdUser) {
-      navigate("/login");
+      navigate("/signin");
     }
     if (isError && message) {
       setTimeout(() => {
         dispatch(resetState());
-      }, 5000);
+      }, 10000);
     }
-  }, [isSuccess, createdUser, navigate, isError, message, dispatch]);
-
+  }, [isSuccess, createdUser, isError, message]);
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -179,15 +177,15 @@ const Signup = () => {
                           class="spinner-border spinner-border-sm"
                           role="status"
                           aria-hidden="true"
-                        ></span>{" "}
+                        ></span>
                         <span> Signing up...</span>
                       </div>
                     ) : (
                       "Sign Up"
                     )}
                   </button>
-                  <Link to="/login" className="button signup ">
-                    Login
+                  <Link to="/signin" className="button signup ">
+                    Sign In
                   </Link>
                 </div>
               </form>

@@ -45,7 +45,7 @@ const ResetPassword = () => {
       dispatch(resetState());
       dispatch(resetPassword({ token: getToken, password: values.password }));
       resetForm();
-      navigate("/login");
+      navigate("/signin");
     },
   });
 

@@ -6,6 +6,6 @@ export const PrivateRoutes = ({ children }) => {
   return customer?.token !== undefined ? (
     children
   ) : (
-    <Navigate to={"/login"} state={{ from: location }} replace />
+    <Navigate to={"/signin"} state={{ from: location }} replace />
   );
 };

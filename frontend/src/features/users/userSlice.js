@@ -13,11 +13,11 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const loginUser = createAsyncThunk(
-  "auth/user-login",
+export const signinUser = createAsyncThunk(
+  "auth/user-signin",
   async (userData, thunkAPI) => {
     try {
-      return await userService.login(userData);
+      return await userService.signin(userData);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -191,7 +191,7 @@ const initialState = {
     : [],
   isError: {
     registerUser: false,
-    loginUser: false,
+    signinUser: false,
     logoutUser: false,
     addProductToCart: false,
     removeProductFromCart: false,
@@ -207,7 +207,7 @@ const initialState = {
   },
   isLoading: {
     registerUser: false,
-    loginUser: false,
+    signinUser: false,
     logoutUser: false,
     addProductToCart: false,
     removeProductFromCart: false,
@@ -222,7 +222,7 @@ const initialState = {
   },
   isSuccess: {
     registerUser: false,
-    loginUser: false,
+    signinUser: false,
     logoutUser: false,
     addProductToCart: false,
     removeProductFromCart: false,
@@ -259,20 +259,20 @@ export const authSlice = createSlice({
         state.isLoading.registerUser = false;
         state.message = action?.payload?.response?.data?.message;
       })
-      .addCase(loginUser.pending, (state) => {
-        state.isLoading.loginUser = true;
+      .addCase(signinUser.pending, (state) => {
+        state.isLoading.signinUser = true;
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.isError.loginUser = false;
-        state.isLoading.loginUser = false;
-        state.isSuccess.loginUser = true;
+      .addCase(signinUser.fulfilled, (state, action) => {
+        state.isError.signinUser = false;
+        state.isLoading.signinUser = false;
+        state.isSuccess.signinUser = true;
         state.user = action.payload;
         localStorage.setItem("token", action?.payload?.token);
       })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.isError.loginUser = true;
-        state.isSuccess.loginUser = false;
-        state.isLoading.loginUser = false;
+      .addCase(signinUser.rejected, (state, action) => {
+        state.isError.signinUser = true;
+        state.isSuccess.signinUser = false;
+        state.isLoading.signinUser = false;
         state.message = action?.payload?.response?.data?.message;
       })
       .addCase(logoutUser.pending, (state) => {
@@ -444,7 +444,7 @@ export const authSlice = createSlice({
         state.isLoading.resetPassword = false;
         state.isSuccess.resetPassword = true;
         state.newPassword = action?.payload;
-        toast.success("Your password has been updated. Proceed to login.");
+        toast.success("Your password has been updated. Proceed to signin.");
       })
       .addCase(resetPassword.rejected, (state, action) => {
         state.isError.resetPassword = true;
@@ -466,6 +466,7 @@ export const authSlice = createSlice({
         state.isSuccess.getOrders = false;
         state.isLoading.getOrders = false;
         state.message = action?.payload?.response?.data?.message;
+        toast.error();
       })
       .addCase(resetState, () => initialState);
   },

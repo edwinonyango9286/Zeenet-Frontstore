@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import {
   getUserCart,
-  loginUser,
+  signinUser,
   resetState,
 } from "../features/users/userSlice";
 import { useSelector } from "react-redux";
@@ -17,7 +17,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 
-const LOGIN_SCHEMA = Yup.object().shape({
+const SIGNIN_SCHEMA = Yup.object().shape({
   email: Yup.string().email().required(),
   password: Yup.string()
     .min(8)
@@ -28,15 +28,15 @@ const LOGIN_SCHEMA = Yup.object().shape({
     .required(),
 });
 
-const Login = () => {
+const Signin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const user = useSelector((state) => state?.user?.user);
   const message = useSelector((state) => state?.user?.message);
-  const isSuccess = useSelector((state) => state?.user?.isSuccess?.loginUser);
-  const isError = useSelector((state) => state?.user?.isError?.loginUser);
-  const isLoading = useSelector((state) => state?.user?.isLoading?.loginUser);
+  const isSuccess = useSelector((state) => state?.user?.isSuccess?.signinUser);
+  const isError = useSelector((state) => state?.user?.isError?.signinUser);
+  const isLoading = useSelector((state) => state?.user?.isLoading?.signinUser);
   const from =
     (location?.state &&
       location?.state.from &&
@@ -54,9 +54,9 @@ const Login = () => {
       email: "",
       password: "",
     },
-    validationSchema: LOGIN_SCHEMA,
+    validationSchema: SIGNIN_SCHEMA,
     onSubmit: (values, { resetForm }) => {
-      dispatch(loginUser(values));
+      dispatch(signinUser(values));
       if (isSuccess) {
         dispatch(getUserCart());
         resetForm();
@@ -78,14 +78,14 @@ const Login = () => {
 
   return (
     <>
-      <Meta title={"Login"} />
-      <BreadCrump title="Login" />
+      <Meta title={"Signin"} />
+      <BreadCrump title="Signin" />
       <Container class1="home-wrapper-2 py-4">
         <div className="row">
           <div className="col-12 d-flex items-center">
             <div className="auth-card">
-              <h3 className="text-center ">Login</h3>
-              <p className="text-center">Login to your account to continue.</p>
+              <h3 className="text-center ">Sign in</h3>
+              <p className="text-center">Signin to your account to continue.</p>
               <div className="error text-center mb-2">
                 {isError && message
                   ? message || "Something went wrong. Please try again later."
@@ -158,7 +158,7 @@ const Login = () => {
                         <span>Logging in...</span>
                       </div>
                     ) : (
-                      "Login"
+                      "Sign In"
                     )}
                   </button>
                   <Link to="/signup" className="button signup">
@@ -174,4 +174,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signin;

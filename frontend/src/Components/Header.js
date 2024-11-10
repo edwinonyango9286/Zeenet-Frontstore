@@ -275,8 +275,8 @@ const Header = () => {
                       aria-labelledby="dropdownMenuButton"
                     >
                       {user === null ? (
-                        <Link className="dropdown-item" to={"/login"}>
-                          Login
+                        <Link className="dropdown-item" to={"/signin"}>
+                          Sign In
                         </Link>
                       ) : (
                         <Link className="dropdown-item" to={"/profile"}>
