@@ -3,7 +3,7 @@ import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
 import ProductCard from "../Components/ProductCard";
 import ReactStars from "react-rating-stars-component";
-import { LoadingOutlined } from "@ant-design/icons";
+import { Loading3QuartersOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import ReactImageZoom from "react-image-zoom";
 import { VscGitCompare } from "react-icons/vsc";
@@ -100,8 +100,8 @@ const Product = () => {
       return false;
     } else {
       const data = { star: star, enquiry: enquiry, prodId: getProductId };
-      await dispatch(addProductRating(data));
-      await dispatch(getAproduct(getProductId));
+      dispatch(addProductRating(data));
+      dispatch(getAproduct(getProductId));
       setStar(null);
       setEnquiry(null);
       return false;
@@ -135,7 +135,7 @@ const Product = () => {
         >
           <Spin
             indicator={
-              <LoadingOutlined
+              <Loading3QuartersOutlined
                 style={{
                   fontSize: 36,
                   color: "#000",
