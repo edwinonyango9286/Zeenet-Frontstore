@@ -24,6 +24,16 @@ const getProduct = async (id) => {
 };
 
 const addToWishlist = async (productId) => {
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${user !== null ? user.token : ""}`,
+      Accept: "application/json",
+    },
+    withCredentials: true,
+  };
   const response = await newRequest.put(
     `products/addtowishlist`,
     {
@@ -35,6 +45,7 @@ const addToWishlist = async (productId) => {
     return response.data;
   }
 };
+
 const removeFromWishlist = async (productId) => {
   const response = await newRequest.put(
     `products/addtowishlist`,

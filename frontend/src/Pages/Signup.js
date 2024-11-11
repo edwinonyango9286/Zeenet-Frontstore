@@ -48,19 +48,22 @@ const Signup = () => {
     onSubmit: (values, { resetForm }) => {
       dispatch(resetState());
       dispatch(registerUser(values));
-      resetForm();
+      if (isSuccess && createdUser) {
+        resetForm();
+        dispatch(resetState());
+        navigate("/signin");
+      }
     },
   });
+
   useEffect(() => {
-    if (isSuccess && createdUser) {
-      navigate("/signin");
-    }
     if (isError && message) {
       setTimeout(() => {
         dispatch(resetState());
       }, 10000);
     }
-  }, [isSuccess, createdUser, isError, message]);
+  }, [isError, message]);
+
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);

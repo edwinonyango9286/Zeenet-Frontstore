@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Meta from "../Components/Meta";
 import BreadCrump from "../Components/BreadCrumb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "../Components/Container";
 import CustomInput from "../Components/CustomInput";
 import * as Yup from "yup";
@@ -15,6 +15,19 @@ const FORGOT_PASSWORD_SCHEMA = Yup.object().shape({
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const message = useSelector((state) => state?.user.message);
+  const isError = useSelector(
+    (state) => state.user?.isError?.resetPasswordToken
+  );
+  const isSuccess = useSelector(
+    (state) => state?.user?.isSuccess?.resetPasswordToken
+  );
+  const isLoading = useSelector(
+    (state) => state?.user?.isLoading?.resetPasswordToken
+  );
+  const resetToken = useSelector((state) => state?.user?.resetToken);
 
   const formik = useFormik({
     initialValues: {
@@ -24,18 +37,21 @@ const ForgotPassword = () => {
     onSubmit: (values, { resetForm }) => {
       dispatch(resetState());
       dispatch(resetPasswordToken(values));
-      resetForm();
+      if (isSuccess && resetToken) {
+        resetForm();
+        navigate("/signin");
+        dispatch(resetState());
+      }
     },
   });
 
-  const message = useSelector((state) => state?.user.message);
-  const isError = useSelector(
-    (state) => state.user?.isError?.resetPasswordToken
-  );
-
-  const isLoading = useSelector(
-    (state) => state?.user?.isLoading?.resetPasswordToken
-  );
+  useEffect(() => {
+    if (isError && message) {
+      setTimeout(() => {
+        dispatch(resetState());
+      }, 10000);
+    }
+  }, [isError, message]);
 
   return (
     <>

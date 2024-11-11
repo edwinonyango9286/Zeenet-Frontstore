@@ -57,9 +57,9 @@ const Signin = () => {
     validationSchema: SIGNIN_SCHEMA,
     onSubmit: (values, { resetForm }) => {
       dispatch(signinUser(values));
-      if (isSuccess) {
-        dispatch(getUserCart());
+      if (isSuccess && user) {
         resetForm();
+        dispatch(getUserCart());
         navigate(from, { replace: true });
       }
     },
@@ -69,7 +69,7 @@ const Signin = () => {
     if (isError && message) {
       dispatch(resetState());
     }
-  }, []);
+  }, [isError, message]);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
@@ -84,7 +84,7 @@ const Signin = () => {
         <div className="row">
           <div className="col-12 d-flex items-center">
             <div className="auth-card">
-              <h3 className="text-center ">Sign in</h3>
+              <h3 className="text-center ">Sign In</h3>
               <p className="text-center">Signin to your account to continue.</p>
               <div className="error text-center mb-2">
                 {isError && message

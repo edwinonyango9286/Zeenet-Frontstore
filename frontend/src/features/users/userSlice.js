@@ -189,6 +189,7 @@ const initialState = {
   userCart: localStorage.getItem("userCart")
     ? JSON.parse(localStorage.getItem("userCart"))
     : [],
+  resetToken: null,
   isError: {
     registerUser: false,
     signinUser: false,
@@ -258,6 +259,13 @@ export const authSlice = createSlice({
         state.isSuccess.registerUser = false;
         state.isLoading.registerUser = false;
         state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
       })
       .addCase(signinUser.pending, (state) => {
         state.isLoading.signinUser = true;
@@ -274,6 +282,13 @@ export const authSlice = createSlice({
         state.isSuccess.signinUser = false;
         state.isLoading.signinUser = false;
         state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
       })
       .addCase(logoutUser.pending, (state) => {
         state.isLoading.logoutUser = true;
@@ -288,7 +303,14 @@ export const authSlice = createSlice({
         state.isError.logoutUser = true;
         state.isSuccess.logoutUser = false;
         state.isLoading.logoutUser = false;
-        state.message = action.error;
+        state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
       })
 
       .addCase(addProductToCart.pending, (state) => {
@@ -306,7 +328,14 @@ export const authSlice = createSlice({
         state.isError.addProductToCart = true;
         state.isSuccess.addProductToCart = false;
         state.isLoading.addProductToCart = false;
-        state.message = action.error;
+        state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
       })
       .addCase(removeProductFromCart.pending, (state) => {
         state.isLoading.removeProductFromCart = true;
@@ -322,7 +351,14 @@ export const authSlice = createSlice({
         state.isError.removeProductFromCart = true;
         state.isSuccess.removeProductFromCart = false;
         state.isLoading.removeProductFromCart = false;
-        state.message = action.error;
+        state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
       })
 
       .addCase(updateProductQuantity.pending, (state) => {
@@ -339,7 +375,14 @@ export const authSlice = createSlice({
         state.isError.updateProductQuantity = true;
         state.isSuccess.updateProductQuantity = false;
         state.isLoading.updateProductQuantity = false;
-        state.message = action?.payload;
+        state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
       })
 
       .addCase(clearUserCart.pending, (state) => {
@@ -355,7 +398,14 @@ export const authSlice = createSlice({
         state.isError.clearUserCart = true;
         state.isSuccess.clearUserCart = false;
         state.isLoading.clearUserCart = false;
-        state.message = action?.payload;
+        state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
       })
       .addCase(getUserProductWishlist.pending, (state) => {
         state.isLoading.getUserProductWishlist = true;
@@ -370,7 +420,14 @@ export const authSlice = createSlice({
         state.isError.getUserProductWishlist = true;
         state.isSuccess.getUserProductWishlist = false;
         state.isLoading.getUserProductWishlist = false;
-        state.message = action.error;
+        state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
       })
       .addCase(getUserCart.pending, (state) => {
         state.isLoading.getUserCart = true;
@@ -386,6 +443,13 @@ export const authSlice = createSlice({
         state.isSuccess.getUserCart = false;
         state.isLoading.getUserCart = false;
         state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
       })
       .addCase(placeUserOrder.pending, (state) => {
         state.isLoading.placeUserOrder = true;
@@ -400,7 +464,14 @@ export const authSlice = createSlice({
         state.isError.placeUserOrder = true;
         state.isSuccess.placeUserOrder = false;
         state.isLoading.placeUserOrder = false;
-        state.message = action.error;
+        state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
       })
       .addCase(updateProfile.pending, (state) => {
         state.isLoading.updateProfile = true;
@@ -416,6 +487,13 @@ export const authSlice = createSlice({
         state.isSuccess.updateProfile = false;
         state.isLoading.updateProfile = false;
         state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
       })
 
       .addCase(resetPasswordToken.pending, (state) => {
@@ -425,7 +503,7 @@ export const authSlice = createSlice({
         state.isError.resetPasswordToken = false;
         state.isLoading.resetPasswordToken = false;
         state.isSuccess.resetPasswordToken = true;
-        state.token = action?.payload;
+        state.resetToken = action?.payload;
         toast.success(
           "A password reset link has been sent to your email. Proceed to your eamil to reset your password."
         );
@@ -435,6 +513,13 @@ export const authSlice = createSlice({
         state.isSuccess.resetPasswordToken = false;
         state.isLoading.resetPasswordToken = false;
         state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
       })
       .addCase(resetPassword.pending, (state) => {
         state.isLoading.resetPassword = true;
@@ -451,6 +536,13 @@ export const authSlice = createSlice({
         state.isSuccess.resetPassword = false;
         state.isLoading.resetPassword = false;
         state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
       })
       .addCase(getOrders.pending, (state) => {
         state.isLoading.getOrders = true;
@@ -466,7 +558,13 @@ export const authSlice = createSlice({
         state.isSuccess.getOrders = false;
         state.isLoading.getOrders = false;
         state.message = action?.payload?.response?.data?.message;
-        toast.error();
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
       })
       .addCase(resetState, () => initialState);
   },
