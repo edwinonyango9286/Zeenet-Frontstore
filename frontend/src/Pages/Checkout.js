@@ -8,7 +8,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Meta from "../Components/Meta";
 import { toast } from "react-toastify";
-import { placeUserOrder } from "../features/users/userSlice";
+import { checkout } from "../features/users/userSlice";
 
 const SHIPPINGSCHEMA = Yup.object().shape({
   firstName: Yup.string().required(),
@@ -33,6 +33,10 @@ const Checkout = () => {
   const [paymentStatus, setPaymentStatus] = useState(null);
 
   useEffect(() => {
+    if (!userCart || userCart.length === 0) {
+      setTotalAmount(null);
+      return;
+    }
     let sum = 0;
     for (let index = 0; index < userCart?.length; index++) {
       sum = sum + Number(userCart[index]?.quantity) * userCart[index]?.price;
@@ -68,11 +72,16 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = () => {
+    if (!totalAmount || totalAmount === 0) {
+      toast.error(
+        "Your cart is empty. Add items to your cart to proceed with checkout. "
+      );
+    }
     const paymentInfo = {
       amount: totalAmount,
       phone: user?.phone,
     };
-    dispatch(placeUserOrder(paymentInfo));
+    dispatch(checkout(paymentInfo));
     setPaymentStatus("pending");
   };
 
@@ -510,11 +519,16 @@ const Checkout = () => {
               </div>
               <div className="py-4 d-flex align-items-center justify-content-end">
                 <button
-                  className="button signup border-0"
+                  className={`button signup border-0 ${
+                    !totalAmount || totalAmount === 0
+                      ? "opacity-50 cursor-not-allowed"
+                      : ""
+                  }`}
                   type="submit"
                   onClick={handlePlaceOrder}
+                  disabled={!totalAmount || totalAmount === 0}
                 >
-                  Place order
+                  Checkout
                 </button>
               </div>
             </div>

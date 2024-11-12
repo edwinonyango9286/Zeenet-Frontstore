@@ -138,7 +138,7 @@ const Cart = () => {
               <div className="d-flex flex-column align-items-end gap-3 mb-3">
                 <h6>Sub total {formatKES(totalAmount)}</h6>
                 <Link to="/checkout" className="button signup">
-                  Checkout
+                  Proceed to checkout
                 </Link>
               </div>
             </div>

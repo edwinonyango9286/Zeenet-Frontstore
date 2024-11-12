@@ -122,11 +122,11 @@ export const clearUserCart = createAsyncThunk(
   }
 );
 
-export const placeUserOrder = createAsyncThunk(
-  "user/place-order",
+export const checkout = createAsyncThunk(
+  "user/checkout",
   async (paymentInfo, thunkAPI) => {
     try {
-      return await userService.placeOrder(paymentInfo);
+      return await userService.userCheckout(paymentInfo);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -194,6 +194,7 @@ const initialState = {
     registerUser: false,
     signinUser: false,
     logoutUser: false,
+    checkout: false,
     addProductToCart: false,
     removeProductFromCart: false,
     updateProductQuantity: false,
@@ -210,6 +211,7 @@ const initialState = {
     registerUser: false,
     signinUser: false,
     logoutUser: false,
+    checkout: false,
     addProductToCart: false,
     removeProductFromCart: false,
     updateProductQuantity: false,
@@ -225,6 +227,7 @@ const initialState = {
     registerUser: false,
     signinUser: false,
     logoutUser: false,
+    checkout: false,
     addProductToCart: false,
     removeProductFromCart: false,
     updateProductQuantity: false,
@@ -451,19 +454,19 @@ export const authSlice = createSlice({
           );
         }
       })
-      .addCase(placeUserOrder.pending, (state) => {
-        state.isLoading.placeUserOrder = true;
+      .addCase(checkout.pending, (state) => {
+        state.isLoading.checkout = true;
       })
-      .addCase(placeUserOrder.fulfilled, (state, action) => {
-        state.isError.placeUserOrder = false;
-        state.isLoading.placeUserOrder = false;
-        state.isSuccess.placeUserOrder = true;
+      .addCase(checkout.fulfilled, (state, action) => {
+        state.isError.checkout = false;
+        state.isLoading.checkout = false;
+        state.isSuccess.checkout = true;
         state.paymentStatus = action?.payload;
       })
-      .addCase(placeUserOrder.rejected, (state, action) => {
-        state.isError.placeUserOrder = true;
-        state.isSuccess.placeUserOrder = false;
-        state.isLoading.placeUserOrder = false;
+      .addCase(checkout.rejected, (state, action) => {
+        state.isError.checkout = true;
+        state.isSuccess.checkout = false;
+        state.isLoading.checkout = false;
         state.message = action?.payload?.response?.data?.message;
         if (action?.payload?.response?.data?.message) {
           toast.error(action?.payload?.response?.data?.message);

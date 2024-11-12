@@ -29,11 +29,11 @@ const Wishlist = () => {
   );
   useEffect(() => {
     dispatch(getUserProductWishlist());
-  }, [dispatch]);
+  }, []);
 
   const removeFromWishlist = async (productId) => {
     await dispatch(removeProductFromWishlist(productId));
-    dispatch(getUserProductWishlist());
+    await dispatch(getUserProductWishlist());
   };
 
   const addItemToCart = (product) => {

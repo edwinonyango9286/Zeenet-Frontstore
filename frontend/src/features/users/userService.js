@@ -1,4 +1,3 @@
-import { config } from "../../utils/axiosConfig";
 import { newRequest } from "../../utils/newRequest";
 
 const register = async (userData) => {
@@ -34,7 +33,7 @@ const getUserWishlist = async () => {
     },
     withCredentials: true,
   };
-  const response = await newRequest.get(`user/wishlist`, config);
+  const response = await newRequest.get(`user/get-user-wishlist`, config);
   if (response?.data) {
     return response.data;
   }
@@ -79,7 +78,7 @@ const getCart = async (data) => {
   }
 };
 
-const placeOrder = async (paymentInfo) => {
+const userCheckout = async (paymentInfo) => {
   const user = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : null;
@@ -160,7 +159,7 @@ const userService = {
   forgotPasswordToken,
   resetUserPassword,
   getUserOrders,
-  placeOrder,
+  userCheckout,
 };
 
 export default userService;
