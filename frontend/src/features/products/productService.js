@@ -1,4 +1,3 @@
-import { config } from "../../utils/axiosConfig";
 import { newRequest } from "../../utils/newRequest";
 
 const getProducts = async (data) => {
@@ -47,6 +46,16 @@ const addToWishlist = async (productId) => {
 };
 
 const removeFromWishlist = async (productId) => {
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${user !== null ? user.token : ""}`,
+      Accept: "application/json",
+    },
+    withCredentials: true,
+  };
   const response = await newRequest.put(
     `products/addtowishlist`,
     {
@@ -59,6 +68,16 @@ const removeFromWishlist = async (productId) => {
   }
 };
 const addRating = async (data) => {
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${user !== null ? user.token : ""}`,
+      Accept: "application/json",
+    },
+    withCredentials: true,
+  };
   const response = await newRequest.put(`products/rating`, data, config);
   if (response?.data) {
     return response.data;
