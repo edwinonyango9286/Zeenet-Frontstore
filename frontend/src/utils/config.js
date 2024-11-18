@@ -7,5 +7,4 @@ export const config = {
     Authorization: `Bearer ${user !== null ? user.token : ""}`,
     Accept: "application/json",
   },
-  withCredentials: true,
 };

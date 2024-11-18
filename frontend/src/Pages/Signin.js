@@ -155,7 +155,7 @@ const Signin = () => {
                           role="status"
                           aria-hidden="true"
                         ></span>{" "}
-                        <span>Logging in...</span>
+                        <span>Please wait...</span>
                       </div>
                     ) : (
                       "Sign In"

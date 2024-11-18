@@ -10,6 +10,7 @@ import Meta from "../Components/Meta";
 import { toast } from "react-toastify";
 import { checkout } from "../features/users/userSlice";
 
+
 const SHIPPINGSCHEMA = Yup.object().shape({
   firstName: Yup.string().required(),
   lastName: Yup.string().required(),
@@ -27,6 +28,7 @@ const SHIPPINGSCHEMA = Yup.object().shape({
 const Checkout = () => {
   const dispatch = useDispatch();
   const userCart = useSelector((state) => state?.user?.userCart);
+  const isLoading = useSelector((state) => state?.user?.isLoading?.checkout);
   const user = useSelector((state) => state?.user?.user);
   const [totalAmount, setTotalAmount] = useState(null);
   const [ShippingInfo, setShippingInfo] = useState(null);
@@ -526,9 +528,20 @@ const Checkout = () => {
                   }`}
                   type="submit"
                   onClick={handlePlaceOrder}
-                  disabled={!totalAmount || totalAmount === 0}
+                  disabled={isLoading || !totalAmount || totalAmount === 0}
                 >
-                  Checkout
+                  {isLoading ? (
+                    <div className="d-flex flex-row gap-1 align-items-center justify-content-center">
+                      <span
+                        class="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>{" "}
+                      <span>Please wait...</span>
+                    </div>
+                  ) : (
+                    "Checkout"
+                  )}
                 </button>
               </div>
             </div>
