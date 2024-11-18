@@ -256,6 +256,7 @@ export const authSlice = createSlice({
         state.isLoading.registerUser = false;
         state.isSuccess.registerUser = true;
         state.createdUser = action?.payload;
+        toast.success("Account created successfully.");
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isError.registerUser = true;
