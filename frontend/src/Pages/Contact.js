@@ -11,16 +11,24 @@ import { createEnquiry, resetState } from "../features/contact/contactSlice";
 import CustomInput from "../Components/CustomInput";
 
 let contactSchema = Yup.object().shape({
-  name: Yup.string().required(),
-  email: Yup.string().email().required(),
+  name: Yup.string().required("Please provide your name"),
+  email: Yup.string().email().required("Please provide your email."),
   phone: Yup.string()
     .matches(/^(\+?254|0)?(7\d{8})$/, "Please provide a valid phone number.")
-    .required(),
-  enquiry: Yup.string().required(),
+    .required("Please provide your phone number."),
+  enquiry: Yup.string().required("Please provide your eunquiry."),
 });
 
 const Contact = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(
+    (state) => state.contact.isLoading.createEnquiry
+  );
+  const createdEnquiry = useSelector((state) => state.contact.createdEnquiry);
+  const isSuccess = useSelector(
+    (state) => state.contact.isSuccess.createEnquiry
+  );
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -33,13 +41,14 @@ const Contact = () => {
     onSubmit: (values, { resetForm }) => {
       dispatch(resetState());
       dispatch(createEnquiry(values));
-      resetForm();
+      if (isSuccess && createdEnquiry) {
+        resetForm();
+        dispatch(resetState());
+      }
     },
   });
 
-  const isLoading = useSelector(
-    (state) => state?.contact?.isLoading?.createEnquiry
-  );
+  
 
   return (
     <>
@@ -73,7 +82,20 @@ const Contact = () => {
                     name="name"
                     id="name"
                     onChange={formik.handleChange("name")}
-                    onBlur={formik.handleBlur("name")}
+                    onBlur={(e) => {
+                      formik.setFieldValue(
+                        "name",
+                        e.target.value
+                          .toLowerCase()
+                          .split(" ")
+                          .map(
+                            (word) =>
+                              word.charAt(0).toUpperCase() + word.slice(1)
+                          )
+                          .join(" ")
+                      );
+                      formik.handleBlur(e);
+                    }}
                     value={formik.values.name}
                   />
                   <div className="error">
@@ -118,7 +140,21 @@ const Contact = () => {
                     rows={4}
                     placeholder="Enquiry"
                     onChange={formik.handleChange("enquiry")}
-                    onBlur={formik.handleBlur("enquiry")}
+                    onBlur={(e) => {
+                      formik.setFieldValue(
+                        "enquiry",
+                        e.target.value
+                          .split(/(?<=\.\s|\n)/) // Split by sentence delimiters like ". " or newline
+                          .map(
+                            (sentence) =>
+                              sentence.charAt(0).toUpperCase() +
+                              sentence.slice(1).toLowerCase()
+                          )
+                          .join("")
+                          .trim()
+                      );
+                      formik.handleBlur(e);
+                    }}
                     value={formik.values.enquiry}
                   />
                   <div className="error">
@@ -137,8 +173,8 @@ const Contact = () => {
                           class="spinner-border spinner-border-sm"
                           role="status"
                           aria-hidden="true"
-                        ></span>{" "}
-                        <span>Submitting...</span>
+                        ></span>
+                        <span>Please wait...</span>
                       </div>
                     ) : (
                       "Submit"

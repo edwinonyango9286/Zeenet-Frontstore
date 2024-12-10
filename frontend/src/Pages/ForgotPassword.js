@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Meta from "../Components/Meta";
 import BreadCrump from "../Components/BreadCrumb";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,10 +17,6 @@ const ForgotPassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const message = useSelector((state) => state?.user.message);
-  const isError = useSelector(
-    (state) => state.user?.isError?.resetPasswordToken
-  );
   const isSuccess = useSelector(
     (state) => state?.user?.isSuccess?.resetPasswordToken
   );
@@ -45,14 +41,6 @@ const ForgotPassword = () => {
     },
   });
 
-  useEffect(() => {
-    if (isError && message) {
-      setTimeout(() => {
-        dispatch(resetState());
-      }, 10000);
-    }
-  }, [isError, message]);
-
   return (
     <>
       <Meta title={"forgot password"} />
@@ -66,11 +54,6 @@ const ForgotPassword = () => {
                 We will send you an email to reset your password.
               </p>
 
-              <div className="error text-center">
-                {isError && message
-                  ? message || "Something went wrong. Please try again later."
-                  : ""}
-              </div>
               <form
                 onSubmit={formik.handleSubmit}
                 className="d-flex flex-column gap-10"
@@ -95,7 +78,18 @@ const ForgotPassword = () => {
                     type="submit"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Submitting..." : "Submit"}
+                    {isLoading ? (
+                      <div className="d-flex flex-row gap-1 align-items-center justify-content-center">
+                        <span
+                          class="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                        <span>Please wait...</span>
+                      </div>
+                    ) : (
+                      "Submit"
+                    )}
                   </button>
                   <Link to="/signin">Cancel</Link>
                 </div>

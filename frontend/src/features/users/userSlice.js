@@ -278,7 +278,7 @@ export const authSlice = createSlice({
         state.isError.signinUser = false;
         state.isLoading.signinUser = false;
         state.isSuccess.signinUser = true;
-        state.user = action.payload;
+        state.user = action?.payload;
         localStorage.setItem("token", action?.payload?.token);
       })
       .addCase(signinUser.rejected, (state, action) => {

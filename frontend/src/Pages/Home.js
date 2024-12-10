@@ -598,7 +598,7 @@ const Home = () => {
                             width={80}
                             height={40}
                             alt="brand6"
-                          ></img>
+                          />
                         </div>
                         <div className="">
                           <img
@@ -607,7 +607,7 @@ const Home = () => {
                             width={80}
                             height={40}
                             alt="brand7"
-                          ></img>
+                          />
                         </div>
                         <div className="">
                           <img
@@ -616,7 +616,7 @@ const Home = () => {
                             width={80}
                             height={40}
                             alt="brand8"
-                          ></img>
+                          />
                         </div>
                       </div>
                     </Marquee>

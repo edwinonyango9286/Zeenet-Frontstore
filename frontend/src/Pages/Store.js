@@ -49,7 +49,7 @@ const Store = () => {
     dispatch(
       getAllProducts({ sort, tag, brand, category, minPrice, maxPrice })
     );
-  }, [sort, tag, brand, category, minPrice, maxPrice]);
+  }, [sort, tag, brand, category, minPrice, maxPrice, dispatch]);
 
   const formatKES = (amount) => {
     return new Intl.NumberFormat("en-KE", {

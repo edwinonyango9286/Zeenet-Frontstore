@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-import blogImage from "../images/blog-1.jpg";
 import { Link, useLocation } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Container from "../Components/Container";
@@ -9,18 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getABlog } from "../features/blogs/blogSlice";
 
 const SingleBlog = () => {
-  const blogState = useSelector((state) => state?.blog?.singleBlog);
+  const blogState = useSelector((state) => state.blog.singleBlog);
   const dispatch = useDispatch();
   const location = useLocation();
-  const getBlogId = location.pathname.split("/")[3];
+  const blogId = location.pathname.split("/")[3];
 
   useEffect(() => {
-    getblog();
-  }, []);
-
-  const getblog = () => {
-    dispatch(getABlog(getBlogId));
-  };
+    dispatch(getABlog(blogId));
+  }, [blogId]);
 
   return (
     <>
@@ -38,14 +33,9 @@ const SingleBlog = () => {
               <h3 className="text-uppercase">{blogState?.title}</h3>
               <div className="d-flex flex-col">
                 <div>
-
                   <img
-                    src={
-                      blogState?.images[0]?.url
-                        ? blogState?.images[0]?.url
-                        : blogImage
-                    }
-                    alt="blog image"
+                    src={blogState?.images[0]?.url}
+                    alt={blogState.title}
                     className="img-fluid  my-4 rounded-4  w-md-100 object-fit-cover"
                     height={100}
                   />

@@ -18,6 +18,7 @@ export const resetState = createAction("Reset_all");
 
 const enquiryState = {
   enquiries: [],
+  createdEnquiry: null,
   isError: {
     createEnquiry: false,
   },
@@ -43,9 +44,9 @@ export const contactSlice = createSlice({
         state.isLoading.createEnquiry = false;
         state.isError.createEnquiry = false;
         state.isSuccess.createEnquiry = true;
-        state.createdEnquiry = action.payload;
+        state.createdEnquiry = action?.payload;
         toast.success(
-          "Enquiry Submitted. We will review and provide response in a few."
+          "Your enquiry has been submitted. We’ll review it and get back to you shortly."
         );
       })
 
@@ -54,7 +55,13 @@ export const contactSlice = createSlice({
         state.isError.createEnquiry = true;
         state.isSuccess.createEnquiry = false;
         state.message = action?.payload?.response?.data?.message;
-        toast.error(message || "Something went wrong. Please try again later.");
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "We couldn't create the enquiry. Please check your internet connection or try again in a moment."
+          );
+        }
       })
       .addCase(resetState, () => enquiryState);
   },

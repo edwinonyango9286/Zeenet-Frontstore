@@ -27,7 +27,6 @@ import { addProductToCart } from "../features/users/userSlice";
 
 const Product = () => {
   const [quantity, setQuantity] = useState(1);
-
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -230,27 +229,20 @@ const Product = () => {
                           {product?.category}
                         </p>
                       </div>
-
-                      <div className="d-flex gap-2 align-items-center my-2">
-                        <h3 className="product-heading">Tags</h3>
-                        <p className="product-data mb-0 mt-0">
-                          {product?.tags}
-                        </p>
-                      </div>
-
                       <div className="d-flex gap-2 align-items-center my-2">
                         <h3 className="product-heading">Availability</h3>
                         <p className="product-data mb-0 mt-0">
                           {product?.quantity} units
                         </p>
                       </div>
-
-                      <div className="d-flex gap-2 align-items-center mt-2">
-                        <h3 className="product-heading mb-2"> Screen Size</h3>
-                        <p className="product-data  mb-2 mt-0 ">
-                          {parseFloat(product?.screenSize)}"
-                        </p>
-                      </div>
+                      {product?.screenSize && (
+                        <div className="d-flex gap-2 align-items-center mt-2">
+                          <h3 className="product-heading mb-2"> Screen Size</h3>
+                          <p className="product-data  mb-2 mt-0 ">
+                            {parseFloat(product?.screenSize)}"
+                          </p>
+                        </div>
+                      )}
                       <div className="d-flex flex-column  gap-4 flex-row mt-3 mb-3">
                         <div className="d-flex flex-row  align-items-center gap-4 ">
                           {alreadyAddedToCart === false && (
@@ -370,7 +362,7 @@ const Product = () => {
                           <span className="text-white">
                             <img
                               src={kcbBadge}
-                              alt=""
+                              alt="Kcb Badge"
                               width={80}
                               height={40}
                               className=" img-fluid rounded-pill"
@@ -392,7 +384,7 @@ const Product = () => {
                           <span className="text-white">
                             <img
                               src={airtelMoneyBadge}
-                              alt=""
+                              alt="Airtel Badge"
                               width={80}
                               height={40}
                               className="img-fluid rounded-pill"

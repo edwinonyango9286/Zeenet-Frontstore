@@ -31,8 +31,6 @@ const Signup = () => {
   const createdUser = useSelector((state) => state?.user?.createdUser);
   const isSuccess = useSelector((state) => state.user?.isSuccess?.registerUser);
   const isLoading = useSelector((state) => state.user?.isLoading?.registerUser);
-  const isError = useSelector((state) => state.user?.isError?.registerUser);
-  const message = useSelector((state) => state?.user?.message);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -56,14 +54,6 @@ const Signup = () => {
     },
   });
 
-  useEffect(() => {
-    if (isError && message) {
-      setTimeout(() => {
-        dispatch(resetState());
-      }, 10000);
-    }
-  }, [isError, message]);
-
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -79,11 +69,6 @@ const Signup = () => {
             <div className="auth-card">
               <h3 className="text-center">Sign Up</h3>
               <p className="text-center">Sign up to continue.</p>
-              <div className="error text-center mb-2">
-                {isError && message
-                  ? message || "Something went wrong. Please try again later."
-                  : ""}
-              </div>
               <form
                 onSubmit={formik.handleSubmit}
                 className="d-flex flex-column gap-10"

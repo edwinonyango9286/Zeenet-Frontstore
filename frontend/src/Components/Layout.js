@@ -12,7 +12,7 @@ const Layout = () => {
       <Outlet></Outlet>
       <Footer></Footer>
       <ToastContainer
-        position="top-right"
+        position="top-center"
         autoClose={5000}
         hideProgressBar={true}
         newestOnTop={true}
@@ -22,7 +22,7 @@ const Layout = () => {
         pauseOnHover
         draggable
         transition={Bounce}
-        theme="dark"
+        theme="light"
         toastStyle={{
           fontSize: "12px",
           fontWeight: "400",

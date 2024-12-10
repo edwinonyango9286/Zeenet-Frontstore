@@ -102,7 +102,7 @@ const Wishlist = () => {
                           }}
                           title="Remove product from wishlist."
                           src={cross}
-                          className=" position-absolute img-fluid cross"
+                          className="position-absolute img-fluid cross"
                           alt="cross"
                           width={50}
                           height={50}
@@ -110,13 +110,9 @@ const Wishlist = () => {
                         <div className="bg-white pt-4  pt-2 rounded">
                           <div>
                             <img
-                              src={item?.images[0]?.url || "Product image."}
+                              src={item?.images[0]?.url}
                               className="img-fluid d-block mx-auto"
-                              alt={
-                                item?.images[0]?.url
-                                  ? item?.images[0]?.url
-                                  : "Product image"
-                              }
+                              alt={item?.title}
                               width={140}
                               height={140}
                             />

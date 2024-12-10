@@ -115,7 +115,7 @@ export const productSlice = createSlice({
         state.isLoading.addProductToWishlist = false;
         state.isError.addProductToWishlist = false;
         state.isSuccess.addProductToWishlist = true;
-        state.wishlist = action.payload;
+        state.wishlist = action?.payload;
         toast.success("Product added to your wishlist.");
       })
       .addCase(addProductToWishlist.rejected, (state, action) => {
@@ -132,7 +132,7 @@ export const productSlice = createSlice({
         state.isLoading.removeProductFromWishlist = false;
         state.isError.removeProductFromWishlist = false;
         state.isSuccess.removeProductFromWishlist = true;
-        state.wishlist = action.payload;
+        state.wishlist = action?.payload;
         toast.success("Product removed from your wishlist.");
       })
       .addCase(removeProductFromWishlist.rejected, (state, action) => {
@@ -149,7 +149,7 @@ export const productSlice = createSlice({
         state.isLoading.getAproduct = false;
         state.isError.getAproduct = false;
         state.isSuccess.getAproduct = true;
-        state.product = action.payload;
+        state.product = action?.payload;
       })
       .addCase(getAproduct.rejected, (state, action) => {
         state.isLoading.getAproduct = false;
@@ -164,7 +164,7 @@ export const productSlice = createSlice({
         state.isLoading.addProductRating = false;
         state.isError.addProductRating = false;
         state.isSuccess.addProductRating = true;
-        state.rating = action.payload;
+        state.rating = action?.payload;
         toast.success("Product rating has been submitted.");
       })
       .addCase(addProductRating.rejected, (state, action) => {

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import blogService from "./blogService";
+import { toast } from "react-toastify";
 
 export const getAllBlogs = createAsyncThunk(
   "blogs/get-all-blogs",
@@ -35,7 +36,7 @@ const blogState = {
   },
   isSuccess: {
     getAllBlogs: false,
-    getAllBlogs: false,
+    getABlog: false,
   },
   message: "",
 };
@@ -53,13 +54,20 @@ export const blogSlice = createSlice({
         state.isLoading.getAllBlogs = false;
         state.isError.getAllBlogs = false;
         state.isSuccess.getAllBlogs = true;
-        state.blogs = action.payload;
+        state.blogs = action?.payload;
       })
       .addCase(getAllBlogs.rejected, (state, action) => {
         state.isLoading.getAllBlogs = false;
         state.isError.getAllBlogs = true;
         state.isSuccess.getAllBlogs = false;
         state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "We couldn't fetch blogs. Please check your internet connection or try a again in a moment."
+          );
+        }
       })
       .addCase(getABlog.pending, (state) => {
         state.isLoading.getABlog = true;
@@ -68,13 +76,20 @@ export const blogSlice = createSlice({
         state.isLoading.getABlog = false;
         state.isError.getABlog = false;
         state.isSuccess.getABlog = true;
-        state.singleBlog = action.payload;
+        state.singleBlog = action?.payload;
       })
       .addCase(getABlog.rejected, (state, action) => {
         state.isLoading.getABlog = false;
         state.isError.getABlog = true;
         state.isSuccess.getABlog = false;
         state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "We couldn't fetch the blog. Please check your internet connection or try a again in a moment."
+          );
+        }
       });
   },
 });

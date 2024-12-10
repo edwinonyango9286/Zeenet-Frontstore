@@ -33,9 +33,7 @@ const Signin = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const user = useSelector((state) => state?.user?.user);
-  const message = useSelector((state) => state?.user?.message);
   const isSuccess = useSelector((state) => state?.user?.isSuccess?.signinUser);
-  const isError = useSelector((state) => state?.user?.isError?.signinUser);
   const isLoading = useSelector((state) => state?.user?.isLoading?.signinUser);
   const from =
     (location?.state &&
@@ -56,6 +54,7 @@ const Signin = () => {
     },
     validationSchema: SIGNIN_SCHEMA,
     onSubmit: (values, { resetForm }) => {
+      dispatch(resetState());
       dispatch(signinUser(values));
       if (isSuccess && user) {
         resetForm();
@@ -64,12 +63,6 @@ const Signin = () => {
       }
     },
   });
-
-  useEffect(() => {
-    if (isError && message) {
-      dispatch(resetState());
-    }
-  }, [isError, message]);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
@@ -86,11 +79,6 @@ const Signin = () => {
             <div className="auth-card">
               <h3 className="text-center ">Sign In</h3>
               <p className="text-center">Signin to your account to continue.</p>
-              <div className="error text-center mb-2">
-                {isError && message
-                  ? message || "Something went wrong. Please try again later."
-                  : ""}
-              </div>
               <form
                 onSubmit={formik.handleSubmit}
                 className="d-flex flex-column gap-10"
@@ -154,7 +142,7 @@ const Signin = () => {
                           class="spinner-border spinner-border-sm"
                           role="status"
                           aria-hidden="true"
-                        ></span>{" "}
+                        ></span>
                         <span>Please wait...</span>
                       </div>
                     ) : (
