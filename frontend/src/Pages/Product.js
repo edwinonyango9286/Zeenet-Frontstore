@@ -52,11 +52,11 @@ const Product = () => {
       productId: product?._id,
       quantity: quantity,
       price: product?.price,
-      category: product?.category,
+      category: product?.category?.title,
       title: product?.title,
       images: product?.images[0]?.url,
       screenSize: product?.screenSize,
-      brand: product?.brand,
+      brand: product?.brand?.title,
     };
     dispatch(addProductToCart(cartData));
   };
@@ -215,18 +215,20 @@ const Product = () => {
                     <div className=" border-bottom py-2">
                       <div className="d-flex gap-2 align-items-center">
                         <h3 className="product-heading">Type</h3>
-                        <p className="product-data">{product?.category}</p>
+                        <p className="product-data">
+                          {product?.category?.title}
+                        </p>
                       </div>
 
                       <div className="d-flex gap-2 align-items-center my-2">
                         <h3 className="product-heading">Brand</h3>
-                        <p className="product-data">{product?.brand}</p>
+                        <p className="product-data">{product?.brand?.title}</p>
                       </div>
 
                       <div className="d-flex gap-2 align-items-center my-2">
                         <h3 className="product-heading">Category</h3>
                         <p className="product-data mb-0 mt-0">
-                          {product?.category}
+                          {product?.category?.title}
                         </p>
                       </div>
                       <div className="d-flex gap-2 align-items-center my-2">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BreadCrumb from "../Components/BreadCrumb";
 import Meta from "../Components/Meta";
 import { AiTwotoneHome, AiTwotoneMail } from "react-icons/ai";
@@ -38,17 +38,18 @@ const Contact = () => {
       enquiry: "",
     },
     validationSchema: contactSchema,
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: (values) => {
       dispatch(resetState());
       dispatch(createEnquiry(values));
-      if (isSuccess && createdEnquiry) {
-        resetForm();
-        dispatch(resetState());
-      }
     },
   });
 
-  
+  useEffect(() => {
+    if (isSuccess && createdEnquiry) {
+      formik.resetForm();
+      dispatch(resetState());
+    }
+  }, [isSuccess, createdEnquiry, formik, dispatch]);
 
   return (
     <>
@@ -58,6 +59,7 @@ const Contact = () => {
         <div className="row">
           <div className="col-12">
             <iframe
+              title="Google map showing physical location of our shop."
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d54952.62173316973!2d36.79491909941817!3d-1.3028984515834783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d671900001%3A0x90f5e610e51dce23!2sKimathi%20House!5e0!3m2!1sen!2ske!4v1728286391627!5m2!1sen!2ske"
               width="600"
               height="450"

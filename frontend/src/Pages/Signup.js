@@ -43,14 +43,9 @@ const Signup = () => {
       password: "",
     },
     validationSchema: SIGN_UP_SCHEMA,
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: (values) => {
       dispatch(resetState());
       dispatch(registerUser(values));
-      if (isSuccess && createdUser) {
-        resetForm();
-        dispatch(resetState());
-        navigate("/signin");
-      }
     },
   });
 
@@ -58,6 +53,14 @@ const Signup = () => {
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  useEffect(() => {
+    if (isSuccess && createdUser) {
+      formik.resetForm();
+      dispatch(resetState());
+      navigate("/signin");
+    }
+  }, [isSuccess, createdUser, formik, dispatch, navigate]);
 
   return (
     <>

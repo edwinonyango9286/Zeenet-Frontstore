@@ -36,8 +36,8 @@ const Store = () => {
     let newTags = [];
     for (let index = 0; index < products?.length; index++) {
       const element = products[index];
-      newBrands.push(element.brand);
-      newCategory.push(element.category);
+      newBrands.push(element.brand?.title);
+      newCategory.push(element.category?.title);
       newTags.push(element.tags);
     }
     setBrands(newBrands);

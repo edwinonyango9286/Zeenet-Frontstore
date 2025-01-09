@@ -1,4 +1,6 @@
 import { newRequest } from "../../utils/newRequest";
+import { config } from "../../utils/axiosConfig";
+import Cookies from "js-cookie";
 
 const register = async (userData) => {
   const response = await newRequest.post(`user/register`, userData);
@@ -10,7 +12,6 @@ const register = async (userData) => {
 const signin = async (userData) => {
   const response = await newRequest.post(`user/signin`, userData);
   if (response?.data) {
-    localStorage.setItem("user", JSON.stringify(response.data));
     return response.data;
   }
 };
@@ -23,16 +24,6 @@ const logoutAUser = async () => {
 };
 
 const getUserWishlist = async () => {
-  const user = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
-    : null;
-  const config = {
-    headers: {
-      Authorization: `Bearer ${user !== null ? user.token : ""}`,
-      Accept: "application/json",
-    },
-    withCredentials: true,
-  };
   const response = await newRequest.get(`user/get-user-wishlist`, config);
   if (response?.data) {
     return response.data;
@@ -40,17 +31,8 @@ const getUserWishlist = async () => {
 };
 
 const addToCart = async (cartData) => {
-  const user = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
-    : null;
-  const config = {
-    headers: {
-      Authorization: `Bearer ${user !== null ? user.token : ""}`,
-      Accept: "application/json",
-    },
-    withCredentials: true,
-  };
-  if (localStorage.getItem("customer")) {
+  const token = Cookies.get("token");
+  if (token) {
     const response = await newRequest.post(`user/cart`, cartData, config);
     if (response?.data) {
       localStorage.removeItem("userCart");
@@ -62,16 +44,6 @@ const addToCart = async (cartData) => {
 };
 
 const getCart = async (data) => {
-  const user = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
-    : null;
-  const config = {
-    headers: {
-      Authorization: `Bearer ${user !== null ? user.token : ""}`,
-      Accept: "application/json",
-    },
-    withCredentials: true,
-  };
   const response = await newRequest.get(`user/getusercart`, data, config);
   if (response?.data) {
     return response.data;
@@ -79,16 +51,6 @@ const getCart = async (data) => {
 };
 
 const userCheckout = async (paymentInfo) => {
-  const user = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
-    : null;
-  const config = {
-    headers: {
-      Authorization: `Bearer ${user !== null ? user.token : ""}`,
-      Accept: "application/json",
-    },
-    withCredentials: true,
-  };
   const response = await newRequest.post(
     "/payment/stk-push",
     paymentInfo,
@@ -99,16 +61,6 @@ const userCheckout = async (paymentInfo) => {
   }
 };
 const updateUserProfile = async (data) => {
-  const user = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
-    : null;
-  const config = {
-    headers: {
-      Authorization: `Bearer ${user !== null ? user.token : ""}`,
-      Accept: "application/json",
-    },
-    withCredentials: true,
-  };
   const response = await newRequest.put(`user/update-user`, data?.data, config);
   if (response?.data) {
     return response.data;
@@ -132,16 +84,6 @@ const resetUserPassword = async (data) => {
 };
 
 const getUserOrders = async () => {
-  const user = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
-    : null;
-  const config = {
-    headers: {
-      Authorization: `Bearer ${user !== null ? user.token : ""}`,
-      Accept: "application/json",
-    },
-    withCredentials: true,
-  };
   const response = await newRequest.get(`user/getmyorders`, config);
   if (response?.data) {
     return response.data;

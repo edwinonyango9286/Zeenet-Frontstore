@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import contactService from "./contactService";
 import { toast } from "react-toastify";
-import { message } from "antd";
 
 export const createEnquiry = createAsyncThunk(
   "enquiries/post-enquiry",
@@ -49,7 +48,6 @@ export const contactSlice = createSlice({
           "Your enquiry has been submitted. We’ll review it and get back to you shortly."
         );
       })
-
       .addCase(createEnquiry.rejected, (state, action) => {
         state.isLoading.createEnquiry = false;
         state.isError.createEnquiry = true;

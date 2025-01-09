@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import userService from "./userService";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 export const registerUser = createAsyncThunk(
   "auth/user-register",
@@ -179,13 +180,9 @@ export const getOrders = createAsyncThunk(
 
 export const resetState = createAction("Reset_all");
 
-const user = localStorage.getItem("user")
-  ? JSON.parse(localStorage.getItem("user"))
-  : null;
-
 const initialState = {
-  createdUser: {},
-  user: user,
+  createdUser: null,
+  user: null,
   userCart: localStorage.getItem("userCart")
     ? JSON.parse(localStorage.getItem("userCart"))
     : [],
@@ -279,7 +276,26 @@ export const authSlice = createSlice({
         state.isLoading.signinUser = false;
         state.isSuccess.signinUser = true;
         state.user = action?.payload;
-        localStorage.setItem("token", action?.payload?.token);
+        Cookies.set("firstName", action?.payload?.firstName, {
+          expires: 1,
+          secure: true,
+          sameSite: "Strict",
+        });
+        Cookies.set("email", action?.payload?.email, {
+          expires: 1,
+          secure: true,
+          sameSite: "Strict",
+        });
+        Cookies.set("avatar", action?.payload?.avatar, {
+          expires: 1,
+          secure: true,
+          sameSite: "Strict",
+        });
+        Cookies.set("token", action?.payload?.token, {
+          expires: 1,
+          secure: true,
+          sameSite: "Strict",
+        });
       })
       .addCase(signinUser.rejected, (state, action) => {
         state.isError.signinUser = true;
@@ -316,7 +332,6 @@ export const authSlice = createSlice({
           );
         }
       })
-
       .addCase(addProductToCart.pending, (state) => {
         state.isLoading.addProductToCart = true;
       })
@@ -349,7 +364,7 @@ export const authSlice = createSlice({
         state.isLoading.removeProductFromCart = false;
         state.isSuccess.removeProductFromCart = true;
         state.userCart = action?.payload;
-        localStorage.setItem("userCart", JSON.stringify(action.payload));
+        localStorage.setItem("userCart", JSON.stringify(action?.payload));
       })
       .addCase(removeProductFromCart.rejected, (state, action) => {
         state.isError.removeProductFromCart = true;
@@ -373,7 +388,7 @@ export const authSlice = createSlice({
         state.isLoading.updateProductQuantity = false;
         state.isSuccess.updateProductQuantity = true;
         state.userCart = action?.payload;
-        localStorage.setItem("userCart", JSON.stringify(action.payload));
+        localStorage.setItem("userCart", JSON.stringify(action?.payload));
       })
       .addCase(updateProductQuantity.rejected, (state, action) => {
         state.isError.updateProductQuantity = true;

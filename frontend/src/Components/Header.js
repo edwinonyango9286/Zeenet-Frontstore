@@ -14,6 +14,7 @@ import { getAproduct } from "../features/products/productSlice";
 import { TfiMenu } from "react-icons/tfi";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { logoutUser, resetState } from "../features/users/userSlice";
+import Cookies from "js-cookie";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -35,21 +36,14 @@ const Header = () => {
     setProductOpt(data);
   }, [products]);
 
-  const clearLocalStorage = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-  };
-
   const handleLogout = async () => {
-    try {
-      clearLocalStorage();
-      dispatch(logoutUser());
-      dispatch(resetState());
-      navigate("/store");
-      window.location.reload();
-    } catch (error) {
-      console.log("Something is not right.");
-    }
+    await dispatch(logoutUser());
+    dispatch(resetState());
+    Cookies.remove("firstName");
+    Cookies.remove("email");
+    Cookies.remove("avatar");
+    Cookies.remove("token");
+    navigate("/store");
   };
 
   return (

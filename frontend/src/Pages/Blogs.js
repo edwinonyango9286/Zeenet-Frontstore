@@ -4,15 +4,16 @@ import Meta from "../Components/Meta";
 import BlogCard from "../Components/BlogCard";
 import Container from "../Components/Container";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBlogs } from "../features/blogs/blogSlice";
+import { getAllBlogs, reseBlogState } from "../features/blogs/blogSlice";
 
 const Blogs = () => {
   const dispatch = useDispatch();
   const blogState = useSelector((state) => state?.blog?.blogs);
 
   useEffect(() => {
+    dispatch(reseBlogState());
     dispatch(getAllBlogs());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

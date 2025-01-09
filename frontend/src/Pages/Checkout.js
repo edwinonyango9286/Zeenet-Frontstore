@@ -10,7 +10,6 @@ import Meta from "../Components/Meta";
 import { toast } from "react-toastify";
 import { checkout } from "../features/users/userSlice";
 
-
 const SHIPPINGSCHEMA = Yup.object().shape({
   firstName: Yup.string().required(),
   lastName: Yup.string().required(),
@@ -483,12 +482,14 @@ const Checkout = () => {
                               className="img-fluid border rounded "
                               width={120}
                               height={120}
-                              alt="Product Image"
+                              alt="Product"
                             ></img>
                           </div>
                           <div>
                             <h5 className="total-price">{item?.title}</h5>
-                            <h5 className="total-price">{item?.brand}</h5>
+                            <h5 className="total-price">
+                              {item?.brand?.title}
+                            </h5>
                             <h5 className="total-price">
                               {formatKES(item?.price)}
                             </h5>

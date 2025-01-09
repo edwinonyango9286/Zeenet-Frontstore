@@ -1,10 +1,7 @@
 import { Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export const OpenRoutes = ({ children }) => {
-  const customer = JSON.parse(localStorage.getItem("user"));
-  return customer?.token === undefined ? (
-    children
-  ) : (
-    <Navigate to={"/"} replace={true} />
-  );
+  const token = Cookies.get("token");
+  return token === undefined ? children : <Navigate to={"/"} replace={true} />;
 };

@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import blogService from "./blogService";
 import { toast } from "react-toastify";
 
@@ -24,7 +24,7 @@ export const getABlog = createAsyncThunk(
   }
 );
 
-const blogState = {
+const initialState = {
   blogs: [],
   isError: {
     getAllBlogs: false,
@@ -41,9 +41,11 @@ const blogState = {
   message: "",
 };
 
+export const reseBlogState = createAction("Reset_all");
+
 export const blogSlice = createSlice({
   name: "blogs",
-  initialState: blogState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -90,7 +92,8 @@ export const blogSlice = createSlice({
             "We couldn't fetch the blog. Please check your internet connection or try a again in a moment."
           );
         }
-      });
+      })
+      .addCase(reseBlogState, () => initialState);
   },
 });
 

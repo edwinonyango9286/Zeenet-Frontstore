@@ -1,32 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BreadCrumb from "../Components/BreadCrumb";
 import Container from "../Components/Container";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { logoutUser, resetState } from "../features/users/userSlice";
+import Cookies from "js-cookie";
 
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state?.user ?? {});
-
-  const clearLocalStorage = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-  };
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [avatar, SetAvatar] = useState("");
 
   const handleLogout = async () => {
-    try {
-      clearLocalStorage();
-      dispatch(logoutUser());
-      dispatch(resetState());
-      navigate("/store");
-      window.location.reload();
-    } catch (error) {
-      console.log("Something is not right.");
-    }
+    await dispatch(logoutUser());
+    dispatch(resetState());
+    Cookies.remove("firstName");
+    Cookies.remove("email");
+    Cookies.remove("avatar");
+    Cookies.remove("token");
+    navigate("/store");
   };
+
+  useEffect(() => {
+    const adminFirstName = Cookies.get("firstName");
+    const adminEmail = Cookies.get("email");
+    const adminAvatar = Cookies.get("avatar");
+    if (adminFirstName) setFirstName(adminFirstName);
+    if (adminEmail) setEmail(adminEmail);
+    if (adminAvatar) SetAvatar(adminAvatar);
+  }, []);
 
   return (
     <>
@@ -65,15 +70,15 @@ const Profile = () => {
               <div className="d-flex gap-2 justify-content-start flex-column">
                 <h4 className="mt-0 md-0">Account details</h4>
                 <h6 className="text-capitalize mb-0 mt-0">
-                  Name:{"  "} {user?.firstname + " " + user?.lastname}
+                  Name:{"  "} {firstName + " " + firstName}
                 </h6>
                 <h6 className="mb-0 mt-0">
                   {" "}
-                  Email: {"  "} {user?.email}
+                  Email: {"  "} {email}
                 </h6>
                 <h6 className="mb-0 mt-0">
                   {" "}
-                  Phone: {"  "} {user?.phone}
+                  Phone: {"  "} {""}
                 </h6>
               </div>
             </div>

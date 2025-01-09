@@ -71,7 +71,7 @@ const Cart = () => {
                         />
                       </div>
                       <div>
-                        <p className="mt-0">{item?.category}</p>
+                        <p className="mt-0">{item?.category?.title}</p>
                         <p className="mb-0">{item?.title}</p>
                         <p className="mb-0">{formatKES(item?.price)}</p>
                         <p className="d-flex justify-content-between flex-wrap mb-0">

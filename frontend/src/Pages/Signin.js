@@ -41,12 +41,6 @@ const Signin = () => {
       location?.state?.from?.pathname) ||
     "/store";
 
-  useEffect(() => {
-    if (user) {
-      navigate(from, { replace: true });
-    }
-  }, [user, navigate]);
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -63,6 +57,13 @@ const Signin = () => {
       }
     },
   });
+
+  useEffect(() => {
+    if (isSuccess && user) {
+      formik.resetForm();
+      navigate(from, { replace: true });
+    }
+  }, [isSuccess, user, navigate, from, formik]);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {

@@ -41,11 +41,11 @@ const Wishlist = () => {
       productId: product?._id,
       quantity: quantity,
       price: product?.price,
-      category: product?.category,
+      category: product?.category?.title,
       title: product?.title,
       images: product?.images[0]?.url,
       screenSize: product?.screenSize,
-      brand: product?.brand,
+      brand: product?.brand?.title,
     };
     dispatch(addProductToCart(cartData));
   };

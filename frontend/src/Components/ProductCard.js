@@ -43,7 +43,7 @@ const ProductCard = (props) => {
                   >
                     <img
                       src={wishlistIcon}
-                      alt="Wishlist Image"
+                      alt="Wishlist"
                       loading="lazy"
                       width={20}
                       height={20}
@@ -70,7 +70,7 @@ const ProductCard = (props) => {
                   />
                 </div>
                 <div className="product-details">
-                  <h6 className="brand mb-0 mt-3">{item?.brand}</h6>
+                  <h6 className="brand mb-0 mt-3">{item?.brand?.title}</h6>
                   <h5 className="product-title mb-0">{item?.title}</h5>
                   <ReactStars
                     count={5}
@@ -85,14 +85,14 @@ const ProductCard = (props) => {
                   <div className="d-flex flex-column gap-2">
                     <img
                       src={prodcompare}
-                      alt="Compare Product Image"
+                      alt="Compare Product"
                       width={20}
                       height={20}
                     />
 
                     <img
                       src={view}
-                      alt="View Product Image"
+                      alt="View Product"
                       loading="lazy"
                       width={20}
                       height={20}
@@ -100,7 +100,7 @@ const ProductCard = (props) => {
                     />
                     <img
                       src={addCart}
-                      alt="Add to cart Image"
+                      alt="Add to cart"
                       loading="lazy"
                       width={20}
                       height={20}

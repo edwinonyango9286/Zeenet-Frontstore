@@ -39,8 +39,8 @@ import addCart from "../images/add-cart.svg";
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const blogState = useSelector((state) => state?.blog?.blogs);
-  const productState = useSelector((state) => state?.product?.products);
+  const blogs = useSelector((state) => state?.blog?.blogs);
+  const products = useSelector((state) => state?.product?.products);
   const loadingProducts = useSelector(
     (state) => state?.product?.isLoading?.getAllProducts
   );
@@ -49,9 +49,9 @@ const Home = () => {
   );
 
   const popularProducts =
-    productState?.filter((item) => item?.tags === "Popular") || [];
+    products?.filter((item) => item?.tags === "Popular") || [];
   const specialProducts =
-    productState?.filter((item) => item?.tags === "Special") || [];
+    products?.filter((item) => item?.tags === "Special") || [];
 
   const addProductUserToWishlist = (productId) => {
     dispatch(addProductToWishlist(productId));
@@ -59,7 +59,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllBlogs());
     dispatch(getAllProducts());
-  }, []);
+  }, [dispatch]);
 
   const formatKES = (amount) => {
     return new Intl.NumberFormat("en-KE", {
@@ -193,31 +193,32 @@ const Home = () => {
               <div className="row">
                 <div className="col-12">
                   <div className="services d-flex align-items-center justify-content-between ">
-                    {services?.map((service, index) => (
-                      <div
-                        className="d-flex align-items-center justify-content-center gap-4"
-                        key={index}
-                      >
-                        <div>
-                          <img
-                            src={service.image}
-                            alt="Services"
-                            className="advertImages img-fluid"
-                            width={40}
-                            height={40}
-                            loading="lazy"
-                          />
+                    {Array.isArray(services) &&
+                      services?.map((service, index) => (
+                        <div
+                          className="d-flex align-items-center justify-content-center gap-4"
+                          key={index}
+                        >
                           <div>
-                            <h6 className="d-none d-lg-block">
-                              {service.title}
-                            </h6>
-                            <p className="mb-0 d-none d-lg-block">
-                              {service.tagline}
-                            </p>
+                            <img
+                              src={service?.image}
+                              alt="Services"
+                              className="advertImages img-fluid"
+                              width={40}
+                              height={40}
+                              loading="lazy"
+                            />
+                            <div>
+                              <h6 className="d-none d-lg-block">
+                                {service.title}
+                              </h6>
+                              <p className="mb-0 d-none d-lg-block">
+                                {service?.tagline}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
                   </div>
                 </div>
               </div>
@@ -228,12 +229,12 @@ const Home = () => {
                 <div>
                   <div className="col-12">
                     <h3 className="section-heading">
-                      {productState.length === 0 ? " " : "Featured collection"}
+                      {products.length === 0 ? " " : "Featured collection"}
                     </h3>
                   </div>
                   <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-start  gap-2 flex-wrap">
-                    {productState &&
-                      productState?.map((item, index) => {
+                    {Array.isArray(products) &&
+                      products?.map((item, index) => {
                         if (item?.tags === "Featured") {
                           return (
                             <div key={index} className="">
@@ -247,7 +248,7 @@ const Home = () => {
                                   >
                                     <img
                                       src={wishlistIcon}
-                                      alt="Wishlist Image"
+                                      alt="Wishlist"
                                       width={20}
                                       height={20}
                                     />
@@ -278,7 +279,7 @@ const Home = () => {
 
                                 <div className="product-details">
                                   <h6 className="brand mt-3 mb-0">
-                                    {item?.brand}
+                                    {item?.brand?.title}
                                   </h6>
                                   <h5 className="product-title mb-0">
                                     {item?.title}
@@ -300,7 +301,7 @@ const Home = () => {
                                     <button className="border-0 bg-transparent">
                                       <img
                                         src={prodcompare}
-                                        alt="Compare Product Image"
+                                        alt="Compare Product"
                                         loading="lazy"
                                         width={20}
                                         height={20}
@@ -310,7 +311,7 @@ const Home = () => {
                                     <button className="border-0 bg-transparent">
                                       <img
                                         src={view}
-                                        alt="View Product Image"
+                                        alt="View Product"
                                         onClick={() =>
                                           navigate("/product/" + item?._id)
                                         }
@@ -406,13 +407,13 @@ const Home = () => {
                   </div>
 
                   <div className="col-12 d-flex  flex-row align-items-center justify-content-center justify-content-md-start gap-2 gap-lg-3 flex-wrap flex-lg-nowrap">
-                    {specialProducts?.length > 0 &&
+                    {Array.isArray(specialProducts) &&
                       specialProducts?.map((item, index) => {
                         return (
                           <SpecialProducts
                             key={index}
                             id={item?._id}
-                            brand={item?.brand}
+                            brand={item?.brand?.title}
                             title={item?.title}
                             totalRating={parseInt(item?.totalRating ?? 0)}
                             price={formatKES(item?.price)}
@@ -437,7 +438,7 @@ const Home = () => {
                   </div>
 
                   <div className="col-12 d-inline-flex flex-row align-items-center flex-wrap justify-content-start  gap-2">
-                    {popularProducts.length > 0 &&
+                    {Array.isArray(popularProducts) &&
                       popularProducts.map((item, index) => {
                         return (
                           <div key={index}>
@@ -451,7 +452,7 @@ const Home = () => {
                                 >
                                   <img
                                     src={wishlistIcon}
-                                    alt="Wishlist Image"
+                                    alt="Wishlist"
                                     width={20}
                                     height={20}
                                   />
@@ -461,7 +462,7 @@ const Home = () => {
                                 <img
                                   src={item?.images[0]?.url}
                                   className="img-fluid mx-auto border rounded object-fit "
-                                  alt="Product Image"
+                                  alt="Product"
                                   width={90}
                                   height={130}
                                   onClick={() =>
@@ -471,7 +472,7 @@ const Home = () => {
                                 <img
                                   src={item?.images[0]?.url}
                                   className="img-fluid mx-auto border rounded object-fit"
-                                  alt="Product Image"
+                                  alt="Product"
                                   width={90}
                                   height={130}
                                   onClick={() =>
@@ -482,7 +483,7 @@ const Home = () => {
 
                               <div className="product-details">
                                 <h6 className="brandvmb-0 mt-3">
-                                  {item?.brand}
+                                  {item?.brand?.title}
                                 </h6>
                                 <h5 className="product-title mb-0">
                                   {item?.title}
@@ -504,7 +505,7 @@ const Home = () => {
                                   <button className="border-0 bg-transparent">
                                     <img
                                       src={prodcompare}
-                                      alt="Compare Product Image"
+                                      alt="Compare Product"
                                       width={20}
                                       height={20}
                                     />
@@ -513,7 +514,7 @@ const Home = () => {
                                   <button className="border-0 bg-transparent">
                                     <img
                                       src={view}
-                                      alt="View Product Image"
+                                      alt="View Product"
                                       onClick={() =>
                                         navigate("/product/" + item?._id)
                                       }
@@ -524,7 +525,7 @@ const Home = () => {
                                   <button className="border-0 bg-transparent">
                                     <img
                                       src={addCart}
-                                      alt="Add to cart Image"
+                                      alt="Add to cart"
                                       width={20}
                                       height={20}
                                     />
@@ -630,14 +631,11 @@ const Home = () => {
                 <div>
                   <div className="col-12">
                     <h3 className="section-heading">
-                      {blogState && blogState?.length === 0
-                        ? " "
-                        : "Our Latest News"}
+                      {blogs && blogs?.length === 0 ? " " : "Our Latest News"}
                     </h3>
                   </div>
-
                   <div className="d-flex align-items-center gap-2 flex-wrap pb-2">
-                    <BlogCard data={blogState} />
+                    <BlogCard data={blogs} />
                   </div>
                 </div>
               </div>
