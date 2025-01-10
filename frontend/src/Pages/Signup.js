@@ -12,10 +12,10 @@ import { useEffect } from "react";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 
 const SIGN_UP_SCHEMA = Yup.object().shape({
-  firstname: Yup.string().required(),
-  lastname: Yup.string().required(),
+  firstName: Yup.string().required(),
+  lastName: Yup.string().required(),
   email: Yup.string().email().required(),
-  phone: Yup.string()
+  phoneNumber: Yup.string()
     .matches(/^(\+?254|0)?(7\d{8})$/, "Please provide a valid phone nummber.")
     .required(),
   password: Yup.string()
@@ -36,10 +36,10 @@ const Signup = () => {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      firstname: "",
-      lastname: "",
+      firstName: "",
+      lastName: "",
       email: "",
-      phone: "",
+      phoneNumber: "",
       password: "",
     },
     validationSchema: SIGN_UP_SCHEMA,
@@ -78,26 +78,27 @@ const Signup = () => {
               >
                 <CustomInput
                   type="text"
-                  name="firstname"
+                  id="firstName"
+                  name="firstName"
                   placeholder="First name"
-                  onChange={formik.handleChange("firstname")}
-                  onBlur={formik.handleBlur("firstname")}
-                  value={formik.values.firstname}
+                  onChange={formik.handleChange("firstName")}
+                  onBlur={formik.handleBlur("firstName")}
+                  value={formik.values.firstName}
                 />
                 <div className="error">
-                  {formik.touched.firstname && formik.errors.firstname}
+                  {formik.touched.firstName && formik.errors.firstName}
                 </div>
 
                 <CustomInput
                   type="text"
-                  name="lastname"
+                  name="lastName"
                   placeholder="Last name"
-                  onChange={formik.handleChange("lastname")}
-                  onBlur={formik.handleBlur("lastname")}
-                  value={formik.values.lastname}
+                  onChange={formik.handleChange("lastName")}
+                  onBlur={formik.handleBlur("lastName")}
+                  value={formik.values.lastName}
                 />
                 <div className="error">
-                  {formik.touched.lastname && formik.errors.lastname}
+                  {formik.touched.lastName && formik.errors.lastName}
                 </div>
                 <CustomInput
                   type="email"
@@ -113,16 +114,17 @@ const Signup = () => {
 
                 <CustomInput
                   type="tel"
-                  name="phone"
+                  name="phoneNumber"
+                  id="phoneNumber"
                   max={0}
                   min={14}
                   placeholder="Phone number"
-                  onChange={formik.handleChange("phone")}
-                  onBlur={formik.handleBlur("phone")}
-                  value={formik.values.phone}
+                  onChange={formik.handleChange("phoneNumber")}
+                  onBlur={formik.handleBlur("phoneNumber")}
+                  value={formik.values.phoneNumber}
                 />
                 <div className="error">
-                  {formik.touched.phone && formik.errors.phone}
+                  {formik.touched.phoneNumber && formik.errors.phoneNumber}
                 </div>
 
                 <div className="position-relative z-index-4 d-flex flex-column mb-2 gap-2 md-mb-4 ">

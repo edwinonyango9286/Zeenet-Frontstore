@@ -97,7 +97,7 @@ const Header = () => {
       <header className="header-middle py-2 custom-scroll">
         <div className="container">
           <div className="row">
-            <div className="col-12 d-flex flex-row gap-md-4 align-items-center justify-content-between">
+            <div className="col-12 d-flex flex-row gap-md-4 align-items-center justify-content-between ">
               <div className="d-sm-none col-6 col-md-2 d-flex flex-row align-items-center gap-3 my-1">
                 <div className="header-bottom">
                   <div className="dropdown">
@@ -141,9 +141,17 @@ const Header = () => {
                     </div>
                   </div>
                 </div>
+
+                <div className="d-sm-none">
+                  <h2 className="m-0 p-0">
+                    <Link to="/" className="text-white logo text-start">
+                      Zeenet
+                    </Link>
+                  </h2>
+                </div>
               </div>
 
-              <div>
+              <div className="d-none d-sm-block">
                 <h2 className="m-0 p-0">
                   <Link to="/" className="text-white logo text-start">
                     Zeenet
