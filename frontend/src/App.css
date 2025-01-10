@@ -137,23 +137,23 @@ body a {
   background-color: var(--color-131921);
 }
 
+.overflow-hidden-x {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
 .header-info {
   font-size: 12px;
-  font-weight: 400;
-  line-height: 22px;
+  font-weight: 600;
+  line-height: 16px;
   text-transform: capitalize;
   color: var(--color-ffffff);
-  letter-spacing: 0.3px;
 }
-
 .header-middle {
   background-color: var(--color-131921);
 }
-
 .form-control {
   height: 36px;
 }
-
 .form-control:focus {
   border: none;
   box-shadow: none;
@@ -170,14 +170,14 @@ body a {
 }
 .header-middle .header-middle-links span {
   text-transform: capitalize;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 22px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
   letter-spacing: 0.5px;
   color: var(--color-ffffff);
 }
 .logo {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 28px;
   line-height: 24px;
   text-transform: uppercase;
@@ -186,9 +186,8 @@ body a {
 .header-bottom .dropdown button {
   color: white;
   font-size: 14px;
-  line-height: 24px;
-  font-weight: 300;
-  letter-spacing: 0.3;
+  line-height: 20px;
+  font-weight: bold;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -294,7 +293,6 @@ footer .input-group-text {
 .small-banner-content h5 {
   font-size: 18px;
   line-height: 24px;
-  letter-spacing: -2px;
   font-weight: 500;
   text-transform: none;
 }
@@ -302,7 +300,6 @@ footer .input-group-text {
 .small-banner-content p {
   font-size: 14px;
   line-height: 22px;
-  letter-spacing: 0.4;
   color: var(--color-131921);
 }
 
@@ -364,6 +361,9 @@ footer .input-group-text {
   background-color: white;
   border-radius: 10px;
   padding: 10px;
+  width: 300px;
+  height: 310px;
+
 }
 
 .blog-card img {

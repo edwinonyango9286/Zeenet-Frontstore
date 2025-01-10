@@ -19,11 +19,8 @@ import Cookies from "js-cookie";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state?.user ?? {});
   const userCart = useSelector((state) => state?.user?.userCart);
-
   const { products } = useSelector((state) => state?.product);
-
   const [productOpt, setProductOpt] = useState([]);
   const [paginate, setPaginate] = useState(true);
 
@@ -35,6 +32,16 @@ const Header = () => {
     }
     setProductOpt(data);
   }, [products]);
+
+  const [firstName, setFirstName] = useState("");
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const userFirstName = Cookies.get("firstName");
+    const UserToken = Cookies.get("token");
+    if (userFirstName) setFirstName(userFirstName);
+    if (UserToken) setToken(UserToken);
+  }, []);
 
   const handleLogout = async () => {
     await dispatch(logoutUser());
@@ -52,9 +59,9 @@ const Header = () => {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <div className="d-flex  flex-row justify-content-center justify-content-sm-between align-items-center">
+              <div className="d-flex flex-row justify-content-center justify-content-sm-between align-items-center">
                 <div className="d-none d-sm-block">
-                  <p className="mb-0 header-info ">
+                  <p className="my-1 header-info ">
                     Free delivery & returns for all our customers.
                   </p>
                 </div>
@@ -90,7 +97,7 @@ const Header = () => {
       <header className="header-middle py-1">
         <div className="container">
           <div className="row">
-            <div className=" col-12 d-flex flex-row gap-md-4 align-items-center ">
+            <div className="col-12 d-flex flex-row gap-md-4 align-items-center justify-content-between">
               <div className="col-6 col-md-2 d-flex flex-row align-items-center gap-3 my-1">
                 <div className="header-bottom">
                   <div className="d-sm-none">
@@ -110,7 +117,6 @@ const Header = () => {
                           marginTop: "-8px",
                         }}
                       />
-
                       <div
                         className="dropdown-menu"
                         aria-labelledby="dropdownMenuButton1"
@@ -146,7 +152,7 @@ const Header = () => {
 
                 <div>
                   <h2 className="m-0 p-0">
-                    <Link to="/" className="text-white logo m-0">
+                    <Link to="/" className="text-white logo text-start">
                       Zeenet
                     </Link>
                   </h2>
@@ -182,7 +188,7 @@ const Header = () => {
                 </div>
               </div>
 
-              <div className="col-6 col-sm-5">
+              <div className="col-6 ">
                 <div className="header-middle-links d-flex align-items-center justify-content-center  gap-2 gap-md-3 ">
                   <div>
                     <Link
@@ -191,7 +197,7 @@ const Header = () => {
                     >
                       <img
                         src={compareImage}
-                        alt="Compare Image"
+                        alt="Compare"
                         className="img-fluid"
                         loading="lazy"
                         style={{
@@ -212,7 +218,7 @@ const Header = () => {
                     >
                       <img
                         src={wishlistImage}
-                        alt="Wishlist Image"
+                        alt="Wishlist"
                         className="img-fluid"
                         loading="lazy"
                         style={{
@@ -242,7 +248,7 @@ const Header = () => {
                     >
                       <img
                         src={accountImage}
-                        alt="Account Image"
+                        alt="Account"
                         className="img-fluid"
                         loading="lazy"
                         style={{
@@ -251,7 +257,7 @@ const Header = () => {
                         }}
                       />
 
-                      {user === null ? (
+                      {token === null ? (
                         <span className="mb-0 mt-0 d-none d-lg-block">
                           Log in
                           <br />
@@ -259,7 +265,7 @@ const Header = () => {
                         </span>
                       ) : (
                         <span className="mb-0 d-none d-lg-block text-capitalize">
-                          Hi, {user?.firstname}
+                          Hi, {firstName}
                         </span>
                       )}
                     </button>
@@ -268,7 +274,7 @@ const Header = () => {
                       className="dropdown-menu "
                       aria-labelledby="dropdownMenuButton"
                     >
-                      {user === null ? (
+                      {token === null ? (
                         <Link className="dropdown-item" to={"/signin"}>
                           Sign In
                         </Link>
@@ -278,7 +284,7 @@ const Header = () => {
                         </Link>
                       )}
 
-                      {user === null ? (
+                      {token === null ? (
                         <Link className="dropdown-item" to={"/signup"}>
                           Register
                         </Link>
@@ -389,7 +395,7 @@ const Header = () => {
                     >
                       <img
                         src={menu}
-                        alt="Menu Image"
+                        alt="Menu"
                         className="img-fluid"
                         loading="lazy"
                       />

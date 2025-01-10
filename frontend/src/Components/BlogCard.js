@@ -24,7 +24,12 @@ const BlogCard = (props) => {
                 <p className="date">
                   {moment(item?.createdAt).format("MMMM Do YY, h:mm a")}
                 </p>
-                <h5 className="title text-uppercase">{item?.title}</h5>
+                <h5
+                  className="title text-uppercase"
+                  dangerouslySetInnerHTML={{
+                    __html: item?.description.substr(0, 14) + "...",
+                  }}
+                ></h5>
                 <p
                   className="desc text-capitalize"
                   dangerouslySetInnerHTML={{

@@ -15,7 +15,6 @@ import {
   addProductRating,
   getAllProducts,
   getAproduct,
-  resetState,
 } from "../features/products/productSlice";
 import { toast } from "react-toastify";
 import mpesaBadge from "../images/Mpesa logo best.png";

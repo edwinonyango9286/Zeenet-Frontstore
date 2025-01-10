@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getABlog } from "../features/blogs/blogSlice";
 
 const SingleBlog = () => {
-  const blogState = useSelector((state) => state.blog.singleBlog);
   const dispatch = useDispatch();
   const location = useLocation();
   const blogId = location.pathname.split("/")[3];
@@ -17,10 +16,12 @@ const SingleBlog = () => {
     dispatch(getABlog(blogId));
   }, [blogId]);
 
+  const blog = useSelector((state) => state?.blog?.blog);
+
   return (
     <>
-      <Meta title={blogState?.title} />
-      <BreadCrumb title={blogState?.title} className="text-capitalize" />
+      <Meta title={blog?.title} />
+      <BreadCrumb title={blog?.title} className="text-capitalize" />
       <Container class1="home-wrapper-2 py-2">
         <div className="row">
           <div className="col-12 col-lg-6">
@@ -30,21 +31,20 @@ const SingleBlog = () => {
                 Go Back To blogs
               </Link>
 
-              <h3 className="text-uppercase">{blogState?.title}</h3>
+              <h3 className="text-uppercase">{blog?.title}</h3>
               <div className="d-flex flex-col">
                 <div>
                   <img
-                    src={blogState?.images[0]?.url}
-                    alt={blogState.title}
+                    src={blog?.images[0]?.url}
+                    alt={blog?.title}
                     className="img-fluid  my-4 rounded-4  w-md-100 object-fit-cover"
                     height={100}
                   />
                 </div>
               </div>
-
               <div>
                 <p
-                  dangerouslySetInnerHTML={{ __html: blogState?.description }}
+                  dangerouslySetInnerHTML={{ __html: blog?.description }}
                   className="text-capitalize"
                 ></p>
               </div>

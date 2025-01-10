@@ -26,6 +26,7 @@ export const getABlog = createAsyncThunk(
 
 const initialState = {
   blogs: [],
+  blog: null,
   isError: {
     getAllBlogs: false,
     getABlog: false,
@@ -78,7 +79,7 @@ export const blogSlice = createSlice({
         state.isLoading.getABlog = false;
         state.isError.getABlog = false;
         state.isSuccess.getABlog = true;
-        state.singleBlog = action?.payload;
+        state.blog = action?.payload;
       })
       .addCase(getABlog.rejected, (state, action) => {
         state.isLoading.getABlog = false;

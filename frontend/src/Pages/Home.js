@@ -103,11 +103,11 @@ const Home = () => {
                       loading="lazy"
                     />
                     <div className="main-banner-content position-absolute">
-                      <h4 className="text-uppercase fs-md-4">
+                      <h4 className="text-uppercase fs-md-4 fw-bold">
                         Supercharged for pros.
                       </h4>
-                      <h5 className="fs-4 fs-md-3">iPad S13+ Pro.</h5>
-                      <p className="d-none d-lg-block ">
+                      <h5 className="fs-2 fw-bold">iPad S13+ Pro.</h5>
+                      <p className="d-none d-lg-block fw-bold">
                         From Ksh 56,000 to Ksh 98,000 <br />
                         or ksh 4000/mo. for 24 months.
                       </p>
@@ -128,10 +128,10 @@ const Home = () => {
                         loading="lazy"
                       />
                       <div className="small-banner-content position-absolute">
-                        <h4 className="text-uppercase">best sales</h4>
-                        <h5 className="text-capitalize">laptop max</h5>
-                        <div className=" d-none d-lg-block ">
-                          <p>
+                        <h4 className="text-uppercase fw-bold">best sales</h4>
+                        <h5 className="text-capitalize fw-bold">laptop max</h5>
+                        <div className="d-none d-lg-block ">
+                          <p className="fw-bold">
                             From Ksh 120,000 or <br /> ksh 6,000/mo.
                           </p>
                         </div>
@@ -145,9 +145,9 @@ const Home = () => {
                         loading="lazy"
                       />
                       <div className="small-banner-content position-absolute">
-                        <h4 className="text-uppercase">15% off</h4>
-                        <h5 className="text-capitalize">Smartwatch 7</h5>
-                        <p className="d-none d-lg-block">
+                        <h4 className="text-uppercase fw-bold">15% off</h4>
+                        <h5 className="text-capitalize fw-bold">Smartwatch 7</h5>
+                        <p className="d-none d-lg-block fw-bold">
                           Shop the latest brands <br /> styles and colors.
                         </p>
                       </div>
@@ -161,9 +161,9 @@ const Home = () => {
                         loading="lazy"
                       />
                       <div className="small-banner-content position-absolute">
-                        <h4 className="text-uppercase">new arrivals</h4>
-                        <h5 className="text-capitalize">Buy IPad Air</h5>
-                        <p className="d-none d-lg-block">
+                        <h4 className="text-uppercase fw-bold">new arrivals</h4>
+                        <h5 className="text-capitalize fw-bold">Buy IPad Air</h5>
+                        <p className="d-none d-lg-block fw-bold">
                           From ksh 56,000 or <br /> ksh 4,000/mo for 12 mo.
                         </p>
                       </div>
@@ -176,9 +176,9 @@ const Home = () => {
                         loading="lazy"
                       />
                       <div className="small-banner-content position-absolute">
-                        <h4 className="text-uppercase">Free Engraving</h4>
-                        <h5 className="text-capitalize">AirPods Max</h5>
-                        <p className="d-none d-lg-block">
+                        <h4 className="text-uppercase fw-bold">Free Engraving</h4>
+                        <h5 className="text-capitalize fw-bold">AirPods Max</h5>
+                        <p className="d-none d-lg-block fw-bold">
                           High-fidelity playback & <br />
                           ultra-low distortion
                         </p>

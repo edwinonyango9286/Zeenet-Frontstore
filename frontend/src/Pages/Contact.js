@@ -13,8 +13,8 @@ import CustomInput from "../Components/CustomInput";
 let contactSchema = Yup.object().shape({
   name: Yup.string().required("Please provide your name"),
   email: Yup.string().email().required("Please provide your email."),
-  phone: Yup.string()
-    .matches(/^(\+?254|0)?(7\d{8})$/, "Please provide a valid phone number.")
+  phoneNumber: Yup.string()
+    .matches(/^\+?[0-9]\d{1,14}$/, "Please provide a valid phone number.")
     .required("Please provide your phone number."),
   enquiry: Yup.string().required("Please provide your eunquiry."),
 });
@@ -34,7 +34,7 @@ const Contact = () => {
     initialValues: {
       name: "",
       email: "",
-      phone: "",
+      phoneNumber: "",
       enquiry: "",
     },
     validationSchema: contactSchema,
@@ -49,7 +49,7 @@ const Contact = () => {
       formik.resetForm();
       dispatch(resetState());
     }
-  }, [isSuccess, createdEnquiry, formik, dispatch]);
+  }, [isSuccess, createdEnquiry, dispatch]);
 
   return (
     <>
@@ -122,14 +122,14 @@ const Contact = () => {
                   <CustomInput
                     type="tel"
                     placeholder="Phone number"
-                    id="phone"
-                    name="phone"
-                    onChange={formik.handleChange("phone")}
-                    onBlur={formik.handleBlur("phone")}
-                    value={formik.values.phone}
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    onChange={formik.handleChange("phoneNumber")}
+                    onBlur={formik.handleBlur("phoneNumber")}
+                    value={formik.values.phoneNumber}
                   />
                   <div className="error">
-                    {formik.touched.phone && formik.errors.phone}
+                    {formik.touched.phoneNumber && formik.errors.phoneNumber}
                   </div>
                 </div>
 
