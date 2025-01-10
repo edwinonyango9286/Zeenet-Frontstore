@@ -151,6 +151,14 @@ body a {
 .header-middle {
   background-color: var(--color-131921);
 }
+ .custom-scroll {
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+  }
+
+  .custom-scroll::-webkit-scrollbar {
+    display: none; 
+  }
 .form-control {
   height: 36px;
 }

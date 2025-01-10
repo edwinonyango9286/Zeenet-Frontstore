@@ -59,8 +59,7 @@ const Blogs = () => {
                     </div>
                   </div>
                 </div>
-
-                <div className="col-12 col-md-9 d-flex gap-10">
+                <div className="col-12 col-md-9 d-flex gap-10 flex-wrap justify-content-center justify-content-md-start">
                   <BlogCard data={blogState ? blogState : []} />
                 </div>
               </div>

@@ -9,7 +9,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword, resetState } from "../features/users/userSlice";
-import { toast } from "react-toastify";
 
 const RESET_PASSWORD_SCHEMA = Yup.object().shape({
   password: Yup.string()
@@ -51,7 +50,6 @@ const ResetPassword = () => {
 
   const message = useSelector((state) => state?.user?.message);
   const isError = useSelector((state) => state?.user?.isError?.resetPassword);
-
   const isLoading = useSelector((state) => state?.user?.resetPassword);
 
   return (

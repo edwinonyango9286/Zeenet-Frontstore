@@ -115,10 +115,10 @@ const Footer = () => {
                     Refund Policy
                   </Link>
                   <Link
-                    to="/shipping-policy"
+                    to="/delivery-policy"
                     className="text-white py-1 footer-text "
                   >
-                    Shipping Policy
+                    Delivery Policy
                   </Link>
                   <Link
                     to="/terms-and-conditions"

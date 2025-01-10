@@ -145,11 +145,11 @@ export const updateProfile = createAsyncThunk(
   }
 );
 
-export const resetPasswordToken = createAsyncThunk(
+export const resetUserPasswordToken = createAsyncThunk(
   "user/reset-password-token",
   async (data, thunkAPI) => {
     try {
-      return await userService.forgotPasswordToken(data);
+      return await userService.resetPasswordToken(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -178,6 +178,17 @@ export const getOrders = createAsyncThunk(
   }
 );
 
+export const addADeliveryAddress = createAsyncThunk(
+  "user/add-a-orders",
+  async (data, thunkAPI) => {
+    try {
+      return await userService.addDeliveryAddress(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const resetState = createAction("Reset_all");
 
 const initialState = {
@@ -199,10 +210,11 @@ const initialState = {
     getUserCart: false,
     getOrders: false,
     updateProfile: false,
-    resetPasswordToken: false,
+    resetUserPasswordToken: false,
     resetPassword: false,
     getUserProductWishlist: false,
     getAccessToken: false,
+    addADeliveryAddress: false,
   },
   isLoading: {
     registerUser: false,
@@ -216,9 +228,10 @@ const initialState = {
     getUserCart: false,
     getOrders: false,
     updateProfile: false,
-    resetPasswordToken: false,
+    resetUserPasswordToken: false,
     resetPassword: false,
     getUserProductWishlist: false,
+    addADeliveryAddress: false,
   },
   isSuccess: {
     registerUser: false,
@@ -232,9 +245,10 @@ const initialState = {
     getUserCart: false,
     getOrders: false,
     updateProfile: false,
-    resetPasswordToken: false,
+    resetUserPasswordToken: false,
     resetPassword: false,
     getUserProductWishlist: false,
+    addADeliveryAddress: false,
   },
   message: "",
 };
@@ -286,12 +300,17 @@ export const authSlice = createSlice({
           secure: true,
           sameSite: "Strict",
         });
+        Cookies.set("phoneNumber", action?.payload?.phoneNumber, {
+          expires: 1,
+          secure: true,
+          sameSite: "Strict",
+        });
         Cookies.set("avatar", action?.payload?.avatar, {
           expires: 1,
           secure: true,
           sameSite: "Strict",
         });
-        Cookies.set("token", action?.payload?.token, {
+        Cookies.set("accessToken", action?.payload?.accessToken, {
           expires: 1,
           secure: true,
           sameSite: "Strict",
@@ -515,22 +534,20 @@ export const authSlice = createSlice({
         }
       })
 
-      .addCase(resetPasswordToken.pending, (state) => {
-        state.isLoading.resetPasswordToken = true;
+      .addCase(resetUserPasswordToken.pending, (state) => {
+        state.isLoading.resetUserPasswordToken = true;
       })
-      .addCase(resetPasswordToken.fulfilled, (state, action) => {
-        state.isError.resetPasswordToken = false;
-        state.isLoading.resetPasswordToken = false;
-        state.isSuccess.resetPasswordToken = true;
-        state.resetToken = action?.payload;
-        toast.success(
-          "A password reset link has been sent to your email. Proceed to your eamil to reset your password."
-        );
+      .addCase(resetUserPasswordToken.fulfilled, (state, action) => {
+        state.isError.resetUserPasswordToken = false;
+        state.isLoading.resetUserPasswordToken = false;
+        state.isSuccess.resetUserPasswordToken = true;
+        state.message = action?.payload?.message;
+        toast.success(action?.payload?.message);
       })
-      .addCase(resetPasswordToken.rejected, (state, action) => {
-        state.isError.resetPasswordToken = true;
-        state.isSuccess.resetPasswordToken = false;
-        state.isLoading.resetPasswordToken = false;
+      .addCase(resetUserPasswordToken.rejected, (state, action) => {
+        state.isError.resetUserPasswordToken = true;
+        state.isSuccess.resetUserPasswordToken = false;
+        state.isLoading.resetUserPasswordToken = false;
         state.message = action?.payload?.response?.data?.message;
         if (action?.payload?.response?.data?.message) {
           toast.error(action?.payload?.response?.data?.message);
@@ -576,6 +593,28 @@ export const authSlice = createSlice({
         state.isError.getOrders = true;
         state.isSuccess.getOrders = false;
         state.isLoading.getOrders = false;
+        state.message = action?.payload?.response?.data?.message;
+        if (action?.payload?.response?.data?.message) {
+          toast.error(action?.payload?.response?.data?.message);
+        } else {
+          toast.error(
+            "It seems there’s an issue at the moment. Please try again later."
+          );
+        }
+      })
+      .addCase(addADeliveryAddress.pending, (state) => {
+        state.isLoading.addADeliveryAddress = true;
+      })
+      .addCase(addADeliveryAddress.fulfilled, (state, action) => {
+        state.isError.addADeliveryAddress = false;
+        state.isLoading.addADeliveryAddress = false;
+        state.isSuccess.addADeliveryAddress = true;
+        state.deliveryAddress = action?.payload;
+      })
+      .addCase(addADeliveryAddress.rejected, (state, action) => {
+        state.isError.addADeliveryAddress = true;
+        state.isSuccess.addADeliveryAddress = false;
+        state.isLoading.addADeliveryAddress = false;
         state.message = action?.payload?.response?.data?.message;
         if (action?.payload?.response?.data?.message) {
           toast.error(action?.payload?.response?.data?.message);

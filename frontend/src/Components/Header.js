@@ -33,8 +33,8 @@ const Header = () => {
     setProductOpt(data);
   }, [products]);
 
-  const [firstName, setFirstName] = useState("");
-  const [token, setToken] = useState("");
+  const [firstName, setFirstName] = useState(null);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     const userFirstName = Cookies.get("firstName");
@@ -44,12 +44,12 @@ const Header = () => {
   }, []);
 
   const handleLogout = async () => {
-    await dispatch(logoutUser());
+    dispatch(logoutUser());
     dispatch(resetState());
     Cookies.remove("firstName");
     Cookies.remove("email");
     Cookies.remove("avatar");
-    Cookies.remove("token");
+    Cookies.remove("accessToken");
     navigate("/store");
   };
 
@@ -94,69 +94,61 @@ const Header = () => {
         </div>
       </header>
 
-      <header className="header-middle py-1">
+      <header className="header-middle py-2 custom-scroll">
         <div className="container">
           <div className="row">
             <div className="col-12 d-flex flex-row gap-md-4 align-items-center justify-content-between">
-              <div className="col-6 col-md-2 d-flex flex-row align-items-center gap-3 my-1">
+              <div className="d-sm-none col-6 col-md-2 d-flex flex-row align-items-center gap-3 my-1">
                 <div className="header-bottom">
-                  <div className="d-sm-none">
-                    <div className="dropdown">
-                      <TfiMenu
-                        className="fs-3"
-                        id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                        style={{
-                          cursor: "pointer",
-                          border: "none",
-                          outline: "none",
-                          boxShadow: "none",
-                          color: "white",
-                          backgroundColor: "#131921",
-                          marginTop: "-8px",
-                        }}
-                      />
-                      <div
-                        className="dropdown-menu"
-                        aria-labelledby="dropdownMenuButton1"
-                      >
-                        <Link className="dropdown-item text-white" to="/">
-                          Home
-                        </Link>
-                        <Link className="dropdown-item text-white" to="/store">
-                          Store
-                        </Link>
-                        <Link
-                          className="dropdown-item text-white"
-                          to="/myorders"
-                        >
-                          Orders
-                        </Link>
-                        <Link className="dropdown-item text-white" to="/blogs">
-                          Blogs
-                        </Link>
-                        <Link
-                          className="dropdown-item text-white"
-                          to="/contact"
-                        >
-                          Contact
-                        </Link>
-                        <Link className="dropdown-item text-white" to="/about">
-                          About
-                        </Link>
-                      </div>
+                  <div className="dropdown">
+                    <TfiMenu
+                      className="fs-3"
+                      id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      style={{
+                        cursor: "pointer",
+                        border: "none",
+                        outline: "none",
+                        boxShadow: "none",
+                        color: "white",
+                        backgroundColor: "#131921",
+                        marginTop: "-8px",
+                      }}
+                    />
+                    <div
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton1"
+                    >
+                      <Link className="dropdown-item text-white" to="/">
+                        Home
+                      </Link>
+                      <Link className="dropdown-item text-white" to="/store">
+                        Store
+                      </Link>
+                      <Link className="dropdown-item text-white" to="/myorders">
+                        Orders
+                      </Link>
+                      <Link className="dropdown-item text-white" to="/blogs">
+                        Blogs
+                      </Link>
+                      <Link className="dropdown-item text-white" to="/contact">
+                        Contact
+                      </Link>
+                      <Link className="dropdown-item text-white" to="/about">
+                        About
+                      </Link>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div>
-                  <h2 className="m-0 p-0">
-                    <Link to="/" className="text-white logo text-start">
-                      Zeenet
-                    </Link>
-                  </h2>
-                </div>
+              <div>
+                <h2 className="m-0 p-0">
+                  <Link to="/" className="text-white logo text-start">
+                    Zeenet
+                  </Link>
+                </h2>
               </div>
 
               <div className="d-none d-sm-block col-sm-5">
@@ -189,7 +181,7 @@ const Header = () => {
               </div>
 
               <div className="col-6 ">
-                <div className="header-middle-links d-flex align-items-center justify-content-center  gap-2 gap-md-3 ">
+                <div className="header-middle-links d-flex align-items-center justify-content-center gap-2 gap-md-3 ">
                   <div>
                     <Link
                       to="/compare-products"

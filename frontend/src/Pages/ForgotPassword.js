@@ -7,7 +7,10 @@ import CustomInput from "../Components/CustomInput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { resetPasswordToken, resetState } from "../features/users/userSlice";
+import {
+  resetUserPasswordToken,
+  resetState,
+} from "../features/users/userSlice";
 
 const FORGOT_PASSWORD_SCHEMA = Yup.object().shape({
   email: Yup.string().email().required(),
@@ -18,12 +21,11 @@ const ForgotPassword = () => {
   const navigate = useNavigate();
 
   const isSuccess = useSelector(
-    (state) => state?.user?.isSuccess?.resetPasswordToken
+    (state) => state?.user?.isSuccess?.resetUserPasswordToken
   );
   const isLoading = useSelector(
-    (state) => state?.user?.isLoading?.resetPasswordToken
+    (state) => state?.user?.isLoading?.resetUserPasswordToken
   );
-  const resetToken = useSelector((state) => state?.user?.resetToken);
 
   const formik = useFormik({
     initialValues: {
@@ -32,8 +34,8 @@ const ForgotPassword = () => {
     validationSchema: FORGOT_PASSWORD_SCHEMA,
     onSubmit: (values, { resetForm }) => {
       dispatch(resetState());
-      dispatch(resetPasswordToken(values));
-      if (isSuccess && resetToken) {
+      dispatch(resetUserPasswordToken(values));
+      if (isSuccess) {
         resetForm();
         navigate("/signin");
         dispatch(resetState());

@@ -17,7 +17,7 @@ const signin = async (userData) => {
 };
 
 const logoutAUser = async () => {
-  const response = await newRequest.get(`user/logout`);
+  const response = await newRequest.put(`user/logout`, config);
   if (response?.data) {
     return response.data;
   }
@@ -31,8 +31,8 @@ const getUserWishlist = async () => {
 };
 
 const addToCart = async (cartData) => {
-  const token = Cookies.get("token");
-  if (token) {
+  const accessToken = Cookies.get("accessToken");
+  if (accessToken) {
     const response = await newRequest.post(`user/cart`, cartData, config);
     if (response?.data) {
       localStorage.removeItem("userCart");
@@ -67,8 +67,8 @@ const updateUserProfile = async (data) => {
   }
 };
 
-const forgotPasswordToken = async (data) => {
-  const response = await newRequest.post(`user/forgot-password-token`, data);
+const resetPasswordToken = async (data) => {
+  const response = await newRequest.post(`user/reset-password-token`, data);
   if (response?.data) {
     return response.data;
   }
@@ -90,6 +90,17 @@ const getUserOrders = async () => {
   }
 };
 
+const addDeliveryAddress = async (data) => {
+  const response = await newRequest.post(
+    `user/add-delivery-address`,
+    data,
+    config
+  );
+  if (response?.data) {
+    return response.data;
+  }
+};
+
 const userService = {
   register,
   signin,
@@ -98,10 +109,11 @@ const userService = {
   addToCart,
   getCart,
   updateUserProfile,
-  forgotPasswordToken,
+  resetPasswordToken,
   resetUserPassword,
   getUserOrders,
   userCheckout,
+  addDeliveryAddress,
 };
 
 export default userService;

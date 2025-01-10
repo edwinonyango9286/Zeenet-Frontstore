@@ -14,7 +14,7 @@ import Signup from "./Pages/Signup";
 import ResetPassword from "./Pages/ResetPassword";
 import SingleBlog from "./Pages/SingleBlog";
 import RefundPolicy from "./Pages/RefundPolicy";
-import ShippingPolicy from "./Pages/ShippingPolicy";
+import DeliveryPolicy from "./Pages/DeliveryPolicy";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import TermsandConditions from "./Pages/TermsandConditions";
 import Product from "./Pages/Product";
@@ -97,7 +97,7 @@ function App() {
             />
             <Route path="reset-password/:token" element={<ResetPassword />} />
             <Route path="refund-policy" element={<RefundPolicy />} />
-            <Route path="shipping-policy" element={<ShippingPolicy />} />
+            <Route path="delivery-policy" element={<DeliveryPolicy />} />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route
               path="terms-and-conditions"

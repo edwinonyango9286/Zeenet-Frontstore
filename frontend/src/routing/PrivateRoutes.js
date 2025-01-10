@@ -4,9 +4,9 @@ import Cookies from "js-cookie";
 export const PrivateRoutes = ({ children }) => {
   const location = useLocation();
 
-  const token = Cookies.get("token");
+  const accessToken = Cookies.get("accessToken");
   
-  return token !== undefined ? (
+  return accessToken !== undefined ? (
     children
   ) : (
     <Navigate to={"/signin"} state={{ from: location }} replace />
