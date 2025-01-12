@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BreadCrumb from "../Components/BreadCrumb";
 import Container from "../Components/Container";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { logoutUser, resetState } from "../features/users/userSlice";
@@ -11,26 +11,35 @@ const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [avatar, SetAvatar] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(null);
+
+  const isSuccessLogoutUser = useSelector(
+    (state) => state?.user?.isSuccess?.logoutUser
+  );
+  const message = useSelector((state) => state?.user?.message);
+
+  useEffect(() => {
+    if (isSuccessLogoutUser && message) {
+      navigate("/store");
+      dispatch(resetState());
+    }
+  }, [isSuccessLogoutUser, message]);
 
   const handleLogout = async () => {
-    await dispatch(logoutUser());
-    dispatch(resetState());
-    Cookies.remove("firstName");
-    Cookies.remove("email");
-    Cookies.remove("avatar");
-    Cookies.remove("token");
-    navigate("/store");
+    dispatch(logoutUser());
   };
 
   useEffect(() => {
-    const adminFirstName = Cookies.get("firstName");
-    const adminEmail = Cookies.get("email");
-    const adminAvatar = Cookies.get("avatar");
-    if (adminFirstName) setFirstName(adminFirstName);
-    if (adminEmail) setEmail(adminEmail);
-    if (adminAvatar) SetAvatar(adminAvatar);
+    const userFirstName = Cookies.get("firstName");
+    const userLastName = Cookies.get("lastName");
+    const userEmail = Cookies.get("email");
+    const userPhoneNumber = Cookies.get("phoneNumber");
+    if (userFirstName) setFirstName(userFirstName);
+    if (userLastName) setLastName(userLastName);
+    if (userEmail) setEmail(userEmail);
+    if (userPhoneNumber) setPhoneNumber(userPhoneNumber);
   }, []);
 
   return (
@@ -70,7 +79,7 @@ const Profile = () => {
               <div className="d-flex gap-2 justify-content-start flex-column">
                 <h4 className="mt-0 md-0">Account details</h4>
                 <h6 className="text-capitalize mb-0 mt-0">
-                  Name:{"  "} {firstName + " " + firstName}
+                  Name:{"  "} {firstName + " " + lastName}
                 </h6>
                 <h6 className="mb-0 mt-0">
                   {" "}
@@ -78,7 +87,7 @@ const Profile = () => {
                 </h6>
                 <h6 className="mb-0 mt-0">
                   {" "}
-                  Phone: {"  "} {""}
+                  Phone: {"  "} {phoneNumber}
                 </h6>
               </div>
             </div>

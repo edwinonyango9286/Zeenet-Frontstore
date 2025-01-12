@@ -171,7 +171,8 @@ export const productSlice = createSlice({
         state.isLoading.addProductRating = false;
         state.isError.addProductRating = true;
         state.isSuccess.addProductRating = false;
-        state.message = action?.payload?.response?.data?.message;
+        state.message = action?.payload?.message;
+        toast.error(action?.payload?.response?.data?.message);
       })
       .addCase(resetState, () => initialState);
   },

@@ -39,12 +39,12 @@ const Product = () => {
 
   const [popularProducts, setPopularProducts] = useState([]);
   const [star, setStar] = useState(null);
-  const [enquiry, setEnquiry] = useState(null);
+  const [ratingComment, setRatingComment] = useState("");
 
   useEffect(() => {
     dispatch(getAproduct(getProductId));
     dispatch(getAllProducts());
-  }, [getProductId]);
+  }, [dispatch, getProductId]);
 
   const addItemToCart = () => {
     const cartData = {
@@ -89,20 +89,24 @@ const Product = () => {
     }
   }, [products]);
 
+  const addaProductRatingLoading = useSelector(
+    (state) => state?.product?.isLoading?.addProductRating
+  );
+
   const addRatingToProduct = async () => {
     if (star === null) {
       toast.error("Add star rating?");
       return false;
-    } else if (enquiry === null) {
+    } else if (ratingComment === "") {
       toast.error("Please write a review about the product?");
       return false;
     } else {
-      const data = { star: star, enquiry: enquiry, prodId: getProductId };
+      const data = {
+        star: star,
+        ratingComment: ratingComment,
+        prodId: getProductId,
+      };
       dispatch(addProductRating(data));
-      dispatch(getAproduct(getProductId));
-      setStar(null);
-      setEnquiry(null);
-      return false;
     }
   };
 
@@ -457,7 +461,7 @@ const Product = () => {
                           key={product?._id}
                           count={5}
                           size={20}
-                          value={parseInt(star)}
+                          value={star}
                           edit={true}
                           activeColor="#ffd700"
                           onChange={(e) => {
@@ -472,9 +476,10 @@ const Product = () => {
                           className="w-100 form-control border shadow-none"
                           cols={20}
                           rows={4}
-                          placeholder="Enquiry..."
+                          placeholder="Rating comment..."
+                          value={ratingComment}
                           onChange={(e) => {
-                            setEnquiry(e.target.value);
+                            setRatingComment(e.target.value);
                           }}
                         />
                       </div>
@@ -483,8 +488,20 @@ const Product = () => {
                           type="submit"
                           onClick={addRatingToProduct}
                           className="button border-0"
+                          disabled={addaProductRatingLoading}
                         >
-                          Submit review
+                          {addaProductRatingLoading ? (
+                            <div className="d-flex flex-row gap-1 align-items-center justify-content-center">
+                              <span
+                                className="spinner-border spinner-border-sm"
+                                role="status"
+                                aria-hidden="true"
+                              ></span>
+                              <span>Please wait...</span>
+                            </div>
+                          ) : (
+                            "Submit review"
+                          )}
                         </button>
                       </div>
                     </div>
@@ -504,7 +521,7 @@ const Product = () => {
                                 activeColor="#ffd700"
                               />
                             </div>
-                            <p>{item?.enquiry}</p>
+                            <p>{item?.ratingComment}</p>
                           </div>
                         );
                       })}

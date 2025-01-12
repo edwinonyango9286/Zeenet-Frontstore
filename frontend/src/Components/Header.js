@@ -33,24 +33,23 @@ const Header = () => {
     setProductOpt(data);
   }, [products]);
 
-  const [firstName, setFirstName] = useState(null);
-  const [token, setToken] = useState(null);
+  const firstName = Cookies.get("firstName");
+  const accessToken = Cookies.get("accessToken");
+
+  const isSuccessLogoutUser = useSelector(
+    (state) => state?.user?.isSuccess?.logoutUser
+  );
+  const message = useSelector((state) => state.user.message);
 
   useEffect(() => {
-    const userFirstName = Cookies.get("firstName");
-    const UserToken = Cookies.get("token");
-    if (userFirstName) setFirstName(userFirstName);
-    if (UserToken) setToken(UserToken);
-  }, []);
+    if (isSuccessLogoutUser && message) {
+      navigate("/signin");
+      dispatch(resetState());
+    }
+  }, [isSuccessLogoutUser, message]);
 
   const handleLogout = async () => {
     dispatch(logoutUser());
-    dispatch(resetState());
-    Cookies.remove("firstName");
-    Cookies.remove("email");
-    Cookies.remove("avatar");
-    Cookies.remove("accessToken");
-    navigate("/store");
   };
 
   return (
@@ -162,6 +161,7 @@ const Header = () => {
               <div className="d-none d-sm-block col-sm-5 mx-sm-2">
                 <div className="input-group">
                   <Typeahead
+                    id=""
                     onPaginate={() => console.log("result paginated")}
                     onChange={(selected) => {
                       navigate(`/product/${selected[0]?.prod}`);
@@ -256,7 +256,7 @@ const Header = () => {
                         }}
                       />
 
-                      {token === null ? (
+                      {accessToken === undefined ? (
                         <span className="mb-0 mt-0 d-none d-lg-block">
                           Log in
                           <br />
@@ -273,7 +273,7 @@ const Header = () => {
                       className="dropdown-menu "
                       aria-labelledby="dropdownMenuButton"
                     >
-                      {token === null ? (
+                      {accessToken === undefined ? (
                         <Link className="dropdown-item" to={"/signin"}>
                           Sign In
                         </Link>
@@ -283,7 +283,7 @@ const Header = () => {
                         </Link>
                       )}
 
-                      {token === null ? (
+                      {accessToken === undefined ? (
                         <Link className="dropdown-item" to={"/signup"}>
                           Register
                         </Link>
@@ -346,6 +346,7 @@ const Header = () => {
         </div>
       </header>
       <header className="header-bottom py-1 header-middle">
+        firstName
         <div className="container">
           <div className="row">
             <div className="col-12">

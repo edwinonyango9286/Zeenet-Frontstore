@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import userService from "./userService";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import { act } from "react";
 
 export const registerUser = createAsyncThunk(
   "auth/user-register",
@@ -295,17 +296,18 @@ export const authSlice = createSlice({
           secure: true,
           sameSite: "Strict",
         });
+        Cookies.set("lastName", action?.payload?.lastName, {
+          expires: 1,
+          secure: true,
+          sameSite: "Strict",
+        });
+
         Cookies.set("email", action?.payload?.email, {
           expires: 1,
           secure: true,
           sameSite: "Strict",
         });
         Cookies.set("phoneNumber", action?.payload?.phoneNumber, {
-          expires: 1,
-          secure: true,
-          sameSite: "Strict",
-        });
-        Cookies.set("avatar", action?.payload?.avatar, {
           expires: 1,
           secure: true,
           sameSite: "Strict",
@@ -336,7 +338,13 @@ export const authSlice = createSlice({
         state.isError.logoutUser = false;
         state.isLoading.logoutUser = false;
         state.isSuccess.logoutUser = true;
-        state.user = null;
+        state.message = action?.payload?.message;
+        Cookies.remove("firstName");
+        Cookies.remove("email");
+        Cookies.remove("avatar");
+        Cookies.remove("accessToken");
+        Cookies.remove("phoneNumber");
+        toast.success(action?.payload?.message);
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.isError.logoutUser = true;
@@ -617,7 +625,7 @@ export const authSlice = createSlice({
         state.isLoading.addADeliveryAddress = false;
         state.message = action?.payload?.response?.data?.message;
         if (action?.payload?.response?.data?.message) {
-          toast.error(action?.payload?.response?.data?.message);
+          toast.error(action?.payload?.message);
         } else {
           toast.error(
             "It seems there’s an issue at the moment. Please try again later."

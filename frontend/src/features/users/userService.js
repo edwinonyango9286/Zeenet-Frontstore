@@ -17,7 +17,7 @@ const signin = async (userData) => {
 };
 
 const logoutAUser = async () => {
-  const response = await newRequest.put(`user/logout`, config);
+  const response = await newRequest.put(`user/logout`);
   if (response?.data) {
     return response.data;
   }
