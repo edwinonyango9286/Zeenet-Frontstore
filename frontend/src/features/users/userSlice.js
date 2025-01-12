@@ -406,7 +406,6 @@ export const authSlice = createSlice({
           );
         }
       })
-
       .addCase(updateProductQuantity.pending, (state) => {
         state.isLoading.updateProductQuantity = true;
       })
