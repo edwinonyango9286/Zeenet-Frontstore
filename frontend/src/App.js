@@ -12,7 +12,6 @@ import Wishlist from "./Pages/Wishlist";
 import ForgotPassword from "./Pages/ForgotPassword";
 import Signup from "./Pages/Signup";
 import ResetPassword from "./Pages/ResetPassword";
-import SingleBlog from "./Pages/SingleBlog";
 import RefundPolicy from "./Pages/RefundPolicy";
 import DeliveryPolicy from "./Pages/DeliveryPolicy";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
@@ -25,6 +24,7 @@ import { OpenRoutes } from "./routing/OpenRoutes";
 import Profile from "./Pages/Profile";
 import MyOrders from "./Pages/MyOrders";
 import Signin from "./Pages/Signin";
+import Blog from "./Pages/Blog";
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
             <Route path="/store" element={<Store />} />
             <Route path="/product/:id" element={<Product />} />
             <Route path="/blogs" element={<Blogs />} />
-            <Route path="/blogs/singleblog/:id" element={<SingleBlog />} />
+            <Route path="/blogs/blog/:id" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/compare-products" element={<CompareProducts />} />
             <Route

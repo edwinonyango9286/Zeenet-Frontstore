@@ -9,6 +9,10 @@ import Meta from "../Components/Meta";
 import { toast } from "react-toastify";
 import { addADeliveryAddress, checkout } from "../features/users/userSlice";
 import Cookies from "js-cookie";
+import { getAllCountries } from "../features/country/countrySlice";
+import { getAllCounties } from "../features/county/countySlice";
+import { getAllTowns } from "../features/town/townSlice";
+import { getAllDeliveyStations } from "../features/deliveryStation/deliveryStationSlice";
 
 const DELIVERY_ADDRESS_SCHEMA = Yup.object().shape({
   country: Yup.string().required("Please select country."),
@@ -29,11 +33,24 @@ const Checkout = () => {
     (state) => state?.user?.isSuccess?.addADeliveryAddress
   );
   const deliveryAddress = useSelector((state) => state?.user?.deliveryAddress);
+  const countries = useSelector((state) => state?.country?.countries);
+  const counties = useSelector((state) => state?.county?.counties);
+  const towns = useSelector((state) => state?.town?.towns);
+  const deliveryStations = useSelector(
+    (state) => state?.deliveryStation?.deliveryStations
+  );
 
   const [firstName, setFirstName] = useState("");
   const [token, setToken] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+
+  useEffect(() => {
+    dispatch(getAllCountries());
+    dispatch(getAllCounties());
+    dispatch(getAllTowns());
+    dispatch(getAllDeliveyStations());
+  }, [dispatch]);
 
   useEffect(() => {
     const userFirstName = Cookies.get("firstName");
@@ -146,7 +163,15 @@ const Checkout = () => {
                       onChange={formik.handleChange("country")}
                       onBlur={formik.handleBlur("coucountrynty")}
                       value={formik.values.country}
-                    ></select>
+                    >
+                      <option value="" label="Select a country" />
+                      {Array.isArray(countries) &&
+                        countries.map((country, index) => (
+                          <option key={index} value={country?._id}>
+                            {country?.name}
+                          </option>
+                        ))}
+                    </select>
                     <div className="error ms-2">
                       {formik.touched.country && formik.errors.country}
                     </div>
@@ -161,7 +186,15 @@ const Checkout = () => {
                       onChange={formik.handleChange("county")}
                       onBlur={formik.handleBlur("county")}
                       value={formik.values.county}
-                    ></select>
+                    >
+                      <option value="" label="Select a county" />
+                      {Array.isArray(counties) &&
+                        counties.map((county, index) => (
+                          <option key={index} value={county?._id}>
+                            {county?.name}
+                          </option>
+                        ))}
+                    </select>
                     <div className="error ms-2">
                       {formik.touched.county && formik.errors.county}
                     </div>
@@ -177,7 +210,15 @@ const Checkout = () => {
                       onChange={formik.handleChange("town")}
                       onBlur={formik.handleBlur("town")}
                       value={formik.values.town}
-                    ></select>
+                    >
+                      <option value="" label="Select a nearest town." />
+                      {Array.isArray(towns) &&
+                        towns.map((town, index) => (
+                          <option key={index} value={town?._id}>
+                            {town?.name}
+                          </option>
+                        ))}
+                    </select>
                     <div className="error ms-2">
                       {formik.touched.town && formik.errors.town}
                     </div>
@@ -192,7 +233,19 @@ const Checkout = () => {
                       onChange={formik.handleChange("pickupStation")}
                       onBlur={formik.handleBlur("pickupStation")}
                       value={formik.values.pickupStation}
-                    ></select>
+                    >
+                      <option
+                        value=""
+                        label="Select a nearest delivery station."
+                      />
+
+                      {Array.isArray(deliveryStations) &&
+                        deliveryStations.map((deliveryStation, index) => (
+                          <option key={index} value={deliveryStation?._id}>
+                            {deliveryStation?.name}
+                          </option>
+                        ))}
+                    </select>
                     <div className="error ms-2">
                       {formik.touched.pickupStation &&
                         formik.errors.pickupStation}

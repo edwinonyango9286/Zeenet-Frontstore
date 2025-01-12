@@ -36,7 +36,7 @@ const BlogCard = (props) => {
                     __html: item?.description.substr(0, 70) + "...",
                   }}
                 ></p>
-                <Link to={`/blogs/singleblog/${item?._id}`} className="button">
+                <Link to={`/blogs/blog/${item?._id}`} className="button">
                   Read More
                 </Link>
               </div>

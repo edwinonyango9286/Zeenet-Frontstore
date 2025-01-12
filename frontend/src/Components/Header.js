@@ -54,8 +54,8 @@ const Header = () => {
   };
 
   return (
-    <>
-      <header className="header-top py-2">
+    <div>
+      <header className="header-top py-2 overflow-lg-hidden">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -66,7 +66,7 @@ const Header = () => {
                   </p>
                 </div>
 
-                <div className="d-flex gap-20 justify-content-center align-items-center">
+                <div className="d-flex gap-20 justify-content-center align-items-center justify-content-lg-end">
                   <div>
                     <p className="mb-0 header-info">
                       Hotline: {"  "}
@@ -94,10 +94,10 @@ const Header = () => {
         </div>
       </header>
 
-      <header className="header-middle py-2 custom-scroll">
+      <header className="header-middle py-2">
         <div className="container">
           <div className="row">
-            <div className="col-12 d-flex flex-row gap-md-4 align-items-center justify-content-between ">
+            <div className="col-12 d-flex flex-row gap-md-4 align-items-center justify-content-between">
               <div className="d-sm-none col-6 col-md-2 d-flex flex-row align-items-center gap-3 my-1">
                 <div className="header-bottom">
                   <div className="dropdown">
@@ -151,7 +151,7 @@ const Header = () => {
                 </div>
               </div>
 
-              <div className="d-none d-sm-block">
+              <div className="d-none d-sm-block ">
                 <h2 className="m-0 p-0">
                   <Link to="/" className="text-white logo text-start">
                     Zeenet
@@ -159,10 +159,9 @@ const Header = () => {
                 </h2>
               </div>
 
-              <div className="d-none d-sm-block col-sm-5">
+              <div className="d-none d-sm-block col-sm-5 mx-sm-2">
                 <div className="input-group">
                   <Typeahead
-                    id=""
                     onPaginate={() => console.log("result paginated")}
                     onChange={(selected) => {
                       navigate(`/product/${selected[0]?.prod}`);
@@ -188,8 +187,8 @@ const Header = () => {
                 </div>
               </div>
 
-              <div className="col-6 ">
-                <div className="header-middle-links d-flex align-items-center justify-content-center gap-2 gap-md-3 ">
+              <div className="col-5 col-sm-4 col-md-5">
+                <div className="header-middle-links d-flex align-items-center justify-content-center gap-3  gap-sm-2 gap-md-4 justify-content-lg-end">
                   <div>
                     <Link
                       to="/compare-products"
@@ -346,7 +345,6 @@ const Header = () => {
           </div>
         </div>
       </header>
-
       <header className="header-bottom py-1 header-middle">
         <div className="container">
           <div className="row">
@@ -396,10 +394,10 @@ const Header = () => {
                       <img
                         src={menu}
                         alt="Menu"
-                        className="img-fluid"
+                        className="img-fluid d-sm-none d-md-block"
                         loading="lazy"
                       />
-                      <div className="d-flex gap-4 align-items-center ">
+                      <div className="d-flex gap-4 gap-sm-2 gap-md-4 align-items-center ">
                         <span className="">SHOP CATEGORIES</span>
                         <RiArrowDownSLine className="fs-6" />
                       </div>
@@ -468,7 +466,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-    </>
+    </div>
   );
 };
 
