@@ -90,17 +90,6 @@ const getUserOrders = async () => {
   }
 };
 
-const addDeliveryAddress = async (data) => {
-  const response = await newRequest.post(
-    `user/add-delivery-address`,
-    data,
-    config
-  );
-  if (response?.data) {
-    return response.data;
-  }
-};
-
 const userService = {
   register,
   signin,
@@ -113,7 +102,6 @@ const userService = {
   resetUserPassword,
   getUserOrders,
   userCheckout,
-  addDeliveryAddress,
 };
 
 export default userService;

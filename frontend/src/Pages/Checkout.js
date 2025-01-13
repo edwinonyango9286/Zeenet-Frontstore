@@ -7,18 +7,25 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Meta from "../Components/Meta";
 import { toast } from "react-toastify";
-import { addADeliveryAddress, checkout } from "../features/users/userSlice";
+import { checkout } from "../features/users/userSlice";
 import Cookies from "js-cookie";
 import { getAllCountries } from "../features/country/countrySlice";
 import { getAllCounties } from "../features/county/countySlice";
 import { getAllTowns } from "../features/town/townSlice";
 import { getAllDeliveyStations } from "../features/deliveryStation/deliveryStationSlice";
+import {
+  addADeliveryAddress,
+  getUserDeliveryAddresses,
+  removeUserDeliveryAddress,
+} from "../features/deliveryAddress/deliveryAddressSlice";
+import { Loading3QuartersOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 const DELIVERY_ADDRESS_SCHEMA = Yup.object().shape({
   country: Yup.string().required("Please select country."),
   county: Yup.string().required("Please select county"),
   town: Yup.string().required("Please select town."),
-  pickupStation: Yup.string().required("Please select a pickup station."),
+  deliveryStation: Yup.string().required("Please select a pickup station."),
 });
 
 const Checkout = () => {
@@ -26,13 +33,25 @@ const Checkout = () => {
   const userCart = useSelector((state) => state?.user?.userCart);
   const isLoading = useSelector((state) => state?.user?.isLoading?.checkout);
   const [totalAmount, setTotalAmount] = useState(null);
-  const [ShippingInfo, setShippingInfo] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState(null);
 
   const isSuccessAddingAdeliveryAddress = useSelector(
-    (state) => state?.user?.isSuccess?.addADeliveryAddress
+    (state) => state?.deliveryAddress?.isSuccess?.addADeliveryAddress
   );
-  const deliveryAddress = useSelector((state) => state?.user?.deliveryAddress);
+  const addedDeliveryAddress = useSelector(
+    (state) => state?.deliveryAddress?.addedDeliveryAddress
+  );
+  const addAdeliveryAddressLoading = useSelector(
+    (state) => state?.deliveryAddress?.isLoading?.addADeliveryAddress
+  );
+  const deliveryAddresses = useSelector(
+    (state) => state?.deliveryAddress?.userDeliveryAddresses
+  );
+
+  const getUserDeliveryAddressesLoading = useSelector(
+    (state) => state?.deliveryAddress?.isLoading?.getUserDeliveryAddresses
+  );
+
   const countries = useSelector((state) => state?.country?.countries);
   const counties = useSelector((state) => state?.county?.counties);
   const towns = useSelector((state) => state?.town?.towns);
@@ -41,6 +60,7 @@ const Checkout = () => {
   );
 
   const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [token, setToken] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -50,14 +70,17 @@ const Checkout = () => {
     dispatch(getAllCounties());
     dispatch(getAllTowns());
     dispatch(getAllDeliveyStations());
+    dispatch(getUserDeliveryAddresses());
   }, [dispatch]);
 
   useEffect(() => {
     const userFirstName = Cookies.get("firstName");
+    const userLastName = Cookies.get("lastName");
     const UserToken = Cookies.get("token");
     const userEmail = Cookies.get("email");
     const userPhoneNumber = Cookies.get("phoneNumber");
     if (userFirstName) setFirstName(userFirstName);
+    if (userLastName) setLastName(userLastName);
     if (UserToken) setToken(UserToken);
     if (userEmail) setEmail(userEmail);
     if (userPhoneNumber) setPhoneNumber(userPhoneNumber);
@@ -80,19 +103,20 @@ const Checkout = () => {
       country: "",
       county: "",
       town: "",
-      pickupStation: "",
+      deliveryStation: "",
     },
     validationSchema: DELIVERY_ADDRESS_SCHEMA,
     onSubmit: (values) => {
-      addADeliveryAddress(values);
+      dispatch(addADeliveryAddress(values));
     },
   });
 
   useEffect(() => {
-    if (isSuccessAddingAdeliveryAddress && deliveryAddress) {
+    if (isSuccessAddingAdeliveryAddress && addedDeliveryAddress) {
       formik.resetForm();
+      dispatch(getUserDeliveryAddresses());
     }
-  }, [isSuccessAddingAdeliveryAddress, deliveryAddress]);
+  }, [isSuccessAddingAdeliveryAddress, addedDeliveryAddress]);
 
   const formatKES = (amount) => {
     return new Intl.NumberFormat("en-KE", {
@@ -107,6 +131,7 @@ const Checkout = () => {
       toast.error(
         "Your cart is empty. Add items to your cart to proceed with checkout. "
       );
+      return;
     }
     const paymentInfo = {
       amount: totalAmount,
@@ -124,6 +149,24 @@ const Checkout = () => {
     }
   }, [paymentStatus]);
 
+  // remove delivery address
+  const removeUserDeliveryAddressLoading = useSelector(
+    (state) => state?.deliveryAddress?.isLoading?.removeUserDeliveryAddress
+  );
+  const removeUserDeliveryAddressSuccess = useSelector(
+    (state) => state?.deliveryAddress?.isSuccess?.removeUserDeliveryAddress
+  );
+
+  useEffect(() => {
+    if (removeUserDeliveryAddressSuccess) {
+      dispatch(getUserDeliveryAddresses());
+    }
+  }, [removeUserDeliveryAddressSuccess]);
+
+  const handleRemoveDeliveryAddress = (deliveryAddressId) => {
+    dispatch(removeUserDeliveryAddress(deliveryAddressId));
+  };
+
   return (
     <>
       <Meta title={"Checkout"} />
@@ -133,146 +176,259 @@ const Checkout = () => {
             <div className="col-12 col-md-6 ">
               <div className="checkout-left-data">
                 <h6 className="logo py-2 mb-0 mt-0">ZEENET</h6>
-                <h6
-                  className="my-0"
-                  style={{ fontSize: "14px", fontWeight: "400" }}
-                >
+                <h6 className="my-0 fw-bold" style={{ fontSize: "16px" }}>
                   Account
                 </h6>
-                <div className="d-flex flex-column justify-content-between gap-2">
-                  <p style={{ fontSize: "12px" }} className="mb-0 mt-0">
-                    {email}
+                <div className="d-flex flex-column justify-content-between">
+                  <p style={{ fontSize: "16px" }} className="mb-0 mt-0 fw-4">
+                    Name: {firstName + " " + lastName}
+                  </p>
+                  <p style={{ fontSize: "16px" }} className="mb-0 mt-0 fw-4">
+                    Email: {email}
+                  </p>
+                  <p style={{ fontSize: "16px" }} className="mb-0 mt-0 fw-4">
+                    Phone Number: {phoneNumber}
                   </p>
                 </div>
-                <h6
-                  style={{ fontSize: "16px", fontWeight: "600" }}
-                  className="my-4"
-                >
-                  Add a delivery address
-                </h6>
-                <form
-                  className="d-flex gap-2 flex-wrap flex-column flex-md-row justify-content-between gap-2"
-                  onSubmit={formik.handleSubmit}
-                >
-                  <div className="w-100">
-                    <label htmlFor="pickupStation">Country</label>
-                    <select
-                      name="country"
-                      className="form-control form-select shadow-none outline-none"
-                      id="country"
-                      onChange={formik.handleChange("country")}
-                      onBlur={formik.handleBlur("coucountrynty")}
-                      value={formik.values.country}
-                    >
-                      <option value="" label="Select a country" />
-                      {Array.isArray(countries) &&
-                        countries.map((country, index) => (
-                          <option key={index} value={country?._id}>
-                            {country?.name}
-                          </option>
-                        ))}
-                    </select>
-                    <div className="error ms-2">
-                      {formik.touched.country && formik.errors.country}
-                    </div>
-                  </div>
 
-                  <div className="w-100">
-                    <label htmlFor="County">County</label>
-                    <select
-                      name="county"
-                      className="form-control form-select shadow-none outline-none"
-                      id="county"
-                      onChange={formik.handleChange("county")}
-                      onBlur={formik.handleBlur("county")}
-                      value={formik.values.county}
+                <div>
+                  {getUserDeliveryAddressesLoading ? (
+                    <div
+                      className="d-flex flex-row justify-content-center align-items-center"
+                      style={{ marginTop: "80px", marginBottom: "80px" }}
                     >
-                      <option value="" label="Select a county" />
-                      {Array.isArray(counties) &&
-                        counties.map((county, index) => (
-                          <option key={index} value={county?._id}>
-                            {county?.name}
-                          </option>
-                        ))}
-                    </select>
-                    <div className="error ms-2">
-                      {formik.touched.county && formik.errors.county}
-                    </div>
-                  </div>
-
-                  <div className="w-100">
-                    <label htmlFor="town">Nearest Town</label>
-
-                    <select
-                      name="town"
-                      className="form-control form-select shadow-none outline-none"
-                      id="town"
-                      onChange={formik.handleChange("town")}
-                      onBlur={formik.handleBlur("town")}
-                      value={formik.values.town}
-                    >
-                      <option value="" label="Select a nearest town." />
-                      {Array.isArray(towns) &&
-                        towns.map((town, index) => (
-                          <option key={index} value={town?._id}>
-                            {town?.name}
-                          </option>
-                        ))}
-                    </select>
-                    <div className="error ms-2">
-                      {formik.touched.town && formik.errors.town}
-                    </div>
-                  </div>
-
-                  <div className="w-100">
-                    <label htmlFor="pickupStation">Pickup Station</label>
-                    <select
-                      name="pickupStation"
-                      className="form-control form-select shadow-none outline-none"
-                      id="pickupStation"
-                      onChange={formik.handleChange("pickupStation")}
-                      onBlur={formik.handleBlur("pickupStation")}
-                      value={formik.values.pickupStation}
-                    >
-                      <option
-                        value=""
-                        label="Select a nearest delivery station."
+                      <Spin
+                        indicator={
+                          <Loading3QuartersOutlined
+                            style={{
+                              fontSize: 40,
+                              fontWeight: "bold",
+                              color: "#000",
+                            }}
+                            spin
+                          />
+                        }
                       />
-
-                      {Array.isArray(deliveryStations) &&
-                        deliveryStations.map((deliveryStation, index) => (
-                          <option key={index} value={deliveryStation?._id}>
-                            {deliveryStation?.name}
-                          </option>
-                        ))}
-                    </select>
-                    <div className="error ms-2">
-                      {formik.touched.pickupStation &&
-                        formik.errors.pickupStation}
                     </div>
-                  </div>
+                  ) : (
+                    <div>
+                      {deliveryAddresses && deliveryAddresses.length > 0 ? (
+                        <div>
+                          <h6
+                            style={{ fontSize: "18px", fontWeight: "600" }}
+                            className="my-3"
+                          >
+                            Select a delivery address
+                          </h6>
 
-                  <div className="my-3">
-                    <button
-                      className={"button border-0"}
-                      type="submit"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? (
-                        <div className="d-flex flex-row gap-1 align-items-center justify-content-center">
-                          <span
-                            class="spinner-border spinner-border-sm"
-                            role="status"
-                            aria-hidden="true"
-                          ></span>{" "}
-                          <span>Please wait...</span>
+                          <div>
+                            {Array.isArray(deliveryAddresses) &&
+                              deliveryAddresses.map((address) => (
+                                <div
+                                  key={address._id}
+                                  className="border p-3 mb-3 rounded-3 bg-white"
+                                >
+                                  <p>
+                                    <strong>Country:</strong>{" "}
+                                    {address.country.name}
+                                  </p>
+                                  <p>
+                                    <strong>County:</strong>{" "}
+                                    {address.county.name}
+                                  </p>
+                                  <p>
+                                    <strong>Town:</strong> {address.town.name}
+                                  </p>
+                                  <p>
+                                    <strong>Delivery Station:</strong>{" "}
+                                    {address.deliveryStation.name}
+                                  </p>
+                                  <div className="d-flex gap-4 flex-row flex-wrap">
+                                    <button
+                                      className="button border-0"
+                                      onClick={() => {}}
+                                    >
+                                      Use this address
+                                    </button>
+
+                                    <button
+                                      className="button signup border-0"
+                                      disabled={
+                                        removeUserDeliveryAddressLoading
+                                      }
+                                      onClick={() =>
+                                        handleRemoveDeliveryAddress(address._id)
+                                      }
+                                    >
+                                      {removeUserDeliveryAddressLoading ? (
+                                        <div className="d-flex flex-row gap-1 align-items-center justify-content-center">
+                                          <span
+                                            class="spinner-border spinner-border-sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                          ></span>{" "}
+                                          <span>Please wait...</span>
+                                        </div>
+                                      ) : (
+                                        "Remove this address"
+                                      )}
+                                    </button>
+                                  </div>
+                                </div>
+                              ))}
+                          </div>
                         </div>
                       ) : (
-                        "submit"
+                        <div>
+                          <h6
+                            style={{ fontSize: "18px", fontWeight: "600" }}
+                            className="my-3"
+                          >
+                            Add a new delivery address
+                          </h6>
+
+                          <form
+                            className="d-flex gap-2 flex-wrap flex-column flex-md-row justify-content-between gap-2"
+                            onSubmit={formik.handleSubmit}
+                          >
+                            <div className="w-100">
+                              <label htmlFor="pickupStation">Country</label>
+                              <select
+                                name="country"
+                                className="form-control form-select shadow-none outline-none"
+                                id="country"
+                                onChange={formik.handleChange("country")}
+                                onBlur={formik.handleBlur("country")}
+                                value={formik.values.country}
+                              >
+                                <option value="" label="Select a country" />
+                                {Array.isArray(countries) &&
+                                  countries.map((country, index) => (
+                                    <option key={index} value={country?._id}>
+                                      {country?.name}
+                                    </option>
+                                  ))}
+                              </select>
+                              <div className="error ms-2">
+                                {formik.touched.country &&
+                                  formik.errors.country}
+                              </div>
+                            </div>
+
+                            <div className="w-100">
+                              <label htmlFor="County">County</label>
+                              <select
+                                name="county"
+                                className="form-control form-select shadow-none outline-none"
+                                id="county"
+                                onChange={formik.handleChange("county")}
+                                onBlur={formik.handleBlur("county")}
+                                value={formik.values.county}
+                              >
+                                <option value="" label="Select a county" />
+                                {Array.isArray(counties) &&
+                                  counties.map((county, index) => (
+                                    <option key={index} value={county?._id}>
+                                      {county?.name}
+                                    </option>
+                                  ))}
+                              </select>
+                              <div className="error ms-2">
+                                {formik.touched.county && formik.errors.county}
+                              </div>
+                            </div>
+
+                            <div className="w-100">
+                              <label htmlFor="town">Nearest Town</label>
+
+                              <select
+                                name="town"
+                                className="form-control form-select shadow-none outline-none"
+                                id="town"
+                                onChange={formik.handleChange("town")}
+                                onBlur={formik.handleBlur("town")}
+                                value={formik.values.town}
+                              >
+                                <option
+                                  value=""
+                                  label="Select a nearest town."
+                                />
+                                {Array.isArray(towns) &&
+                                  towns.map((town, index) => (
+                                    <option key={index} value={town?._id}>
+                                      {town?.name}
+                                    </option>
+                                  ))}
+                              </select>
+                              <div className="error ms-2">
+                                {formik.touched.town && formik.errors.town}
+                              </div>
+                            </div>
+
+                            <div className="w-100">
+                              <label htmlFor="deliveryStation">
+                                Pickup Station
+                              </label>
+                              <select
+                                name="deliveryStation"
+                                className="form-control form-select shadow-none outline-none"
+                                id="deliveryStation"
+                                onChange={formik.handleChange(
+                                  "deliveryStation"
+                                )}
+                                onBlur={formik.handleBlur("deliveryStation")}
+                                value={formik.values.deliveryStation}
+                              >
+                                <option
+                                  value=""
+                                  label="Select a nearest delivery station."
+                                />
+
+                                {Array.isArray(deliveryStations) &&
+                                  deliveryStations.map(
+                                    (deliveryStation, index) => (
+                                      <option
+                                        key={index}
+                                        value={deliveryStation?._id}
+                                      >
+                                        {deliveryStation?.name}
+                                      </option>
+                                    )
+                                  )}
+                              </select>
+                              <div className="error ms-2">
+                                {formik.touched.deliveryStation &&
+                                  formik.errors.deliveryStation}
+                              </div>
+                            </div>
+
+                            <div className="my-3">
+                              <button
+                                className={"button border-0"}
+                                type="submit"
+                                disabled={addAdeliveryAddressLoading}
+                              >
+                                {addAdeliveryAddressLoading ? (
+                                  <div className="d-flex flex-row gap-1 align-items-center justify-content-center">
+                                    <span
+                                      className="spinner-border spinner-border-sm"
+                                      role="status"
+                                      aria-hidden="true"
+                                    ></span>{" "}
+                                    <span>Please wait...</span>
+                                  </div>
+                                ) : (
+                                  "submit"
+                                )}
+                              </button>
+                            </div>
+                          </form>
+                        </div>
                       )}
-                    </button>
-                  </div>
-                </form>
+                    </div>
+                  )}
+                </div>
+
                 <div className="w-100 mt-5 mb-2">
                   <div className="d-flex justify-content-between align-items-center">
                     <Link to="/cart" className="text-dark">
@@ -361,7 +517,7 @@ const Checkout = () => {
                   {isLoading ? (
                     <div className="d-flex flex-row gap-1 align-items-center justify-content-center">
                       <span
-                        class="spinner-border spinner-border-sm"
+                        className="spinner-border spinner-border-sm"
                         role="status"
                         aria-hidden="true"
                       ></span>{" "}

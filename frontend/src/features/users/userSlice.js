@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import userService from "./userService";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import { act } from "react";
 
 export const registerUser = createAsyncThunk(
   "auth/user-register",
@@ -179,17 +178,6 @@ export const getOrders = createAsyncThunk(
   }
 );
 
-export const addADeliveryAddress = createAsyncThunk(
-  "user/add-a-orders",
-  async (data, thunkAPI) => {
-    try {
-      return await userService.addDeliveryAddress(data);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
 export const resetState = createAction("Reset_all");
 
 const initialState = {
@@ -215,7 +203,6 @@ const initialState = {
     resetPassword: false,
     getUserProductWishlist: false,
     getAccessToken: false,
-    addADeliveryAddress: false,
   },
   isLoading: {
     registerUser: false,
@@ -232,7 +219,6 @@ const initialState = {
     resetUserPasswordToken: false,
     resetPassword: false,
     getUserProductWishlist: false,
-    addADeliveryAddress: false,
   },
   isSuccess: {
     registerUser: false,
@@ -249,7 +235,6 @@ const initialState = {
     resetUserPasswordToken: false,
     resetPassword: false,
     getUserProductWishlist: false,
-    addADeliveryAddress: false,
   },
   message: "",
 };
@@ -603,28 +588,6 @@ export const authSlice = createSlice({
         state.message = action?.payload?.response?.data?.message;
         if (action?.payload?.response?.data?.message) {
           toast.error(action?.payload?.response?.data?.message);
-        } else {
-          toast.error(
-            "It seems there’s an issue at the moment. Please try again later."
-          );
-        }
-      })
-      .addCase(addADeliveryAddress.pending, (state) => {
-        state.isLoading.addADeliveryAddress = true;
-      })
-      .addCase(addADeliveryAddress.fulfilled, (state, action) => {
-        state.isError.addADeliveryAddress = false;
-        state.isLoading.addADeliveryAddress = false;
-        state.isSuccess.addADeliveryAddress = true;
-        state.deliveryAddress = action?.payload;
-      })
-      .addCase(addADeliveryAddress.rejected, (state, action) => {
-        state.isError.addADeliveryAddress = true;
-        state.isSuccess.addADeliveryAddress = false;
-        state.isLoading.addADeliveryAddress = false;
-        state.message = action?.payload?.response?.data?.message;
-        if (action?.payload?.response?.data?.message) {
-          toast.error(action?.payload?.message);
         } else {
           toast.error(
             "It seems there’s an issue at the moment. Please try again later."

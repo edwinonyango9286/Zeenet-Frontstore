@@ -7,6 +7,7 @@ import countryReducer from "../features/country/countrySlice";
 import countyReducer from "../features/county/countySlice";
 import townReducer from "../features/town/townSlice";
 import deliveveryStationReducer from "../features/deliveryStation/deliveryStationSlice";
+import deliveryAddressReducer from "../features/deliveryAddress/deliveryAddressSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     county: countyReducer,
     town: townReducer,
     deliveryStation: deliveveryStationReducer,
+    deliveryAddress: deliveryAddressReducer,
   },
   devTools: process.env.REACT_APP_NODE_ENV !== "production",
 });
