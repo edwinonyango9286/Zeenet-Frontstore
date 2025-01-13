@@ -92,13 +92,16 @@ const Product = () => {
   const addaProductRatingLoading = useSelector(
     (state) => state?.product?.isLoading?.addProductRating
   );
+  const addaProductRatingSuccess = useSelector(
+    (state) => state?.product?.isSuccess?.addProductRating
+  );
 
   const addRatingToProduct = async () => {
     if (star === null) {
-      toast.error("Add star rating?");
+      toast.error("Please select star rating for the product.");
       return false;
     } else if (ratingComment === "") {
-      toast.error("Please write a review about the product?");
+      toast.error("Please write a review about the product.");
       return false;
     } else {
       const data = {
@@ -109,6 +112,13 @@ const Product = () => {
       dispatch(addProductRating(data));
     }
   };
+
+  useEffect(() => {
+    if (addaProductRatingSuccess) {
+      setRatingComment("");
+      setStar(null);
+    }
+  }, [addaProductRatingSuccess]);
 
   const formatKES = (amount) => {
     return new Intl.NumberFormat("en-KE", {
