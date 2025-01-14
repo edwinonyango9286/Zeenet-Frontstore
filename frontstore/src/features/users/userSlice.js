@@ -331,6 +331,7 @@ export const authSlice = createSlice({
         Cookies.remove("phoneNumber");
         toast.success(action?.payload?.message);
       })
+      
       .addCase(logoutUser.rejected, (state, action) => {
         state.isError.logoutUser = true;
         state.isSuccess.logoutUser = false;
