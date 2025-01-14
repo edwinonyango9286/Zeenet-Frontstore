@@ -143,7 +143,10 @@ const Header = () => {
 
                 <div className="d-sm-none">
                   <h2 className="m-0 p-0">
-                    <Link to="/" className="text-white logo text-start">
+                    <Link
+                      to="/"
+                      className="text-white text-start fw-bold text-uppercase fs-2  fs-sm-1"
+                    >
                       Zeenet
                     </Link>
                   </h2>
@@ -152,7 +155,10 @@ const Header = () => {
 
               <div className="d-none d-sm-block ">
                 <h2 className="m-0 p-0">
-                  <Link to="/" className="text-white logo text-start">
+                  <Link
+                    to="/"
+                    className="text-white  text-start fw-bold text-uppercase"
+                  >
                     Zeenet
                   </Link>
                 </h2>
@@ -188,7 +194,7 @@ const Header = () => {
               </div>
 
               <div className="col-5 col-sm-4 col-md-5">
-                <div className="header-middle-links d-flex align-items-center justify-content-center gap-3  gap-sm-2 gap-md-4 justify-content-lg-end">
+                <div className="header-middle-links d-flex align-items-center  justify-content-center justify-content-sm-end justify-content-md-center  gap-2 gap-sm-3 gap-md-4  gap-lg-2  justify-content-lg-end me-lg-4">
                   <div>
                     <Link
                       to="/compare-products"
@@ -380,7 +386,7 @@ const Header = () => {
             </div>
 
             <div className="col-12 d-none d-sm-block">
-              <div className="d-flex align-items-center gap-20">
+              <div className="d-flex align-items-center justify-content-start gap-3">
                 <div className="d-none d-sm-block">
                   <div className="dropdown">
                     <button
@@ -451,9 +457,8 @@ const Header = () => {
                   </div>
                 </div>
                 <div className="vertical-rule d-none d-md-block"></div>
-
                 <div className="menu-links col-6">
-                  <div className="d-flex align-items-center gap-20">
+                  <div className="d-flex align-items-center gap-3 gap-md-4">
                     <NavLink to="/">home</NavLink>
                     <NavLink to="/store">store</NavLink>
                     <NavLink to="/myorders">orders</NavLink>

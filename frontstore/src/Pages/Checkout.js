@@ -175,7 +175,9 @@ const Checkout = () => {
           <div className="col-12 d-md-inline-flex gap-md-2">
             <div className="col-12 col-md-6 ">
               <div className="checkout-left-data">
-                <h6 className="logo py-2 mb-0 mt-0">ZEENET</h6>
+                <h6 className="py-2 mb-0 mt-0 fw-bold text-uppercase fs-2  fs-sm-1 ">
+                  ZEENET
+                </h6>
                 <h6 className="my-0 fw-bold" style={{ fontSize: "16px" }}>
                   Account
                 </h6>
