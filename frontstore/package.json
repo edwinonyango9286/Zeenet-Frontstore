@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "frontstore",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.19.0",
     "axios": "^1.6.8",
-    "bootstrap": "^5.3.1",
+    "bootstrap": "^5.3.3",
     "formik": "^2.4.6",
     "immer": "^10.0.3",
     "js-cookie": "^3.0.5",

@@ -49,7 +49,7 @@ const Blog = () => {
           <BreadCrumb title={blog?.title} className="text-capitalize" />
           <Container class1="home-wrapper-2 py-2">
             <div className="row">
-              <div className="col-12 col-lg-6">
+                <div className="col-12 col-lg-6">
                 <div className="single-blog-card">
                   <Link
                     to="/blogs"
@@ -76,7 +76,7 @@ const Blog = () => {
                       className="text-capitalize"
                     ></p>
                   </div>
-                </div>
+                  </div>
               </div>
             </div>
           </Container>
