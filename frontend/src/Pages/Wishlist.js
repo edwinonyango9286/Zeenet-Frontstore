@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addProductToCart,
   getUserProductWishlist,
+  resetState,
 } from "../features/users/userSlice";
 import { removeProductFromWishlist } from "../features/products/productSlice";
 import { Link } from "react-router-dom";
@@ -29,11 +30,21 @@ const Wishlist = () => {
   );
   useEffect(() => {
     dispatch(getUserProductWishlist());
-  }, []);
+  }, [dispatch]);
+
+  const isSuccess = useSelector(
+    (state) => state.product.isSuccess.removeProductFromWishlist
+  );
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(resetState());
+      dispatch(getUserProductWishlist());
+    }
+  }, [isSuccess]);
 
   const removeFromWishlist = async (productId) => {
-    await dispatch(removeProductFromWishlist(productId));
-    await dispatch(getUserProductWishlist());
+    dispatch(removeProductFromWishlist(productId));
   };
 
   const addItemToCart = (product) => {

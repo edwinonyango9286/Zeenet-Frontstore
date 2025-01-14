@@ -346,7 +346,6 @@ const Header = () => {
         </div>
       </header>
       <header className="header-bottom py-1 header-middle">
-        firstName
         <div className="container">
           <div className="row">
             <div className="col-12">
