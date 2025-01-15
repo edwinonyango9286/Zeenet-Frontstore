@@ -45,8 +45,8 @@ const ProductCard = (props) => {
                       src={wishlistIcon}
                       alt="Wishlist"
                       loading="lazy"
-                      width={20}
-                      height={20}
+                      width={18}
+                      height={18}
                     />
                   </button>
                 </div>
@@ -54,15 +54,15 @@ const ProductCard = (props) => {
                 <div className="product-image">
                   <img
                     src={item.images[0]?.url}
-                    className="img-fluid mx-auto border rounded object-fit "
+                    className="img-fluid mx-auto rounded object-fit "
                     alt={item?.title}
-                    width={100}
+                    width={140}
                     height={130}
                     onClick={() => navigate("/product/" + item?._id)}
                   />
                   <img
                     src={item?.images[0]?.url}
-                    className="img-fluid mx-auto  border rounded object-fit"
+                    className="img-fluid mx-auto rounded object-fit"
                     alt={item?.title}
                     width={100}
                     height={130}
@@ -79,31 +79,31 @@ const ProductCard = (props) => {
                     edit={false}
                     activeColor="#ffd700"
                   />
-                  <p className="price mb-0">{formatKES(item?.price)}</p>
+                  <p className="price mb-0 fw-bold">{formatKES(item?.price)}</p>
                 </div>
                 <div className="action-bar position-absolute">
                   <div className="d-flex flex-column gap-2">
                     <img
                       src={prodcompare}
                       alt="Compare Product"
-                      width={20}
-                      height={20}
+                      width={18}
+                      height={18}
                     />
 
                     <img
                       src={view}
                       alt="View Product"
                       loading="lazy"
-                      width={20}
-                      height={20}
+                      width={18}
+                      height={18}
                       onClick={() => navigate("/product/" + item?._id)}
                     />
                     <img
                       src={addCart}
                       alt="Add to cart"
                       loading="lazy"
-                      width={20}
-                      height={20}
+                      width={18}
+                      height={18}
                       onClick={() => navigate("/product/" + item?._id)}
                     />
                   </div>
