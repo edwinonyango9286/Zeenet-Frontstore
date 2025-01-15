@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import mainBanner from "../images/main-banner-1.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import Marquee from "react-fast-marquee";
@@ -35,6 +35,8 @@ import wishlistIcon from "../images/wish.svg";
 import prodcompare from "../images/prodcompare.svg";
 import view from "../images/view.svg";
 import addCart from "../images/add-cart.svg";
+import { FaLessThan } from "react-icons/fa6";
+import { FaGreaterThan } from "react-icons/fa6";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -67,6 +69,27 @@ const Home = () => {
       currency: "KES",
       minimumFractionDigits: 0,
     }).format(amount);
+  };
+
+  const scrollContainerRef = useRef(null);
+  const scrollAmount = 200; // Amount to scroll on each click
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: -scrollAmount,
+        behavior: "smooth", // Smooth scrolling
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: scrollAmount,
+        behavior: "smooth", // Smooth scrolling
+      });
+    }
   };
 
   return (
@@ -129,7 +152,9 @@ const Home = () => {
                       />
                       <div className="small-banner-content position-absolute">
                         <h4 className="text-uppercase fw-bold">best sales</h4>
-                        <h5 className="text-capitalize fw-bold">laptop max</h5>
+                        <h5 className="text-capitalize fw-bold d-sm-none d-md-block">
+                          laptop max
+                        </h5>
                         <div className="d-none d-lg-block ">
                           <p className="fw-bold">
                             From Ksh 120,000 or <br /> ksh 6,000/mo.
@@ -146,7 +171,9 @@ const Home = () => {
                       />
                       <div className="small-banner-content position-absolute">
                         <h4 className="text-uppercase fw-bold">15% off</h4>
-                        <h5 className="text-capitalize fw-bold">Smartwatch 7</h5>
+                        <h5 className="text-capitalize fw-bold d-sm-none d-md-block">
+                          Smartwatch 7
+                        </h5>
                         <p className="d-none d-lg-block fw-bold">
                           Shop the latest brands <br /> styles and colors.
                         </p>
@@ -162,7 +189,9 @@ const Home = () => {
                       />
                       <div className="small-banner-content position-absolute">
                         <h4 className="text-uppercase fw-bold">new arrivals</h4>
-                        <h5 className="text-capitalize fw-bold">Buy IPad Air</h5>
+                        <h5 className="text-capitalize fw-bold d-sm-none d-md-block">
+                          Buy IPad Air
+                        </h5>
                         <p className="d-none d-lg-block fw-bold">
                           From ksh 56,000 or <br /> ksh 4,000/mo for 12 mo.
                         </p>
@@ -176,8 +205,12 @@ const Home = () => {
                         loading="lazy"
                       />
                       <div className="small-banner-content position-absolute">
-                        <h4 className="text-uppercase fw-bold">Free Engraving</h4>
-                        <h5 className="text-capitalize fw-bold">AirPods Max</h5>
+                        <h4 className="text-uppercase fw-bold">
+                          Free Engraving
+                        </h4>
+                        <h5 className="text-capitalize fw-bold d-sm-none d-md-block">
+                          AirPods Max
+                        </h5>
                         <p className="d-none d-lg-block fw-bold">
                           High-fidelity playback & <br />
                           ultra-low distortion
@@ -192,27 +225,29 @@ const Home = () => {
             <Container class1="home-wrapper-2 p-2">
               <div className="row">
                 <div className="col-12">
-                  <div className="services d-flex align-items-center justify-content-between ">
+                  <div className="d-flex align-items-center justify-content-between gap-4 overflow-scroll scroll-container">
                     {Array.isArray(services) &&
                       services?.map((service, index) => (
-                        <div
-                          className="d-flex align-items-center justify-content-center gap-4"
-                          key={index}
-                        >
-                          <div>
-                            <img
-                              src={service?.image}
-                              alt="Services"
-                              className="advertImages img-fluid"
-                              width={40}
-                              height={40}
-                              loading="lazy"
-                            />
+                        <div className="" key={index}>
+                          <div className="d-flex gap-2 flex-nowrap">
+                            <div className="">
+                              <img
+                                src={service?.image}
+                                alt="Services"
+                                width={40}
+                                height={40}
+                                loading="lazy"
+                              />
+                            </div>
+
                             <div>
-                              <h6 className="d-none d-lg-block">
-                                {service.title}
+                              <h6 className="fw-bold fs-6 m-0 p-0 text-nowrap">
+                                {service?.title}
                               </h6>
-                              <p className="mb-0 d-none d-lg-block">
+                              <p
+                                className="m-0 p-0 text-nowrap"
+                                style={{ fontSize: "12px" }}
+                              >
                                 {service?.tagline}
                               </p>
                             </div>
@@ -228,17 +263,36 @@ const Home = () => {
               <div className="row">
                 <div>
                   <div className="col-12">
-                    <h3 className="section-heading">
-                      {products.length === 0 ? " " : "Featured collection"}
-                    </h3>
+                    <div className="d-flex flex-row align-items-center justify-content-between">
+                      <div>
+                        <h3 className="fw-bold fs-4 my-2 ">
+                          {products.length === 0 ? " " : "Featured collection"}
+                        </h3>
+                      </div>
+
+                      <div className="d-flex flex-row gap-2 me-2 text-muted">
+                        <FaLessThan
+                          className="cusor-pointer"
+                          onClick={scrollLeft}
+                        />
+                        <FaGreaterThan
+                          className="cusor-pointer"
+                          onClick={scrollRight}
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <div className="col-12 d-inline-flex  flex-row  align-items-center justify-content-start  gap-2 flex-wrap">
+
+                  <div
+                    className="col-12 d-inline-flex  flex-row  align-items-center justify-content-start gap-2 overflow-scroll scroll-container"
+                    ref={scrollContainerRef}
+                  >
                     {Array.isArray(products) &&
                       products?.map((item, index) => {
                         if (item?.tags === "Featured") {
                           return (
-                            <div key={index} className="">
-                              <div className="product-card position-relative">
+                            <div key={index}>
+                              <div className="product-card position-relative shadow my-2">
                                 <div className="wishlist-icon position-absolute">
                                   <button
                                     className="border-0 bg-transparent"
@@ -249,28 +303,28 @@ const Home = () => {
                                     <img
                                       src={wishlistIcon}
                                       alt="Wishlist"
-                                      width={20}
-                                      height={20}
+                                      width={18}
+                                      height={18}
                                     />
                                   </button>
                                 </div>
                                 <div className="product-image">
                                   <img
                                     src={item?.images[0]?.url}
-                                    className="img-fluid mx-auto border rounded object-fit "
+                                    className="img-fluid mx-auto  rounded object-fit p-1 "
                                     alt={item?.title}
-                                    width={90}
-                                    height={130}
+                                    width={100}
+                                    height={140}
                                     onClick={() =>
                                       navigate("/product/" + item?._id)
                                     }
                                   />
                                   <img
                                     src={item?.images[0]?.url}
-                                    className="img-fluid mx-auto border rounded object-fit "
+                                    className="img-fluid mx-auto rounded object-fit "
                                     alt="ProductImage"
-                                    width={90}
-                                    height={130}
+                                    width={100}
+                                    height={140}
                                     onClick={() =>
                                       navigate("/product/" + item?._id)
                                     }
@@ -284,14 +338,19 @@ const Home = () => {
                                   <h5 className="product-title mb-0">
                                     {item?.title}
                                   </h5>
-                                  <ReactStars
-                                    count={5}
-                                    size={18}
-                                    value={parseInt(item?.totalRating) ?? 0}
-                                    edit={false}
-                                    activeColor="#ffd700"
-                                  />
-                                  <p className="price">
+
+                                  <div className="d-flex m-0 p-0">
+                                    <ReactStars
+                                      count={5}
+                                      size={18}
+                                      value={parseInt(item?.totalRating) ?? 0}
+                                      edit={false}
+                                      activeColor="#ffd700"
+                                      classNames={"p-0 m-0"}
+                                    />
+                                    <p>({item?.totalRating})</p>
+                                  </div>
+                                  <p className="price fw-bold m-0">
                                     {formatKES(item?.price)}
                                   </p>
                                 </div>
@@ -303,8 +362,8 @@ const Home = () => {
                                         src={prodcompare}
                                         alt="Compare Product"
                                         loading="lazy"
-                                        width={20}
-                                        height={20}
+                                        width={18}
+                                        height={18}
                                       />
                                     </button>
 
@@ -316,8 +375,8 @@ const Home = () => {
                                           navigate("/product/" + item?._id)
                                         }
                                         loading="lazy"
-                                        width={20}
-                                        height={20}
+                                        width={18}
+                                        height={18}
                                       />
                                     </button>
                                     <button className="border-0 bg-transparent">
@@ -325,8 +384,8 @@ const Home = () => {
                                         src={addCart}
                                         alt="cartImage"
                                         loading="lazy"
-                                        width={20}
-                                        height={20}
+                                        width={18}
+                                        height={18}
                                       />
                                     </button>
                                   </div>
@@ -343,12 +402,12 @@ const Home = () => {
 
             <Container class1="famous-wrapper py-2  home-wrapper-2">
               <div className="row">
-                <div className="col-12 d-inline-flex align-items-center justify-content-center justify-content-md-between justify-content-lg-start gap-3 gap-md-2 flex-wrap flex-lg-nowrap">
-                  <div className="famous-card position-relative">
-                    <img src={famous1} className="img-fluid" alt="famous1" />
+                <div className="col-12 d-flex  flex-row align-items-center justify-content-start gap-2 overflow-scroll scroll-container">
+                  <div className="famous-card position-relative my-2">
+                    <img src={famous1} alt="famous1" className="shadow" />
                     <div className="famous-content position-absolute">
-                      <h5 className="text-white text-sm">BIG SCREEN</h5>
-                      <h6 className="text-white text-sm">
+                      <h5 className="text-white text-sm ">BIG SCREEN</h5>
+                      <h6 className="text-white text-sm fw-bold">
                         Smart Watch Series 7
                       </h6>
                       <p className="text-white text-sm">
@@ -358,10 +417,10 @@ const Home = () => {
                   </div>
 
                   <div className="famous-card position-relative">
-                    <img src={famous2} className="img-fluid" alt="famous2" />
+                    <img src={famous2} alt="famous2" className="shadow" />
                     <div className="famous-content position-absolute">
-                      <h5 className="text-dark text-sm">STUDIO DISPLAY</h5>
-                      <h6 className="text-dark text-sm ">
+                      <h5 className="text-muted text-sm">STUDIO DISPLAY</h5>
+                      <h6 className="text-dark text-sm fw-bold ">
                         600 units of brightness.
                       </h6>
                       <p className="text-dark text-sm">
@@ -370,10 +429,12 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="famous-card position-relative">
-                    <img src={famous3} className="img-fluid" alt="famous1" />
+                    <img src={famous3} alt="famous1" className="shadow" />
                     <div className="famous-content position-absolute">
-                      <h5 className="text-dark text-sm">SMARTPHONES</h5>
-                      <h6 className="text-dark text-sm">SMARTPHONE 13 PRO.</h6>
+                      <h5 className="text-muted text-sm">SMARTPHONES</h5>
+                      <h6 className="text-dark text-sm fw-bold">
+                        SMARTPHONE 13 PRO.
+                      </h6>
                       <p className="text-dark text-sm">
                         Now Green. From ksh 6000 or <br /> ksh 2000/mo. for 24
                         mo. Footnote*
@@ -382,10 +443,12 @@ const Home = () => {
                   </div>
 
                   <div className="famous-card position-relative">
-                    <img src={famous4} className="img-fluid" alt="famous1" />
+                    <img src={famous4} alt="famous1" className="shadow" />
                     <div className="famous-content position-absolute">
-                      <h5 className="text-dark text-sm">Home Speaker</h5>
-                      <h6 className="text-dark text-sm">Room-filling sound.</h6>
+                      <h5 className="text-muted text-sm">Home Speaker</h5>
+                      <h6 className="text-dark text-sm fw-bold">
+                        Room-filling sound.
+                      </h6>
                       <p className="text-dark text-sm">
                         From ksh 2000 or ksh 1000/mo. for 12 mo*
                       </p>
@@ -544,14 +607,14 @@ const Home = () => {
             <Container class1="marquee-wrapper py-2 home-wrapper-2">
               <div className="row">
                 <div className="col-12">
-                  <div className="marquee-inner-wrapper card-wrapper">
+                  <div className="marquee-inner-wrapper card-wrapper bg-white rounded-3 shadow my-1">
                     <Marquee>
-                      <div className="d-inline-flex align-items-center justify-content-between gap-4 ">
+                      <div className="d-inline-flex align-items-center justify-content-between gap-4">
                         <div className="">
                           <img
                             src={brand1}
                             className="img-fluid "
-                            width={80}
+                            width={40}
                             height={40}
                             alt="brand1"
                           />
@@ -583,15 +646,7 @@ const Home = () => {
                             alt="brand4"
                           ></img>
                         </div>
-                        <div className="">
-                          <img
-                            src={brand5}
-                            className="img-fluid"
-                            width={80}
-                            height={40}
-                            alt="brand5"
-                          ></img>
-                        </div>
+
                         <div className="">
                           <img
                             src={brand6}
@@ -630,11 +685,11 @@ const Home = () => {
               <div className="row">
                 <div>
                   <div className="col-12">
-                    <h3 className="section-heading">
+                    <h3 className="section-heading fw-bold fs-4 my-4">
                       {blogs && blogs?.length === 0 ? " " : "Our Latest News"}
                     </h3>
                   </div>
-                  <div className="d-flex align-items-center gap-2 flex-wrap pb-2">
+                  <div className="d-flex align-items-center justify-content-start gap-3 my-2 overflow-scroll scroll-container">
                     <BlogCard data={blogs} />
                   </div>
                 </div>

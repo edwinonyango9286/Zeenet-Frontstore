@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-
 const BlogCard = (props) => {
   const { data } = props;
 
@@ -11,14 +10,14 @@ const BlogCard = (props) => {
       {(Array.isArray(data) &&
         data?.map((item, index) => {
           return (
-            <div key={index} className="blog-card">
-              <div className="card-image">
+            <div key={index} className="blog-card bg-white rounded-3">
+              <div className="p-2">
                 <img
                   src={item?.images[0]?.url}
                   alt={item?.title}
-                  className="img-fluid"
-                  width={100}
-                  height={100}
+                  className="rounded-3"
+                  width={200}
+                  height={200}
                 />
               </div>
               <div className="blog-content">

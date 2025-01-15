@@ -32,7 +32,7 @@ const ProductCard = (props) => {
         data.map((item, index) => {
           return (
             <div key={index}>
-              <div className="product-card position-relative">
+              <div className="product-card position-relative shadow">
                 <div className="wishlist-icon position-absolute">
                   <button
                     className="border-0 bg-transparent"

@@ -182,13 +182,16 @@ const Checkout = () => {
                   Account
                 </h6>
                 <div className="d-flex flex-column justify-content-between">
-                  <p style={{ fontSize: "16px" }} className="mb-0 mt-0 fw-4">
+                  <p
+                    style={{ fontSize: "14px" }}
+                    className="mb-0 mt-0 fw-4 text-capitalize"
+                  >
                     Name: {firstName + " " + lastName}
                   </p>
-                  <p style={{ fontSize: "16px" }} className="mb-0 mt-0 fw-4">
+                  <p style={{ fontSize: "14px" }} className="mb-0 mt-0 fw-4">
                     Email: {email}
                   </p>
-                  <p style={{ fontSize: "16px" }} className="mb-0 mt-0 fw-4">
+                  <p style={{ fontSize: "14px" }} className="mb-0 mt-0 fw-4">
                     Phone Number: {phoneNumber}
                   </p>
                 </div>
@@ -230,18 +233,18 @@ const Checkout = () => {
                                   key={address._id}
                                   className="border p-3 mb-3 rounded-3 bg-white"
                                 >
-                                  <p>
+                                  <p className="fs-6">
                                     <strong>Country:</strong>{" "}
                                     {address.country.name}
                                   </p>
-                                  <p>
+                                  <p className="fs-6">
                                     <strong>County:</strong>{" "}
                                     {address.county.name}
                                   </p>
-                                  <p>
+                                  <p className="fs-6">
                                     <strong>Town:</strong> {address.town.name}
                                   </p>
-                                  <p>
+                                  <p className="fs-6">
                                     <strong>Delivery Station:</strong>{" "}
                                     {address.deliveryStation.name}
                                   </p>
@@ -452,7 +455,7 @@ const Checkout = () => {
                     return (
                       <div
                         key={index}
-                        className="d-flex gap-4 mb-3 align-items-center"
+                        className="d-flex gap-4 mb-3 align-items-start"
                       >
                         <div className="w-75 d-flex gap-10">
                           <div className="w-25 position-relative">
@@ -462,13 +465,15 @@ const Checkout = () => {
                             >
                               {item?.quantity}
                             </span>
-                            <img
-                              src={item?.images}
-                              className="img-fluid border rounded "
-                              width={120}
-                              height={120}
-                              alt="Product"
-                            ></img>
+                            <div className="border bg-white rounded p-2">
+                              <img
+                                src={item?.images}
+                                className="img-fluid rounded"
+                                width={120}
+                                height={120}
+                                alt="Product"
+                              ></img>
+                            </div>
                           </div>
                           <div>
                             <h5 className="total-price">{item?.title}</h5>
@@ -481,7 +486,7 @@ const Checkout = () => {
                           </div>
                         </div>
                         <div className="flex-grow-1">
-                          <h5 className="total">
+                          <h5 className="total fw-bold">
                             {formatKES(item?.quantity * item?.price)}
                           </h5>
                         </div>
@@ -502,8 +507,8 @@ const Checkout = () => {
                 </div>
               </div>
               <div className="d-flex justify-content-between align-items-center border-bottom py-2">
-                <h4 className="total">Total</h4>
-                <h5 className="total-price">{formatKES(totalAmount)} </h5>
+                <h4 className="total fw-bold fs-6">Total</h4>
+                <h5 className="total-price fw-bold fs-6">{formatKES(totalAmount)} </h5>
               </div>
               <div className="py-4 d-flex align-items-center justify-content-end">
                 <button

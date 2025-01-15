@@ -7,11 +7,11 @@ import service5 from "../images/secure payment.png";
 const services = [
   {
     title: "Free Delivery",
-    tagline: "For all our customers",
+    tagline: "For all orders above ksh 200,000",
     image: service1,
   },
   {
-    title: "Daily Offers",
+    title: "Daily Surprise Offers",
     tagline: "Save Upto 25% Off",
     image: service2,
   },
@@ -27,7 +27,7 @@ const services = [
   },
   {
     title: "Secure Payments",
-    tagline: "100% Protected Payment",
+    tagline: "100% protected payment",
     image: service5,
   },
 ];

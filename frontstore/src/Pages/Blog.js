@@ -49,34 +49,36 @@ const Blog = () => {
           <BreadCrumb title={blog?.title} className="text-capitalize" />
           <Container class1="home-wrapper-2 py-2">
             <div className="row">
-                <div className="col-12 col-lg-6">
-                <div className="single-blog-card">
-                  <Link
-                    to="/blogs"
-                    className="d-flex align-items-center gap-10"
-                  >
-                    <AiOutlineArrowLeft className="fs-4" />
-                    Go Back To blogs
-                  </Link>
+              <div className="col-12">
+                <div className="single-blog-card ">
+                  <div className="d-flex flex-start">
+                    <Link
+                      to="/blogs"
+                      className="d-flex align-items-center gap-10"
+                    >
+                      <AiOutlineArrowLeft className="fs-4" />
+                      Go Back To blogs
+                    </Link>
+                    </div>
+                    
 
-                  <h3 className="text-uppercase">{blog?.title}</h3>
-                  <div className="d-flex flex-col">
-                    <div>
+                    <div className="bg-white p-3 rounded mb-2 d-flex align-items-center justify-content-center">
                       <img
                         src={blog?.images[0]?.url}
                         alt={blog?.title}
-                        className="img-fluid  my-4 rounded-4  w-md-100 object-fit-cover"
-                        height={100}
+                        className="img-fluid  my-4 w-md-100 object-fit-cover w-100%"
+                        style={{ objectFit:"contain"}}
                       />
                     </div>
-                  </div>
-                  <div>
+                    
+                  <div className="d-flex flex-column align-items-center justify-content-center my-5">
+                    <h3 className="text-uppercase">{blog?.title}</h3>
                     <p
                       dangerouslySetInnerHTML={{ __html: blog?.description }}
                       className="text-capitalize"
                     ></p>
                   </div>
-                  </div>
+                </div>
               </div>
             </div>
           </Container>
