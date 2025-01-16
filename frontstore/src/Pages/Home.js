@@ -10,7 +10,6 @@ import brand1 from "../images/brand-01.png";
 import brand2 from "../images/brand-02.png";
 import brand3 from "../images/brand-03.png";
 import brand4 from "../images/brand-04.png";
-import brand5 from "../images/brand-05.png";
 import brand6 from "../images/brand-06.png";
 import brand7 from "../images/brand-07.png";
 import brand8 from "../images/brand-08.png";
@@ -35,8 +34,8 @@ import wishlistIcon from "../images/wish.svg";
 import prodcompare from "../images/prodcompare.svg";
 import view from "../images/view.svg";
 import addCart from "../images/add-cart.svg";
-import { FaLessThan } from "react-icons/fa6";
-import { FaGreaterThan } from "react-icons/fa6";
+import { FaGreaterThan } from "react-icons/fa";
+import { FaLessThan } from "react-icons/fa";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -50,6 +49,8 @@ const Home = () => {
     (state) => state?.blog?.isLoading?.getAllBlogs
   );
 
+  const featuredProducts =
+    products?.filter((item) => item?.tags === "Featured") || [];
   const popularProducts =
     products?.filter((item) => item?.tags === "Popular") || [];
   const specialProducts =
@@ -72,22 +73,25 @@ const Home = () => {
   };
 
   const scrollContainerRef = useRef(null);
-  const scrollAmount = 200; // Amount to scroll on each click
+  const specialScrollContainerRef = useRef(null);
+  const popularProductsConatainerRef = useRef(null);
 
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
+  const scrollAmount = 200;
+
+  const scrollLeft = (ref) => {
+    if (ref.current) {
+      ref.current.scrollBy({
         left: -scrollAmount,
-        behavior: "smooth", // Smooth scrolling
+        behavior: "smooth",
       });
     }
   };
 
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
+  const scrollRight = (ref) => {
+    if (ref.current) {
+      ref.current.scrollBy({
         left: scrollAmount,
-        behavior: "smooth", // Smooth scrolling
+        behavior: "smooth",
       });
     }
   };
@@ -239,7 +243,6 @@ const Home = () => {
                                 loading="lazy"
                               />
                             </div>
-
                             <div>
                               <h6 className="fw-bold fs-6 m-0 p-0 text-nowrap">
                                 {service?.title}
@@ -263,137 +266,137 @@ const Home = () => {
               <div className="row">
                 <div>
                   <div className="col-12">
-                    <div className="d-flex flex-row align-items-center justify-content-between">
-                      <div>
-                        <h3 className="fw-bold fs-4 my-2 ">
-                          {products.length === 0 ? " " : "Featured collection"}
-                        </h3>
-                      </div>
+                    {featuredProducts.length > 0 && (
+                      <div className="d-flex flex-row align-items-center justify-content-between">
+                        <div>
+                          <h3 className="fw-bold fs-4 my-2">
+                            Featured Collection
+                          </h3>
+                        </div>
 
-                      <div className="d-flex flex-row gap-2 me-2 text-muted">
-                        <FaLessThan
-                          className="cusor-pointer"
-                          onClick={scrollLeft}
-                        />
-                        <FaGreaterThan
-                          className="cusor-pointer"
-                          onClick={scrollRight}
-                        />
+                        <div className="d-flex flex-row gap-2 me-2 text-muted">
+                          <FaLessThan
+                            className="cusor-pointer"
+                            onClick={() => scrollLeft(scrollContainerRef)}
+                          />
+                          <FaGreaterThan
+                            className="cusor-pointer"
+                            onClick={() => scrollRight(scrollContainerRef)}
+                          />
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
 
                   <div
                     className="col-12 d-inline-flex  flex-row  align-items-center justify-content-start gap-2 overflow-scroll scroll-container"
                     ref={scrollContainerRef}
                   >
-                    {Array.isArray(products) &&
-                      products?.map((item, index) => {
-                        if (item?.tags === "Featured") {
-                          return (
-                            <div key={index}>
-                              <div className="product-card position-relative shadow my-2">
-                                <div className="wishlist-icon position-absolute">
-                                  <button
-                                    className="border-0 bg-transparent"
-                                    onClick={(e) =>
-                                      addProductUserToWishlist(item?._id)
-                                    }
-                                  >
+                    {Array.isArray(featuredProducts) &&
+                      featuredProducts?.map((item, index) => {
+                        return (
+                          <div key={index}>
+                            <div className="product-card position-relative shadow my-2">
+                              <div className="wishlist-icon position-absolute">
+                                <button
+                                  className="border-0 bg-transparent"
+                                  onClick={(e) =>
+                                    addProductUserToWishlist(item?._id)
+                                  }
+                                >
+                                  <img
+                                    src={wishlistIcon}
+                                    alt="Wishlist"
+                                    width={18}
+                                    height={18}
+                                  />
+                                </button>
+                              </div>
+                              <div className="product-image">
+                                <img
+                                  src={item?.images[0]?.url}
+                                  className="img-fluid mx-auto  rounded object-fit p-1 "
+                                  alt={item?.title}
+                                  width={100}
+                                  height={140}
+                                  onClick={() =>
+                                    navigate("/product/" + item?._id)
+                                  }
+                                />
+                                <img
+                                  src={item?.images[0]?.url}
+                                  className="img-fluid mx-auto rounded object-fit "
+                                  alt="ProductImage"
+                                  width={100}
+                                  height={140}
+                                  onClick={() =>
+                                    navigate("/product/" + item?._id)
+                                  }
+                                />
+                              </div>
+
+                              <div className="product-details">
+                                <h6 className="brand mt-3 mb-0">
+                                  {item?.brand?.title}
+                                </h6>
+                                <h5 className="product-title mb-0 fw-bold">
+                                  {item?.title}
+                                </h5>
+
+                                <div className="d-flex m-0 p-0">
+                                  <ReactStars
+                                    count={5}
+                                    size={18}
+                                    value={parseInt(item?.totalRating) ?? 0}
+                                    edit={false}
+                                    activeColor="#ffd700"
+                                    classNames={"p-0 m-0"}
+                                  />
+                                  <p>({item?.totalRating})</p>
+                                </div>
+                                <p className="price fw-bold m-0">
+                                  {formatKES(item?.price)}
+                                </p>
+                              </div>
+
+                              <div className="action-bar position-absolute">
+                                <div className="d-flex flex-column gap-1">
+                                  <button className="border-0 bg-transparent">
                                     <img
-                                      src={wishlistIcon}
-                                      alt="Wishlist"
+                                      src={prodcompare}
+                                      alt="Compare Product"
+                                      loading="lazy"
+                                      width={18}
+                                      height={18}
+                                    />
+                                  </button>
+
+                                  <button className="border-0 bg-transparent">
+                                    <img
+                                      src={view}
+                                      alt="View Product"
+                                      onClick={() =>
+                                        navigate("/product/" + item?._id)
+                                      }
+                                      loading="lazy"
+                                      width={18}
+                                      height={18}
+                                    />
+                                  </button>
+                                  <button className="border-0 bg-transparent">
+                                    <img
+                                      src={addCart}
+                                      alt="cartImage"
+                                      loading="lazy"
                                       width={18}
                                       height={18}
                                     />
                                   </button>
                                 </div>
-                                <div className="product-image">
-                                  <img
-                                    src={item?.images[0]?.url}
-                                    className="img-fluid mx-auto  rounded object-fit p-1 "
-                                    alt={item?.title}
-                                    width={100}
-                                    height={140}
-                                    onClick={() =>
-                                      navigate("/product/" + item?._id)
-                                    }
-                                  />
-                                  <img
-                                    src={item?.images[0]?.url}
-                                    className="img-fluid mx-auto rounded object-fit "
-                                    alt="ProductImage"
-                                    width={100}
-                                    height={140}
-                                    onClick={() =>
-                                      navigate("/product/" + item?._id)
-                                    }
-                                  />
-                                </div>
-
-                                <div className="product-details">
-                                  <h6 className="brand mt-3 mb-0">
-                                    {item?.brand?.title}
-                                  </h6>
-                                  <h5 className="product-title mb-0">
-                                    {item?.title}
-                                  </h5>
-
-                                  <div className="d-flex m-0 p-0">
-                                    <ReactStars
-                                      count={5}
-                                      size={18}
-                                      value={parseInt(item?.totalRating) ?? 0}
-                                      edit={false}
-                                      activeColor="#ffd700"
-                                      classNames={"p-0 m-0"}
-                                    />
-                                    <p>({item?.totalRating})</p>
-                                  </div>
-                                  <p className="price fw-bold m-0">
-                                    {formatKES(item?.price)}
-                                  </p>
-                                </div>
-
-                                <div className="action-bar position-absolute">
-                                  <div className="d-flex flex-column gap-1">
-                                    <button className="border-0 bg-transparent">
-                                      <img
-                                        src={prodcompare}
-                                        alt="Compare Product"
-                                        loading="lazy"
-                                        width={18}
-                                        height={18}
-                                      />
-                                    </button>
-
-                                    <button className="border-0 bg-transparent">
-                                      <img
-                                        src={view}
-                                        alt="View Product"
-                                        onClick={() =>
-                                          navigate("/product/" + item?._id)
-                                        }
-                                        loading="lazy"
-                                        width={18}
-                                        height={18}
-                                      />
-                                    </button>
-                                    <button className="border-0 bg-transparent">
-                                      <img
-                                        src={addCart}
-                                        alt="cartImage"
-                                        loading="lazy"
-                                        width={18}
-                                        height={18}
-                                      />
-                                    </button>
-                                  </div>
-                                </div>
                               </div>
                             </div>
-                          );
-                        }
+                          </div>
+                        );
                       })}
                   </div>
                 </div>
@@ -462,14 +465,37 @@ const Home = () => {
               <div className="row">
                 <div>
                   <div className="col-12">
-                    <h3 className="section-heading">
-                      {specialProducts?.length === 0
-                        ? " "
-                        : " Special products"}
-                    </h3>
+                    {specialProducts.length > 0 && (
+                      <div className="d-flex flex-row align-items-center justify-content-between">
+                        <div>
+                          <h3 className="fw-bold fs-4 mt-2 mb-3">
+                            {specialProducts?.length === 0
+                              ? " "
+                              : " Special Products"}
+                          </h3>
+                        </div>
+                        <div className="d-flex flex-row gap-2 me-2 text-muted">
+                          <FaLessThan
+                            className="cusor-pointer"
+                            onClick={() =>
+                              scrollLeft(specialScrollContainerRef)
+                            }
+                          />
+                          <FaGreaterThan
+                            className="cusor-pointer"
+                            onClick={() =>
+                              scrollRight(specialScrollContainerRef)
+                            }
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
 
-                  <div className="col-12 d-flex  flex-row align-items-center justify-content-center justify-content-md-start gap-2 gap-lg-3 flex-wrap flex-lg-nowrap">
+                  <div
+                    className="col-12 d-flex flex-row align-items-center justify-content-start gap-3 flex-nowrap overflow-scroll scroll-container"
+                    ref={specialScrollContainerRef}
+                  >
                     {Array.isArray(specialProducts) &&
                       specialProducts?.map((item, index) => {
                         return (
@@ -491,21 +517,44 @@ const Home = () => {
               </div>
             </Container>
 
-            <Container class1="popular-wrapper home-wrapper-2 overflow-hidden">
+            <Container class1="popular-wrapper home-wrapper-2">
               <div className="row">
                 <div>
                   <div className="col-12">
-                    <h3 className="section-heading">
-                      {popularProducts.length === 0 ? "" : "Popular Products"}
-                    </h3>
-                  </div>
+                    <div className="d-flex flex-row align-items-center justify-content-between">
+                      <div>
+                        <h3 className="fw-bold fs-4 my-2">
+                          {popularProducts.length === 0
+                            ? ""
+                            : "Popular Products"}
+                        </h3>
+                      </div>
 
-                  <div className="col-12 d-inline-flex flex-row align-items-center flex-wrap justify-content-start  gap-2">
+                      <div className="d-flex flex-row gap-2 me-2 text-muted">
+                        <FaLessThan
+                          className="cusor-pointer"
+                          onClick={() =>
+                            scrollLeft(popularProductsConatainerRef)
+                          }
+                        />
+                        <FaGreaterThan
+                          className="cusor-pointer"
+                          onClick={() =>
+                            scrollRight(popularProductsConatainerRef)
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="col-12 d-inline-flex flex-row align-items-center flex-nowrap justify-content-start gap-2 overflow-scroll scroll-container"
+                    ref={popularProductsConatainerRef}
+                  >
                     {Array.isArray(popularProducts) &&
                       popularProducts.map((item, index) => {
                         return (
                           <div key={index}>
-                            <div className="product-card position-relative">
+                            <div className="product-card position-relative shadow my-2">
                               <div className="wishlist-icon position-absolute">
                                 <button
                                   className="border-0 bg-transparent"
@@ -516,15 +565,15 @@ const Home = () => {
                                   <img
                                     src={wishlistIcon}
                                     alt="Wishlist"
-                                    width={20}
-                                    height={20}
+                                    width={18}
+                                    height={18}
                                   />
                                 </button>
                               </div>
                               <div className="product-image">
                                 <img
                                   src={item?.images[0]?.url}
-                                  className="img-fluid mx-auto border rounded object-fit "
+                                  className="img-fluid object-fit "
                                   alt="Product"
                                   width={90}
                                   height={130}
@@ -534,7 +583,7 @@ const Home = () => {
                                 />
                                 <img
                                   src={item?.images[0]?.url}
-                                  className="img-fluid mx-auto border rounded object-fit"
+                                  className="img-fluid mx-auto object-fit"
                                   alt="Product"
                                   width={90}
                                   height={130}
@@ -548,7 +597,7 @@ const Home = () => {
                                 <h6 className="brandvmb-0 mt-3">
                                   {item?.brand?.title}
                                 </h6>
-                                <h5 className="product-title mb-0">
+                                <h5 className="product-title mb-0 fw-bold">
                                   {item?.title}
                                 </h5>
                                 <ReactStars
@@ -558,7 +607,7 @@ const Home = () => {
                                   edit={false}
                                   activeColor="#ffd700"
                                 />
-                                <p className="price">
+                                <p className="price fw-bold">
                                   {formatKES(item?.price)}
                                 </p>
                               </div>
@@ -569,8 +618,8 @@ const Home = () => {
                                     <img
                                       src={prodcompare}
                                       alt="Compare Product"
-                                      width={20}
-                                      height={20}
+                                      width={18}
+                                      height={18}
                                     />
                                   </button>
 
@@ -581,16 +630,16 @@ const Home = () => {
                                       onClick={() =>
                                         navigate("/product/" + item?._id)
                                       }
-                                      width={20}
-                                      height={20}
+                                      width={18}
+                                      height={18}
                                     />
                                   </button>
                                   <button className="border-0 bg-transparent">
                                     <img
                                       src={addCart}
                                       alt="Add to cart"
-                                      width={20}
-                                      height={20}
+                                      width={18}
+                                      height={18}
                                     />
                                   </button>
                                 </div>
@@ -607,7 +656,7 @@ const Home = () => {
             <Container class1="marquee-wrapper py-2 home-wrapper-2">
               <div className="row">
                 <div className="col-12">
-                  <div className="marquee-inner-wrapper card-wrapper bg-white rounded-3 shadow my-1">
+                  <div className="marquee-inner-wrapper card-wrapper bg-white rounded-3 shadow my-2">
                     <Marquee>
                       <div className="d-inline-flex align-items-center justify-content-between gap-4">
                         <div className="">

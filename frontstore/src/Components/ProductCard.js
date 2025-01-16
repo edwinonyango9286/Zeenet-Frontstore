@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import { addProductToWishlist } from "../features/products/productSlice";
 
 const ProductCard = (props) => {
-  const param = useParams();
   const navigate = useNavigate();
   const { data } = props;
   const dispatch = useDispatch();

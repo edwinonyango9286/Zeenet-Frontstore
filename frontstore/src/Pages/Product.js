@@ -204,10 +204,12 @@ const Product = () => {
                 <div className="col-12 col-md-6">
                   <div className="main-product-details">
                     <div className="border-bottom">
-                      <h4 className="title">{product?.title}</h4>
+                      <h4 className="title fw-bold fs-5">{product?.title}</h4>
                     </div>
                     <div className="border-bottom py-2">
-                      <p className="price">{formatKES(product?.price)}</p>
+                      <p className="price fw-bold">
+                        {formatKES(product?.price)}
+                      </p>
                       <div className="d-flex align-items-center gap-2">
                         <ReactStars
                           key={product?._id}
@@ -227,32 +229,37 @@ const Product = () => {
                     </div>
                     <div className=" border-bottom py-2">
                       <div className="d-flex gap-2 align-items-center">
-                        <h3 className="product-heading">Type</h3>
+                        <h3 className="product-heading fw-bold">Type</h3>
                         <p className="product-data">
                           {product?.category?.title}
                         </p>
                       </div>
 
                       <div className="d-flex gap-2 align-items-center my-2">
-                        <h3 className="product-heading">Brand</h3>
+                        <h3 className="product-heading fw-bold">Brand</h3>
                         <p className="product-data">{product?.brand?.title}</p>
                       </div>
 
                       <div className="d-flex gap-2 align-items-center my-2">
-                        <h3 className="product-heading">Category</h3>
+                        <h3 className="product-heading fw-bold">Category</h3>
                         <p className="product-data mb-0 mt-0">
                           {product?.category?.title}
                         </p>
                       </div>
                       <div className="d-flex gap-2 align-items-center my-2">
-                        <h3 className="product-heading">Availability</h3>
+                        <h3 className="product-heading fw-bold">
+                          Availability
+                        </h3>
                         <p className="product-data mb-0 mt-0">
                           {product?.quantity} units
                         </p>
                       </div>
                       {product?.screenSize && (
                         <div className="d-flex gap-2 align-items-center mt-2">
-                          <h3 className="product-heading mb-2"> Screen Size</h3>
+                          <h3 className="product-heading mb-2 fw-bold">
+                            {" "}
+                            Screen Size
+                          </h3>
                           <p className="product-data  mb-2 mt-0 ">
                             {parseFloat(product?.screenSize)}"
                           </p>
@@ -263,7 +270,7 @@ const Product = () => {
                           {alreadyAddedToCart === false && (
                             <div>
                               <button
-                                className="button signup border-0"
+                                className="button signup border-0 fw-bold"
                                 type="button"
                                 onClick={(e) => {
                                   e.preventDefault();
@@ -294,7 +301,7 @@ const Product = () => {
                           {alreadyAddedToCart === false && (
                             <div>
                               <button
-                                className="button  border-0"
+                                className="button  border-0 fw-bold"
                                 type="button"
                                 onClick={(e) => {
                                   e.preventDefault();
@@ -312,31 +319,33 @@ const Product = () => {
                         <div>
                           <button
                             type="button"
-                            className="border-0 bg-transparent"
+                            className="border-0 bg-transparent fw-bold"
                             onClick={(e) => {
                               e.preventDefault();
                             }}
                           >
-                            <VscGitCompare className="fs-5 me-2" />
+                            <VscGitCompare className="fs-5 me-2 fw-bold" />
                             Add to compare
                           </button>
                         </div>
                         <div>
                           <button
                             type="button"
-                            className="border-0 bg-transparent"
+                            className="border-0 bg-transparent fw-bold"
                             onClick={(e) => {
                               e.preventDefault();
                               addProductToUserWishlist(product?._id);
                             }}
                           >
-                            <AiOutlineHeart className="fs-5 me-2" />
+                            <AiOutlineHeart className="fs-5 me-2 fw-bold" />
                             Add to wishlist
                           </button>
                         </div>
                       </div>
                       <div className="d-flex gap-10 flex-column my-3">
-                        <h3 className="product-heading">Delivery & Returns:</h3>
+                        <h3 className="product-heading fw-bold">
+                          Delivery & Returns:
+                        </h3>
                         <p className="product-data">
                           Free Delivery and Returns available for all orders.
                           <br />
@@ -362,10 +371,11 @@ const Product = () => {
                       </div>
 
                       <div className="d-flex flex-column justify-content-center align-items-center my-2">
-                        <div className="mb-4">
+                        <div className="mb-2">
                           <h6
+                            className="fw-bold"
                             style={{
-                              fontSize: "14px",
+                              fontSize: "15px",
                               fontWeight: "500",
                               lineHeight: "20px",
                             }}
@@ -418,7 +428,7 @@ const Product = () => {
           <Container class1="description-wrapper py-2 home-wrapper-2">
             <div className="row">
               <div className="col-12">
-                <button className="button signup border-0 mb-2">
+                <button className="button signup border-0 mb-2 fw-bold">
                   Description{" "}
                 </button>
                 <div className=" description p-2 border ">
@@ -436,11 +446,11 @@ const Product = () => {
           <Container class1="reviews-wrapper  home-wrapper-2">
             <div className="row">
               <div className="col-12">
-                <h3 id="review">Reviews</h3>
+                <h3 id="review fw-bold">Reviews</h3>
                 <div className="review-inner-wrapper">
                   <div className="review-head d-flex  justify-content-between align-items-end">
                     <div>
-                      <h4 className="mb-2">Customer reviews</h4>
+                      <h4 className="mb-2 fw-bold">Customer reviews</h4>
                       <div className="d-flex align-items-center gap-10">
                         <ReactStars
                           key={product?._id}
@@ -463,7 +473,7 @@ const Product = () => {
                     </div>
                   </div>
                   <div className="review-form py-4">
-                    <h4>Write a review</h4>
+                    <h4 className="fw-bold">Write a review</h4>
 
                     <div action="" className="d-flex flex-column gap-15">
                       <div>
@@ -543,13 +553,14 @@ const Product = () => {
 
           <Container class1="popular-wrapper home-wrapper-2 py-2">
             <div className="row">
+              {popularProducts && (
+                <div className="col-12">
+                  <h6 className="fw-bold fs-4 my-2">Popular products</h6>
+                </div>
+              )}
+
               <div className="col-12">
-                <h6 className="section-heading">
-                  {popularProducts ? "Popular products" : ""}
-                </h6>
-              </div>
-              <div className="col-12">
-                <div className="col-12 d-inline-flex flex-row justify-content-start flex-wrap gap-2 justify-content-start">
+                <div className="col-12 d-inline-flex flex-row justify-content-start flex-wrap gap-2">
                   <ProductCard data={popularProducts} />
                 </div>
               </div>

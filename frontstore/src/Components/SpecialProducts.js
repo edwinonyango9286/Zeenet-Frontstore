@@ -7,14 +7,14 @@ const SpecialProducts = (props) => {
   return (
     <>
       <div className="mb-2">
-        <div className="special-product-card">
-          <div className="d-flex flex-row justify-content-md-start gap-2">
+        <div className="special-product-card shadow">
+          <div className="d-flex flex-row justify-content-start gap-2">
             <div>
               <img src={image} className="img-fluid" alt={title} />
             </div>
             <div className="special-product-content">
-              <h5 className="brand">{brand}</h5>
-              <h6 className="title">{title}</h6>
+              <h5 className="brand fw-bold text-danger mt-2">{brand}</h5>
+              <h6 className="title fw-bold">{title}</h6>
               <ReactStars
                 count={5}
                 size={24}
@@ -22,33 +22,33 @@ const SpecialProducts = (props) => {
                 edit={false}
                 activeColor="#ffd700"
               />
-              <p className="price">
+              <p className="price fw-bold">
                 <span className="text-danger">{price}</span>&nbsp;
                 <strike>{price}</strike>
               </p>
               <div className="discount-till d-flex align-items-center gap-10">
-                <p className="mb-0">5 days</p>
+                <p className="mb-0 fw-normal">5 days</p>
                 <div className="d-flex align-items-center gap-1">
                   <span
-                    className="badge rounded-pill  bg-danger"
+                    className="badge rounded-circle  bg-danger"
                     style={{
                       fontSize: "12px",
                     }}
                   >
                     1
                   </span>
-                  :
+
                   <span
-                    className="badge rounded-pill  bg-danger"
+                    className="badge rounded-circle  bg-danger"
                     style={{
                       fontSize: "12px",
                     }}
                   >
                     1
                   </span>
-                  :
+
                   <span
-                    className="badge rounded-pill  bg-danger"
+                    className="badge rounded-circle  bg-danger"
                     style={{
                       fontSize: "12px",
                     }}
@@ -70,8 +70,8 @@ const SpecialProducts = (props) => {
                   ></div>
                 </div>
               </div>
-              <Link to={"/product/" + id} className="button">
-                View Product
+              <Link to={"/product/" + id} className="button fw-bold">
+                Choose options
               </Link>
             </div>
           </div>
