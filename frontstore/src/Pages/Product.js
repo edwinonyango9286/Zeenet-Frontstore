@@ -558,7 +558,6 @@ const Product = () => {
                   <h6 className="fw-bold fs-4 my-2">Popular products</h6>
                 </div>
               )}
-
               <div className="col-12">
                 <div className="col-12 d-inline-flex flex-row justify-content-start flex-wrap gap-2">
                   <ProductCard data={popularProducts} />

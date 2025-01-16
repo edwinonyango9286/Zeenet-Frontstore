@@ -181,19 +181,38 @@ const Checkout = () => {
                 <h6 className="my-0 fw-bold" style={{ fontSize: "16px" }}>
                   Account
                 </h6>
-                <div className="d-flex flex-column justify-content-between">
-                  <p
-                    style={{ fontSize: "14px" }}
-                    className="mb-0 mt-0 fw-4 text-capitalize"
-                  >
-                    Name: {firstName + " " + lastName}
-                  </p>
-                  <p style={{ fontSize: "14px" }} className="mb-0 mt-0 fw-4">
-                    Email: {email}
-                  </p>
-                  <p style={{ fontSize: "14px" }} className="mb-0 mt-0 fw-4">
-                    Phone Number: {phoneNumber}
-                  </p>
+                <div className="d-flex flex-column justify-content-start">
+                  <div className="d-flex flex-row gap-1">
+                    <p
+                      style={{ fontSize: "14px" }}
+                      className="mb-0 mt-0 fw-bold"
+                    >
+                      Name:
+                    </p>
+                    <p className="text-capitalize mb-0 mt-0">
+                      {firstName + " " + lastName}
+                    </p>
+                  </div>
+
+                  <div className="d-flex flex-row gap-1">
+                    <p
+                      style={{ fontSize: "14px" }}
+                      className="mb-0 mt-0 fw-bold"
+                    >
+                      Email:
+                    </p>
+                    <p className="mb-0 mt-0">{email}</p>
+                  </div>
+
+                  <div className="d-flex flex-row gap-1">
+                    <p
+                      style={{ fontSize: "14px" }}
+                      className="mb-0 mt-0 fw-bold"
+                    >
+                      Phone Number:
+                    </p>
+                    <p>{phoneNumber}</p>
+                  </div>
                 </div>
 
                 <div>
@@ -223,7 +242,7 @@ const Checkout = () => {
                             style={{ fontSize: "18px", fontWeight: "600" }}
                             className="my-3"
                           >
-                            Select a delivery address
+                            Delivery
                           </h6>
 
                           <div>
@@ -231,23 +250,57 @@ const Checkout = () => {
                               deliveryAddresses.map((address) => (
                                 <div
                                   key={address._id}
-                                  className="border p-3 mb-3 rounded-3 bg-white"
+                                  className="border py-2  px-3 rounded-3 bg-white"
                                 >
-                                  <p className="fs-6">
-                                    <strong>Country:</strong>{" "}
-                                    {address.country.name}
-                                  </p>
-                                  <p className="fs-6">
-                                    <strong>County:</strong>{" "}
-                                    {address.county.name}
-                                  </p>
-                                  <p className="fs-6">
-                                    <strong>Town:</strong> {address.town.name}
-                                  </p>
-                                  <p className="fs-6">
-                                    <strong>Delivery Station:</strong>{" "}
-                                    {address.deliveryStation.name}
-                                  </p>
+                                  <div className="my-3">
+                                    <div className="d-flex flex-row gap-1">
+                                      <p
+                                        className="mb-0 mt-0 fw-bold"
+                                        style={{ fontSize: "14px" }}
+                                      >
+                                        Country
+                                      </p>
+                                      <p className="mb-0 mt-0">
+                                        {address?.country?.name}
+                                      </p>
+                                    </div>
+
+                                    <div className="d-flex flex-row gap-1">
+                                      <p
+                                        className="mb-0 mt-0 fw-bold"
+                                        style={{ fontSize: "14px" }}
+                                      >
+                                        County
+                                      </p>
+                                      <p className="mb-0 mt-0">
+                                        {address?.county?.name}
+                                      </p>
+                                    </div>
+
+                                    <div className="d-flex flex-row gap-1">
+                                      <p
+                                        className="mb-0 mt-0 fw-bold"
+                                        style={{ fontSize: "14px" }}
+                                      >
+                                        Town
+                                      </p>
+                                      <p className="mb-0 mt-0">
+                                        {address?.town?.name}
+                                      </p>
+                                    </div>
+                                    <div className="d-flex flex-row gap-1">
+                                      <p
+                                        className="mb-0 mt-0 fw-bold"
+                                        style={{ fontSize: "14px" }}
+                                      >
+                                        Delivery station
+                                      </p>
+                                      <p className="mb-0 mt-0">
+                                        {address?.deliveryStation?.name}
+                                      </p>
+                                    </div>
+                                  </div>
+
                                   <div className="d-flex gap-4 flex-row flex-wrap">
                                     <button
                                       className="button border-0"
@@ -508,7 +561,9 @@ const Checkout = () => {
               </div>
               <div className="d-flex justify-content-between align-items-center border-bottom py-2">
                 <h4 className="total fw-bold fs-6">Total</h4>
-                <h5 className="total-price fw-bold fs-6">{formatKES(totalAmount)} </h5>
+                <h5 className="total-price fw-bold fs-6">
+                  {formatKES(totalAmount)}{" "}
+                </h5>
               </div>
               <div className="py-4 d-flex align-items-center justify-content-end">
                 <button

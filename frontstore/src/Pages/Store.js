@@ -192,7 +192,7 @@ const Store = () => {
                       return (
                         <div key={index} className="filter-card mb-0">
                           <div>
-                            <div className="random-product mb-2 d-flex justify-content-between">
+                            <div className="random-product mb-2 d-flex gap-1">
                               <div
                                 className="w-50"
                                 onClick={() =>
@@ -201,7 +201,7 @@ const Store = () => {
                               >
                                 <img
                                   src={randomProduct?.images[0]?.url}
-                                  className="img-fluid border mx-auto rounded mb-3"
+                                  className="img-fluid mx-auto rounded mb-3"
                                   alt="watch"
                                   width={100}
                                   height={100}
@@ -209,7 +209,7 @@ const Store = () => {
                               </div>
 
                               <div className="w-50">
-                                <h6>{randomProduct?.title}</h6>
+                                <h6 className="fw-bold">{randomProduct?.title}</h6>
                                 <ReactStars
                                   count={5}
                                   size={18}
@@ -217,7 +217,7 @@ const Store = () => {
                                   edit={false}
                                   activeColor="#ffd700"
                                 />
-                                <p>{formatKES(randomProduct?.price)}</p>
+                                <p className="fw-bold">{formatKES(randomProduct?.price)}</p>
                               </div>
                             </div>
                           </div>
