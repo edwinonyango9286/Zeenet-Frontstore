@@ -70,7 +70,7 @@ const ProductCard = (props) => {
                 </div>
                 <div className="product-details">
                   <h6 className="brand mb-0 mt-3">{item?.brand?.title}</h6>
-                  <h5 className="product-title mb-0">{item?.title}</h5>
+                  <h5 className="product-title mb-0 fw-bold">{item?.title}</h5>
                   <ReactStars
                     count={5}
                     size={18}
