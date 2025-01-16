@@ -204,7 +204,7 @@ const Product = () => {
                 <div className="col-12 col-md-6">
                   <div className="main-product-details">
                     <div className="border-bottom">
-                      <h4 className="title fw-bold fs-5">{product?.title}</h4>
+                      <h4 className="title fw-bold fs-6">{product?.title}</h4>
                     </div>
                     <div className="border-bottom py-2">
                       <p className="price fw-bold">
