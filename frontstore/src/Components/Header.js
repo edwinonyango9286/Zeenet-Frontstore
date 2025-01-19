@@ -101,7 +101,7 @@ const Header = () => {
                 <div className="header-bottom">
                   <div className="dropdown">
                     <TfiMenu
-                      className="fs-3"
+                      className="fs-4"
                       id="dropdownMenuButton1"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
@@ -386,11 +386,11 @@ const Header = () => {
             </div>
 
             <div className="col-12 d-none d-sm-block">
-              <div className="d-flex align-items-center justify-content-start gap-3">
+              <div className="d-flex align-items-center justify-content-start gap-2">
                 <div className="d-none d-sm-block">
                   <div className="dropdown">
                     <button
-                      className="btn btn-secondary bg-transparent border-0 gap-20 d-flex align-items-center"
+                      className="btn btn-secondary bg-transparent border-0 gap-20 d-flex align-items-center justify-content-start"
                       type="button"
                       id="dropdownMenuButton1"
                       aria-haspopup="true"
@@ -403,12 +403,11 @@ const Header = () => {
                         className="img-fluid d-sm-none d-md-block"
                         loading="lazy"
                       />
-                      <div className="d-flex gap-4 gap-sm-2 gap-md-4 align-items-center ">
-                        <span className="">SHOP CATEGORIES</span>
+                      <div className="d-flex gap-2 align-items-center">
+                        <span>SHOP CATEGORIES</span>
                         <RiArrowDownSLine className="fs-6" />
                       </div>
                     </button>
-
                     <ul
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenuButton1"
@@ -456,6 +455,7 @@ const Header = () => {
                     </ul>
                   </div>
                 </div>
+
                 <div className="vertical-rule d-none d-md-block"></div>
                 <div className="menu-links col-6">
                   <div className="d-flex align-items-center gap-3 gap-md-4">

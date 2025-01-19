@@ -118,7 +118,7 @@ body a {
   font-size: 12px;
   padding: 8px 24px;
   border-radius: 20px;
-  font-weight:600;
+  font-weight: 550;
 }
 
 .button:hover {
@@ -348,10 +348,9 @@ footer .input-group-text {
 /* Blogcards styling starts here */
 
 .blog-card {
-  border-radius: 10px;
   padding: 10px;
-  height: 430px;
   width: 300px;
+  height: 420px;
 }
 
 .blog-content {
@@ -428,7 +427,7 @@ footer .input-group-text {
 }
 
 @media (min-width: 768px) {
- .product-card {
+  .product-card {
     width: 167px;
     height: 230px;
   }
@@ -439,7 +438,7 @@ footer .input-group-text {
 }
 
 @media (min-width: 992px) {
- .product-card {
+  .product-card {
     width: 226px;
     height: 230px;
   }

@@ -732,13 +732,13 @@ const Home = () => {
 
             <Container class1="home-wrapper-2">
               <div className="row">
-                <div>
-                  <div className="col-12">
+                <div className="col-12">
+                  <div>
                     <h3 className="section-heading fw-bold fs-4 my-4">
                       {blogs && blogs?.length === 0 ? " " : "Our Latest News"}
                     </h3>
                   </div>
-                  <div className="d-flex align-items-center justify-content-start gap-3 my-2 overflow-scroll scroll-container">
+                  <div className="d-flex align-items-center justify-content-start gap-2 my-2 overflow-scroll scroll-container">
                     <BlogCard data={blogs} />
                   </div>
                 </div>
