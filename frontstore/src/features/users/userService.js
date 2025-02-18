@@ -3,21 +3,21 @@ import { config } from "../../utils/axiosConfig";
 import Cookies from "js-cookie";
 
 const register = async (userData) => {
-  const response = await newRequest.post(`user/register`, userData);
+  const response = await newRequest.post(`auth/customer_register`, userData);
   if (response?.data) {
     return response.data;
   }
 };
 
 const signin = async (userData) => {
-  const response = await newRequest.post(`user/signin`, userData);
+  const response = await newRequest.post(`auth/signin_customer`, userData);
   if (response?.data) {
     return response.data;
   }
 };
 
 const logoutAUser = async () => {
-  const response = await newRequest.put(`user/logout`);
+  const response = await newRequest.put(`auth/logout`);
   if (response?.data) {
     return response.data;
   }
@@ -84,7 +84,7 @@ const resetUserPassword = async (data) => {
 };
 
 const getUserOrders = async () => {
-  const response = await newRequest.get(`user/getmyorders`, config);
+  const response = await newRequest.get(`user/get_customer_orders`, config);
   if (response?.data) {
     return response.data;
   }

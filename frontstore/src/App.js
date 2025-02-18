@@ -66,9 +66,7 @@ function App() {
                 </PrivateRoutes>
               }
             />
-
             <Route path="cart" element={<Cart />} />
-
             <Route
               path="/myorders"
               element={

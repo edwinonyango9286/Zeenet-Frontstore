@@ -22,6 +22,12 @@ const Store = () => {
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
 
+  // Pagination state
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const itemsPerPage = 20;
+
   //Filter States
   const [tag, setTag] = useState(null);
   const [category, setCategory] = useState(null);
@@ -47,9 +53,30 @@ const Store = () => {
 
   useEffect(() => {
     dispatch(
-      getAllProducts({ sort, tag, brand, category, minPrice, maxPrice })
+      getAllProducts({
+        sort,
+        tag,
+        brand,
+        category,
+        minPrice,
+        maxPrice,
+        limit: itemsPerPage,
+        offset: (currentPage - 1) * itemsPerPage,
+      })
     );
-  }, [sort, tag, brand, category, minPrice, maxPrice, dispatch]);
+  }, [sort, tag, brand, category, minPrice, maxPrice]);
+
+  useEffect(() => {
+    if (products) {
+      setTotalProducts(products.length);
+    }
+  }, [products]);
+
+  const totalPages = Math.ceil(totalProducts / itemsPerPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   const formatKES = (amount) => {
     return new Intl.NumberFormat("en-KE", {
@@ -209,7 +236,9 @@ const Store = () => {
                               </div>
 
                               <div className="w-50">
-                                <h6 className="fw-bold">{randomProduct?.title}</h6>
+                                <h6 className="fw-bold">
+                                  {randomProduct?.title}
+                                </h6>
                                 <ReactStars
                                   count={5}
                                   size={18}
@@ -217,7 +246,9 @@ const Store = () => {
                                   edit={false}
                                   activeColor="#ffd700"
                                 />
-                                <p className="fw-bold">{formatKES(randomProduct?.price)}</p>
+                                <p className="fw-bold">
+                                  {formatKES(randomProduct?.price)}
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -283,7 +314,7 @@ const Store = () => {
                       </div>
                       <div>
                         <span className="mb-0">
-                          {products.length ? products.length : 0} {""}
+                          {products ? products.length : 0} {""}
                           products
                         </span>
                       </div>
@@ -293,6 +324,25 @@ const Store = () => {
                   <div className="pb-2">
                     <div className="d-inline-flex justify-content-start flex-wrap  gap-2">
                       <ProductCard data={products ? products : []} />
+                    </div>
+                    <div className="d-flex  justify-content-center gap-2 align-items-center mt-4">
+                      {Array.from({ length: totalPages }, (_, index) => (
+                        <button
+                          key={index}
+                          type="button"
+                          className={`signup rounded ${
+                            currentPage === index + 1 ? "" : "bg-white"
+                          }`}
+                          style={{
+                            width: "34px",
+                            height: "34px",
+                            text: "White",
+                          }}
+                          onClick={() => handlePageChange(index + 1)}
+                        >
+                          {index + 1}
+                        </button>
+                      ))}
                     </div>
                   </div>
                 </div>

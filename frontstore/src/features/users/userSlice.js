@@ -331,14 +331,14 @@ export const authSlice = createSlice({
         Cookies.remove("phoneNumber");
         toast.success(action?.payload?.message);
       })
-      
       .addCase(logoutUser.rejected, (state, action) => {
         state.isError.logoutUser = true;
         state.isSuccess.logoutUser = false;
         state.isLoading.logoutUser = false;
-        state.message = action?.payload?.response?.data?.message;
-        if (action?.payload?.response?.data?.message) {
-          toast.error(action?.payload?.response?.data?.message);
+        state.message = action?.payload?.message;
+        console.log(action?.payload?.response)
+        if (action?.payload?.message) {
+          toast.error(action?.payload?.message);
         } else {
           toast.error(
             "It seems there’s an issue at the moment. Please try again later."
